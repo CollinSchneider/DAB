@@ -1,0 +1,43 @@
+<h1> <%= current_user.email %> Admin Page </h1>
+<%= link_to "Product Page", products_path %>
+
+<h2> Users: </h2>
+<% @users.each do |user| %>
+<h4><%= user.email %>:</h4>
+<% end %>
+
+<h2> Affiliates: </h2>
+<% @affiliates.each do |affiliate| %>
+<h4> <%= affiliate.email %> </h4>
+<% end %>
+
+<h2> Products to be OK'd by you: </h2>
+<% @new_products.each do |product| %>
+<h4> <%= product.title %> </h4>
+<h5> <%= product.category %> </h5>
+<h5> <%= product.price %> </h5>
+<p> <%= product.description %> </p>
+  <%= form_for product do |f| %>
+  <%= f.hidden_field :status, :value => 2 %>
+  <%= f.submit "Submit Product" %>
+  <% end %>
+  <%= form_for product do |f| %>
+  <%= f.hidden_field :status, :value => 1 %>
+  <%= f.label :admin_notes %>
+  <%= f.text_field :admin_notes %>
+  <%= f.submit "Send Back to Affiliate for Revision" %>
+  <% end %>
+<% end %>
+
+<div class = "user-forms">
+
+  <h3> Create an Affiliate: </h3>
+  <%= form_for @user do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.hidden_field :status, :value => 1 %>
+  <%= f.submit "Create Affiliate" %>
+  <% end %>
+</div>

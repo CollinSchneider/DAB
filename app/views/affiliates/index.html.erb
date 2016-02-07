@@ -1,0 +1,48 @@
+<h1> <%= current_user.email %> Affiliate Page  </h1>
+
+<%= link_to "Products Page", products_path %>
+
+<% current_user.products.each do |product| %>
+  <% if product.status === 2 %>
+    <h2> Product is currently being listed: </h2>
+    <h3> <%= product.title %> </h3>
+    <h4> <%= product.category %> </h4>
+    <h4> <%= product.price %> </h4>
+    <p> <%= product.description %> </p>
+  <% end %>
+  <% if product.status === 0 %>
+    <h2> Product is awaiting approval: </h2>
+    <h3> Title: <%= product.title %> </h3>
+    <h4>Category: <%= product.category %> </h4>
+    <h4> $<%= product.price %>.00 </h4>
+    <p> Description: <%= product.description %> </p>
+  <% end %>
+  <% if product.status === 1 %>
+    <h2> Product needs to be revised: </h2>
+    <h2> Products to be revised </h2>
+    <h3> <%= product.title %> </h3>
+    <h4> <%= product.category %> </h4>
+    <h4> <%= product.price %> </h4>
+    <p> <%= product.description %> </p>
+    <h2>Notes From Admin: <%= product.admin_notes %> </h2>
+  <% end %>
+<% end %>
+
+<h3> Sell a Product: </h3>
+<%= form_for @product do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :category %>
+  <%= f.select :category do %>
+    <%= ['Tech', 'Apparel', 'Accessories', 'Miscellanious'].each do |a| %>
+      <%= content_tag(:option, a, value: a) %>
+    <% end %>
+  <% end %>
+<%= f.label :price %>
+<%= f.number_field :price %>
+<%= f.hidden_field :user_id, :value => current_user.id %>
+<%= f.hidden_field :status, :value => 0 %>
+<%= f.submit "Sell a Product" %>
+<% end %>

@@ -1,0 +1,10 @@
+<%= link_to "All Products", products_path %>
+
+<h1> <%= @product['title'] %> </h1>
+<h4> <%= @product['category'] %> </h4>
+<h4> $<%= @product['price'] %>.00 </h4>
+<p>
+  <%= @product['description'] %>
+</p>
+
+<%= link_to "Add to Cart", user_orders_path(current_user) %>

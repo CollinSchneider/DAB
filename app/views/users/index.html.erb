@@ -1,0 +1,23 @@
+<div class = "user-forms">
+  <h1> Login: </h1>
+  <%= form_tag sessions_path do %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <%= submit_tag "login" %>
+  <% end %>
+</div>
+
+<div class = "user-forms">
+
+  <h3> User Sign Up: </h3>
+  <%= form_for @user do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.hidden_field :status, :value => 0 %>
+  <%= f.submit "Create User" %>
+  <% end %>
+</div>
