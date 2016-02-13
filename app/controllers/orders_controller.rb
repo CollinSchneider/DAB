@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    authenticate!
+    authenticate_user
     @orders = Order.all
   end
 

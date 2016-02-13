@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'inventories/index'
+
+  get '/view' => 'products#view'
+  get '/sell' => 'affiliates#sell'
+
   resources :products
   resources :users do
     resources :orders
@@ -7,7 +12,7 @@ Rails.application.routes.draw do
   resources :admins
   resources :affiliates
 
-  root 'products#index'
+  root 'products#view'
 
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'

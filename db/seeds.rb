@@ -6,17 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Product.destroy_all
-Affiliate.destroy_all
-
-3.times do
-  Affiliate.create \
-    email: Faker::Internet.email,
-    password_digest: Faker::Internet.password
-end
 
 100.times do
   Product.create(
-    affiliate_id: Faker::Number.between(16, 18),
+    affiliate_id: 17,
+    status: 2,
     title: Faker::Commerce.product_name,
     price: Faker::Number.between(1, 150),
     description: Faker::Lorem.paragraph,

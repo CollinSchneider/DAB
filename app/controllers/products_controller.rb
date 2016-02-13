@@ -7,6 +7,13 @@ class ProductsController < ApplicationController
     @affiliate_products = Product.where('affiliate_id = ?', current_user)
   end
 
+  def view
+    @accepted_products = Product.where('status = ?', 2)
+    @rejected_products = Product.where('status = ?', 1)
+    @submitted_products = Product.where('status = ?', 0)
+    @affiliate_products = Product.where('affiliate_id = ?', current_user)
+  end
+
   def show
     @product = Product.find(params[:id])
   end
@@ -32,7 +39,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :admin_notes)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :admin_notes, :inventory_attributes => [:quantity, :size])
   end
 
 end

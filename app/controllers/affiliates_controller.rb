@@ -6,14 +6,12 @@ class AffiliatesController < ApplicationController
     @users = User.all
   end
 
-  def create
-    product = Product.create( product_params )
-    redirect_to request.referrer
+  def sell
+    authenticate_affiliate
+    @product = Product.new
   end
 
-  private
-  def affiliate_params
-    params.require(:affiliate).permit(:email, :password, :status)
+  def create
   end
 
 end

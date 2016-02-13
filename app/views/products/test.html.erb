@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf8'>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="../css/stylesheet.css">
+  </head>
+  <body class='grey lighten-3'>
+    <!-- Compiled and minified Jquery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <!-- Pacifico Font -->
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <script>
+      $(document).ready(function() {
+        $(".dropdown-button").dropdown();
+        $(".button-collapse").sideNav();
+      });
+    </script>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper grey lighten-5">
+          <a href="#" class="brand-logo center" id='logo'>Deal Baked</a>
+          <a href="#" data-activates="mobile" class="button-collapse hide-on-med-and-up"><i class="material-icons black-text">menu</i></a>
+          <ul class="side-nav" id="mobile">
+            <li><a id='toolbar-links'class='black-text' href="">Account</a></li>
+            <li><a id='toolbar-links'class='black-text' href="">Shopping Cart</a></li>
+            <li><a id='toolbar-links'class='black-text' href="">Category 1</a></li>
+            <li><a id='toolbar-links'class='black-text' href="">Category 2</a></li>
+            <li><a id='toolbar-links'class='black-text' href="">Category 3</a></li>
+            <li><a id='toolbar-links'class='black-text' href="">Category 4</a></li>
+            <li><a id='toolbar-links'class='black-text' href="">Category 5</a></li>
+            <li><a id='toolbar-links'class='black-text' href="">Category 6</a></li>
+          </ul>
+          <ul class="right hide-on-small-and-down">
+            <li><a class="dropdown-button black-text" href="../views/account.html" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
+            <li><a class='black-text'href="views/cart.html"><i class="material-icons">shopping_cart</i></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="navbar-fixed hide-on-small-only">
+      <nav class='grey lighten-2 center-align' id='toolbar'>
+        <div class="nav-wrapper">
+          <div id="toolbar-link-list">
+            <a id='toolbar-links'class='black-text' href="../views/category.html">Category 1</a>
+            <a id='toolbar-links'class='black-text' href="../views/category.html">Category 2</a>
+            <a id='toolbar-links'class='black-text' href="../views/category.html">Category 3</a>
+            <a id='toolbar-links'class='black-text' href="../views/category.html">Category 4</a>
+            <a id='toolbar-links'class='black-text' href="../views/category.html">Category 5</a>
+            <a id='toolbar-links'class='black-text' href="../views/category.html">Category 6</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="container">
+      <div class="row hide-on-small-only" id='hero-row'>
+        <div class="col s12 center-align">
+          <div id="index-hero-wrapper">
+            <div id="index-hero-image"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" id='main-content'>
+      <div class="row">
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>Card Title</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col l4 m12 s12">
+          <a href="product.html">
+            <div class="card">
+              <div class="card-image">
+                <img class="responsive-img" src="../images/sample-pic.jpg" style='height:300px'>
+                <div class="card-title" id='card-category-title'>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <footer class="page-footer grey lighten-2" stlye='min-hieght:190px'>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 center">
+          <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-instagram fa-lg"></i></a>
+          <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-facebook fa-lg"></i></a>
+          <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-twitter fa-lg"></i></a>
+          <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-google-plus fa-lg"></i></a>
+          <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-pinterest fa-lg"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 center">
+          <a class="grey-text darken-4" id='footer-links' href="../views/about.html">About</a>
+          <a class="grey-text darken-4" id='footer-links' href="../views/terms.html">Terms</a>
+          <a class="grey-text darken-4" id='footer-links' href="../views/faq.html">FAQ</a>
+          <a class="grey-text darken-4" id='footer-links' href="../views/shipping.html">Shipping</a>
+          <a class="grey-text darken-4" id='footer-links' href="../views/affiliates.html">Affiliates</a>
+          <a class="grey-text darken-4" id='footer-links' href="../views/contact.html">Contact</a>
+        </div>
+      </div>
+      </div>
+      <div class="footer-copyright grey lighten-2">
+        <div class="container center">
+          <span class='grey-text darken-4' id='footer-copyright'>©2016 DealBaked, DealBaked inc.</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+---------------------------------
+Zachary Messinger
+718.440.6798
+zac.messinger@gmail.com
