@@ -20,11 +20,11 @@
 <%= f.number_field :price %>
 <%= f.hidden_field :user_id, :value => current_user.id %>
 <%= f.hidden_field :status, :value => 0 %>
-  <% fields_for :inventory, @product.inventories do |ff| %>
-    <%= ff.label :size %>
-    <%= ff.text_field :size %>
-    <%= ff.label :quantity %>
-    <%= ff.number_field :quantity %>
-  <% end %>
+  <!-- <#% fields_for :inventory, @product.inventories do |ff| %>
+    <#%= ff.label :size %>
+    <#%= ff.text_field :size %>
+    <#%= ff.label :quantity %>
+    <#%= ff.number_field :quantity %>
+  <#% end %> -->
 <%= f.submit "Sell a Product" %>
 <% end %>

@@ -1,10 +1,90 @@
-<%= link_to "All Products", products_path %>
 
-<h1> <%= @product['title'] %> </h1>
-<h4> <%= @product['category'] %> </h4>
-<h4> $<%= @product['price'] %>.00 </h4>
-<p>
-  <%= @product['description'] %>
-</p>
-
-<%= link_to "Add to Cart", user_orders_path(current_user) %>
+<div class="container" id='main-content'>
+    <!-- <div class="row black-text">
+      <nav class='grey lighten-5' id='breadcrumbs-nav'>
+        <div class="nav-wrapper black-text">
+          <div class="col s12 black-text">
+            <a href="../index.html" class="breadcrumb black-text">DealBaked HomePage</a>
+            <a href="../views/category.html" class="breadcrumb black-text">Category 1</a>
+          </div>
+        </div>
+      </nav>
+    </div> -->
+    <div class="row">
+      <div class="col l6 s12">
+        <%= image_tag(@product.picture, :id => 'product-image', :class => 'materialboxed responsive-img', :width => '650') %>
+        <ul id='product-images-list'>
+          <li> <%= image_tag(@product.picture, :id => 'product-image-thumbnail', :class => 'materialboxed responsive-img') %> </li>
+          <li> <%= image_tag(@product.picture, :id => 'product-image-thumbnail', :class => 'materialboxed responsive-img', :width => '550') %> </li>
+          <li> <%= image_tag(@product.picture, :id => 'product-image-thumbnail', :class => 'materialboxed responsive-img', :width => '550') %> </li>
+        </ul>
+      </div>
+      <div class="col l6 s12">
+        <div id="product-content">
+          <div class="row">
+            <h4 id='product-title'> <%= @product.title %> </h4>
+            <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
+          </div>
+          <div class="row" style='margin-top:-25px'>
+            <div class="input-field col l6 s12 center" id='input-field'>
+              <select class='browser-default' id='add-to-cart-qty'>
+                <option value="" disabled selected>Quantity: 1</option>
+                <option value="1">Quantity: 2</option>
+                <option value="2">Quantity: 3</option>
+                <option value="3">Quantity: 4</option>
+              </select>
+            </div>
+            <div class="input-field col l6 s12 center">
+              <button class='btn grey darken-3' type="submit" name="action" id='add-to-cart-btn'>Add to Cart</button>
+            </div>
+          </div>
+          <div class="row">
+            <div id='product-info'>
+              <hr>
+              <p><strong>Desciption:</strong><br>
+                <%= @product.description %>
+              </p>
+              <hr>
+              <p><strong>Features:</strong>
+                <ul id='feature-list'>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_one %> </li>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
+                </ul>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div id='product-info'>
+              <hr>
+              <p><strong>Shipping Information:</strong><br></p>
+              <ul id='shipping-list'>
+                <li>
+                  <span class='grey-text'id='shipping-header'>Shipping Policy</span><br>
+                  <span>Discounted Shipping</span>
+                </li>
+                <li>
+                  <span class='grey-text'id='shipping-header'>Shipping Availability</span><br>
+                  <span>Canada, USA</span>
+                </li>
+                <li>
+                  <span class='grey-text'id='shipping-header'>Discounted Shipping</span><br>
+                  <span>$10.00 first item / $10.00 each additional</span>
+                </li>
+                <li>
+                  <span class='grey-text'id='shipping-header'>Ships In</span><br>
+                  <span>2-3 weeks</span>
+                </li>
+                <li>
+                  <span class='grey-text'id='shipping-header'>Return Policy</span><br>
+                  <span>Final sale, not eligible for return</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -11,26 +11,77 @@
 <h4> <%= affiliate.email %> </h4>
 <% end %>
 
-<h2> Products to be OK'd by you: </h2>
-<% @new_products.each do |product| %>
-<h4> <%= product.title %> </h4>
-<h5> <%= product.category %> </h5>
-<h5> <%= product.price %> </h5>
-<p> <%= product.description %> </p>
-  <%= form_for product do |f| %>
-  <%= f.hidden_field :status, :value => 2 %>
-  <%= f.submit "Submit Product" %>
-  <% end %>
-  <%= form_for product do |f| %>
-  <%= f.hidden_field :status, :value => 1 %>
-  <%= f.label :admin_notes %>
-  <%= f.text_field :admin_notes %>
-  <%= f.submit "Send Back to Affiliate for Revision" %>
-  <% end %>
-<% end %>
+
+</br></br>
+
+<!-- <div ng-controller="ProductsController">
+  <form ng-submit="createProduct()">
+    <input type="text" ng-model="newProduct.title" placeholder="Product Title" required>
+    <input type="text" ng-model="newProduct.price" placeholder="Product Price" required>
+    <select ng-model="newProduct.category" placeholder = "Product Category" required>
+      <option value="Tech">Tech</option>
+      <option value="Apparel">Apparel</option>
+      <option value="Accessories">Accessories</option>
+      <option value="Miscellanious">Miscellanious</option>
+    </select>
+    <select ng-model="newProduct.affiliate" placeholder = "Affiliate" required>
+      <% @affiliates.each do |affiliate| %>
+       <option value = <%=affiliate.id %>> <%=affiliate.email %> </option>
+       <% end %>
+    </select>
+    <input type="text" ng-model="newProduct.description" placeholder="Product Description" required>
+    <input type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
+    <input type="submit" name="name" value="Submit Product">
+  </form>
+</div> -->
+
+<form ng-submit="createProduct()" ng-hide="apparel_quantity || total_quantity">
+  <input type="text" ng-model="newProduct.title" placeholder="Product Title" required>
+  <input type="text" ng-model="newProduct.price" placeholder="Product Price" required>
+  <select ng-model="newProduct.category" placeholder = "Product Category" required>
+    <option value="Tech">Tech</option>
+    <option value="Apparel">Apparel</option>
+    <option value="Accessories">Accessories</option>
+    <option value="Miscellanious">Miscellanious</option>
+  </select>
+  <input type="text" ng-model="newProduct.description" placeholder="Product Description" required>
+  <input type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
+  <input type="submit" name="name" value="Create Product">
+</form>
+
+<form ng-submit="createInventory(product.id)">
+  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XXL_quantity" placeholder="XXL Quantity">
+  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XL_quantity" placeholder="XL Quantity">
+  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.L_quantity" placeholder="L Quantity">
+  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.M_quantity" placeholder="M Quantity">
+  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.S_quantity" placeholder="S Quantity">
+  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XS_quantity" placeholder="XS Quantity">
+  <input ng-show="total_quantity" type = "text" ng-model = "newProduct.total_quantity" placeholder = "Product Quantity">
+  <input ng-show="total_quantity || apparel_quantity" type="submit" name="name" value="Create Quantity">
+</form>
+
+<div ng-repeat = "product in products">
+  <div id = "product">
+  <h1>{{product.title}}</h1>
+  <div ng-if="product.category === 'Apparel'">
+    <h4>XXL: {{product.XXL_quantity}}</h4>
+    <h4>XL: {{product.XL_quantity}}</h4>
+    <h4>L: {{product.L_quantity}}</h4>
+    <h4>M: {{product.M_quantity}}</h4>
+    <h4>S: {{product.S_quantity}}</h4>
+    <h4>XS: {{product.XS_quantity}}</h4>
+  </div>
+  <div ng-if="product.category != 'Apparel'">
+    <h4>Quantity: {{product.total_quantity}}</h4>
+  </div>
+  </div>
+</div>
+
+
+
+
 
 <div class = "user-forms">
-
   <h3> Create an Affiliate: </h3>
   <%= form_for @user do |f| %>
   <%= f.label :email %>

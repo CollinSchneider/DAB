@@ -1,11 +1,30 @@
 Rails.application.routes.draw do
 
+  namespace :api do
   get 'inventories/index'
+  end
+
+  namespace :api do
+  get 'products/index'
+  end
+
+  # get 'inventories/index'
 
   get '/view' => 'products#view'
   get '/sell' => 'affiliates#sell'
 
-  resources :products
+  get '/faq' => 'products#faq'
+  get '/about' => 'products#about'
+  get '/terms' => 'products#terms'
+  get '/affiliates' => 'products#affiliates'
+  get '/shipping' => 'products#shipping'
+  get '/contact' => 'products#contact'
+
+  namespace :api do
+    resources :products
+    resources :inventories
+  end
+
   resources :users do
     resources :orders
   end

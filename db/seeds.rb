@@ -15,6 +15,11 @@ Product.destroy_all
     price: Faker::Number.between(1, 150),
     description: Faker::Lorem.paragraph,
     category: Faker::Commerce.department(3),
+    feature_one: Faker::Lorem.sentence,
+    feature_two: Faker::Lorem.sentence,
+    feature_three: Faker::Lorem.sentence,
+    feature_four: Faker::Lorem.sentence,
+    feature_five: Faker::Lorem.sentence,
     picture: Faker::Avatar.image
     )
 end

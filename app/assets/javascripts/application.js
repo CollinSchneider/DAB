@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var app = angular.module('DealBaked', []);
+
+app.controller('ProductsController', ['$scope', '$http', function($scope, $http){
+
+  $http.get('/api/products').then(function(response){
+    var data = response.data;
+    $scope.products = data.products;
+  })
+
+  $scope.createProduct = function(){
+    $http.post('/api/products').then(function(response){
+      $scope.product = response.data;
+      console.log($scope.product);
+    })
+  }
+
+}])
