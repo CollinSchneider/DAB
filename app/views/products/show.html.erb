@@ -11,6 +11,9 @@
         </div>
       </nav>
     </div> -->
+    <p id ="product-id" class = "hidden">
+      <%= @product.id %>
+    </p>
     <div class="row">
       <div class="col l6 s12">
         <%= image_tag(@product.picture, :id => 'product-image', :class => 'materialboxed responsive-img', :width => '650') %>
