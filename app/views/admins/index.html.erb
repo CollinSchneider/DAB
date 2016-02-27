@@ -1,66 +1,58 @@
 <h1> <%= current_user.email %> Admin Page </h1>
-<%= link_to "Product Page", view_path %>
+<%= link_to "Product Page", products_path %>
 
-<h2> Users: </h2>
+<h3> Users: </h3>
 <% @users.each do |user| %>
-<h4><%= user.email %>:</h4>
+<h5><%= user.email %>:</h5>
 <% end %>
 
-<h2> Affiliates: </h2>
+<h3> Affiliates: </h3>
 <% @affiliates.each do |affiliate| %>
-<h4> <%= affiliate.email %> </h4>
+<h5> <%= affiliate.email %> </h5>
 <% end %>
 
 
-</br></br>
+</br></br></br>
 
-<!-- <div ng-controller="ProductsController">
-  <form ng-submit="createProduct()">
+<section ng-controller="ProductsController">
+
+<div id = "create-product-div">
+  <h3>Create a Product:</h3>
+  <form ng-submit="checkCategory()" ng-hide="apparel_quantity || total_quantity">
     <input type="text" ng-model="newProduct.title" placeholder="Product Title" required>
     <input type="text" ng-model="newProduct.price" placeholder="Product Price" required>
-    <select ng-model="newProduct.category" placeholder = "Product Category" required>
+    <input type="text" ng-model="newProduct.category" placeholder="Product Category" required>
+    <!-- <select ng-model="newProduct.category" placeholder = "Product Category" required>
       <option value="Tech">Tech</option>
       <option value="Apparel">Apparel</option>
       <option value="Accessories">Accessories</option>
       <option value="Miscellanious">Miscellanious</option>
-    </select>
-    <select ng-model="newProduct.affiliate" placeholder = "Affiliate" required>
-      <% @affiliates.each do |affiliate| %>
-       <option value = <%=affiliate.id %>> <%=affiliate.email %> </option>
-       <% end %>
-    </select>
+    </select> -->
     <input type="text" ng-model="newProduct.description" placeholder="Product Description" required>
     <input type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
-    <input type="submit" name="name" value="Submit Product">
+    <input type="submit" name="name" value="Create Product">
   </form>
-</div> -->
 
-<form ng-submit="createProduct()" ng-hide="apparel_quantity || total_quantity">
-  <input type="text" ng-model="newProduct.title" placeholder="Product Title" required>
-  <input type="text" ng-model="newProduct.price" placeholder="Product Price" required>
-  <select ng-model="newProduct.category" placeholder = "Product Category" required>
-    <option value="Tech">Tech</option>
-    <option value="Apparel">Apparel</option>
-    <option value="Accessories">Accessories</option>
-    <option value="Miscellanious">Miscellanious</option>
-  </select>
-  <input type="text" ng-model="newProduct.description" placeholder="Product Description" required>
-  <input type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
-  <input type="submit" name="name" value="Create Product">
-</form>
+  <form ng-submit="createProduct()">
+    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.title" placeholder="Product Title" required>
+    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.price" placeholder="Product Price" required>
+    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.category" placeholder = "Product Category" required>
+    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.description" placeholder="Product Description" required>
+    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
+    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XXL_quantity" placeholder="XXL Quantity">
+    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XL_quantity" placeholder="XL Quantity">
+    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.L_quantity" placeholder="L Quantity">
+    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.M_quantity" placeholder="M Quantity">
+    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.S_quantity" placeholder="S Quantity">
+    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XS_quantity" placeholder="XS Quantity">
+    <input ng-show="total_quantity" type = "text" ng-model = "newProduct.total_quantity" placeholder = "Product Quantity">
+    <input ng-show="total_quantity || apparel_quantity" type="submit" name="name" value="Create Product">
+  </form>
+</div>
 
-<form ng-submit="createInventory(product.id)">
-  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XXL_quantity" placeholder="XXL Quantity">
-  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XL_quantity" placeholder="XL Quantity">
-  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.L_quantity" placeholder="L Quantity">
-  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.M_quantity" placeholder="M Quantity">
-  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.S_quantity" placeholder="S Quantity">
-  <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XS_quantity" placeholder="XS Quantity">
-  <input ng-show="total_quantity" type = "text" ng-model = "newProduct.total_quantity" placeholder = "Product Quantity">
-  <input ng-show="total_quantity || apparel_quantity" type="submit" name="name" value="Create Quantity">
-</form>
+</section>
 
-<div ng-repeat = "product in products">
+<!-- <div ng-repeat = "product in products">
   <div id = "product">
   <h1>{{product.title}}</h1>
   <div ng-if="product.category === 'Apparel'">
@@ -75,8 +67,7 @@
     <h4>Quantity: {{product.total_quantity}}</h4>
   </div>
   </div>
-</div>
-
+</div> -->
 
 
 

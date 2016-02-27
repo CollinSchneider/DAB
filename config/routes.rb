@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :api do
-  get 'inventories/index'
-  end
-
-  namespace :api do
-  get 'products/index'
-  end
-
-  # get 'inventories/index'
 
   get '/view' => 'products#view'
   get '/sell' => 'affiliates#sell'
@@ -30,8 +21,9 @@ Rails.application.routes.draw do
   end
   resources :admins
   resources :affiliates
+  resources :products
 
-  root 'products#view'
+  root 'products#index'
 
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'

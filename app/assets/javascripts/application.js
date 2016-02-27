@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
+var init = function(){
+
 var app = angular.module('DealBaked', []);
 
 app.controller('ProductsController', ['$scope', '$http', function($scope, $http){
@@ -24,11 +26,24 @@ app.controller('ProductsController', ['$scope', '$http', function($scope, $http)
     $scope.products = data.products;
   })
 
+  $scope.checkCategory = function(){
+    console.log($scope.newProduct.category);
+    if($scope.newProduct.category === 'Apparel'){
+      $scope.apparel_quantity = true
+      $scope.total_quantity = false;
+    } else {
+      $scope.total_quantity = true;
+      $scope.apparel_quantity = false;
+    }
+  }
+
   $scope.createProduct = function(){
-    $http.post('/api/products').then(function(response){
-      $scope.product = response.data;
-      console.log($scope.product);
+    $http.post('/api/products', {product: $scope.newProduct}).then(function(response){
+      console.log(response.data);
     })
   }
 
 }])
+
+};
+ init();
