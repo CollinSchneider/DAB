@@ -9,7 +9,7 @@ Product.destroy_all
 
 100.times do
   Product.create(
-    affiliate_id: 17,
+    user_id: 17,
     status: 2,
     title: Faker::Commerce.product_name,
     price: Faker::Number.between(1, 150),
