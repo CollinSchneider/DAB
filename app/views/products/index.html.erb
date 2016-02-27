@@ -37,13 +37,79 @@
   <%= button_to "Logout", sessions_path, method: :delete %>
 <% end %>
 
-<div ng-controller = "ProductsController">
-  <div ng-repeat = "product in products" id = "each-product" class = "col 14 m12 s12">
-    <div class="row">
+<div class="container" id='main-content'>
+  <div ng-controller = "ProductsController">
+    <div ng-repeat="product in products" ng-if="$index % 3 == 0" class="row">
+
+      <div class="col l4 m12 s12">
+      <!-- <div class="col 14 m12 s12"> -->
+        <div class="card">
+          <a href="/products/{{products[$index].id}}">
+            <div class="card-image">
+              <img src="{{products[$index].picture}}" id = "product-image" class = "responsive-img" alt="" />
+              <div class="card-title" id = "card-category-title">
+                <div style="font-size: 18px; font-weighy: bold; color:white">
+                  {{products[$index].title}}
+                </div>
+                <div style="font-size:16px">
+                  ${{products[$index].price}}.00
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    <div class = "col l4 m12 s12">
+      <!-- <div class="col 14 m12 s12"> -->
+        <div class="card">
+          <a href="/products/{{products[$index +1].id}}">
+            <div class="card-image">
+              <img src="{{products[$index +1].picture}}" id = "product-image" class = "responsive-img" alt="" />
+              <div class="card-title" id = "card-category-title">
+                <div style="font-size: 18px; font-weighy: bold; color:white">
+                  {{products[$index +1].title}}
+                </div>
+                <div style="font-size:16px">
+                  ${{products[$index +1].price}}.00
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    <div class="col l4 m12 s12">
+      <!-- <div class="col 14 m12 s12"> -->
+        <div class="card">
+          <a href="/products/{{products[$index + 2].id}}">
+            <div class="card-image">
+              <img src="{{products[$index + 2].picture}}" id = "product-image" class = "responsive-img" alt="" />
+              <div class="card-title" id = "card-category-title">
+                <div style="font-size: 18px; font-weighy: bold; color:white">
+                  {{products[$index + 2].title}}
+                </div>
+                <div style="font-size:16px">
+                  ${{products[$index + 2].price}}.00
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+  </div>
+
+  </div>
+</div>
+
+
+<!--
+  <div class="row">
+    <div class = "col 14 m12 s12">
       <div class="card">
         <a href = "/products/{{product.id}}">
         <div class="card-image">
-          <img src="{{product.picture}}" class = "responsive-img" alt="" />
+          <img src="{{product.picture}}" id = "product-image" class = "responsive-img" alt="" />
           <div class="card-title" id = "card-category-title">
             <div style = "font-size: 18px; font-weight: bold; color:white">
               {{product.title}}
@@ -55,5 +121,4 @@
       </div>
       </a>
     </div>
-  </div>
-</div>
+  </div> -->
