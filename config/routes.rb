@@ -18,9 +18,8 @@ Rails.application.routes.draw do
     resources :inventories
   end
 
-  resources :users do
-    resources :orders
-  end
+  resources :users
+  resources :orders
   resources :admins
   resources :affiliates
   resources :products

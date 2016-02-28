@@ -1,14 +1,16 @@
 <h2><%= current_user.email %>'s Cart</h2>
 
-<!-- <#% current_user.cart_items.each do |item| %>
-  <h5>Item ID: <#%= item.id %> </h5>
-  <h5> User ID: <#%= item.user_id %> </h5>
-  <h5> Product ID: <#%= item.product_id %> </h5>
-  <hr>
-<#% end %> -->
 <% @cart.each do |item| %>
 <h3> <%= item.title %> </h3>
 <h4> <%= item.description %> </h4>
 <h4> <%= item.price %> </h4>
 <hr>
+<% end %>
+
+<%= form_for @order do |f| %>
+  <%= f.text_field :user_id, :value => current_user.id %>
+  <%= f.text_field :affiliate_id, :placeholder => "Eventually Affiliate ID" %>
+  <%= f.text_field :product_id, :placeholder => "Eventually Product ID" %>
+  <%= f.number_field :status, :value => 0 %>
+<%= f.submit "Checkout", :class => "btn btn-primary" %>
 <% end %>

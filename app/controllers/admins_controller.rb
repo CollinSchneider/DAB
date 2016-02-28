@@ -18,20 +18,5 @@ class AdminsController < ApplicationController
     redirect_to request.referrer
   end
 
-  # def create
-  #   authenticate_admin
-  #   user = User.create( user_params )
-  #   if user.save
-  #     redirect_to request.referrer
-  #   else
-  #     flash[:error] = user.errors.full_messages
-  #     redirect_to request.referrer
-  #   end
-  # end
-  #
-  # private
-  # def user_params
-  #   params.require(:user).permit(:email, :password, :status)
-  # end
 
 end

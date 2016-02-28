@@ -1,28 +1,3 @@
-<!--
-<% if current_user == nil %>
-  <h1>No user</h1>
-  <%= button_to "Login/Create User", users_path, method: :get %>
-<% elsif current_user != nil %>
-  <h1> Hello <%= current_user.email %> </h1>
-  <% if current_user.status === 1 %>
-    <%= link_to "Affiliate Page", affiliates_path %>
-  <% elsif current_user.status === 2 %>
-    <%= link_to "Admin Page", admins_path %>
-  <% end %>
-  <%= button_to "Logout", sessions_path, method: :delete %>
-<% end %>
-
-<h2>Products:</h2>
-
-<% @accepted_products.each do |product| %>
-<h3> <%= link_to "Product: #{product.title}", product_path(product.id) %> </h3>
-<h5> Category: <%= product.category %> </h5>
-<h5> $<%= product.price %>.00 </h5>
-<p>
-  <%= product.description %>
-</p>
-<% end %> -->
-
 
 <% if current_user == nil %>
   <h1>No user</h1>
@@ -44,7 +19,6 @@
     <div ng-repeat="product in products| filter:search" ng-if="$index % 3 == 0" class="row">
 
       <div class="col l4 m12 s12">
-      <!-- <div class="col 14 m12 s12"> -->
         <div class="card">
           <a href="/products/{{products[$index].id}}">
             <div class="card-image">
@@ -63,7 +37,6 @@
       </div>
 
     <div class = "col l4 m12 s12">
-      <!-- <div class="col 14 m12 s12"> -->
         <div class="card">
           <a href="/products/{{products[$index +1].id}}">
             <div class="card-image">
@@ -82,7 +55,6 @@
       </div>
 
     <div class="col l4 m12 s12">
-      <!-- <div class="col 14 m12 s12"> -->
         <div class="card">
           <a href="/products/{{products[$index + 2].id}}">
             <div class="card-image">
@@ -103,24 +75,3 @@
 
   </div>
 </div>
-
-
-<!--
-  <div class="row">
-    <div class = "col 14 m12 s12">
-      <div class="card">
-        <a href = "/products/{{product.id}}">
-        <div class="card-image">
-          <img src="{{product.picture}}" id = "product-image" class = "responsive-img" alt="" />
-          <div class="card-title" id = "card-category-title">
-            <div style = "font-size: 18px; font-weight: bold; color:white">
-              {{product.title}}
-          </div>
-          <div style="font-size: 16px">
-            ${{product.price}}.00
-          </div>
-        </div>
-      </div>
-      </a>
-    </div>
-  </div> -->
