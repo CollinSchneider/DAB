@@ -4,10 +4,12 @@ class CartItemsController < ApplicationController
   # end
 
   def create
-    # @product = Product.find(params[:id])
     # if @product.total_quantity > 0
       @cart_item = CartItem.create(cart_items_params)
-      # @product.total_quantity = @product.total_quantity - 1
+      @product = Product.where('id = ?', @cart_item.product_id)
+      # @product[0].update( :total_quantity => (:total_quantity - 1) )
+      @product[0].total_quantity = (@product[0].total_quantity - 1)
+      @product[0].save
       redirect_to request.referrer
     # else
       # puts "Not enough inventory"
@@ -16,7 +18,9 @@ class CartItemsController < ApplicationController
 
   def destroy
     cart_item = CartItem.find(params[:id])
-    # cart_item = CartItem.where('product_id = ?', item_id)
+    @product = Product.where('id = ?', cart_item.product_id)
+    @product[0].total_quantity = (@product[0].total_quantity + 1)
+    @product[0].save
     cart_item.destroy
     redirect_to request.referrer
   end
