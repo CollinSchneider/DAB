@@ -23,7 +23,6 @@ class UsersController < ApplicationController
   def cart
     product_id_array = current_user.cart_items.map { |item| item.product_id }
     @cart = Product.find(product_id_array)
-    # @order = Order.create(order_params)
     @order = Order.new
   end
 
