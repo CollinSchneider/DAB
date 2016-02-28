@@ -20,6 +20,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def cart
+    product_id_array = current_user.cart_items.map { |item| item.product_id }
+    @cart = Product.find(product_id_array)
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password, :status)

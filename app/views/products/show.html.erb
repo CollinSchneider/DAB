@@ -39,7 +39,12 @@
               </select>
             </div>
             <div class="input-field col l6 s12 center">
-              <button class='btn grey darken-3' type="submit" name="action" id='add-to-cart-btn'>Add to Cart</button>
+              <%= form_for @cart_item do |f| %>
+                <%= f.text_field :product_id, :value => @product.id %>
+                <%= f.text_field :user_id, :value => current_user.id %>
+                <%= f.submit 'ADD TO CART' %>
+              <% end %>
+              <!-- <button class='btn grey darken-3' type="submit" name="action" id='add-to-cart-btn'>Add to Cart</button> -->
             </div>
           </div>
           <div class="row">

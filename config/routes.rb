@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/shipping' => 'products#shipping'
   get '/contact' => 'products#contact'
 
+  get '/cart' => 'users#cart'
+
   namespace :api do
     resources :products
     resources :inventories
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   resources :admins
   resources :affiliates
   resources :products
+  resources :cart_items
 
   root 'products#index'
 
