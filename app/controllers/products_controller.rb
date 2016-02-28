@@ -14,27 +14,6 @@ class ProductsController < ApplicationController
     @affiliate_products = Product.where('affiliate_id = ?', current_user)
   end
 
-  def faq
-  end
-
-  def about
-  end
-
-  def terms
-  end
-
-  def affiliates
-  end
-
-  def shipping
-  end
-
-  def shipping
-  end
-
-  def contact
-  end
-
   def show
     @product = Product.find(params[:id])
     @cart_item = CartItem.new

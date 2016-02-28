@@ -37,11 +37,11 @@
   <%= button_to "Logout", sessions_path, method: :delete %>
 <% end %>
 
-<!-- <input ng-model="search.title" placeholder = "SEARCH PRODUCTS"> -->
+<input ng-model="search.title" placeholder = "SEARCH PRODUCTS">
 
 <div class="container" id='main-content'>
   <div ng-controller = "ProductsController">
-    <div ng-repeat="product in products" ng-if="$index % 3 == 0" class="row">
+    <div ng-repeat="product in products| filter:search" ng-if="$index % 3 == 0" class="row">
 
       <div class="col l4 m12 s12">
       <!-- <div class="col 14 m12 s12"> -->
