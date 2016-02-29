@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   get '/faq' => 'products#faq'
   get '/about' => 'products#about'
   get '/terms' => 'products#terms'
-  get '/affiliates' => 'products#affiliates'
+  get '/about-affiliates' => 'products#affiliates', as: :about_affiliates
   get '/shipping' => 'products#shipping'
   get '/contact' => 'products#contact'
+
+  get '/affiliate' => 'users#affiliate'
 
   get '/cart' => 'users#cart'
 

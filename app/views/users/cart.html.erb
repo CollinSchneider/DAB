@@ -1,16 +1,27 @@
 <h2><%= current_user.email %>'s Cart</h2>
 
+<!-- <#% current_user.cart_items.each do |cart_item| %> -->
 <% @cart.each do |item| %>
-  <h3> <%= item.title %> </h3>
-  <h4> <%= item.description %> </h4>
-  <h4> <%= item.price %> </h4>
+<div class="col l4 m12 s12">
+  <div class="card" style = "width: 400px">
+      <div class="card-image">
+        <%= image_tag item.picture, :style => 'height:400px; width:400px' %>
+        <div class="card-title" id = "card-category-title">
+          <div style="font-size: 18px; font-weighy: bold; color:white">
+            <%= item.title %>
+          </div>
+          <div style="font-size:16px">
+            $<%= item.price %>.00
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- <h4> Quantity: <#%= cart_item.quantity %></h4>
+  <#%= button_to "Remove #{item.title} From Cart", cart_item_path(cart_item.id), method: :delete, :class => 'btn btn-danger' %> -->
+</div>
   <!-- <#%= button_to "Remove From Cart", cart_item_path(@cart_item.id), method: :destroy, :class => 'btn btn-danger' %> -->
-  <hr>
 <% end %>
-
-<% current_user.cart_items.each do |cart_item| %>
-  <%= button_to "Remove #{cart_item.product_id} From Cart", cart_item_path(cart_item.id), method: :delete, :class => 'btn btn-danger' %>
-<% end %>
+<!-- <#% end %> -->
 
 <%= form_for @order do |f| %>
   <%= f.text_field :user_id, :value => current_user.id %>

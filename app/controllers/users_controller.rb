@@ -5,6 +5,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def affiliate
+    authenticate_affiliate
+    @product = Product.new
+    @users = User.all
+  end
+
   def create
     user = User.create( user_params )
     if user.save

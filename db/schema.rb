@@ -11,24 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228194610) do
+ActiveRecord::Schema.define(version: 20160229195816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "admins", force: :cascade do |t|
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  create_table "affiliates", force: :cascade do |t|
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,11 +25,6 @@ ActiveRecord::Schema.define(version: 20160228194610) do
   end
 
   add_index "cart_items", ["user_id"], name: "index_cart_items_on_user_id", using: :btree
-
-  create_table "inventories", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "inventory", force: :cascade do |t|
     t.integer  "product_id"
@@ -69,7 +50,6 @@ ActiveRecord::Schema.define(version: 20160228194610) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "affiliate_id"
     t.string   "title"
     t.text     "description"
     t.string   "category"
@@ -96,7 +76,6 @@ ActiveRecord::Schema.define(version: 20160228194610) do
     t.integer  "XXL_quantity"
   end
 
-  add_index "products", ["affiliate_id"], name: "index_products_on_affiliate_id", using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -111,5 +90,4 @@ ActiveRecord::Schema.define(version: 20160228194610) do
   add_foreign_key "inventory", "products"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
-  add_foreign_key "products", "affiliates"
 end

@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Product.destroy_all
 
-100.times do
+50.times do
   Product.create(
-    user_id: 28,
+    user_id: [28, 30].sample,
     status: 2,
     title: Faker::Commerce.product_name,
     price: Faker::Number.between(1, 150),

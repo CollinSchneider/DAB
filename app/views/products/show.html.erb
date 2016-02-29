@@ -30,16 +30,22 @@
             <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
           </div>
           <div class="row" style='margin-top:-25px'>
-            <div class="input-field col l6 s12 center" id='input-field'>
+            <!-- <div class="input-field col l6 s12 center" id='input-field'>
               <select class='browser-default' id='add-to-cart-qty'>
                 <option value="" disabled selected>Quantity: 1</option>
                 <option value="1">Quantity: 2</option>
                 <option value="2">Quantity: 3</option>
                 <option value="3">Quantity: 4</option>
               </select>
-            </div>
+            </div> -->
             <div class="input-field col l6 s12 center">
               <%= form_for @cart_item do |f| %>
+                <p>Quantity:</p>
+                <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
+                  <% (1..10).each do |a| %>
+                    <%= content_tag(:option, a, value: a) %>
+                  <% end %>
+                <% end %>
                 <%= f.hidden_field :product_id, :value => @product.id %>
                 <%= f.hidden_field :user_id, :value => current_user.id %>
                 <%= f.submit 'ADD TO CART', :class => 'btn btn-primary'  %>

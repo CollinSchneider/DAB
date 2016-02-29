@@ -1,5 +1,4 @@
 class Product < ActiveRecord::Base
-  belongs_to :affiliate
+  belongs_to :user
   has_many :orders
-  has_many :inventories
 end
