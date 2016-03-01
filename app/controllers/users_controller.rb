@@ -7,8 +7,7 @@ class UsersController < ApplicationController
 
   def affiliate
     authenticate_affiliate
-    @product = Product.new
-    @users = User.all
+    @affiliate_orders = OrderItem.where('affiliate_id = ?', current_user.id)
   end
 
   def create

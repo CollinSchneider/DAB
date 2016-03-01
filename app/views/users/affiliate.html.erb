@@ -1,4 +1,30 @@
-<h1>Affiliate <%= current_user.email %> Products: </h1>
+<h2> Hello <%= current_user.email %>!</h2>
+
+<h3>Sales to be Shipped:</h3>
+<% @affiliate_orders.each do |order_item| %>
+<% if order_item.status === 0 %>
+  <h5> Order_Item ID: <%= order_item.id %> </h5>
+  <h5> Order Status: <%= order_item.status %> </h5>
+  <h5> Order's Product ID: <%= order_item.product_id %> </h5>
+  <%= form_for order_item do |f| %>
+    <%= f.text_field :order_id, :value => order_item.id %>
+    <%= f.text_field :status, :value => 1 %>
+    <%= f.text_field :shipping_number, :placeholder => "Shipping Number", :required => true %>
+    <%= f.submit "Order Shipped" %>
+  <% end %>
+<% end %>
+<% end %>
+
+<h3>Sales Shipped:</h3>
+<% @affiliate_orders.each do |order_item| %>
+<% if order_item.status === 1 %>
+  <h5> Order_Item ID: <%= order_item.id %> </h5>
+  <h5> Order Status: <%= order_item.status %> </h5>
+  <h5> Order's Product ID: <%= order_item.product_id %> </h5>
+<% end %>
+<% end %>
+
+<h3>Affiliate <%= current_user.email %> Products: </h3>
 
 <% current_user.products.each do |product| %>
 <div class="col l4 m12 s12" style="display:inline-block">

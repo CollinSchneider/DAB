@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       if user.status === 0
         redirect_to root_path
       elsif user.status === 1
-        redirect_to affiliates_path
+        redirect_to affiliate_path
       elsif user.status === 2
         redirect_to admins_path
       end

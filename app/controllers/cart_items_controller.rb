@@ -1,8 +1,5 @@
 class CartItemsController < ApplicationController
 
-  # def index
-  # end
-
   def create
     @cart_item = CartItem.create(cart_items_params)
     @product = Product.where('id = ?', @cart_item.product_id)
@@ -27,7 +24,7 @@ class CartItemsController < ApplicationController
 
   private
   def cart_items_params
-    params.require(:cart_item).permit(:user_id, :product_id, :quantity)
+    params.require(:cart_item).permit(:user_id, :product_id, :affiliate_id, :quantity)
   end
 
 end

@@ -11,6 +11,7 @@ Product.destroy_all
   Product.create(
     user_id: [28, 30].sample,
     status: 2,
+    category: ['Apparel', 'Tech', 'Art/Culture', 'Gadgets', 'Essentials', 'Accessories'].sample,
     title: Faker::Commerce.product_name,
     price: Faker::Number.between(1, 150),
     total_quantity: Faker::Number.between(1, 100),

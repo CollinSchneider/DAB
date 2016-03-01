@@ -12,38 +12,31 @@
   <%= button_to "Logout", sessions_path, method: :delete %>
 <% end %>
 
-<!-- <input ng-model="search.title" placeholder = "SEARCH PRODUCTS"> -->
-<!-- <select ng-model="search.category">
-  <option value = "Apparel">Apparel</option>
-  <option value = "Tech">Tech</option>
-  <option value = "Gadget">Gadgets</option>
-  <option value = "Art/Culture">Art/Culture</option>
-  <option value = "Essentials">Essentials</option>
-  <option value = "Accessories">Accessories</option>
-</select> -->
+<input ng-model="search.$" placeholder = "SEARCH PRODUCTS">
 <section ng-controller="ProductsController">
 
-<ul>
-  <li ng-repeat="option in sortOptions">{{option.name}}</li>
-</ul>
+  <!-- Filter:
+  <select ng-model="filterItem.store" ng-options="item.name for item in filterOptions.stores">
+  </select>
+  Sort:
+  <select ng-model="sortItem.store" ng-options="item.name for item in sortOptions.stores">
+  </select>
+  <p>
+    <strong>Selected Filter dropdown item: </strong> {{filterItem.store.category}}
+  </p>
 
-<ul>
-  <li ng-repeat="filter in filterOptions.stores">{{filter.name}}</li>
-</ul>
+  <p>
+    <strong>Selected Sort dropdown item: </strong> {{sortItem.store.category}}
+  </p>
 
-<!-- Filter:
-<select ng-model="filterItem.store" ng-options="item.name for item in filterOptions.stores">
-</select>
-Sort:
-<select ng-model="sortItem.store" ng-options="item.name for item in sortOptions.stores">
-</select> -->
+
 
 <h4>Filter By: {{filterItem.store.name}}</h4>
-<h4>Sort By: {{sortItem.store.name}}</h4>
+<h4>Sort By: {{sortItem.store.name}}</h4> -->
 
 <div class="container" id='main-content'>
   <!-- <div ng-controller = "ProductsController"> -->
-    <div ng-repeat="product in products | orderBy:'price':reverse | filter:customerFilter" ng-if="$index % 3 == 0" class="row">
+    <div ng-repeat="product in products | filter:search.$" ng-if="$index % 3 == 0" class="row">
 
       <div class="col l4 m12 s12">
         <div class="card">

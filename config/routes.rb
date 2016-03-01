@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :affiliates
   resources :products
   resources :cart_items
+  resources :order_items
 
   root 'products#index'
 

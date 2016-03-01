@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229195816) do
+ActiveRecord::Schema.define(version: 20160301164439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 20160229195816) do
     t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "affiliate_id"
   end
 
   add_index "cart_items", ["user_id"], name: "index_cart_items_on_user_id", using: :btree
@@ -36,17 +37,25 @@ ActiveRecord::Schema.define(version: 20160229195816) do
 
   add_index "inventory", ["product_id"], name: "index_inventory_on_product_id", using: :btree
 
-  create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
     t.integer  "product_id"
-    t.string   "shipping_number"
-    t.integer  "status"
+    t.integer  "user_id"
+    t.integer  "affiliate_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "affiliate_id"
+    t.string   "shipping_number"
+    t.integer  "status"
   end
 
-  add_index "orders", ["product_id"], name: "index_orders_on_product_id", using: :btree
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
@@ -88,6 +97,6 @@ ActiveRecord::Schema.define(version: 20160229195816) do
 
   add_foreign_key "cart_items", "users"
   add_foreign_key "inventory", "products"
-  add_foreign_key "orders", "products"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
 end
