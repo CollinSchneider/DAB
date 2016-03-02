@@ -5,21 +5,28 @@ ctrl.controller('ProductsController', ['$scope', 'ProductsApi',
 
     $scope.products = [];
     $scope.page = 0;
-    $scope.limit = 10;
+    $scope.limit = 5;
 
     $scope.loadMore = function(){
-      ProductsApi.getAll($scope.page, $scope.limit).then(function(response){
-        $scope.products = $scope.products.concat(response.data.products);
-        console.log($scope.products);
-        $scope.page += 1;
-      });
+      $scope.getProducts();
+      $scope.page += 1;
     };
 
-    // $scope.loadMore()
+    $scope.getProducts = function(){
+      ProductsApi.getAll($scope.page, $scope.limit).then(function(response){
+        $scope.products = $scope.products.concat(response.data.products);
+      });
+    }
+
+    // console.log('doc height: ', $(document).height());
+    // console.log('scroll: ', $(document).height());
+    if($(window).scrollTop() + $(window).height() >= $(document).height()-200) {
+      $scope.loadMore()
+    }
 
     $(window).scroll(function(){
-      if($(window).scrollTop() + $(window).height() >= $(document).height()-50) {
-          $scope.loadMore()
+      if($(window).scrollTop() + $(window).height() >= $(document).height()-200) {
+        $scope.loadMore()
       }
     })
 
