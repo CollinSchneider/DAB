@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
   def show
     authenticate_anybody
     @product = Product.find(params[:id])
+    @new_product_item = ProductItem.new
     @cart_item = CartItem.new
   end
 
@@ -34,12 +35,12 @@ class ProductsController < ApplicationController
   def create
     authenticate_admin
     product = Product.create( product_params )
-    redirect_to request.referrer
+    redirect_to product_path(product.id)
   end
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :admin_notes, :total_quantity, :XS_quantity, :S_quantity, :M_quantity, :L_quantity, :XL_quantity, :XXL_quantity)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five)
   end
 
 end

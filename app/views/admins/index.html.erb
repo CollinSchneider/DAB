@@ -14,7 +14,35 @@
 
 </br></br></br>
 
-<section ng-controller="ProductsController">
+<div class="user-form">
+
+<%= form_for @product do |f| %>
+  <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
+  <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
+  <%= f.select :category, :required => true do %>
+    <% ['Apparel', 'Essentials', 'Accessories', 'Art/Culture', 'Tech', 'Gadgets'].each do |a| %>
+      <%= content_tag(:option, a, value: a,) %>
+    <% end %>
+  <% end %>
+  <%= f.number_field :price, :placeholder => "Product Price", :required => true %>
+  <%= f.text_field :picture, :placeholder => "Product Picture", :required => true %>
+  <%= f.select :user_id, :required => true do %>
+    <% @affiliates.each do |a| %>
+      <%= content_tag(:option, a.email, value: a.id,) %>
+    <% end %>
+  <% end %>
+  <%= f.number_field :status, :placeholder => "Product Status", :required => true %>
+  <%= f.text_field :feature_one, :placeholder => "Feature One" %>
+  <%= f.text_field :feature_two, :placeholder => "Feature Two" %>
+  <%= f.text_field :feature_three, :placeholder => "Feature Three" %>
+  <%= f.text_field :feature_four, :placeholder => "Feature Four" %>
+  <%= f.text_field :feature_five, :placeholder => "Feature Five" %>
+  <%= f.submit "Create Product" %>
+<% end %>
+
+</div>
+
+<!-- <section ng-controller="ProductsController">
 
 <div id = "create-product-div">
   <h3>Create a Product:</h3>
@@ -22,12 +50,12 @@
     <input type="text" ng-model="newProduct.title" placeholder="Product Title" required>
     <input type="text" ng-model="newProduct.price" placeholder="Product Price" required>
     <input type="text" ng-model="newProduct.category" placeholder="Product Category" required>
-    <!-- <select ng-model="newProduct.category" placeholder = "Product Category" required>
+    <select ng-model="newProduct.category" placeholder = "Product Category" required>
       <option value="Tech">Tech</option>
       <option value="Apparel">Apparel</option>
       <option value="Accessories">Accessories</option>
       <option value="Miscellanious">Miscellanious</option>
-    </select> -->
+    </select>
     <input type="text" ng-model="newProduct.description" placeholder="Product Description" required>
     <input type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
     <input type="submit" name="name" value="Create Product">
@@ -50,7 +78,7 @@
   </form>
 </div>
 
-</section>
+</section> -->
 
 
 <div class = "user-forms">

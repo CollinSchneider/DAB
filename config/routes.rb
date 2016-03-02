@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :admins
   resources :affiliates
   resources :products
+  resources :product_items
   resources :cart_items
   resources :order_items
   resources :charges

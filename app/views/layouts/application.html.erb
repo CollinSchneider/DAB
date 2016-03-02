@@ -48,6 +48,9 @@
           <li><a id='toolbar-links'class='black-text' href="">Accessories</a></li>
         </ul>
         <ul class="right hide-on-small-and-down">
+        <% if current_user === nil %>
+
+        <% else %>
           <li> <%= link_to sessions_path, :class => "dropdown-button black-text", method: :delete do %> <i class="fa fa-sign-out"></i> Logout <% end %></li>
           <% if current_user.status === 0 %>
           <li><a class="dropdown-button black-text" href="./profile" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
@@ -56,6 +59,7 @@
           <% elsif current_user.status === 2 %>
             <li><a class="dropdown-button black-text" href="localhost:3000" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
           <% end %>
+        <% end %>
           <li><a class='black-text'href="/cart"><i class="material-icons">shopping_cart</i></a></li>
         </ul>
       </div>
