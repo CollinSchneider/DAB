@@ -1,28 +1,40 @@
 <h2> Hello <%= current_user.email %>!</h2>
 
-<h3>Sales to be Shipped:</h3>
-<% @affiliate_orders.each do |order_item| %>
-<% if order_item.status === 0 %>
-  <h5> Order_Item ID: <%= order_item.id %> </h5>
-  <h5> Order Status: <%= order_item.status %> </h5>
-  <h5> Order's Product ID: <%= order_item.product_id %> </h5>
-  <%= form_for order_item do |f| %>
-    <%= f.text_field :order_id, :value => order_item.id %>
-    <%= f.text_field :status, :value => 1 %>
-    <%= f.text_field :shipping_number, :placeholder => "Shipping Number", :required => true %>
-    <%= f.submit "Order Shipped" %>
+<h1>Sales to be shipped: </h1>
+<% current_user.products.each do |product| %>
+  <!-- <h3> <#%= product.title %> </h3> -->
+  <% product.order_items.each do |order_item| %>
+  <% if order_item.status === 0 %>
+    <div id = "affiliate-order-div">
+    <%= image_tag order_item.product.picture %>
+    <h5> <%= order_item.product.title %> </h5>
+    <h5> $<%= order_item.product.price %>.00 </h5>
+    <p> <%= order_item.product.description %> </p>
+    <%= form_for order_item do |f| %>
+      <%= f.hidden_field :status, :value => 1 %>
+      <%= f.text_field :shipping_number, :placeholder => 'Shipping Number', :required => true %>
+      <%= f.submit "Shipped Order" %>
+    <% end %>
+    </div>
+    <% end %>
   <% end %>
 <% end %>
+
+<h1> Past Sales: </h1>
+<% current_user.products.each do |product| %>
+  <!-- <h3> <#%= product.title %> </h3> -->
+  <% product.order_items.each do |order_item| %>
+  <% if order_item.status === 1 %>
+    <div id = "affiliate-order-div">
+    <%= image_tag order_item.product.picture %>
+    <h5> <%= order_item.product.title %> </h5>
+    <h5> $<%= order_item.product.price %>.00 </h5>
+    <p> <%= order_item.product.description %> </p>
+    </div>
+    <% end %>
+  <% end %>
 <% end %>
 
-<h3>Sales Shipped:</h3>
-<% @affiliate_orders.each do |order_item| %>
-<% if order_item.status === 1 %>
-  <h5> Order_Item ID: <%= order_item.id %> </h5>
-  <h5> Order Status: <%= order_item.status %> </h5>
-  <h5> Order's Product ID: <%= order_item.product_id %> </h5>
-<% end %>
-<% end %>
 
 <h3>Affiliate <%= current_user.email %> Products: </h3>
 

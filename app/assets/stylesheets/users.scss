@@ -1,11 +1,12 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.user-forms {
-  margin-left: 25%;
+#affiliate-order-div {
   border: 1px solid black;
+  display: inline-block;
+  width: 32%;
+  margin: 5px;
   text-align: center;
-  width: 50%;
-  margin-top: 10px;
   padding: 10px;
+  background: white;
 }

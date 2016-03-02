@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var app = angular.module('DealBaked', [
+  'MainControllerModule',
+  'ProductsApiFactory'
+]);

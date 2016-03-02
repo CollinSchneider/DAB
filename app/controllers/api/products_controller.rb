@@ -1,9 +1,21 @@
 class Api::ProductsController < ApplicationController
-
   def index
-    dbProducts = Product.all
-    render json: { products: dbProducts }
+  limit = (params[:limit] || 10).to_i
+    # if params[:search]
+    #   search_term = params[:search]
+    #   violations = Violation.where("description ILIKE ?", "%#{search_term}%")
+    #                         .limit(limit)
+    # else
+      page = (params[:page] || 0).to_i
+      products = Product.offset(limit*page).limit(limit)
+    # end
+    render json: {products: products}
   end
+
+  # def index
+  #   dbProducts = Product.all
+  #   render json: { products: dbProducts }
+  # end
 
   def create
     new_product = Product.create(product_params)
