@@ -54,6 +54,7 @@ GEM
     debug_inspector (0.0.2)
     domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.1.0)
     erubis (2.7.0)
     execjs (2.6.0)
     faker (1.6.1)
@@ -169,6 +170,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
+  dotenv
   faker
   jbuilder (~> 2.0)
   jquery-rails

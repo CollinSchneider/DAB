@@ -1,6 +1,5 @@
 <h2><%= current_user.email %>'s Cart</h2>
 
-<!-- <#% current_user.cart_items.each do |cart_item| %> -->
 <% @cart.each do |item| %>
 <div class="col l4 m12 s12" style="display:inline-block">
   <div class="card" style = "width: 400px">
@@ -23,7 +22,9 @@
 <% end %>
 <!-- <#% end %> -->
 
-<%= form_for @order do |f| %>
-  <%= f.text_field :user_id, :value => current_user.id %>
-<%= f.submit "Checkout", :class => "btn btn-primary" %>
-<% end %>
+<!-- <#%= form_for @order do |f| %>
+  <#%= f.text_field :user_id, :value => current_user.id %>
+<#%= f.submit "Checkout", :class => "btn btn-primary" %>
+<#% end %> -->
+
+<%= button_to "Checkout", new_charge_path, method: :get %>

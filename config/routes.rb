@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :order_items
   resources :charges
 
-  root 'products#index'
+  root 'users#index'
 
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'

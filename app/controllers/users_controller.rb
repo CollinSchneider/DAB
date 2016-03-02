@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
 
   def index
+    if current_user
+      redirect_to products_path
+    end
     @user = User.new
-    @users = User.all
   end
 
   def affiliate
