@@ -9,9 +9,9 @@ class UsersController < ApplicationController
 
   def affiliate
     authenticate_affiliate
-    @affiliate_new_orders_array = OrderItem.where('affiliate_id = ?', current_user.id)
-    affiliate_products = @affiliate_new_orders_array.map { |item| item.product_id }
-    @affiliate_order_products = Product.find(affiliate_products)
+    # @affiliate_new_orders_array = OrderItem.where('affiliate_id = ?', current_user.id)
+    # affiliate_products = @affiliate_new_orders_array.map { |item| item.product_id }
+    # @affiliate_order_products = Product.find(affiliate_products)
   end
 
   def create

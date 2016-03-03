@@ -7,10 +7,11 @@
     <% end %>
     <label class="amount">
       <% current_user.cart_items.each do |item| %>
-        <h4> <strong> <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %>: </strong> $<%= item.product_item.product.price %>.00 </h4>
+        <h4> <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %> at $<%= item.product_item.product.price %>.00 each = <strong style = "font-weight:bold">$<%= item.product_item.product.price.to_i  * item.quantity.to_i %>.00</strong> </h4>
         <% end %>
       <h3>Total Amount: $<%= @amount %>.00</h3>
     </label>
+    <a href="/cart">Cart incorrect?</a></br></br>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"

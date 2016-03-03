@@ -20,12 +20,13 @@ class ChargesController < ApplicationController
 	  # @amount = 500
 		total_price
 
-		# new_order = Order.create( order_params )
-		# users_cart = CartItem.where('user_id = ?', current_user)
+		new_order = Order.create( :user_id => current_user.id )
+
 		current_user.cart_items.each do |item|
-			OrderItem.create(:status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.product_id)
+			OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.id, :quantity => item.quantity)
+			item.destroy
 		end
-		current_user.cart_items.each { |item| item.destroy }
+		# current_user.cart_items.each { |item| item.destroy }
 
 	  customer = Stripe::Customer.create(
 	    :email => params[:stripeEmail],

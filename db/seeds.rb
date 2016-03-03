@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 Product.destroy_all
 
 50.times do
@@ -14,7 +15,6 @@ Product.destroy_all
     category: ['Apparel', 'Tech', 'Art/Culture', 'Gadgets', 'Essentials', 'Accessories'].sample,
     title: Faker::Commerce.product_name,
     price: Faker::Number.between(1, 150),
-    total_quantity: Faker::Number.between(1, 100),
     description: Faker::Lorem.paragraph,
     feature_one: Faker::Lorem.sentence,
     feature_two: Faker::Lorem.sentence,
@@ -24,3 +24,13 @@ Product.destroy_all
     picture: Faker::Avatar.image
     )
 end
+
+# ProductItem.destroy_all
+#
+# 150.times do
+#   ProductItem.create(
+#     product_id: Faker::Number.between(1380, 1421),
+#     description: ['XL', 'Blue', 'XS', 'Large Red', 'Green', 'Medium', 'Pink'].sample,
+#     quantity: Faker::Number.between(1, 100)
+#   )
+# end

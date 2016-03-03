@@ -1,0 +1,21 @@
+<h1> Hello, <%= current_user.email %>! </h1>
+
+<h3>Orders Waiting to be Shipped:</h3>
+<% current_user.order_items.each do |order| %>
+  <% if order.status === 0 %>
+  <div style = "display:inline-block">
+    <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
+    <h5><%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h5>
+  </div>
+  <% end %>
+<% end %>
+
+<h3>Orders Currently in Shipping:</h3>
+<% current_user.order_items.each do |order| %>
+  <% if order.status === 1 %>
+  <div style = "display:inline-block">
+    <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
+    <h5><%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h5>
+  </div>
+  <% end %>
+<% end %>

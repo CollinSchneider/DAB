@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/contact' => 'products#contact'
 
   get '/affiliate' => 'users#affiliate'
+  get '/profile' => 'users#profile'
 
   get '/cart' => 'users#cart'
 
