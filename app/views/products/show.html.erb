@@ -5,7 +5,7 @@
       <%= f.number_field :product_id, :value => @product.id %>
       <%= f.text_field :description, :placeholder => "Item's Description (Large, red)" %>
       <%= f.number_field :quantity, :placeholder => "Item Quantity" %>
-      <%= f.submit "Create #{@product.title} Item" %>
+      <%= f.submit "Create item for #{@product.title} Product" %>
     <% end %>
   <% end %>
     <!-- <div class="row black-text">
@@ -46,6 +46,7 @@
               </select>
             </div> -->
             <div class="input-field col l6 s12 center">
+            <% if @product.product_items.exists? %>
               <%= form_for @cart_item do |f| %>
                 <%= f.select :product_item_id, :class => "browser-default", :id => "add-to-cart-qty" do %>
                   <% @product.product_items.each do |item| %>
@@ -57,10 +58,11 @@
                     <%= content_tag(:option, a, value: a) %>
                   <% end %>
                 <% end %>
-                <%= f.text_field :affiliate_id, :value => @product.user_id %>
+                <%= f.hidden_field :affiliate_id, :value => @product.user_id %>
                 <%= f.hidden_field :user_id, :value => current_user.id %>
                 <%= f.submit 'ADD TO CART', :class => 'btn btn-primary'  %>
               <% end %>
+            <% end %>
               <!-- <button class='btn grey darken-3' type="submit" name="action" id='add-to-cart-btn'>Add to Cart</button> -->
             </div>
           </div>

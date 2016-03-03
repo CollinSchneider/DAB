@@ -6,8 +6,8 @@
       </div>
     <% end %>
     <label class="amount">
-      <% @cart.each do |item| %>
-        <h4> <strong><%= item.title %>: </strong> $<%= item.price %>.00 </h4>
+      <% current_user.cart_items.each do |item| %>
+        <h4> <strong> <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %>: </strong> $<%= item.product_item.product.price %>.00 </h4>
         <% end %>
       <h3>Total Amount: $<%= @amount %>.00</h3>
     </label>
