@@ -14,12 +14,41 @@
  *= require_self
  */
 
- .hidden {
-   display: none;
- }
-
  .row {
    margin-bottom: 0px;
+ }
+
+ #landing-container {
+   width: 100%;
+   margin-bottom: -25px;
+ }
+
+ #sign-up-tag {
+   color: black;
+   text-decoration: underline;
+ }
+
+ #sign-up-tag:hover {
+   color: black;
+ }
+
+
+ #cover-photo {
+   background:
+     linear-gradient(
+       rgba(0, 0, 0, 0.5),
+       rgba(0, 0, 0, 0.5)
+     ),
+     url('http://www.onesothebysrealty.com/blog/wp-content/uploads/2015/03/3-13-14-Miami-Skyline.jpg');
+   background-size: cover;
+   height: 83vh;
+ }
+
+ #login-container {
+   max-width:350px;
+   float: none;
+   margin: 100px auto;
+   margin-top: 50px;
  }
 
  #logo {

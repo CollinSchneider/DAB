@@ -1,27 +1,36 @@
 <h2> Hello <%= current_user.email %>!</h2>
 
-<h3>Sales to be Shipped:</h3>
-<% @affiliate_orders.each do |order_item| %>
-<% if order_item.status === 0 %>
-  <h5> Order_Item ID: <%= order_item.id %> </h5>
-  <h5> Order Status: <%= order_item.status %> </h5>
-  <h5> Order's Product ID: <%= order_item.product_id %> </h5>
-  <%= form_for order_item do |f| %>
-    <%= f.text_field :order_id, :value => order_item.id %>
-    <%= f.text_field :status, :value => 1 %>
-    <%= f.text_field :shipping_number, :placeholder => "Shipping Number", :required => true %>
-    <%= f.submit "Order Shipped" %>
-  <% end %>
-<% end %>
+<h1>Sales to be shipped: </h1>
+<% current_user.products.each do |product| %>
+  <% product.product_items.each do |item| %>
+    <% item.order_items.each do |order| %>
+      <% if order.status === 0 %>
+        <div id = "affiliate-order-div">
+          <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
+          <h3> <%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h3>
+          <%= form_for order do |f| %>
+            <%= f.hidden_field :status, :value => 1 %>
+            <%= f.text_field :shipping_number, :placeholder => "Shipping Number", :required => true %>
+            <%= f.submit "Mark Order as Shipped"%>
+          <% end %>
+          </div>
+      <% end %>
+    <% end %>
+  <% end%>
 <% end %>
 
-<h3>Sales Shipped:</h3>
-<% @affiliate_orders.each do |order_item| %>
-<% if order_item.status === 1 %>
-  <h5> Order_Item ID: <%= order_item.id %> </h5>
-  <h5> Order Status: <%= order_item.status %> </h5>
-  <h5> Order's Product ID: <%= order_item.product_id %> </h5>
-<% end %>
+<h1>Shipped Sales: </h1>
+<% current_user.products.each do |product| %>
+  <% product.product_items.each do |item| %>
+    <% item.order_items.each do |order| %>
+      <% if order.status === 1 %>
+        <div id = "affiliate-order-div">
+          <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
+          <h3> <%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h3>
+        </div>
+      <% end %>
+    <% end %>
+  <% end%>
 <% end %>
 
 <h3>Affiliate <%= current_user.email %> Products: </h3>

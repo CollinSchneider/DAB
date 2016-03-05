@@ -1,21 +1,22 @@
 class UsersController < ApplicationController
 
   def index
+    if current_user
+      redirect_to products_path
+    end
     @user = User.new
-    @users = User.all
   end
 
   def affiliate
     authenticate_affiliate
-    @affiliate_orders = OrderItem.where('affiliate_id = ?', current_user.id)
   end
 
   def create
+    authenticate_anybody
     user = User.create( user_params )
     if user.save
       if user.status === 0
         session[:user_id] = user.id
-        redirect_to root_path
       elsif user.status != 0
         redirect_to request.referrer
       end
@@ -26,9 +27,14 @@ class UsersController < ApplicationController
   end
 
   def cart
-    product_id_array = current_user.cart_items.map { |item| item.product_id }
-    @cart = Product.find(product_id_array)
+    authenticate_anybody
     @order = Order.new
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.delete
+    redirect_to request.referrer
   end
 
   private

@@ -5,7 +5,7 @@ class AdminsController < ApplicationController
     @user = User.new
     @users = User.where('status = ?', 0)
     @affiliates = User.where('status = ?', 1)
-    @new_products = Product.where('status = ?', 0)
+    @product = Product.new
     # @product = Product.find(params[:product_id])
   end
 

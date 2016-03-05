@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/contact' => 'products#contact'
 
   get '/affiliate' => 'users#affiliate'
+  get '/profile' => 'users#profile'
 
   get '/cart' => 'users#cart'
 
@@ -25,11 +26,12 @@ Rails.application.routes.draw do
   resources :admins
   resources :affiliates
   resources :products
+  resources :product_items
   resources :cart_items
   resources :order_items
   resources :charges
 
-  root 'products#index'
+  root 'users#index'
 
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'

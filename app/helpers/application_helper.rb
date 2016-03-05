@@ -6,8 +6,8 @@ module ApplicationHelper
     end
   end
 
-  def store_last_location
-    session[:previous_url] = request.fullpath
+  def authenticate_anybody
+    redirect_to users_path unless current_user
   end
 
   def authenticate_user
