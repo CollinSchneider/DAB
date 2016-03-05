@@ -16,6 +16,11 @@ Rails.application.routes.draw do
 
   get '/cart' => 'users#cart'
 
+  # Facebook Authentication
+  get 'auth/:provider/callback', to: 'sessions#facebook_create'
+  get 'auth/failure', to: redirect('/') 
+  get 'signout', to: 'sessions#destroy', as: 'signout' 
+
   namespace :api do
     resources :products
     resources :inventories
