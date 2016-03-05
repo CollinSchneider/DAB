@@ -2,13 +2,23 @@
 <%= link_to "Product Page", products_path %>
 
 <h3> Users: </h3>
-<% @users.each do |user| %>
-<h5><%= user.email %>:</h5>
+<% if @users.length === 0 %>
+  <h6>No users have signed-up!</h6>
+<% else %>
+  <% @users.each do |user| %>
+    <h5><%= user.email %></h5>
+    <%= button_to "X", user_path(user.id), method: :delete %>
+  <% end %>
 <% end %>
 
 <h3> Affiliates: </h3>
-<% @affiliates.each do |affiliate| %>
-<h5> <%= affiliate.email %> </h5>
+<% if @affiliates.length === 0 %>
+  <h6> No affiliates have signed-up!</h6>
+<% else %>
+  <% @affiliates.each do |affiliate| %>
+    <h5> <%= affiliate.email %> </h5>
+    <%= button_to "X", user_path(affiliate.id), method: :delete %>
+  <% end %>
 <% end %>
 
 
@@ -16,70 +26,35 @@
 
 <div class="user-form">
 
-<%= form_for @product do |f| %>
-  <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
-  <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
-  <%= f.select :category, :required => true do %>
-    <% ['Apparel', 'Essentials', 'Accessories', 'Art/Culture', 'Tech', 'Gadgets'].each do |a| %>
-      <%= content_tag(:option, a, value: a,) %>
+<% if @affiliates.length === 0 %>
+  <h6>Cannot create any products until affiliates have signed-up for DealBaked!</h6>
+<% else %>
+  <%= form_for @product do |f| %>
+    <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
+    <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
+    <%= f.select :category, :required => true do %>
+      <% ['Apparel', 'Essentials', 'Accessories', 'Art/Culture', 'Tech', 'Gadgets'].each do |a| %>
+        <%= content_tag(:option, a, value: a,) %>
+      <% end %>
     <% end %>
-  <% end %>
-  <%= f.number_field :price, :placeholder => "Product Price", :required => true %>
-  <%= f.text_field :picture, :placeholder => "Product Picture", :required => true %>
-  <%= f.select :user_id, :required => true do %>
-    <% @affiliates.each do |a| %>
-      <%= content_tag(:option, a.email, value: a.id,) %>
+    <%= f.number_field :price, :placeholder => "Product Price", :required => true %>
+    <%= f.text_field :picture, :placeholder => "Product Picture", :required => true %>
+    <%= f.select :user_id, :required => true do %>
+      <% @affiliates.each do |a| %>
+        <%= content_tag(:option, a.email, value: a.id,) %>
+      <% end %>
     <% end %>
+    <%= f.number_field :status, :placeholder => "Product Status", :required => true %>
+    <%= f.text_field :feature_one, :placeholder => "Feature One" %>
+    <%= f.text_field :feature_two, :placeholder => "Feature Two" %>
+    <%= f.text_field :feature_three, :placeholder => "Feature Three" %>
+    <%= f.text_field :feature_four, :placeholder => "Feature Four" %>
+    <%= f.text_field :feature_five, :placeholder => "Feature Five" %>
+    <%= f.submit "Create Product" %>
   <% end %>
-  <%= f.number_field :status, :placeholder => "Product Status", :required => true %>
-  <%= f.text_field :feature_one, :placeholder => "Feature One" %>
-  <%= f.text_field :feature_two, :placeholder => "Feature Two" %>
-  <%= f.text_field :feature_three, :placeholder => "Feature Three" %>
-  <%= f.text_field :feature_four, :placeholder => "Feature Four" %>
-  <%= f.text_field :feature_five, :placeholder => "Feature Five" %>
-  <%= f.submit "Create Product" %>
 <% end %>
 
 </div>
-
-<!-- <section ng-controller="ProductsController">
-
-<div id = "create-product-div">
-  <h3>Create a Product:</h3>
-  <form ng-submit="checkCategory()" ng-hide="apparel_quantity || total_quantity">
-    <input type="text" ng-model="newProduct.title" placeholder="Product Title" required>
-    <input type="text" ng-model="newProduct.price" placeholder="Product Price" required>
-    <input type="text" ng-model="newProduct.category" placeholder="Product Category" required>
-    <select ng-model="newProduct.category" placeholder = "Product Category" required>
-      <option value="Tech">Tech</option>
-      <option value="Apparel">Apparel</option>
-      <option value="Accessories">Accessories</option>
-      <option value="Miscellanious">Miscellanious</option>
-    </select>
-    <input type="text" ng-model="newProduct.description" placeholder="Product Description" required>
-    <input type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
-    <input type="submit" name="name" value="Create Product">
-  </form>
-
-  <form ng-submit="createProduct()">
-    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.title" placeholder="Product Title" required>
-    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.price" placeholder="Product Price" required>
-    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.category" placeholder = "Product Category" required>
-    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.description" placeholder="Product Description" required>
-    <input ng-show="total_quantity || apparel_quantity" type="text" ng-model="newProduct.picture" placeholder = "Product Picture" required>
-    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XXL_quantity" placeholder="XXL Quantity">
-    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XL_quantity" placeholder="XL Quantity">
-    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.L_quantity" placeholder="L Quantity">
-    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.M_quantity" placeholder="M Quantity">
-    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.S_quantity" placeholder="S Quantity">
-    <input ng-show="apparel_quantity" type="text" name="name" ng-model="newProduct.XS_quantity" placeholder="XS Quantity">
-    <input ng-show="total_quantity" type = "text" ng-model = "newProduct.total_quantity" placeholder = "Product Quantity">
-    <input ng-show="total_quantity || apparel_quantity" type="submit" name="name" value="Create Product">
-  </form>
-</div>
-
-</section> -->
-
 
 <div class = "user-forms">
   <h3> Create an Affiliate: </h3>

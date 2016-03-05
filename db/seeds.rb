@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+ProductItem.destroy_all
 Product.destroy_all
 
 50.times do
@@ -25,12 +26,10 @@ Product.destroy_all
     )
 end
 
-# ProductItem.destroy_all
-#
-# 150.times do
-#   ProductItem.create(
-#     product_id: Faker::Number.between(1380, 1421),
-#     description: ['XL', 'Blue', 'XS', 'Large Red', 'Green', 'Medium', 'Pink'].sample,
-#     quantity: Faker::Number.between(1, 100)
-#   )
-# end
+150.times do
+  ProductItem.create(
+    product_id: Faker::Number.between(1475, 1524),
+    description: ['XL', 'Blue', 'XS', 'Large Red', 'Green', 'Medium', 'Pink'].sample,
+    quantity: Faker::Number.between(1, 100)
+  )
+end
