@@ -1,31 +1,35 @@
 <h2><%= current_user.email %>'s Cart</h2>
 
-<% current_user.cart_items.each do |cart| %>
-<div class="col l4 m12 s12" style="display:inline-block">
-  <div class="card" style = "width: 400px">
-      <div class="card-image">
-        <%= image_tag cart.product_item.product.picture, :style => 'height:400px; width:400px' %>
-        <div class="card-title" id = "card-category-title">
-          <div style="font-size: 18px; font-weighy: bold; color:white">
-            <h4><%= cart.product_item.product.title %> </h4>
-            <h5><%= cart.quantity %> <%= cart.product_item.description %></h5>
-          </div>
-          <div style="font-size:16px">
-            $<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00
+<% if current_user.cart_items.length === 0 %>
+  <h3>Your shopping cart is empty! Start <a href="/products">shopping</a></h3>
+<% else %>
+  <% current_user.cart_items.each do |cart| %>
+  <div class="col l4 m12 s12" style="display:inline-block">
+    <div class="card" style = "width: 400px">
+        <div class="card-image">
+          <%= image_tag cart.product_item.product.picture, :style => 'height:400px; width:400px' %>
+          <div class="card-title" id = "card-category-title">
+            <div style="font-size: 18px; font-weighy: bold; color:white">
+              <h4><%= cart.product_item.product.title %> </h4>
+              <h5><%= cart.quantity %> <%= cart.product_item.description %></h5>
+            </div>
+            <div style="font-size:16px">
+              $<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00
+            </div>
           </div>
         </div>
-      </div>
-  </div>
-  <%= form_for cart do |f| %>
-    <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
-      <% (1..10).each do |a| %>
-        <%= content_tag(:option, a, value: a) %>
+    </div>
+    <%= form_for cart do |f| %>
+      <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
+        <% (1..10).each do |a| %>
+          <%= content_tag(:option, a, value: a) %>
+        <% end %>
       <% end %>
+    <%= f.submit "Update Quantity" %>
     <% end %>
-  <%= f.submit "Update Quantity" %>
+  </div>
+  <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
   <% end %>
-</div>
-<%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
 <% end %>
 
 <!-- <#%= form_for @order do |f| %>

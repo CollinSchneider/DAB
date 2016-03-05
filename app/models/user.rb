@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :order_items, through: :orders
-  has_many :products
+  has_many :products, :dependent => :destroy
   has_many :product_items, through: :products
-  has_many :cart_items
+  has_many :cart_items, :dependent => :destroy
 
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_create do |user|
@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
 end

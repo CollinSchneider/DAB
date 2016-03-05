@@ -18,17 +18,23 @@ ctrl.controller('ProductsController', ['$scope', 'ProductsApi',
       });
     }
 
-    // console.log('doc height: ', $(document).height());
-    // console.log('scroll: ', $(document).height());
-    if($(window).scrollTop() + $(window).height() >= $(document).height()-200) {
-      $scope.loadMore()
+    $scope.deleteProduct = function(productId){
+      ProductsApi.deleteProduct(productId).then(function(response){
+        $scope.getProducts();
+      })
     }
 
-    $(window).scroll(function(){
+    $scope.scrollLoad = function(){
       if($(window).scrollTop() + $(window).height() >= $(document).height()-200) {
         $scope.loadMore()
       }
-    })
+    }
+
+    $scope.scrollLoad()
+
+    $(window).scroll(function(){
+      $scope.scrollLoad()
+  })
 
   }
 ]);
