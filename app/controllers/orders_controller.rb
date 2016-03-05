@@ -24,6 +24,12 @@ class OrdersController < ApplicationController
     redirect_to request.referrer
   end
 
+  def destroy
+    order = Order.find(params[:id])
+    order.destroy
+    redirect_to request.referrer
+  end
+
   private
   def order_params
     params.require(:order).permit(:user_id)

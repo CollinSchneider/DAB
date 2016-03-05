@@ -25,6 +25,15 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:product_id])
   end
 
+  def destroy
+    product = Product.find(params[:id])
+    product.product_items.each do |item|
+      item.delete
+    end
+    product.delete
+    redirect_to request.referrer
+  end
+
   def update
     authenticate_admin
     product = Product.find(params[:id])

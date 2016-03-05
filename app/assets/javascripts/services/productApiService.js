@@ -12,6 +12,11 @@ api.factory('ProductsApi', ['$http', function($http){
     return $http.get(url);
   };
 
+  productsFactoryInterface.deleteProduct = function(productId){
+    var url = baseUrl + '/' + productId;
+    return $http.delete(url);
+  }
+
   return productsFactoryInterface;
 
 }]);

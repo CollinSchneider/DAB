@@ -67,3 +67,32 @@
   <%= f.submit "Create Affiliate" %>
   <% end %>
 </div>
+
+<section ng-controller="ProductsController">
+
+<div class = "container">
+
+  <div ng-repeat="product in products | filter:search.$" style="display:inline-block">
+
+    <div class="col 14 m6 s12" style="display:inline-block">
+      <div class="card" style="width:400px; height:420px">
+        <button ng-click="deleteProduct(product.id)">X</button>
+          <a href="/products/{{product.id}}">
+            <div class="card-image">
+              <img src="{{products[$index].picture}}" id = "product-image" class = "responsive-img" alt="" />
+              <div class="card-title" id = "card-category-title">
+                <div style="font-size: 18px; font-weighy: bold; color:white">
+                  {{product.title}}
+                </div>
+                <div style="font-size:16px">
+                  ${{product.price}}.00
+                </div>
+              </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
