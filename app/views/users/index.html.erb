@@ -19,7 +19,8 @@
                     <p class='black-text'>OR</p>
                   </div>
                   <div class="input-field col s12">
-                    <button class="btn waves-effect light-blue darken-4" type="submit" name="action" style='width:300px;'><i class="fa fa-facebook fa-1"></i>  LOGIN WITH FACEBOOK</button>
+                    <!-- <button class="btn waves-effect light-blue darken-4" type="submit" name="action" style='width:300px;'><i class="fa fa-facebook fa-1"></i>  LOGIN WITH FACEBOOK</button> -->
+                    <%= link_to "LOGIN WITH FACEBOOK", "/auth/facebook", id: "sign_in", :class => 'btn light-blue darken-4', :style => 'width:300px;'%>
                   </div>
                   <div class="input-field col s12">
                     <p class='black-text'>Not a member? <a id='sign-up-tag' href="">Sign Up!</a></p>
