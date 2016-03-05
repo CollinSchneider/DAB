@@ -1,9 +1,5 @@
 <h2> Hello <%= current_user.email %>!</h2>
 
-<!-- <h5>Today's date is <%= Time.now %></h5>
-<h5> Yesterday was <%= Time.now - (60 * 60 * 24) %> </h5>
-<h5> One week ago was <%= Time.now - (60 * 60 * (24*7)) %> </h5>
-<h5> 30 days ago was <%= Time.now - (60 * 60 * (24*30)) %> </h5> -->
 
 <h4> Sales last 24 hours: </h4>
 <h6> $<%= @todays_sales %>.00 </h6>
@@ -12,24 +8,6 @@
 <h4> Sales in the last month: </h4>
 <h6> $<%= @months_sales %>.00 </h6>
 
-
-
-<!-- @todays_orders = []
-@weeks_orders = []
-@months_orders = []
-past_24_hours = Time.now.utc - (60 * 60 * 24)
-past_7_days = Time.now.utc - (60 * 60 * (24*7))
-past_30_days = Time.now.utc - (60 * 60 * (24*30))
-if order.created_at >= past_24_hours
-  @todays_orders.push(order)
-  @weeks_orders.push(order)
-  @months_orders.push(order)
-elsif order.created_at >= past_7_days
-  @weeks_orders.push(order)
-  @months_orders.push(order)
-elsif order.created_at >= past_30_days
-  @months_orders.push(order)
-end -->
 
 <h4>Total Sales: </h4>
 <h6> <%= @total_orders %> sales to date!</h6>

@@ -1,4 +1,4 @@
-<h1> Hello, <%= current_user.email %>! </h1>
+<h1> Hello, <%= current_user.name %>! </h1>
 
 <h3>Orders Waiting to be Shipped:</h3>
 <% current_user.order_items.each do |order| %>

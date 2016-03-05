@@ -1,4 +1,4 @@
-<h2><%= current_user.email %>'s Cart</h2>
+<h2><%= current_user.name %>'s Cart</h2>
 
 <% if current_user.cart_items.length === 0 %>
   <h3>Your shopping cart is empty! Start <a href="/products">shopping</a></h3>
@@ -31,10 +31,5 @@
   <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
   <% end %>
 <% end %>
-
-<!-- <#%= form_for @order do |f| %>
-  <#%= f.text_field :user_id, :value => current_user.id %>
-<#%= f.submit "Checkout", :class => "btn btn-primary" %>
-<#% end %> -->
 
 <%= button_to "Checkout", new_charge_path, :class => "btn btn-primary", method: :get %>
