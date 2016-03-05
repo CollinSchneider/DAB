@@ -6,7 +6,7 @@
   <h6>No users have signed-up!</h6>
 <% else %>
   <% @users.each do |user| %>
-    <h5><%= user.email %></h5>
+    <h5><%= user.name || user.email %></h5>
     <%= button_to "X", user_path(user.id), method: :delete %>
   <% end %>
 <% end %>
