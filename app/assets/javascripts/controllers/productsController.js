@@ -5,7 +5,7 @@ ctrl.controller('ProductsController', ['$scope', 'ProductsApi',
 
     $scope.products = [];
     $scope.page = 0;
-    $scope.limit = 5;
+    $scope.limit = 3;
 
     $scope.loadMore = function(){
       $scope.getProducts();

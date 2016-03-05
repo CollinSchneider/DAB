@@ -4,7 +4,7 @@
 <!-- <input ng-model="search.$" placeholder = "SEARCH PRODUCTS"> -->
 <section ng-controller="ProductsController">
 
-<div class = "container">
+<div class = "container" id='main-content'>
 
   <div ng-repeat="product in products | filter:search.$" style="display:inline-block">
 
@@ -12,9 +12,9 @@
       <div class="card" style="width:400px; height:420px">
         <a href="/products/{{product.id}}">
           <div class="card-image">
-            <img src="{{products[$index].picture}}" id = "product-image" class = "responsive-img" alt="" />
+            <img src="{{product.picture}}" id = "product-image" class = "responsive-img" alt="" />
             <div class="card-title" id = "card-category-title">
-              <div style="font-size: 18px; font-weighy: bold; color:white">
+              <div style="font-size: 18px; font-weight: bold; color:white">
                 {{product.title}}
               </div>
               <div style="font-size:16px">
