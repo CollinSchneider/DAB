@@ -24,13 +24,49 @@ ctrl.controller('ProductsController', ['$scope', 'ProductsApi',
       })
     }
 
+    // $scope.getTech = function(tech){
+    //   ProdutsApi.getCategory(tech).then(function(response){
+    //     $scope.techProducts;
+    //   })
+    // }
+    //
+    // $scope.getApparel = function(apparel){
+    //   ProdutsApi.getCategory(apparel).then(function(response){
+    //     $scope.apparelProducts;
+    //   })
+    // }
+    //
+    // $scope.getEssentials = function(essentials){
+    //   ProdutsApi.getCategory(essentials).then(function(response){
+    //     $scope.essentialsProducts;
+    //   })
+    // }
+    //
+    // $scope.getArt_Culture = function(art_culture){
+    //   ProdutsApi.getCategory(art_culture).then(function(response){
+    //     $scope.art_cultureProducts;
+    //   })
+    // }
+    //
+    // $scope.getAccesories = function(accessories){
+    //   ProdutsApi.getCategory(accessories).then(function(response){
+    //     $scope.accessoriesProducts;
+    //   })
+    // }
+    //
+    // $scope.getGadgets = function(gadgets){
+    //   ProdutsApi.getCategory(gadgets).then(function(response){
+    //     $scope.gadgetsProducts;
+    //   })
+    // }
+
     $scope.scrollLoad = function(){
       if($(window).scrollTop() + $(window).height() >= $(document).height()-200) {
         $scope.loadMore()
       }
     }
 
-    $scope.scrollLoad()
+    $scope.scrollLoad();
 
     $(window).scroll(function(){
       $scope.scrollLoad()

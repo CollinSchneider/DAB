@@ -2,10 +2,6 @@ class ProductsController < ApplicationController
 
   def index
     authenticate_anybody
-    @accepted_products = Product.where('status = ?', 2)
-    @rejected_products = Product.where('status = ?', 1)
-    @submitted_products = Product.where('status = ?', 0)
-    @affiliate_products = Product.where('affiliate_id = ?', current_user)
   end
 
   def show
@@ -22,8 +18,38 @@ class ProductsController < ApplicationController
 
   def edit
     authenticate_admin
-    @product = Product.find(params[:product_id])
+    @product = Product.find(params[:id])
+    @new_product_item = ProductItem.new
   end
+
+  # def tech
+  #   @tech_products = Product.where('category = ?', tech)
+  # end
+  #
+  # def art_culture
+  #   @art_culture_products = Product.where('category = ?', art_culture)
+  # end
+  #
+  # def gadgets
+  #   @gadget_products = Product.where('category = ?', gadgets)
+  # end
+  #
+  # def apparel
+  #   @apparel_products = Product.where('category = ?', apparel)
+  # end
+  #
+  # def accessories
+  #   @accessories_products = Product.where('category = ?', accessories)
+  # end
+  #
+  # def essentials
+  #   @essentials_products = Product.where('category = ?', essentials)
+  # end
+  #
+  # def edit
+  #   authenticate_admin
+  #   @product = Product.find(params[:product_id])
+  # end
 
   def destroy
     product = Product.find(params[:id])
@@ -49,7 +75,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders)
   end
 
 end

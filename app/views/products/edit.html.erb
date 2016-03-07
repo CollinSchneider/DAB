@@ -1,7 +1,14 @@
+<h1>Edit <%= @product.title %> </h1>
+<%= button_to "Delete #{@product.title}", product_path(@product.id), method: :delete %>
 
 <div class="container" id='main-content'>
   <% if current_user.status === 2 %>
-    <%= button_to "Edit #{@product.title}", edit_product_path(@product.id), method: :get %>
+    <%= form_for @new_product_item, :url => product_items_path do |f| %>
+      <%= f.hidden_field :product_id, :value => @product.id %>
+      <%= f.text_field :description, :placeholder => "Item's Description (Large, red)", :required => true %>
+      <%= f.number_field :quantity, :placeholder => "Item Quantity", :required => true %>
+      <%= f.submit "Create item for #{@product.title} Product" %>
+    <% end %>
   <% end %>
     <!-- <div class="row black-text">
       <nav class='grey lighten-5' id='breadcrumbs-nav'>
@@ -28,29 +35,12 @@
             <h4 id='product-title'> <%= @product.title %> </h4>
             <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
 
-          </div>
-          <div class="row" style='margin-top:-25px'>
-            <div class="input-field col l6 s12 center">
-            <% if @product.product_items.exists? %>
-              <%= form_for @cart_item do |f| %>
-                <%= f.select :product_item_id, :class => "browser-default", :id => "add-to-cart-qty" do %>
-                  <% @product.product_items.each do |item| %>
-                    <%= content_tag(:option, item.description, value: item.id) %>
-                    <% end %>
-                  <% end %>
-                <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
-                  <% (1..10).each do |a| %>
-                    <%= content_tag(:option, a, value: a) %>
-                  <% end %>
-                <% end %>
-                <%= f.hidden_field :affiliate_id, :value => @product.user_id %>
-                <%= f.hidden_field :user_id, :value => current_user.id %>
-                <%= f.submit 'ADD TO CART', :class => 'btn btn-primary'  %>
-              <% end %>
+              <% @product.product_items.each do |item| %>
+                <h6><%= item.description %>: <%= item.quantity %> </h6>
+                <%= button_to "Delete #{item.description} #{ @product.title }", product_item_path(item.id), method: :delete %>
             <% end %>
-              <!-- <button class='btn grey darken-3' type="submit" name="action" id='add-to-cart-btn'>Add to Cart</button> -->
-            </div>
           </div>
+
           <div class="row">
             <div id='product-info'>
               <hr>

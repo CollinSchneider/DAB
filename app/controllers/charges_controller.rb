@@ -23,7 +23,10 @@ class ChargesController < ApplicationController
 		new_order = Order.create( :user_id => current_user.id )
 
 		current_user.cart_items.each do |item|
-			OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.id, :quantity => item.quantity)
+			order_item = OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.id, :quantity => item.quantity)
+			product = order_item.product_item.product
+			product.total_orders += item.quantity
+			product.save
 			item.destroy
 		end
 		# current_user.cart_items.each { |item| item.destroy }

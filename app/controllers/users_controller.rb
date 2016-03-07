@@ -20,9 +20,9 @@ class UsersController < ApplicationController
         item.order_items.each do |order|
           @total_orders += 1
           @total_sales += order.product_item.product.price.to_i
-          past_24_hours = Time.now.utc - (60 * 60 * 24)
-          past_7_days = Time.now.utc - (60 * 60 * (24*7))
-          past_30_days = Time.now.utc - (60 * 60 * (24*30))
+          # past_24_hours = Time.now.utc - (60 * 60 * 24)
+          # past_7_days = Time.now.utc - (60 * 60 * (24*7))
+          # past_30_days = Time.now.utc - (60 * 60 * (24*30))
           if order.created_at >= past_24_hours
             @todays_orders.push(order)
             @weeks_orders.push(order)
