@@ -7,6 +7,7 @@ class AdminsController < ApplicationController
     @affiliates = User.where('status = ?', 1)
     @product = Product.new
     @product_item = ProductItem.new
+    @products = Product.all
 
     total_orders = OrderItem.all
     @total_orders = 0

@@ -1,4 +1,4 @@
-<h2><%= current_user.name %>'s Cart</h2>
+<h2><%= current_user.name || current_user.email %>'s Cart</h2>
 
 <% if current_user.cart_items.length === 0 %>
   <h3>Your shopping cart is empty! Start <a href="/products">shopping</a></h3>

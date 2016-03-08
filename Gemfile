@@ -31,6 +31,8 @@ gem 'stripe'
 
 gem 'omniauth-facebook'
 
+gem 'impressionist'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

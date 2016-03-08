@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+  impressionist :actions=>[:show,:index]
+
   def index
     authenticate_anybody
   end
