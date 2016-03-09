@@ -13,40 +13,47 @@ class ChargesController < ApplicationController
 
 	def new
 		total_price
+		@current_user_address = current_user.addresses.where('active = ?', 'yes')
 	end
 
 	def create
 	  # Amount in cents
 	  # @amount = 500
 		total_price
+		@current_user_address = current_user.addresses.where('active = ?', 'yes')
 
-		new_order = Order.create( :user_id => current_user.id )
+		if current_user.addresses.length == 0
+			flash[:error] = "Must fill out shipping address before checking out!"
+			redirect_to profile_path
+		else
+			new_order = Order.create( :user_id => current_user.id, :address_id => @current_user_address[0].id )
 
-		current_user.cart_items.each do |item|
-			order_item = OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.id, :quantity => item.quantity)
-			product = order_item.product_item.product
-			product.total_orders += item.quantity
-			product.save
-			item.destroy
+			current_user.cart_items.each do |item|
+				order_item = OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.id, :quantity => item.quantity)
+				product = order_item.product_item.product
+				product.total_orders += item.quantity
+				product.save
+				item.destroy
+			end
+
+		  customer = Stripe::Customer.create(
+		    :email => params[:stripeEmail],
+		    :source  => params[:stripeToken]
+		  )
+
+		  charge = Stripe::Charge.create(
+		    :customer    => customer.id,
+		    :amount      => @stripe_amount,
+		    :description => 'Rails Stripe customer',
+		    :currency    => 'usd'
+		  )
+
 		end
-		# current_user.cart_items.each { |item| item.destroy }
 
-	  customer = Stripe::Customer.create(
-	    :email => params[:stripeEmail],
-	    :source  => params[:stripeToken]
-	  )
-
-	  charge = Stripe::Charge.create(
-	    :customer    => customer.id,
-	    :amount      => @stripe_amount,
-	    :description => 'Rails Stripe customer',
-	    :currency    => 'usd'
-	  )
-
-	rescue Stripe::CardError => e
-	  flash[:error] = e.message
-	  redirect_to new_charge_path
-	end
+		rescue Stripe::CardError => e
+		  flash[:error] = e.message
+		  redirect_to new_charge_path
+		end
 
 	private
 	def order_params

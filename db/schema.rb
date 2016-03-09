@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308193124) do
+ActiveRecord::Schema.define(version: 20160309200102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "country"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "active"
+  end
+
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "user_id"
@@ -73,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160308193124) do
     t.integer  "status"
     t.integer  "product_item_id"
     t.integer  "quantity"
+    t.string   "shipping_method"
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
@@ -82,6 +98,7 @@ ActiveRecord::Schema.define(version: 20160308193124) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "address_id"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
@@ -131,6 +148,7 @@ ActiveRecord::Schema.define(version: 20160308193124) do
     t.string   "oauth_token"
   end
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "cart_items", "product_items"
   add_foreign_key "cart_items", "users"
   add_foreign_key "inventory", "products"

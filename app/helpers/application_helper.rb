@@ -6,6 +6,12 @@ module ApplicationHelper
     end
   end
 
+  def current_user_address
+    current_user.addresses.each do |address|
+      binding.pry
+    end
+  end
+
   def past_24_hours
     Time.now.utc - (60 * 60 * 24)
   end

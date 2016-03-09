@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   resources :cart_items
   resources :order_items
   resources :charges
+  resources :addresses
 
   root 'users#index'
 

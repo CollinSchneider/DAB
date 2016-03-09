@@ -1,5 +1,8 @@
-<h1> <%= current_user.email %> Admin Page </h1>
-<%= link_to "Product Page", products_path %>
+<h2> <%= current_user.email %> Admin Page </h2>
+
+<h3>Total Page Views: </h3>
+<h5> <%= @total_visits.count %> </h5>
+
 
 <h3> Users: </h3>
 <% if @users.length === 0 %>

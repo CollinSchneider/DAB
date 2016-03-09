@@ -8,6 +8,7 @@ class AdminsController < ApplicationController
     @product = Product.new
     @product_item = ProductItem.new
     @products = Product.all
+    @total_visits = Impression.where('action_name = ?', 'index')
 
     total_orders = OrderItem.all
     @total_orders = 0
