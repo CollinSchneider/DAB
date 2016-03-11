@@ -1,15 +1,15 @@
 <h1>Edit <%= @product.title %> </h1>
 <%= button_to "Delete #{@product.title}", product_path(@product.id), method: :delete %>
+<h6> <%= flash[:success] %> </h6>
+<h6> <%= flash[:error] %> </h6>
 
 <div class="container" id='main-content'>
-  <% if current_user.status === 2 %>
     <%= form_for @new_product_item, :url => product_items_path do |f| %>
       <%= f.hidden_field :product_id, :value => @product.id %>
       <%= f.text_field :description, :placeholder => "Item's Description (Large, red)", :required => true %>
       <%= f.number_field :quantity, :placeholder => "Item Quantity", :required => true %>
       <%= f.submit "Create item for #{@product.title} Product" %>
     <% end %>
-  <% end %>
     <!-- <div class="row black-text">
       <nav class='grey lighten-5' id='breadcrumbs-nav'>
         <div class="nav-wrapper black-text">
@@ -22,11 +22,11 @@
     </div> -->
     <div class="row">
       <div class="col l6 s12">
-        <%= image_tag(@product.picture, :id => 'product-image', :class => 'materialboxed responsive-img', :width => '650') %>
+        <%= image_tag @product.image.url(:medium), :id => "product-image", :class => "materialboxed responsive-img" %>
         <ul id='product-images-list'>
-          <li> <%= image_tag(@product.picture, :id => 'product-image-thumbnail', :class => 'materialboxed responsive-img') %> </li>
-          <li> <%= image_tag(@product.picture, :id => 'product-image-thumbnail', :class => 'materialboxed responsive-img', :width => '550') %> </li>
-          <li> <%= image_tag(@product.picture, :id => 'product-image-thumbnail', :class => 'materialboxed responsive-img', :width => '550') %> </li>
+          <li><%= image_tag @product.image.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+          <li><%= image_tag @product.image.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+          <li><%= image_tag @product.image.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
         </ul>
       </div>
       <div class="col l6 s12">

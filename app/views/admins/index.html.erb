@@ -55,16 +55,27 @@
 <% if @affiliates.length === 0 %>
   <h6>Cannot create any products until affiliates have signed-up for DealBaked!</h6>
 <% else %>
-  <%= form_for @product do |f| %>
+  <%= form_for @product, html: { multipart: true } do |f| %>
+    <%= f.hidden_field :total_orders, :value => 0 %>
     <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
     <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
+    <%= f.label "Main Image" %>
+    <%= f.file_field :image, :required => true %> </br>
+    <!-- <#%= f.label "Image Two" %>
+    <#%= f.file_field :image_two %> </br>
+    <#%= f.label "Image Three" %>
+    <#%= f.file_field :image_three %> </br>
+    <#%= f.label "Image Four" %>
+    <#%= f.file_field :image_four %> </br>
+    <#%= f.label "Image Five" %>
+    <#%= f.file_field :image_five %> </br> -->
     <%= f.select :category, :required => true do %>
       <% ['Apparel', 'Essentials', 'Accessories', 'Art/Culture', 'Tech', 'Gadgets'].each do |a| %>
         <%= content_tag(:option, a, value: a,) %>
       <% end %>
     <% end %>
     <%= f.number_field :price, :placeholder => "Product Price", :required => true %>
-    <%= f.text_field :picture, :placeholder => "Product Picture", :required => true %>
+    <!-- <#%= f.text_field :picture, :placeholder => "Product Picture", :required => true %> -->
     <%= f.select :user_id, :required => true do %>
       <% @affiliates.each do |a| %>
         <%= content_tag(:option, a.email, value: a.id,) %>

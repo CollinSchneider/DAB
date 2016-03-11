@@ -1,5 +1,8 @@
 <h2><%= current_user.name || current_user.email %>'s Cart</h2>
 
+<h5> <%= flash[:error] %></h5>
+<h5> <%= flash[:success] %></h5>
+
 <% if current_user.cart_items.length === 0 %>
   <h3>Your shopping cart is empty! Start <a href="/products">shopping</a></h3>
 <% else %>
@@ -18,6 +21,7 @@
             </div>
           </div>
         </div>
+        <h5>Product Quantity: <%= cart.product_item.quantity %> </h5>
     </div>
     <%= form_for cart do |f| %>
       <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>

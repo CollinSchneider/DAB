@@ -11,10 +11,11 @@
       <div class="card" style="width:400px; height:420px">
         <a href="/products/{{product.id}}">
           <div class="card-image">
-            <img src="{{product.picture}}" id = "product-image" class = "responsive-img" alt="" />
+            <img src="{{product.image.url}}" id = "product-image" class = "responsive-img" alt="" />
             <div class="card-title" id = "card-category-title">
               <div style="font-size: 18px; font-weight: bold; color:white">
                 {{product.title}}
+                {{product.image.url}}
               </div>
               <div style="font-size:16px">
                 ${{product.price}}.00

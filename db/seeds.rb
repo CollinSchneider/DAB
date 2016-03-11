@@ -31,6 +31,7 @@ end
   ProductItem.create(
     product_id: Faker::Number.between(1625, 1674),
     description: ['XL', 'Blue', 'XS', 'Large Red', 'Green', 'Medium', 'Pink'].sample,
-    quantity: Faker::Number.between(1, 100)
+    quantity: Faker::Number.between(1, 100),
+    status: 1
   )
 end
