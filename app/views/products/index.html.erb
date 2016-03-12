@@ -1,15 +1,12 @@
 <div class = "container" id ="main-content">
 
-<div id="posts">
-  <h1>Products</h1>
-
-    <%= render @products %>
+  <div id="posts">
+    <h1>Products</h1>
+      <%= render @products %>
   </div>
 
-</div>
-<% end %>
-<div class = "hidden">
-  <%= will_paginate @products %>
-</div>
+  <div class = "hidden">
+    <%= will_paginate @products %>
+  </div>
 
 </div>
