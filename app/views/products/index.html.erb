@@ -8,11 +8,11 @@
 
   <div ng-repeat="product in products | filter:search.$" style="display:inline-block">
 
-    <div class="col 14 m6 s12" style="display:inline-block">
+    <div class="col 14 m12 s12" style="display:inline-block">
       <div class="card" style="width:400px; height:420px">
         <a href="/products/{{product.id}}">
           <div class="card-image">
-            <img src="{{product.picture}}" id = "product-image" class = "responsive-img" alt="" />
+            <img src="{{product.picture}}" id = "product-image" class = "responsive-img" style='height:300px' alt="" />
             <div class="card-title" id = "card-category-title">
               <div style="font-size: 18px; font-weight: bold; color:white">
                 {{product.title}}
