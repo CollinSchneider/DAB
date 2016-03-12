@@ -1,0 +1,19 @@
+<div class="col 14 m12 s12 product" style="display:inline-block">
+  <div class="card" style="width:400px; height:420px">
+    <%= link_to product_path(product.id) do %>
+    <!-- <a href="/products/{{product.id}}"> -->
+      <div class="card-image">
+        <%= image_tag gadget.image.url(:medium), :class => "responsive-img" %>
+        <!-- <img src="/system/gadgets/images/000/001/676/original/stars.jpg?1457724554" id = "gadget-image" class = "responsive-img" alt="" /> -->
+        <div class="card-title" id = "card-category-title">
+          <div style="font-size: 18px; font-weight: bold; color:white">
+            <%= gadget.title %>
+          </div>
+          <div style="font-size:16px">
+              $<%= gadget.price %>.00
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
