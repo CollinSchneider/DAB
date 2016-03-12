@@ -10,7 +10,7 @@
   <div class="col l4 m12 s12" style="display:inline-block">
     <div class="card" style = "width: 400px">
         <div class="card-image">
-          <%= image_tag cart.product_item.product.picture, :style => 'height:400px; width:400px' %>
+          <%= image_tag cart.product_item.product.image.url(:medium), :style => 'height:400px; width:400px' %>
           <div class="card-title" id = "card-category-title">
             <div style="font-size: 18px; font-weighy: bold; color:white">
               <h4><%= cart.product_item.product.title %> </h4>

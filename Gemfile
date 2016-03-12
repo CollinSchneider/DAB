@@ -35,6 +35,8 @@ gem 'omniauth-facebook'
 
 gem 'impressionist'
 
+gem 'will_paginate', '~> 3.0.7'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
