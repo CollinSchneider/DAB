@@ -15,15 +15,20 @@ Rails.application.routes.draw do
   get '/profile' => 'users#profile'
 
   get '/cart' => 'users#cart'
+  get '/tech' => 'products#tech'
+  get '/apparel' => 'products#apparel'
+  get '/gadgets' => 'products#gadgets'
+  get '/art&culture' => 'products#art_culture'
+  get '/essentials' => 'products#essentials'
+  get '/accessories' => 'products#accessories'
 
   # Facebook Authentication
   get 'auth/:provider/callback', to: 'sessions#facebook_create'
-  get 'auth/failure', to: redirect('/') 
-  get 'signout', to: 'sessions#destroy', as: 'signout' 
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
 
   namespace :api do
     resources :products
-    resources :inventories
   end
 
   resources :users
@@ -35,6 +40,7 @@ Rails.application.routes.draw do
   resources :cart_items
   resources :order_items
   resources :charges
+  resources :addresses
 
   root 'users#index'
 

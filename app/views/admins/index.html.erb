@@ -1,12 +1,15 @@
-<h1> <%= current_user.email %> Admin Page </h1>
-<%= link_to "Product Page", products_path %>
+<h2> <%= current_user.email %> Admin Page </h2>
+
+<h3>Total Page Views: </h3>
+<h5> <%= @total_visits.count %> </h5>
+
 
 <h3> Users: </h3>
 <% if @users.length === 0 %>
   <h6>No users have signed-up!</h6>
 <% else %>
   <% @users.each do |user| %>
-    <h5><%= user.email %></h5>
+    <h5><%= user.name || user.email %></h5>
     <%= button_to "X", user_path(user.id), method: :delete %>
   <% end %>
 <% end %>
@@ -21,6 +24,29 @@
   <% end %>
 <% end %>
 
+<h3>Total Orders on DealBaked: </h3>
+<h5> <%= @total_orders %> </h5>
+<h3> Total sales: </h3>
+<h5>$<%= @total_sales %>.00 </h5>
+</br>
+
+<h3>Orders past 24 hours: </h3>
+<h5> <%= @orders_24_hours %> </h5>
+<h3> Sales past 24 hours: </h3>
+<h5>$<%= @sales_24_hours %>.00 </h5>
+</br>
+
+<h3>Orders past 7 days: </h3>
+<h5> <%= @orders_7_days %> </h5>
+<h3> Sales past 7 days: </h3>
+<h5>$<%= @sales_7_days %>.00 </h5>
+</br>
+
+<h3> Orders past 30 days: </h3>
+<h5> <%= @orders_30_days %> </h5>
+<h3> Sales past 30 days: </h3>
+<h5> <%= @sales_30_days %>.00 </h5>
+
 
 </br></br></br>
 
@@ -29,22 +55,34 @@
 <% if @affiliates.length === 0 %>
   <h6>Cannot create any products until affiliates have signed-up for DealBaked!</h6>
 <% else %>
-  <%= form_for @product do |f| %>
+  <%= form_for @product, html: { multipart: true } do |f| %>
+    <%= f.hidden_field :total_orders, :value => 0 %>
     <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
     <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
+    <%= f.label "Main Image" %>
+    <%= f.file_field :image, :required => true %> </br>
+    <!-- <#%= f.label "Image Two" %>
+    <#%= f.file_field :image_two %> </br>
+    <#%= f.label "Image Three" %>
+    <#%= f.file_field :image_three %> </br>
+    <#%= f.label "Image Four" %>
+    <#%= f.file_field :image_four %> </br>
+    <#%= f.label "Image Five" %>
+    <#%= f.file_field :image_five %> </br> -->
     <%= f.select :category, :required => true do %>
       <% ['Apparel', 'Essentials', 'Accessories', 'Art/Culture', 'Tech', 'Gadgets'].each do |a| %>
         <%= content_tag(:option, a, value: a,) %>
       <% end %>
     <% end %>
     <%= f.number_field :price, :placeholder => "Product Price", :required => true %>
-    <%= f.text_field :picture, :placeholder => "Product Picture", :required => true %>
+    <!-- <#%= f.text_field :picture, :placeholder => "Product Picture", :required => true %> -->
     <%= f.select :user_id, :required => true do %>
       <% @affiliates.each do |a| %>
         <%= content_tag(:option, a.email, value: a.id,) %>
       <% end %>
     <% end %>
     <%= f.number_field :status, :placeholder => "Product Status", :required => true %>
+    <%= f.hidden_field :total_sales, :value => 0 %>
     <%= f.text_field :feature_one, :placeholder => "Feature One" %>
     <%= f.text_field :feature_two, :placeholder => "Feature Two" %>
     <%= f.text_field :feature_three, :placeholder => "Feature Three" %>
@@ -77,7 +115,7 @@
     <div class="col 14 m6 s12" style="display:inline-block">
       <div class="card" style="width:400px; height:420px">
         <button ng-click="deleteProduct(product.id)">X</button>
-          <a href="/products/{{product.id}}">
+          <a href="products/{{product.id}}/edit">
             <div class="card-image">
               <img src="{{products[$index].picture}}" id = "product-image" class = "responsive-img" alt="" />
               <div class="card-title" id = "card-category-title">
@@ -92,7 +130,6 @@
         </a>
       </div>
     </div>
-
   </div>
 
 </section>

@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def profile
+    @new_address = Address.new
+  end
+
   def affiliate
     authenticate_affiliate
     @total_orders = 0
@@ -20,9 +24,7 @@ class UsersController < ApplicationController
         item.order_items.each do |order|
           @total_orders += 1
           @total_sales += order.product_item.product.price.to_i
-          past_24_hours = Time.now.utc - (60 * 60 * 24)
-          past_7_days = Time.now.utc - (60 * 60 * (24*7))
-          past_30_days = Time.now.utc - (60 * 60 * (24*30))
+
           if order.created_at >= past_24_hours
             @todays_orders.push(order)
             @weeks_orders.push(order)
@@ -33,7 +35,6 @@ class UsersController < ApplicationController
           elsif order.created_at >= past_30_days
             @months_orders.push(order)
           end
-          # @todays_sales = item.order_items.where(item.order_items.created_at > (Time.now - (60 * 60 * 24)))
         end
       end
     end
@@ -45,23 +46,23 @@ class UsersController < ApplicationController
     @months_sales = months_sales.reduce(:+)
   end
 
-  # Today's date is <%= Time.now %></h5>
-  # Yesterday was <%= Time.now - (60 * 60 * 24) %>
-  # One week ago was <%= Time.now - (60 * 60 * (24*7)) %>
-  # 30 days ago was <%= Time.now - (60 * 60 * (24*30)) %>
-
   def create
     authenticate_anybody
     user = User.create( user_params )
-    if user.save
-      if user.status === 0
-        session[:user_id] = user.id
-      elsif user.status != 0
-        redirect_to request.referrer
-      end
+    if User.where('email = ?', user.email).length > 1
+      user.delete
+      flash[:error] = "Email is already in use"
+      # redirect_to request.referrer
+    elsif user.password.length < 8
+      user.delete
+      flash[:error] = "Password must be at least 8 characters long"
     else
-      flash[:error] = user.errors.full_messages
-      redirect_to request.referrer
+      # if user.save
+        if user.status === 0
+          session[:user_id] = user.id
+        elsif user.status != 0
+          redirect_to request.referrer
+        end
     end
   end
 

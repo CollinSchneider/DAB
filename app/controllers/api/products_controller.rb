@@ -7,6 +7,35 @@ class Api::ProductsController < ApplicationController
     render json: {products: products}
   end
 
+  # def tech
+  #   products = Product.where('category = ?', tech)
+  #   render json: { products: products }
+  # end
+  #
+  # def art_culture
+  #   products = Product.where('category = ?', art_culture)
+  #   render json: { products: products }
+  # end
+  #
+  # def gadgets
+  #   products = Product.where('category = ?', gadgets)
+  #   render json: { products: products }
+  # end
+  #
+  # def apparel
+  #   products = Product.where('category = ?', apparel)
+  #   render json: { products: products }
+  # end
+  #
+  # def accessories
+  #   products = Product.where('category = ?', accessories)
+  #   render json: { products: products }
+  # end
+  #
+  # def essentials
+  #   products = Product.where('category = ?', essentials)
+  #   render json: { products: products }
+  # end
 
   def create
     new_product = Product.create(product_params)
@@ -27,7 +56,7 @@ class Api::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :XXL_quantity, :XL_quantity, :L_quantity, :M_quantity, :S_quantity, :XS_quantity, :total_quantity)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :size, :status, :picture, :total_sales)
   end
 
 end

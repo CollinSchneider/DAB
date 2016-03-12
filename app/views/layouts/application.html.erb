@@ -50,21 +50,21 @@
           <% end %>
           </li>
           <li><a id='toolbar-links'class='black-text' href="/cart">Shopping Cart</a></li>
-          <li><a id='toolbar-links'class='black-text' href="">Tech</a></li>
-          <li><a id='toolbar-links'class='black-text' href="">Gadgets</a></li>
-          <li><a id='toolbar-links'class='black-text' href="">Art/Culture</a></li>
-          <li><a id='toolbar-links'class='black-text' href="">Essentials</a></li>
-          <li><a id='toolbar-links'class='black-text' href="">Apparel</a></li>
-          <li><a id='toolbar-links'class='black-text' href="">Accessories</a></li>
+          <li><a id='toolbar-links'class='black-text' href="/tech">Tech</a></li>
+          <li><a id='toolbar-links'class='black-text' href="/gadgets">Gadgets</a></li>
+          <li><a id='toolbar-links'class='black-text' href="/art&culture">Art/Culture</a></li>
+          <li><a id='toolbar-links'class='black-text' href="/essentials">Essentials</a></li>
+          <li><a id='toolbar-links'class='black-text' href="/apparel">Apparel</a></li>
+          <li><a id='toolbar-links'class='black-text' href="/accessories">Accessories</a></li>
         </ul>
         <ul class="right hide-on-small-and-down">
         <% if current_user %>
           <li><input ng-model="search.$" placeholder = "SEARCH PRODUCTS" class = "black-text"></li>
           <li> <%= link_to sessions_path, :class => "dropdown-button black-text", method: :delete do %> <i class="fa fa-sign-out"></i> Logout <% end %></li>
           <% if current_user.status === 0 %>
-            <li><a class="dropdown-button black-text" href="./profile" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
+            <li><a class="dropdown-button black-text" href="/profile" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
           <% elsif current_user.status === 1 %>
-            <li><a class="dropdown-button black-text" href="./affiliate" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
+            <li><a class="dropdown-button black-text" href="/affiliate" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
           <% elsif current_user.status === 2 %>
             <li><a class="dropdown-button black-text" href="/admins" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
           <% end %>
@@ -78,12 +78,12 @@
     <nav class='grey lighten-2 center-align' id='toolbar'>
       <div class="nav-wrapper">
         <div id="toolbar-link-list">
-          <a id='toolbar-links'class='black-text' href="../views/category.html">Tech</a>
-          <a id='toolbar-links'class='black-text' href="../views/category.html">Gadgets</a>
-          <a id='toolbar-links'class='black-text' href="../views/category.html">Art/Culture</a>
-          <a id='toolbar-links'class='black-text' href="../views/category.html">Essentials</a>
-          <a id='toolbar-links'class='black-text' href="../views/category.html">Apparel</a>
-          <a id='toolbar-links'class='black-text' href="../views/category.html">Accessories</a>
+          <a id='toolbar-links'class='black-text' href="/tech">Tech</a>
+          <a id='toolbar-links'class='black-text' href="/gadgets">Gadgets</a>
+          <a id='toolbar-links'class='black-text' href="art&culture">Art/Culture</a>
+          <a id='toolbar-links'class='black-text' href="/essentials">Essentials</a>
+          <a id='toolbar-links'class='black-text' href="/apparel">Apparel</a>
+          <a id='toolbar-links'class='black-text' href="/accessories">Accessories</a>
         </div>
       </div>
     </nav>

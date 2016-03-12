@@ -7,6 +7,7 @@ class ProductItemsController < ApplicationController
   def create
     authenticate_admin
     ProductItem.create(product_params)
+    flash[:success] = "Created Product Item"
     redirect_to request.referrer
   end
 

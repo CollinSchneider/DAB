@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password(validations: false)
 
+  has_many :addresses
   has_many :orders
   has_many :order_items, through: :orders
   has_many :products, :dependent => :destroy

@@ -1,4 +1,42 @@
-<h1> Hello, <%= current_user.name %>! </h1>
+<h1> Hello, <%= current_user.name || current_user.email %>! </h1>
+
+<p><%= flash[:error] %></p>
+
+<%= form_for @new_address do |f| %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
+  <%= f.text_field :country, :placeholder => "Country", :required => true %>
+  <%= f.text_field :state, :placeholder => "State", :required => true %>
+  <%= f.text_field :city, :placeholder => "City", :required => true %>
+  <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
+  <%= f.text_field :address, :placeholder => "Address", :required => true %>
+  <%= f.hidden_field :active, :value => 'no' %>
+  <%= f.submit "Create Shipping Address" %>
+<% end %>
+
+<% if current_user.addresses.length > 0 %>
+  <h3>Shipping Addresses: </h3>
+  <% current_user.addresses.each do |address| %>
+  <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center; margin-top:5px">
+    <% if address.active === 'yes' %>
+      <h4> Primary: </h4>
+    <% end %>
+    <h5><%= address.name %> </h5>
+    <h5><%= address.country %> </h5>
+    <h5> <%= address.state %> </h5>
+    <h5><%= address.city %></h5>
+    <h5><%=address.zip %></h5>
+    <h5><%= address.address %></h5>
+    <% if address.active === 'no' %>
+      <%= form_for address do |f| %>
+        <%= f.hidden_field :active, :value => 'yes' %>
+        <%= f.submit "Make Primary Address" %>
+      <% end %>
+    <% end %>
+    <%= button_to "Remove Address", address_path(address.id), method: :delete %>
+  </div>
+  <% end %>
+<% end %>
 
 <h3>Orders Waiting to be Shipped:</h3>
 <% current_user.order_items.each do |order| %>

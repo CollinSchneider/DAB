@@ -19,14 +19,20 @@
     <% item.order_items.each do |order| %>
       <% if order.status === 0 %>
         <div id = "affiliate-order-div">
-          <h6> Today: <%= Time.now.utc %> </h6>
-          <h6> 24 Hours: <%= Time.now.utc - (60*60*24) %></h6>
-          <h6> Ordered: <%= order.created_at %> </h6>
           <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
           <h3> <%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h3>
-          <h5> Send to: <%= order.order.user.email %> </h5>
+            <h5> Send to: <%= order.order.address.name %> </h5>
+            <h6> <%= order.order.address.address %> </h6>
+            <h6><%= order.order.address.city %>, <%= order.order.address.state %> <%= order.order.address.zip %> </h6>
+            <h6> <%= order.order.address.country %> </h6> </br>
           <%= form_for order do |f| %>
             <%= f.hidden_field :status, :value => 1 %>
+            <%= f.label "Shipping Method" %>
+            <%= f.select :shipping_method do %>
+            <% ['UPS', 'USPS', 'FedEx'].each do |a| %>
+              <%= content_tag(:option, a, value: a) %>
+            <% end %>
+          <% end %>
             <%= f.text_field :shipping_number, :placeholder => "Shipping Number", :required => true %>
             <%= f.submit "Mark Order as Shipped"%>
           <% end %>

@@ -10,8 +10,49 @@
         <h4> <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %> at $<%= item.product_item.product.price %>.00 each = <strong style = "font-weight:bold">$<%= item.product_item.product.price.to_i  * item.quantity.to_i %>.00</strong> </h4>
         <% end %>
       <h3>Total Amount: $<%= @amount %>.00</h3>
-    </label>
+    </label> </br>
     <a href="/cart">Cart incorrect?</a></br></br>
+  </br></br>
+
+  <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center">
+    <h2>Ship to: </h2>
+    <h4><%= @current_user_address[0].name %></h4>
+    <h4> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state %> <%= @current_user_address[0].zip %></h4>
+    <h4> <%= @current_user_address[0].country %></h4>
+    <h4> <%= @current_user_address[0].address %></h4>
+    <a href="/profile">Edit Shipping Info</a>
+  </div>
+
+<!-- <h3>Change Shipping Address: </h3>
+<#% current_user.addresses.each do |address| %>
+<#% if address.active === 'no' %>
+  <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center; margin-top:5px">
+    <h5><#%= address.name %> </h5>
+    <h5><#%= address.country %> </h5>
+    <h5> <#%= address.state %> </h5>
+    <h5><#%= address.city %></h5>
+    <h5><#%=address.zip %></h5>
+    <h5><#%= address.address %></h5>
+      <#%= form_for address, url: {path: edit_address_path(address.id)}, do |f| %>
+        <#%= f.hidden_field :active, :value => 'yes' %>
+        <#%= f.submit "Make Primary Address" %>
+      <#% end %>
+    </div>
+  <#% end %>
+<#% end %> -->
+
+
+  <!-- <#% current_user.addresses.each do |address| %>
+  <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center">
+    <h5><#%= address.name %> </h5>
+    <h5><#%= address.country %> </h5>
+    <h5> <#%= address.state %> </h5>
+    <h5><#%= address.city %></h5>
+    <h5><#%=address.zip %></h5>
+    <h5><#%= address.address %></h5>
+    <h5><#%= address.active %></h5>
+  </div>
+  <#% end %> -->
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
