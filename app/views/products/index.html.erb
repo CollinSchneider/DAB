@@ -2,33 +2,14 @@
 
 <div id="posts">
   <h1>Products</h1>
-  <% @products.each_slice(3) do |slice| %>
-    <div class="row">
-      <% slice.each do |product| %>
 
-      <div class="col 14 m12 s12 product" style="display:inline-block">
-        <div class="card" style="width:400px; height:420px">
-          <%= link_to product_path(product.id) do %>
-            <div class="card-image">
-              <%= image_tag product.image.url(:medium), :class => "responsive-img" %>
-              <div class="card-title" id = "card-category-title">
-                <div style="font-size: 18px; font-weight: bold; color:white">
-                  <%= product.title %>
-                </div>
-                <div style="font-size:16px">
-                    $<%= product.price %>.00
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-      <% end %>
-    </div>
-  <% end %>
+    <%= render @products %>
+  </div>
+
 </div>
 <% end %>
-<!-- <div class = "hidden"> -->
+<div class = "hidden">
   <%= will_paginate @products %>
-<!-- </div> -->
+</div>
 
 </div>
