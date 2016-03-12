@@ -1,42 +1,33 @@
-<div class = "container">
+<div class = "container" id='main-content'>
 
 <div id="posts">
   <h1>Products</h1>
-    <%= render @products %>
+    <% @products.each_slice(3) do |slice| %>
+      <div class="row">
+        <% slice.each do |product| %>
+          <div class="col 14 m12 s12 product" style="display:inline-block">
+            <div class="card" style="width:400px; height:420px">
+              <a href="/products/{{product.id}}">
+                <div class="card-image">
+                  <img src="/system/products/images/000/001/676/original/stars.jpg?1457724554" id = "product-image" class = "responsive-img" alt="" />
+                  <div class="card-title" id = "card-category-title">
+                    <div style="font-size: 18px; font-weight: bold; color:white">
+                      <%= product.title %>
+                    </div>
+                    <div style="font-size:16px">
+                        $<%= product.price %>.00
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 </div>
 <div class = "hidden">
   <%= will_paginate @products %>
 </div>
 
-</div>
-<!-- <section ng-controller="ProductsController">
-
-<div class = "container" id='main-content'>
-
-  <div ng-repeat="product in products | filter:search.$" style="display:inline-block">
-
-    <div class="col 14 m12 s12" style="display:inline-block">
-      <div class="card" style="width:400px; height:420px">
-        <a href="/products/{{product.id}}">
-          <div class="card-image">
-            <img src="/system/products/images/000/001/676/original/stars.jpg?1457724554" id = "product-image" class = "responsive-img" alt="" />
-            <div class="card-title" id = "card-category-title">
-              <div style="font-size: 18px; font-weight: bold; color:white">
-                {{product.title}}
-                {{product.image}}
-              </div>
-              <div style="font-size:16px">
-                ${{product.price}}.00
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-
-
-  </div>
-
-</div>
-
-</section> -->
+</div>  
