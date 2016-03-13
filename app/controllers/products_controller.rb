@@ -4,11 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     authenticate_anybody
-<<<<<<< HEAD
-    @products = Product.paginate(:page => params[:page], :per_page => 6)
-=======
     @products = Product.page(params[:page]).per(3)
->>>>>>> 4c0387f610026c0c29c966f36514c5bb13b5bb7e
   end
 
   def show
