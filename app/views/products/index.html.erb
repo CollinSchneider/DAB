@@ -1,13 +1,13 @@
 <%= render partial: 'partials/header' %>
 
 <div class = "container" id='main-content'>
-  
+
   <div class="infinite-table">
     <h1>Products</h1>
     <%= render :partial => 'product'%>
   </div>
 
-  <p class="pagination" style="margin-left:47%">
+  <p class="pagination hidden" style="margin-left:47%">
     <%= link_to_next_page(@products, 'Next Page', :remote => true) %>
   </p>
 

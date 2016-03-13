@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
 
+  def cart_counter
+    cart_quantity = []
+    current_user.cart_items.each do |item|
+      cart_quantity.push(item.quantity)
+    end
+    @cart_quantity = cart_quantity.reduce(:+)
+  end
+
   def index
     if current_user
       redirect_to products_path
@@ -9,6 +17,7 @@ class UsersController < ApplicationController
 
   def profile
     @new_address = Address.new
+    cart_counter
   end
 
   def affiliate
@@ -69,6 +78,7 @@ class UsersController < ApplicationController
   def cart
     authenticate_anybody
     @order = Order.new
+    cart_counter
   end
 
   def destroy

@@ -36,7 +36,7 @@
           <% end %>
         <% end %>
           <li><a class='black-text'href="/cart"><i class="material-icons">shopping_cart</i></a></li>
-          <li><div class='cart-popup'><span class='cart-number'><%= current_user.cart_items.length %></span></div></li>
+          <li><div class='cart-popup'><span class='cart-number'><%= @cart_quantity %></span></div></li>
         </ul>
       </div>
     </nav>

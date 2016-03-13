@@ -8,7 +8,6 @@ module ApplicationHelper
 
   def current_user_address
     current_user.addresses.each do |address|
-      binding.pry
     end
   end
 

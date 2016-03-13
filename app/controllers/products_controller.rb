@@ -2,13 +2,23 @@ class ProductsController < ApplicationController
 
   impressionist :actions=>[:show,:index]
 
+  def cart_counter
+    cart_quantity = []
+    current_user.cart_items.each do |item|
+      cart_quantity.push(item.quantity)
+    end
+    @cart_quantity = cart_quantity.reduce(:+)
+  end
+
   def index
     authenticate_anybody
+    cart_counter
     @products = Product.page(params[:page]).per(9)
   end
 
   def show
     authenticate_anybody
+    cart_counter
     @product = Product.find(params[:id])
     @product_item = ProductItem.new
     @cart_item = CartItem.new

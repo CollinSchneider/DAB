@@ -9,11 +9,13 @@
                 <span class="card-title" id='logo'>Deal Baked</span>
                 <div class="row">
                   <div class="input-field col s12">
-                    <%= form_for sessions_path do |f| %>
-                    <%= f.text_field :email, :class => "black-text center", :placeholder => 'email@address.com' %>
-                    <%= f.password_field :password, :class=> 'black-text center',:placeholder => 'password' %>
-                    <%= f.submit "Login", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
-                    <% end %>
+                    <%= form_tag sessions_path do %>
+                      <%= label_tag :email %>
+                      <%= text_field_tag :email %>
+                      <%= label_tag :password %>
+                      <%= password_field_tag :password %> </br>
+                      <%= submit_tag "Log In", :class => 'btn btn-primary' %> </br> </br>
+                      <% end %>
                   </div>
                   <div class="input-field col s12">
                     <p class='black-text'>OR</p>
@@ -43,4 +45,4 @@
     </div>
   </div>
 
-<%= render partial: 'partials/footer' %>    
+<%= render partial: 'partials/footer' %>
