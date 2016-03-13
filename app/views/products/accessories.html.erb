@@ -1,1 +1,9 @@
 <h1>Accessories</h1>
+
+<div class="infinite-table">
+    <%= render :partial => 'accessory'%>
+  </div>
+
+  <p class="pagination hidden" style="margin-left:47%">
+    <%= link_to_next_page(@accessories, 'Next Page', :remote => true) %>
+  </p>

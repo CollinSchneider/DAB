@@ -4,6 +4,10 @@ class ProductItemsController < ApplicationController
     authenticate_anybody
   end
 
+  def new
+    @product_item = ProductItem.new
+  end
+
   def create
     authenticate_admin
     ProductItem.create(product_params)

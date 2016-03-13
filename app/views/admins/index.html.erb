@@ -55,7 +55,7 @@
 <% if @affiliates.length === 0 %>
   <h6>Cannot create any products until affiliates have signed-up for DealBaked!</h6>
 <% else %>
-  <%= form_for @product, html: { multipart: true } do |f| %>
+  <%= form_for (Product.new), html: { multipart: true } do |f| %>
     <%= f.hidden_field :total_orders, :value => 0 %>
     <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
     <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
@@ -70,7 +70,7 @@
     <#%= f.label "Image Five" %>
     <#%= f.file_field :image_five %> </br> -->
     <%= f.select :category, :required => true do %>
-      <% ['Apparel', 'Essentials', 'Accessories', 'Art/Culture', 'Tech', 'Gadgets'].each do |a| %>
+      <% ['Apparel', 'Essentials', 'Accessories', 'Art_Culture', 'Tech', 'Gadgets'].each do |a| %>
         <%= content_tag(:option, a, value: a,) %>
       <% end %>
     <% end %>
@@ -96,7 +96,7 @@
 
 <div class = "user-forms">
   <h3> Create an Affiliate: </h3>
-  <%= form_for @user do |f| %>
+  <%= form_for (User.new) do |f| %>
   <%= f.label :email %>
   <%= f.email_field :email %>
   <%= f.label :password %>
@@ -104,16 +104,4 @@
   <%= f.hidden_field :status, :value => 1 %>
   <%= f.submit "Create Affiliate" %>
   <% end %>
-</div>
-
-<div class = "container">
-
-  <div id="posts">
-    <h1>Products</h1>
-      <%= render @products %>
-  </div>
-  <div class = "hidden">
-    <%= will_paginate @products %>
-  </div>
-
 </div>
