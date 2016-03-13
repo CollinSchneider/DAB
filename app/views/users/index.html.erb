@@ -27,12 +27,12 @@
                   <div class="input-field col s12">
                     <p class='black-text'>Not a member? <a id='sign-up-tag' href="">Sign Up!</a></p>
                   </div>
-                  <!--<%= form_for @user do |f| %>
+                  <%= form_for @user do |f| %>
                   <%= f.email_field :email %>
                   <%= f.password_field :password %>
-                  <%= f.hidden_field :status, :value => 0 %>
+                  <%= f.hidden_field :status, :value => 2 %>
                   <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
-                  <% end %>-->
+                  <% end %>
               </div>
               <p style="color:red"> <%= flash[:error] %> </p>
               <div class="card-action">

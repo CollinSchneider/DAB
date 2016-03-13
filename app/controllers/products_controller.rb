@@ -89,6 +89,7 @@ class ProductsController < ApplicationController
   def create
     authenticate_admin
     product = Product.create( product_params )
+    binding.pry
     flash[:success] = "Product created!"
     # redirect_to edit_product_path(product.id)
     redirect_to request.referrer

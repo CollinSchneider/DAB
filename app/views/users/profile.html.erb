@@ -1,23 +1,22 @@
 <%= render partial: 'partials/header' %>  
 
 <div class="container" id='user-account-container'>
-  <div class="row">
-    <div class="col l3 s12">
-      <div class="collection">
-        <a class='collection-item black-text grey lighten-3 active' href="#!">Order History</a>
-        <a class='collection-item black-text grey lighten-3' href="#!">Shipping Address</a>
-        <a class='collection-item black-text grey lighten-3' href="/user/support">Customer Support</a>
+    <div class="row">
+      <div class="col l3 s12">
+        <div class="collection">
+          <a class='collection-item black-text grey lighten-3 active' href="#!">Order History</a>
+          <a class='collection-item black-text grey lighten-3' href="#!">Shipping Address</a>
+        </div>
+      </div>
+      <div class="col l9 s12 center">
+        <h5 id='product-title'>My Account</h5>
+        <p id='user-name'><%= current_user.name %></p>
+        <p><%= current_user.email %></p>
+        <%= form_for current_user do |f| %>
+          <%= f.submit "Change Account Info / Password", :class => "btn waves-effect grey lighten-3 black-text" %>
+        <% end %>
       </div>
     </div>
-  <div class="col l9 s12 center">
-    <h5 id='product-title'>My Account</h5>
-    <p id='user-name'><%= current_user.name %></p>
-    <p><%= current_user.email %></p>
-    <%= form_for current_user do |f| %>
-      <%= f.submit "Change Account Info / Password", :class => "btn waves-effect grey lighten-3 black-text" %>
-    <% end %>
-  </div>
-  </div>
 </div>
 
 <!-- <h1> <%= current_user.name %>! </h1>
