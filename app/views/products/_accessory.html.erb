@@ -1,0 +1,7 @@
+<% @accessories.each do |accessory| %>
+  <div id = "accessory" style = "border: 1px solid black; width: 30%; text-align: center; margin: 5px; display:inline-block">
+    <h4><%= link_to accessory.title, product_path(accessory.id) %> </h4>
+    <%= image_tag accessory.image.url(:medium) %>
+    <h6>$<%= accessory.price %></h6>
+  </div>
+<% end %>

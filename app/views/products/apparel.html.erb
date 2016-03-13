@@ -10,7 +10,7 @@
 		    <%= render :partial => 'apparel'%>
 		  </div>
 
-		  <p class="pagination" style="margin-left:47%">
+		  <p class="pagination hidden" style="margin-left:47%">
 		    <%= link_to_next_page(@apparel, 'Next Page', :remote => true) %>
 		  </p>
 
@@ -18,5 +18,3 @@
     </div>
   </div>
 </div>
-
-<%= render partial: 'partials/footer' %>

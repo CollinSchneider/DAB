@@ -4,13 +4,17 @@ class ProductsController < ApplicationController
 
   def index
     authenticate_anybody
+<<<<<<< HEAD
     @products = Product.paginate(:page => params[:page], :per_page => 6)
+=======
+    @products = Product.page(params[:page]).per(3)
+>>>>>>> 4c0387f610026c0c29c966f36514c5bb13b5bb7e
   end
 
   def show
     authenticate_anybody
     @product = Product.find(params[:id])
-    @new_product_item = ProductItem.new
+    @product_item = ProductItem.new
     @cart_item = CartItem.new
   end
 
@@ -22,24 +26,24 @@ class ProductsController < ApplicationController
   def edit
     authenticate_admin
     @product = Product.find(params[:id])
-    @new_product_item = ProductItem.new
+    @product_item = ProductItem.new
   end
 
   def tech
-    @tech = Product.where('category = ?', 'Tech').paginate(:page => params[:page], :per_page => 3)
+    @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 3, :page => params[:page])
   end
 
   def art_culture
-    @art_culture = Product.where('category = ?', 'Art_culture').paginate(:page => params[:page], :per_page => 3)
+    @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 3, :page => params[:page])
   end
 
   def gadgets
-    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:page => params[:page], :per_page => 3)
+    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 3, :page => params[:page])
     # @gadgets = gadgets.paginate(:page => params[:page], :per_page => 3)
   end
 
   def apparel
-    @apparel = Product.where('category = ?', 'Apparel').paginate(:page => params[:page], :per_page => 3)
+    @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 3, :page => params[:page])
   end
 
   def accessories
@@ -52,7 +56,7 @@ class ProductsController < ApplicationController
 
   def edit
     authenticate_admin
-    @product = Product.find(params[:product_id])
+    @product = Product.find(params[:id])
   end
 
   def destroy
@@ -74,7 +78,7 @@ class ProductsController < ApplicationController
   def create
     authenticate_admin
     product = Product.create( product_params )
-    flash[:success] = product.title + " created!"
+    flash[:success] = "Product created!"
     redirect_to edit_product_path(product.id)
   end
 
