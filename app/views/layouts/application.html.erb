@@ -32,94 +32,9 @@
       $('select').material_select();
     });
   </script>
-  <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper grey lighten-5">
-        <%= link_to "Deal Baked", products_path, :class => 'brand-logo center', :id => 'logo' %>
-        <a href="#" data-activates="mobile" class="button-collapse hide-on-med-and-up"><i class="material-icons black-text">menu</i></a>
-        <ul class="side-nav" id="mobile">
-          <li>
-          <% if current_user %>
-            <% if current_user.status === 0 %>
-              <a id='toolbar-links'class='black-text' href="./profile">Account</a>
-            <% elsif current_user.status === 1 %>
-              <a id='toolbar-links'class='black-text' href="./affiliate">Account</a>
-            <% elsif current_user.status === 2 %>
-              <a id='toolbar-links'class='black-text' href="./admins">Account</a>
-            <% end %>
-          <% end %>
-          </li>
-          <li><a id='toolbar-links'class='black-text' href="/cart">Shopping Cart</a></li>
-          <li><a id='toolbar-links'class='black-text' href="/tech">Tech</a></li>
-          <li><a id='toolbar-links'class='black-text' href="/gadgets">Gadgets</a></li>
-          <li><a id='toolbar-links'class='black-text' href="/art&culture">Art/Culture</a></li>
-          <li><a id='toolbar-links'class='black-text' href="/essentials">Essentials</a></li>
-          <li><a id='toolbar-links'class='black-text' href="/apparel">Apparel</a></li>
-          <li><a id='toolbar-links'class='black-text' href="/accessories">Accessories</a></li>
-        </ul>
-        <ul class="right hide-on-small-and-down">
-        <% if current_user %>
-          <li><input ng-model="search.$" placeholder = "SEARCH PRODUCTS" class = "black-text"></li>
-          <li> <%= link_to sessions_path, :class => "dropdown-button black-text", method: :delete do %> <i class="fa fa-sign-out"></i> Logout <% end %></li>
-          <% if current_user.status === 0 %>
-            <li><a class="dropdown-button black-text" href="/profile" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
-          <% elsif current_user.status === 1 %>
-            <li><a class="dropdown-button black-text" href="/affiliate" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
-          <% elsif current_user.status === 2 %>
-            <li><a class="dropdown-button black-text" href="/admins" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
-          <% end %>
-        <% end %>
-          <li><a class='black-text'href="/cart"><i class="material-icons">shopping_cart</i></a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  <div class="navbar-fixed hide-on-small-only">
-    <nav class='grey lighten-2 center-align' id='toolbar'>
-      <div class="nav-wrapper">
-        <div id="toolbar-link-list">
-          <a id='toolbar-links'class='black-text' href="/tech">Tech</a>
-          <a id='toolbar-links'class='black-text' href="/gadgets">Gadgets</a>
-          <a id='toolbar-links'class='black-text' href="art&culture">Art/Culture</a>
-          <a id='toolbar-links'class='black-text' href="/essentials">Essentials</a>
-          <a id='toolbar-links'class='black-text' href="/apparel">Apparel</a>
-          <a id='toolbar-links'class='black-text' href="/accessories">Accessories</a>
-        </div>
-      </div>
-    </nav>
-  </div>
+
 
 <%= yield %>
-
-
-<footer class="page-footer grey lighten-2" stlye='min-hieght:190px'>
-  <div class="container">
-    <div class="row">
-      <div class="col s12 center">
-        <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-instagram fa-lg"></i></a>
-        <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-facebook fa-lg"></i></a>
-        <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-twitter fa-lg"></i></a>
-        <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-google-plus fa-lg"></i></a>
-        <a class="grey-text darken-4" id='footer-icons' href=""><i class="fa fa-pinterest fa-lg"></i></a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 center">
-        <%= link_to "About", about_path, :class => 'grey-text darken-4', :id => 'footer-links' %>
-        <%= link_to "Terms", terms_path, :class => 'grey-text darken-4', :id => 'footer-links' %>
-        <%= link_to "FAQ", faq_path, :class => 'grey-text darken-4', :id => 'footer-links' %>
-        <%= link_to "Shipping", shipping_path, :class => 'grey-text darken-4', :id => 'footer-links' %>
-        <%= link_to "Affiliates", affiliates_path, :class => 'grey-text darken-4', :id => 'footer-links' %>
-        <%= link_to "Contact", contact_path, :class => 'grey-text darken-4', :id => 'footer-links' %>
-      </div>
-    </div>
-    </div>
-    <div class="footer-copyright grey lighten-2">
-      <div class="container center">
-        <span class='grey-text darken-4' id='footer-copyright'>©2016 DealBaked, DealBaked inc.</span>
-      </div>
-    </div>
-  </footer>
 
 </body>
 </html>

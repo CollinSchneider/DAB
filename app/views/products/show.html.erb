@@ -1,3 +1,4 @@
+<%= render partial: 'partials/header' %>
 
 <div class="container" id='main-content'>
   <% if current_user.status === 2 %>
@@ -16,9 +17,9 @@
       </nav>
     </div> -->
     <div class="row">
-      <h3> <%= @product.impressionist_count %> Views </h3>
+      <!-- <h3> <%= @product.impressionist_count %> Views </h3>
       <h3> <%= @product.impressionist_count(:filter=>:ip_address) %> Unique IP Views </h3>
-      <h3> <%= @product.impressionist_count(:filter=>:session_hash) %> Unique Session Views </h3>
+      <h3> <%= @product.impressionist_count(:filter=>:session_hash) %> Unique Session Views </h3> -->
       <div class="col l6 s12">
         <%= image_tag @product.image.url(:medium), :id => "product-image", :class => "materialboxed responsive-img" %>
         <ul id='product-images-list'>
@@ -32,12 +33,12 @@
           <div class="row">
             <h4 id='product-title'> <%= @product.title %> </h4>
             <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
-            <% @product.product_items.each do |item| %>
+            <!-- <% @product.product_items.each do |item| %>
               <h6> <%= item.description %> <%= item.quantity %> </h6>
-            <% end %>
+            <% end %> -->
           </div>
           <div class="row" style='margin-top:-25px'>
-            <div class="input-field col l6 s12 center">
+            <div class="input-field col s12 center">
             <% if @product.product_items.exists? %>
               <%= form_for @cart_item do |f| %>
                 <%= f.select :product_item_id, :class => "browser-default", :id => "add-to-cart-qty" do %>
@@ -46,16 +47,15 @@
                     <% end %>
                   <% end %>
                 <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
-                  <% (1..10).each do |a| %>
+                  <% (1..5).each do |a| %>
                     <%= content_tag(:option, a, value: a) %>
                   <% end %>
                 <% end %>
                 <%= f.hidden_field :affiliate_id, :value => @product.user_id %>
                 <%= f.hidden_field :user_id, :value => current_user.id %>
-                <%= f.submit 'ADD TO CART', :class => 'btn btn-primary'  %>
+                <%= f.submit 'ADD TO CART', :class => 'btn grey darken-3', :id => 'add-to-cart-btn'  %>
               <% end %>
             <% end %>
-              <!-- <button class='btn grey darken-3' type="submit" name="action" id='add-to-cart-btn'>Add to Cart</button> -->
             </div>
           </div>
           <div class="row">
@@ -108,3 +108,5 @@
       </div>
     </div>
   </div>
+
+<%= render partial: 'partials/footer' %>

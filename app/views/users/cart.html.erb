@@ -1,3 +1,5 @@
+<%= render partial: 'partials/header' %>  
+
 <h2><%= current_user.name || current_user.email %>'s Cart</h2>
 
 <h5> <%= flash[:error] %></h5>
@@ -37,3 +39,5 @@
 <% end %>
 
 <%= button_to "Checkout", new_charge_path, :class => "btn btn-primary", method: :get %>
+
+<%= render partial: 'partials/footer' %>  
