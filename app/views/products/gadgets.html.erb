@@ -5,6 +5,15 @@
     <div class="col s12">
       <div class="row center grey darken-3" id="info-header-container">
         <h4 class="white-text" id="info-header">Gadgets</h4>
+
+		<div class="infinite-table">
+		    <%= render :partial => 'gadgets'%>
+		  </div>
+
+		  <p class="pagination" style="margin-left:47%">
+		    <%= link_to_next_page(@gadgets, 'Next Page', :remote => true) %>
+		  </p>
+		  
       </div>
     </div>
   </div>

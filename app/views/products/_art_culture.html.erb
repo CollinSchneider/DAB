@@ -1,0 +1,7 @@
+<% @art_culture.each do |art| %>
+  <div id = "art" style = "border: 1px solid black; width: 30%; text-align: center; margin: 5px; display:inline-block">
+    <h4><%= link_to art.title, product_path(art.id) %> </h4>
+    <%= image_tag art.image.url(:medium) %>
+    <h6>$<%= art.price %></h6>
+  </div>
+<% end %>

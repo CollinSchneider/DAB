@@ -1,0 +1,7 @@
+<% @essentials.each do |essential| %>
+  <div id = "essential" style = "border: 1px solid black; width: 30%; text-align: center; margin: 5px; display:inline-block">
+    <h4><%= link_to essential.title, product_path(essential.id) %> </h4>
+    <%= image_tag essential.image.url(:medium) %>
+    <h6>$<%= essential.price %></h6>
+  </div>
+<% end %>

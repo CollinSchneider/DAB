@@ -1,37 +1,18 @@
+
 <%= render partial: 'partials/header' %>
 
 <div class = "container" id='main-content'>
 
-  <div id="posts">
-    <% @products.each_slice(3) do |slice| %>
-      <div class="row">
-        <% slice.each do |product| %>
-        <div class="col 14 m12 s12 product" style="display:inline-block">
-          <div class="card" style="width:400px; height:420px">
-            <%= link_to product_path(product.id) do %>
-              <div class="card-image">
-                <img src="" id = "product-image" class = "responsive-img" alt="" />
-                <div class="card-title" id = "card-category-title">
-                  <div style="font-size: 18px; font-weight: bold; color:white">
-                    <%= product.title %>
-                  </div>
-                  <div style="font-size:16px">
-                    $<%= product.price %>.00
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <% end %>
-      </div>
-    <% end %> 
-  </div>
-</div>
-  <div class = "hidden">
-    <%= will_paginate @products %>
-  </div>
+  <div class="infinite-table">
+      <h1>Products</h2>
+      <%= render :partial => 'product'%>
+    </div>
 
-  </div>  
+    <p class="pagination" style="margin-left:47%">
+      <%= link_to_next_page(@products, 'Next Page', :remote => true) %>
+    </p>
+
+</div>
 
 <%= render partial: 'partials/footer' %>
+

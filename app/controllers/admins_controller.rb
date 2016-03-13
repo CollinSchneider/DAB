@@ -6,8 +6,8 @@ class AdminsController < ApplicationController
     @users = User.where('status = ?', 0)
     @affiliates = User.where('status = ?', 1)
     @product = Product.new
+    @products = Product.paginate(:page => params[:page], :per_page => 3)
     @product_item = ProductItem.new
-    @products = Product.all
     @total_visits = Impression.where('action_name = ?', 'index')
 
     total_orders = OrderItem.all
