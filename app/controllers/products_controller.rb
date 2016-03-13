@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     authenticate_anybody
-    @products = Product.page(params[:page]).per(3)
+    @products = Product.page(params[:page]).per(9)
   end
 
   def show
@@ -26,28 +26,27 @@ class ProductsController < ApplicationController
   end
 
   def tech
-    @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 3, :page => params[:page])
+    @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 9, :page => params[:page])
   end
 
   def art_culture
-    @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 3, :page => params[:page])
+    @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 9, :page => params[:page])
   end
 
   def gadgets
-    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 3, :page => params[:page])
-    # @gadgets = gadgets.paginate(:page => params[:page], :per_page => 3)
+    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 9, :page => params[:page])
   end
 
   def apparel
-    @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 3, :page => params[:page])
+    @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 9, :page => params[:page])
   end
 
   def accessories
-    @accessories = Product.where('category = ?', 'Accessories').paginate(:page => params[:page], :per_page => 3)
+    @accessories = Product.where('category = ?', 'Accessories').paginate(:page => params[:page], :per_page => 9)
   end
 
   def essentials
-    @essentials = Product.where('category = ?', 'Essentials').paginate(:page => params[:page], :per_page => 3)
+    @essentials = Product.where('category = ?', 'Essentials').paginate(:page => params[:page], :per_page => 9)
   end
 
   def edit

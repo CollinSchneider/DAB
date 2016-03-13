@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 
+
 $(window).scroll(function() {
   var url = $('.pagination > a').attr('href');
   if(url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
