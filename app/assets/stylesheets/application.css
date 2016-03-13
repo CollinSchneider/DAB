@@ -132,6 +132,9 @@
    #main-content {
      width: 95%;
    }
+   .cart-number {
+    margin-top: -22px;
+   }
  }
 
  #footer-icons {
@@ -300,3 +303,9 @@
   padding-top: 40px;
   min-height: 350px
 }
+
+@media only screen and (max-width: 401px) {
+   .cart-number {
+    margin-top: -22px;
+   }
+ }
