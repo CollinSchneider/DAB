@@ -1,0 +1,11 @@
+
+  $("<%=j render(:partial => 'accessory') %>")
+  .appendTo($(".infinite-table"));
+
+// Update pagination link
+<% if @accessories.last_page? %>
+  $('.pagination').remove();
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@accessories, 'Next Page', :remote => true) %>");
+<% end %>

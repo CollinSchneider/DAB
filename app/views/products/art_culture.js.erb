@@ -1,32 +1,11 @@
-// appendNew = function(){
+
   $("<%=j render(:partial => 'art_culture') %>")
   .appendTo($(".infinite-table"));
-// }
-
-scrollListener = function(){
-  if($(window).scrollTop() + $(window).height() > $(document).height() - 10) {
-    // $("<%=j render(:partial => 'art_culture') %>")
-    // .appendTo($(".infinite-table"));
-    $('.pagination > a')[0].click()
-  }
-}
-
-// scrollListener();
-
-infiniteScroll = function(){
-  $(window).scroll(function() {
-   scrollListener()
-  })
-}
-
-// infiniteScroll()
 
 // Update pagination link
-// <#% if @art_culture.last_page? %>
-//   alert("Thats it!")
-//   $('.pagination').remove();
-//   $(window).scroll('off');
-// <#% else %>
+<% if @art_culture.last_page? %>
+  $('.pagination').remove();
+<% else %>
   $('.pagination')
     .html("<%=j link_to_next_page(@art_culture, 'Next Page', :remote => true) %>");
-// <#% end %>
+<% end %>
