@@ -14,6 +14,7 @@ class ChargesController < ApplicationController
 	def new
 		total_price
 		@current_user_address = current_user.addresses.where('active = ?', 'yes')
+		@new_address = Address.new
 	end
 
 	def create
