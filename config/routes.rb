@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/art&culture' => 'products#art_culture'
   get '/essentials' => 'products#essentials'
   get '/accessories' => 'products#accessories'
+  get '/user/support' => 'users#support'
 
   # Facebook Authentication
   get 'auth/:provider/callback', to: 'sessions#facebook_create'

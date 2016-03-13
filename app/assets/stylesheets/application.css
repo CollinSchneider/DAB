@@ -61,12 +61,13 @@
  }
 
  #product-title {
-   font-family: 'Open Sans', italic;
+   font-family: arial;
    font-weight: 900;
+   text-transform: uppercase;
  }
 
  #product-price {
-   font-family: 'Open Sans', italic;
+   font-family: arial;
    font-weight: 900;
  }
 
@@ -193,7 +194,7 @@
 
  #add-to-cart-qty {
    height:35px;
-   width: 300px;
+   width: 100px;
  }
 
  #feature-list {
@@ -221,8 +222,6 @@
    height: 100px;
    background-color: green;
  }
-
-
 
  #info-header-containter {
    height: 75px;
@@ -274,3 +273,32 @@
    width: 100%;
    text-align: right
  }
+
+ .cart-popup {
+  margin-left: -27px;
+  margin-top: 13px;
+  background-color: red;
+  border-radius: 11px;
+  font-weight: bold;
+  font-size: 10px;
+  width: 14px;
+  height: 15px;
+  padding-left: 4px;
+  padding-top: 1px;
+  padding-bottom: 0px;
+ }
+
+ .cart-number {
+  color: white;
+  position: absolute;
+  margin-top: -25px;
+ }
+
+#user-name {
+  font-size: 20px;
+}
+
+#user-account-container {
+  padding-top: 40px;
+  min-height: 350px
+}
