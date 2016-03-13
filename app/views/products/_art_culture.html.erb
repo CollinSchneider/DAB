@@ -1,7 +1,24 @@
-<% @art_culture.each do |art| %>
-  <div id = "art" style = "border: 1px solid black; width: 30%; text-align: center; margin: 5px; display:inline-block">
-    <h4><%= link_to art.title, product_path(art.id) %> </h4>
-    <%= image_tag art.image.url(:medium) %>
-    <h6>$<%= art.price %></h6>
-  </div>
+<% @art_culture.each_slice(3) do |slice| %>
+<div class="row">
+
+  <% slice.each do |art_culture| %>
+    <div class="col 14 m4 s12 product" style="display:inline-block">
+      <div class="card">
+         <%= link_to product_path(art_culture.id) do %>
+          <div class="card-image">
+            <%= image_tag art_culture.image.url(:medium), :class => "responsive-img" %>
+            <div class="card-title" id = "card-category-title">
+              <div style="font-size: 18px; font-weight: bold; color:white">
+                <%= art_culture.title %>
+              </div>
+              <div style="font-size:16px">
+                  $<%= art_culture.price %>.00
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
 <% end %>

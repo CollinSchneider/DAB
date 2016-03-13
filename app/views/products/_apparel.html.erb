@@ -1,7 +1,24 @@
-<% @apparel.each do |apparel| %>
-  <div id = "apparel" style = "border: 1px solid black; width: 30%; text-align: center; margin: 5px; display:inline-block">
-    <h4><%= link_to apparel.title, product_path(apparel.id) %> </h4>
-    <%= image_tag apparel.image.url(:medium) %>
-    <h6>$<%= apparel.price %></h6>
-  </div>
+<% @apparel.each_slice(3) do |slice| %>
+<div class="row">
+
+  <% slice.each do |apparel| %>
+    <div class="col 14 m4 s12 product" style="display:inline-block">
+      <div class="card">
+         <%= link_to product_path(apparel.id) do %>
+          <div class="card-image">
+            <%= image_tag apparel.image.url(:medium), :class => "responsive-img" %>
+            <div class="card-title" id = "card-category-title">
+              <div style="font-size: 18px; font-weight: bold; color:white">
+                <%= apparel.title %>
+              </div>
+              <div style="font-size:16px">
+                  $<%= apparel.price %>.00
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
 <% end %>

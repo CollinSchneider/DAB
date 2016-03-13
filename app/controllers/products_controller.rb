@@ -36,26 +36,32 @@ class ProductsController < ApplicationController
   end
 
   def tech
+    cart_counter
     @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 9, :page => params[:page])
   end
 
   def art_culture
+    cart_counter
     @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 9, :page => params[:page])
   end
 
   def gadgets
+    cart_counter
     @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 9, :page => params[:page])
   end
 
   def apparel
+    cart_counter
     @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 9, :page => params[:page])
   end
 
   def accessories
+    cart_counter
     @accessories = Product.where('category = ?', 'Accessories').paginate(:page => params[:page], :per_page => 9)
   end
 
   def essentials
+    cart_counter
     @essentials = Product.where('category = ?', 'Essentials').paginate(:page => params[:page], :per_page => 9)
   end
 
@@ -84,7 +90,8 @@ class ProductsController < ApplicationController
     authenticate_admin
     product = Product.create( product_params )
     flash[:success] = "Product created!"
-    redirect_to edit_product_path(product.id)
+    # redirect_to edit_product_path(product.id)
+    redirect_to request.referrer
   end
 
   private
