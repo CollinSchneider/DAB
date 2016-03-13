@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   def index
     authenticate_anybody
     cart_counter
-    @products = Product.page(params[:page]).per(9)
+    @products = Product.page(params[:page]).per(3)
   end
 
   def show
@@ -87,12 +87,28 @@ class ProductsController < ApplicationController
   end
 
   def create
-    authenticate_admin
+    # authenticate_admin
     product = Product.create( product_params )
+    binding.pry
     flash[:success] = "Product created!"
-    # redirect_to edit_product_path(product.id)
     redirect_to request.referrer
   end
+
+#   Product.create(
+# user_id:"42",
+#  title:"ART",
+#  description:"STUFF",
+#  price:"83",
+#  category:"Apparel",
+#  status:"0",
+#  feature_one:"ejfb",
+#  feature_two:"",
+#  feature_three:"",
+#  feature_four:"",
+#  feature_five:"",
+#  total_orders:"0",
+#  image: image_data
+#  )
 
   private
   def product_params

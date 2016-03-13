@@ -55,7 +55,7 @@
 <% if @affiliates.length === 0 %>
   <h6>Cannot create any products until affiliates have signed-up for DealBaked!</h6>
 <% else %>
-  <%= form_for (Product.new), html: { multipart: true } do |f| %>
+  <%= form_for @product, html: { multipart: true } do |f| %>
     <%= f.hidden_field :total_orders, :value => 0 %>
     <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
     <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
@@ -82,7 +82,7 @@
       <% end %>
     <% end %>
     <%= f.number_field :status, :placeholder => "Product Status", :required => true %>
-    <%= f.hidden_field :total_sales, :value => 0 %>
+    <%= f.hidden_field :total_orders, :value => 0 %>
     <%= f.text_field :feature_one, :placeholder => "Feature One" %>
     <%= f.text_field :feature_two, :placeholder => "Feature Two" %>
     <%= f.text_field :feature_three, :placeholder => "Feature Three" %>

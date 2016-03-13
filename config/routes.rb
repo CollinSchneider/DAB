@@ -28,10 +28,6 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
-  namespace :api do
-    resources :products
-  end
-
   resources :users
   resources :orders
   resources :admins
