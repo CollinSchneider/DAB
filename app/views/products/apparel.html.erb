@@ -1,1 +1,10 @@
 <h1>Apparel</h1>
+
+<div class="infinite-table">
+    <%= render :partial => 'apparel'%>
+  </div>
+
+  <p class="pagination" style="margin-left:47%">
+    <!-- <#%= paginate @apparel %> -->
+    <%= link_to_next_page(@apparel, 'Next Page', :remote => true) %>
+  </p>

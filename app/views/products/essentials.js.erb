@@ -1,11 +1,11 @@
 // appendNew = function(){
-  $("<%=j render(:partial => 'product') %>")
+  $("<%=j render(:partial => 'essential') %>")
   .appendTo($(".infinite-table"));
 // }
 
 scrollListener = function(){
   if($(window).scrollTop() + $(window).height() > $(document).height() - 10) {
-    // $("<%=j render(:partial => 'product') %>")
+    // $("<%=j render(:partial => 'essential') %>")
     // .appendTo($(".infinite-table"));
     $('.pagination > a')[0].click()
   }
@@ -22,11 +22,11 @@ infiniteScroll = function(){
 // infiniteScroll()
 
 // Update pagination link
-<% if @products.last_page? %>
+<% if @essentials.last_page? %>
   alert("Thats it!")
   $('.pagination').remove();
   $(window).scroll('off');
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@products, 'Next Page', :remote => true) %>");
+    .html("<%=j link_to_next_page(@essentials, 'Next Page', :remote => true) %>");
 <% end %>

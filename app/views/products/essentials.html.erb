@@ -1,1 +1,10 @@
 <h1>Essentials</h1>
+
+
+<div class="infinite-table">
+    <%= render :partial => 'essential'%>
+  </div>
+
+  <p class="pagination" style="margin-left:47%">
+    <%= link_to_next_page(@essentials, 'Next Page', :remote => true) %>
+  </p>

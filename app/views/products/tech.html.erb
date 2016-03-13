@@ -1,1 +1,9 @@
 <h1>Tech</h1>
+
+<div class="infinite-table">
+    <%= render :partial => 'tech'%>
+  </div>
+
+  <p class="pagination" style="margin-left:47%">
+    <%= link_to_next_page(@tech, 'Next Page', :remote => true) %>
+  </p>

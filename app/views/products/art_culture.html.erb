@@ -1,1 +1,11 @@
 <h1>Art & Culture</h1>
+
+
+<div class="infinite-table">
+    <%= render :partial => 'art_culture'%>
+  </div>
+
+  <p class="pagination" style="margin-left:47%">
+    <!-- <#%= paginate @apparel %> -->
+    <%= link_to_next_page(@art_culture, 'Next Page', :remote => true) %>
+  </p>
