@@ -14,27 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 
-<<<<<<< HEAD
-
-$(document).ready(function() {
-  if ($('.pagination').length) {
-    $(window).scroll(function() {
-      var url = $('.pagination .next_page').attr('href');
-      if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-        $('.pagination').text("Please Wait...");
-        return $.getScript(url);
-      }
-    });
-    return $(window).scroll();
-=======
-// if($('.pagination').length) {
-  // console.log('start')
-  $(window).scroll(function() {
-    var url = $('.pagination > a').attr('href');
-    if(url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
-      $('.pagination').text("Fetching more products...");
-      return $.getScript(url);
-    }
-  });
-// }
->>>>>>> 4c0387f610026c0c29c966f36514c5bb13b5bb7e
+$(window).scroll(function() {
+  var url = $('.pagination > a').attr('href');
+  if(url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
+    $('.pagination').text("Fetching more products...");
+    return $.getScript(url);
+  }
+});
