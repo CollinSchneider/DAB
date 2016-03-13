@@ -1,3 +1,7 @@
+<%= render partial: 'partials/header' %>
+
+<div class="container" id='main-content'>
+
 <%= form_tag charges_path do %>
   <article>
     <% if flash[:error].present? %>
@@ -16,10 +20,6 @@
 
   <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center">
     <h2>Ship to: </h2>
-    <!-- <h4><%= @current_user_address[0].name %></h4>
-    <h4> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state %> <%= @current_user_address[0].zip %></h4>
-    <h4> <%= @current_user_address[0].country %></h4>
-    <h4> <%= @current_user_address[0].address %></h4> -->
     <a href="/profile">Edit Shipping Info</a>
   </div>
 
@@ -61,3 +61,7 @@
           data-amount=<%= @stripe_amount %>
           data-locale="auto"></script>
 <% end %>
+
+</div>
+
+<%= render partial: 'partials/footer' %>
