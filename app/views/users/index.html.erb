@@ -1,5 +1,3 @@
-
-
     <div class="container" id='landing-container'>
       <div id="cover-photo">
         <div class="row">
@@ -8,35 +6,32 @@
               <div class="card-content white-text">
                 <span class="card-title" id='logo'>Deal Baked</span>
                 <div class="row">
-                  <div class="input-field col s12">
+                  <div class="input-field col s12" id='login-content'>
                     <%= form_tag sessions_path do %>
-                      <%= label_tag :email %>
                       <%= text_field_tag :email %>
-                      <%= label_tag :password %>
                       <%= password_field_tag :password %> </br>
-                      <%= submit_tag "Log In", :class => 'btn btn-primary' %> </br> </br>
+                      <%= submit_tag "Log In", :class => 'btn waves-effect grey darken-3', :style=> "width:300px" %> </br> </br>
                       <% end %>
                   </div>
-                  <div class="input-field col s12">
-                    <p class='black-text'>OR</p>
+                  <div class="input-field col s12 ToggleOff" id='signup-content'>
+                    <%= form_for @user do |f| %>
+                    <%= f.email_field :email %>
+                    <%= f.password_field :password %>
+                    <%= f.hidden_field :status, :value => 2 %>
+                    <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
+                    <% end %>
                   </div>
+                  <p class='black-text'>OR</p>
                   <div class="input-field col s12">
                     <!-- <button class="btn waves-effect light-blue darken-4" type="submit" name="action" style='width:300px;'><i class="fa fa-facebook fa-1"></i>  LOGIN WITH FACEBOOK</button> -->
                     <%= link_to "LOGIN WITH FACEBOOK", "/auth/facebook", id: "sign_in", :class => 'btn light-blue darken-4', :style => 'width:300px;'%>
                   </div>
-                  <div class="input-field col s12">
-                    <p class='black-text'>Not a member? <a id='sign-up-tag' href="">Sign Up!</a></p>
-                  </div>
-                  <%= form_for @user do |f| %>
-                  <%= f.email_field :email %>
-                  <%= f.password_field :password %>
-                  <%= f.hidden_field :status, :value => 2 %>
-                  <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
-                  <% end %>
+                  
               </div>
               <p style="color:red"> <%= flash[:error] %> </p>
               <div class="card-action">
-
+                <p id='signup-button'class='black-text'>Not a member? <a id='sign-up-tag' href="">Sign Up!</a></p>
+                <p id='login-button' class='black-text ToggleOff'>Already a member? <a id='sign-up-tag' href="">Log In!</a></p>
               </div>
             </div>
           </div>
@@ -44,5 +39,29 @@
       </div>
     </div>
   </div>
+</div>
 
+<script>
+  $(document).ready(function() {
+    function toggleSignUp(){
+      $('.ToggleOff').removeClass('ToggleOff')
+      $('#login-content').addClass('ToggleOff')
+      $('#signup-button').addClass('ToggleOff')
+    }
+    
+    function toggleLogIn(){
+      $('.ToggleOff').removeClass('ToggleOff');
+      $('#signup-content').addClass('ToggleOff')
+      $('#login-button').addClass('ToggleOff')
+    }
+
+    $('#sign-up-tag').on('click', function() {
+      toggleSignUp()
+    });
+      
+    $('#login-tag').on('click', function() {
+      toggleLogIn()
+    });
+  });
+</script>
 <%= render partial: 'partials/footer' %>
