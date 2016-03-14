@@ -2,7 +2,13 @@ class AddressesController < ApplicationController
 
   def create
     authenticate_user
-    Address.create(address_params)
+    address = Address.create(address_params)
+    current_user.addresses.each do |add|
+      add.active = 'no'
+      add.save
+    end
+    address.active = 'yes'
+    address.save
     redirect_to request.referrer
   end
 

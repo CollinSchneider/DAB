@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get '/affiliate' => 'users#affiliate'
   get '/profile' => 'users#profile'
+  get '/profile/orders' => 'users#orders'
+  get '/profile/addresses' => 'users#addresses'
 
   get '/cart' => 'users#cart'
   get '/tech' => 'products#tech'

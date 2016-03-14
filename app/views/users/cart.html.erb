@@ -1,4 +1,4 @@
-<%= render partial: 'partials/header' %>  
+<%= render partial: 'partials/header' %>
 
 <h2><%= current_user.name || current_user.email %>'s Cart</h2>
 
@@ -23,7 +23,9 @@
             </div>
           </div>
         </div>
-        <h5>Product Quantity: <%= cart.product_item.quantity %> </h5>
+        <h5> Item Quantity: <%= cart.product_item.quantity %> </h5>
+        <h5> Item Status: <%= cart.product_item.status %> </h5>
+        <h5> Product Status: <%= cart.product_item.product.status %> </h5>
     </div>
     <%= form_for cart do |f| %>
       <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
@@ -40,4 +42,4 @@
 
 <%= button_to "Checkout", new_charge_path, :class => "btn btn-primary", method: :get %>
 
-<%= render partial: 'partials/footer' %>  
+<%= render partial: 'partials/footer' %>

@@ -39,10 +39,10 @@
           </div>
           <div class="row" style='margin-top:-25px'>
             <div class="input-field col s12 center">
-            <% if @product.product_items.exists? %>
+            <% if @product.product_items.where('status = ?', 0).exists? %>
               <%= form_for @cart_item do |f| %>
                 <%= f.select :product_item_id, :class => "browser-default", :id => "add-to-cart-qty" do %>
-                  <% @product.product_items.each do |item| %>
+                  <% @product.product_items.where('status = ?', 0).each do |item| %>
                     <%= content_tag(:option, item.description, value: item.id) %>
                     <% end %>
                   <% end %>
@@ -55,6 +55,8 @@
                 <%= f.hidden_field :user_id, :value => current_user.id %>
                 <%= f.submit 'ADD TO CART', :class => 'btn grey darken-3', :id => 'add-to-cart-btn'  %>
               <% end %>
+              <% else %>
+              <h4> SOLD OUT </h4>
             <% end %>
             </div>
           </div>

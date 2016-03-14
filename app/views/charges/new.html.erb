@@ -18,13 +18,29 @@
     <a href="/cart">Cart incorrect?</a></br></br>
   </br></br>
 
-
   <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center">
     <h2>Ship to: </h2>
-
-    <a href="/profile">Edit Shipping Info</a>
+      <h3> <%= @current_user_address[0].name %> </h3>
+      <h3> <%= @current_user_address[0].address %> </h3>
+      <h4> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state%> <%= @current_user_address[0].zip %> </h4>
+      <h4> <%= @current_user_address[0].country %> </h4>
+    <a href="/profile/addresses">Edit Shipping Info</a>
   </div>
 
+  <% current_user.addresses.each do |address| %>
+    <% if address.active === 'no' %>
+      <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center">
+        <h5> <%= address.name %> </h5>
+        <h5> <%= address.address %> </h5>
+        <h6> <%= address.city %>, <%= address.state%> <%= address.zip %> </h6>
+        <h6> <%= address.country %> </h6>
+        <%= form_for address do |f| %>
+          <%= f.hidden_field :active, :value => 'yes' %>
+          <%= f.submit "Make Primary Address" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 <!-- <h3>Change Shipping Address: </h3>
 <#% current_user.addresses.each do |address| %>
 <#% if address.active === 'no' %>

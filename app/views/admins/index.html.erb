@@ -82,7 +82,7 @@
         <%= content_tag(:option, a.email, value: a.id,) %>
       <% end %>
     <% end %>
-    <%= f.number_field :status, :placeholder => "Product Status", :required => true %>
+    <%= f.hidden_field :status, :value => 1 %>
     <%= f.hidden_field :total_orders, :value => 0 %>
     <%= f.text_field :feature_one, :placeholder => "Feature One" %>
     <%= f.text_field :feature_two, :placeholder => "Feature Two" %>

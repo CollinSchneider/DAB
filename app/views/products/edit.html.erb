@@ -8,6 +8,7 @@
       <%= f.hidden_field :product_id, :value => @product.id %>
       <%= f.text_field :description, :placeholder => "Item's Description (Large, red)", :required => true %>
       <%= f.number_field :quantity, :placeholder => "Item Quantity", :required => true %>
+      <%= f.hidden_field :status, :value => 0 %>
       <%= f.submit "Create item for #{@product.title} Product" %>
     <% end %>
     <!-- <div class="row black-text">
@@ -31,6 +32,10 @@
       </div>
       <div class="col l6 s12">
         <div id="product-content">
+          <h2> Product Status: <%= @product.status %> </h2>
+          <% @product.product_items.each do |item| %>
+            <h3> <%= item.description %> Status: <%= item.status %> </h3>
+          <% end %>
           <div class="row">
             <h4 id='product-title'> <%= @product.title %> </h4>
             <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>

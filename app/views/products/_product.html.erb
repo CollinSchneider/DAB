@@ -14,7 +14,10 @@
                 <%= product.title %>
               </div>
               <div style="font-size:16px">
-                  $<%= product.price %>.00
+                  $<%= product.price %>.00 </br>
+                  <% if product.status === 1 %>
+                    SOLD OUT
+                  <% end %>
                 </div>
               </div>
             </div>
