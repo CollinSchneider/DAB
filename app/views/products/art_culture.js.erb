@@ -3,7 +3,7 @@
   .appendTo($(".infinite-table"));
 
 // Update pagination link
-<% if @art_culture.last_page? %>
+<% if @art_culture.current_page === @art_culture.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')

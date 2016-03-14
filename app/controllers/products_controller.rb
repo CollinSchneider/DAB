@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
 
   def apparel
     cart_counter
-    @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 9, :page => params[:page])
+    @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 3, :page => params[:page])
   end
 
   def accessories
@@ -87,28 +87,16 @@ class ProductsController < ApplicationController
   end
 
   def create
-    # authenticate_admin
+    authenticate_admin
     product = Product.create( product_params )
-    binding.pry
-    flash[:success] = "Product created!"
-    redirect_to request.referrer
+    if product.save
+      flash[:success] = "Product created!"
+      redirect_to edit_product_path(product.id)
+    else
+      flash[:error] = "Product not created, cannot have an image type of " + product.image_content_type
+      redirect_to request.referrer
+    end
   end
-
-#   Product.create(
-# user_id:"42",
-#  title:"ART",
-#  description:"STUFF",
-#  price:"83",
-#  category:"Apparel",
-#  status:"0",
-#  feature_one:"ejfb",
-#  feature_two:"",
-#  feature_three:"",
-#  feature_four:"",
-#  feature_five:"",
-#  total_orders:"0",
-#  image: image_data
-#  )
 
   private
   def product_params

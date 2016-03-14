@@ -4,7 +4,7 @@
 
 
 // Update pagination link
-<% if @tech.last_page? %>
+<% if @tech.current_page === @tech.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')

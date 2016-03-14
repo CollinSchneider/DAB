@@ -1,4 +1,5 @@
 <h2> <%= current_user.email %> Admin Page </h2>
+<h3> <%= flash[:error] %></h3>
 
 <h3>Total Page Views: </h3>
 <h5> <%= @total_visits.count %> </h5>

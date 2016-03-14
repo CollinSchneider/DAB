@@ -1,9 +1,8 @@
-
-  $("<%=j render(:partial => 'apparel') %>")
-  .appendTo($(".infinite-table"));
+$("<%=j render(:partial => 'apparel') %>")
+.appendTo($(".infinite-table"));
 
 // Update pagination link
-<% if @apparel.last_page? %>
+<% if @apparel.current_page === @apparel.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')

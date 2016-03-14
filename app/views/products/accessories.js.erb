@@ -3,7 +3,7 @@
   .appendTo($(".infinite-table"));
 
 // Update pagination link
-<% if @accessories.last_page? %>
+<% if @accessories.current_page === @accessories.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')
