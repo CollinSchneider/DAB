@@ -78,6 +78,11 @@ class UsersController < ApplicationController
   def cart
     authenticate_anybody
     @order = Order.new
+    product_prices = current_user.cart_items.map do |cart_item|
+      cart_item.quantity.to_i * cart_item.product_item.product.price.to_i
+    end
+    # product_prices = @cart.map { |item| item.price.to_i }
+    @amount = product_prices.reduce(0, :+)
     cart_counter
   end
 
