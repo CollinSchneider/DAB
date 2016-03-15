@@ -7,49 +7,65 @@
     </div>
   </div>
   <div class="row">
-    <div class='col s12 center'>
-      <h5> <%= flash[:error] %></h5>
-      <h5> <%= flash[:success] %></h5>
-
-      <% if current_user.cart_items.length === 0 %>
+    <% if current_user.cart_items.length === 0 %>
+      <div class="col s12">
         <p>Your shopping cart is empty! Start <a href="/products">shopping</a></p>
-      <% else %>
+      </div>
+    <% else %>
+      <div class='col l8 s12 center'>
+        <h5> <%= flash[:error] %></h5>
+        <h5> <%= flash[:success] %></h5>
         <% current_user.cart_items.each do |cart| %>
-        <div class="col l4 m12 s12" style="display:inline-block">
-          <div class="card" style = "width: 400px">
-              <div class="card-image">
-                <%= image_tag cart.product_item.product.image.url(:medium), :style => 'height:400px; width:400px' %>
-                <div class="card-title" id = "card-category-title">
-                  <div style="font-size: 18px; font-weighy: bold; color:white">
-                    <h4><%= cart.product_item.product.title %> </h4>
-                    <h5><%= cart.quantity %> <%= cart.product_item.description %></h5>
-                  </div>
-                  <div style="font-size:16px">
-                    $<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00
-                  </div>
-                </div>
-              </div>
-              <!-- <h5> Item Quantity: <%= cart.product_item.quantity %> </h5>
-              <h5> Item Status: <%= cart.product_item.status %> </h5>
-              <h5> Product Status: <%= cart.product_item.product.status %> </h5> -->
+          <div class="col s4 cart-product-image">
+            <div>
+              <%= image_tag cart.product_item.product.image.url(:small) %>
+            </div>
           </div>
-          <%= form_for cart do |f| %>
-            <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
-              <% (1..10).each do |a| %>
-                <%= content_tag(:option, a, value: a) %>
+          <div class='col s8 cart-product-details'>
+            <div class='left cart-product-info'>
+              <p class='cart-product-title'><%= cart.product_item.product.title %></p>
+              <p><strong>Price</strong>: <span>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</span></p>
+            </div>  
+            <%= form_for cart do |f| %>
+              <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
+                <% (1..10).each do |a| %>
+                  <%= content_tag(:option, a, value: a) %>
+                <% end %>
               <% end %>
+            <%= f.submit "Update Quantity" %>
             <% end %>
-          <%= f.submit "Update Quantity" %>
-          <% end %>
-        </div>
-        <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
-        <% end %>
-      <% end %>
-
-      <%= button_to "Checkout", new_charge_path, :class => "btn btn-primary", method: :get %>
+            <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
+            <div class='left grey-text darken-4 cart-shipping-info'>
+              <p><strong>Shipping Availability</strong><span></span></p>
+              <p><strong>Ships In</strong><span></span></p>
+              <p class='hide-on-med-and-down'><strong>Shipping Policy</strong><span></span></p>
+              <p class='hide-on-med-and-down'><strong>Return Policy</strong><span></span></p>
+            </div>
           </div>
-        </div>
 
+        <% end %>
       </div>
 
+      <div class="col l4 s12">
+        <div class="grey lighten-2 total-container">
+          <div class="center">
+            <p class='order-summary'>Order Summary</p>
+          </div>
+          <div class='grey-text darken-4 subtotals'>
+            <p>Item Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
+            <p>Item Tax:</p>
+          </div>
+          <div class='subtotals'>
+            <p>Total:</p>
+          </div>
+          <div class='right checkout-button'>
+            <%= button_to "Checkout", new_charge_path, :class => "btn red", method: :get %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <%= render partial: 'partials/footer' %>
+
