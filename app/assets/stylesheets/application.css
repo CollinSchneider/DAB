@@ -315,3 +315,7 @@
 .ToggleOff {
   display: none;
 }
+
+.login-form {
+  color: black;
+}

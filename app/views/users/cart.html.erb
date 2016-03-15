@@ -1,45 +1,55 @@
 <%= render partial: 'partials/header' %>
 
-<h2><%= current_user.name || current_user.email %>'s Cart</h2>
-
-<h5> <%= flash[:error] %></h5>
-<h5> <%= flash[:success] %></h5>
-
-<% if current_user.cart_items.length === 0 %>
-  <h3>Your shopping cart is empty! Start <a href="/products">shopping</a></h3>
-<% else %>
-  <% current_user.cart_items.each do |cart| %>
-  <div class="col l4 m12 s12" style="display:inline-block">
-    <div class="card" style = "width: 400px">
-        <div class="card-image">
-          <%= image_tag cart.product_item.product.image.url(:medium), :style => 'height:400px; width:400px' %>
-          <div class="card-title" id = "card-category-title">
-            <div style="font-size: 18px; font-weighy: bold; color:white">
-              <h4><%= cart.product_item.product.title %> </h4>
-              <h5><%= cart.quantity %> <%= cart.product_item.description %></h5>
-            </div>
-            <div style="font-size:16px">
-              $<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00
-            </div>
-          </div>
-        </div>
-        <h5> Item Quantity: <%= cart.product_item.quantity %> </h5>
-        <h5> Item Status: <%= cart.product_item.status %> </h5>
-        <h5> Product Status: <%= cart.product_item.product.status %> </h5>
+<div class="content" id='main-content'>
+  <div class="row">
+    <div class='col s12 center'>
+      <h4>Shopping Cart</h4>
     </div>
-    <%= form_for cart do |f| %>
-      <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
-        <% (1..10).each do |a| %>
-          <%= content_tag(:option, a, value: a) %>
+  </div>
+  <div class="row">
+    <div class='col s12 center'>
+      <h5> <%= flash[:error] %></h5>
+      <h5> <%= flash[:success] %></h5>
+
+      <% if current_user.cart_items.length === 0 %>
+        <p>Your shopping cart is empty! Start <a href="/products">shopping</a></p>
+      <% else %>
+        <% current_user.cart_items.each do |cart| %>
+        <div class="col l4 m12 s12" style="display:inline-block">
+          <div class="card" style = "width: 400px">
+              <div class="card-image">
+                <%= image_tag cart.product_item.product.image.url(:medium), :style => 'height:400px; width:400px' %>
+                <div class="card-title" id = "card-category-title">
+                  <div style="font-size: 18px; font-weighy: bold; color:white">
+                    <h4><%= cart.product_item.product.title %> </h4>
+                    <h5><%= cart.quantity %> <%= cart.product_item.description %></h5>
+                  </div>
+                  <div style="font-size:16px">
+                    $<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00
+                  </div>
+                </div>
+              </div>
+              <!-- <h5> Item Quantity: <%= cart.product_item.quantity %> </h5>
+              <h5> Item Status: <%= cart.product_item.status %> </h5>
+              <h5> Product Status: <%= cart.product_item.product.status %> </h5> -->
+          </div>
+          <%= form_for cart do |f| %>
+            <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
+              <% (1..10).each do |a| %>
+                <%= content_tag(:option, a, value: a) %>
+              <% end %>
+            <% end %>
+          <%= f.submit "Update Quantity" %>
+          <% end %>
+        </div>
+        <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
         <% end %>
       <% end %>
-    <%= f.submit "Update Quantity" %>
-    <% end %>
-  </div>
-  <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
-  <% end %>
-<% end %>
 
-<%= button_to "Checkout", new_charge_path, :class => "btn btn-primary", method: :get %>
+      <%= button_to "Checkout", new_charge_path, :class => "btn btn-primary", method: :get %>
+          </div>
+        </div>
+
+      </div>
 
 <%= render partial: 'partials/footer' %>
