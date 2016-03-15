@@ -1,0 +1,11 @@
+
+  $("<%=j render(:partial => 'best_seller') %>")
+  .appendTo($(".infinite-table"));
+
+// Update pagination link
+<% if @best_sellers.current_page === @best_sellers.total_pages %>
+  $('.pagination').remove();
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@best_sellers, 'Next Page', :remote => true) %>");
+<% end %>

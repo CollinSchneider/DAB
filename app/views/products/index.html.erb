@@ -2,8 +2,41 @@
 
 <div class = "container" id='main-content'>
 
+<div class="row">
+
+  <div class="col 16 m12 s12 product" style="display:inline-block; width: 50%">
+    <div class="card">
+       <%= link_to best_sellers_path do %>
+        <div class="card-image">
+          <img src="http://www.thewallpapers.org/photo/64315/Summer-and-Nature-Scenery-032.jpg" class = "responsive-img" style = "height: 350px" alt="" />
+          <div class="card-title" id = "card-category-title">
+            <div style="font-size: 18px; font-weight: bold; color:white">
+              Best Sellers
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col 16 m12 s12 product" style="display:inline-block; width: 50%">
+      <div class="card">
+         <%= link_to new_arrivals_path do %>
+          <div class="card-image">
+            <img src="http://onehdwallpaper.com/wp-content/uploads/2015/07/Beautiful-Scenery-HD-Wallpapers-Pictures.jpg" class = "responsive-img" style = "height: 350px" alt="" />
+            <div class="card-title" id = "card-category-title">
+              <div style="font-size: 18px; font-weight: bold; color:white">
+                New Arrivals
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
   <div class="infinite-table">
-    <h1>Products</h1>
     <%= render :partial => 'product'%>
   </div>
 
@@ -14,3 +47,21 @@
 </div>
 
 <%= render partial: 'partials/footer' %>
+
+<script>
+  var active = true;
+
+  function scroller(){
+    $(window).scroll(function() {
+      var url = $('.pagination > a').attr('href');
+      if(active && url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
+        active = false;
+        return $.getScript(url);
+      }
+    });
+  }
+
+  $(document).ready(function(){
+    scroller()
+  })
+</script>

@@ -18,6 +18,7 @@ class ChargesController < ApplicationController
 	end
 
 	def create
+		cart_counter
 	  # Amount in cents
 	  # @amount = 500
 		total_price

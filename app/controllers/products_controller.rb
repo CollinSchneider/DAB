@@ -2,14 +2,6 @@ class ProductsController < ApplicationController
 
   impressionist :actions=>[:show,:index]
 
-  def cart_counter
-    cart_quantity = []
-    current_user.cart_items.each do |item|
-      cart_quantity.push(item.quantity)
-    end
-    @cart_quantity = cart_quantity.reduce(:+)
-  end
-
   def index
     authenticate_anybody
     cart_counter
@@ -37,17 +29,17 @@ class ProductsController < ApplicationController
 
   def tech
     cart_counter
-    @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 9, :page => params[:page])
+    @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 3, :page => params[:page])
   end
 
   def art_culture
     cart_counter
-    @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 9, :page => params[:page])
+    @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 3, :page => params[:page])
   end
 
   def gadgets
     cart_counter
-    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 9, :page => params[:page])
+    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 3, :page => params[:page])
   end
 
   def apparel
@@ -57,12 +49,20 @@ class ProductsController < ApplicationController
 
   def accessories
     cart_counter
-    @accessories = Product.where('category = ?', 'Accessories').paginate(:page => params[:page], :per_page => 9)
+    @accessories = Product.where('category = ?', 'Accessories').paginate(:page => params[:page], :per_page => 3)
   end
 
   def essentials
     cart_counter
-    @essentials = Product.where('category = ?', 'Essentials').paginate(:page => params[:page], :per_page => 9)
+    @essentials = Product.where('category = ?', 'Essentials').paginate(:page => params[:page], :per_page => 3)
+  end
+
+  def best_sellers
+    @best_sellers = Product.order(total_orders: :desc).paginate(:page => params[:page], :per_page => 3)
+  end
+
+  def new_arrivals
+    @new_arrivals = Product.order(created_at: :desc).paginate(:page => params[:page], :per_page => 3)
   end
 
   def edit

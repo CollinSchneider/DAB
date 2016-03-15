@@ -1,2 +1,2 @@
 
-<h2>Thanks for your order <%= current_user.email %>! You will be charged $<%= @amount %>.00 </h2>
+<h2>Thanks for your order <%= current_user.name || current_user.email %>! You will be charged $<%= @amount %>.00 </h2>

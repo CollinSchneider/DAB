@@ -1,18 +1,23 @@
 class UsersController < ApplicationController
 
-  def cart_counter
-    cart_quantity = []
-    current_user.cart_items.each do |item|
-      cart_quantity.push(item.quantity)
-    end
-    @cart_quantity = cart_quantity.reduce(:+)
-  end
-
   def index
     if current_user
       redirect_to products_path
     end
     @user = User.new
+  end
+
+  def total_amount
+    product_prices = current_user.cart_items.map do |cart_item|
+      cart_item.quantity.to_i * cart_item.product_item.product.price.to_i
+    end
+    @amount = product_prices.reduce(0, :+)
+  end
+
+  def shipping
+    cart_counter
+    @current_user_address = current_user.addresses.where('active = ?', 'yes')
+    total_amount
   end
 
   def profile
@@ -78,11 +83,7 @@ class UsersController < ApplicationController
   def cart
     authenticate_anybody
     @order = Order.new
-    product_prices = current_user.cart_items.map do |cart_item|
-      cart_item.quantity.to_i * cart_item.product_item.product.price.to_i
-    end
-    # product_prices = @cart.map { |item| item.price.to_i }
-    @amount = product_prices.reduce(0, :+)
+    total_amount
     cart_counter
   end
 

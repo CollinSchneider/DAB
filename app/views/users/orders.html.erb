@@ -1,1 +1,14 @@
+<%= render partial: 'partials/header' %>
+
 <h2>Orders</h2>
+
+<% current_user.orders.each do |order| %>
+  <div class="order" style = "border: 1px solid black; width: 50%">
+    <%= order.created_at %>
+    <% order.order_items.each do |item| %>
+      <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'partials/footer' %>

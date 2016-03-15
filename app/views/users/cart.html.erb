@@ -18,16 +18,16 @@
         <% current_user.cart_items.each do |cart| %>
           <div class="col s4 cart-product-image">
             <div>
-              <%= image_tag cart.product_item.product.image.url(:small) %>
+              <%= image_tag cart.product_item.product.image.url(:thumb) %>
             </div>
           </div>
           <div class='col s8 cart-product-details'>
             <div class='left cart-product-info'>
               <p class='cart-product-title'><%= cart.product_item.product.title %></p>
               <p><strong>Price</strong>: <span>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</span></p>
-            </div>  
+            </div>
             <%= form_for cart do |f| %>
-              <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
+              <%= f.select :quantity, :id => 'add-to-cart-qty' do %>
                 <% (1..10).each do |a| %>
                   <%= content_tag(:option, a, value: a) %>
                 <% end %>
@@ -59,7 +59,7 @@
             <p>Total:</p>
           </div>
           <div class='right checkout-button'>
-            <%= button_to "Checkout", new_charge_path, :class => "btn red", method: :get %>
+            <%= button_to "Checkout", shipping_path, :class => "btn red", method: :get %>
           </div>
         </div>
       </div>
@@ -68,4 +68,3 @@
 </div>
 
 <%= render partial: 'partials/footer' %>
-

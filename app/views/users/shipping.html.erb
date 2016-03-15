@@ -1,0 +1,68 @@
+<%= render partial: 'partials/header' %>
+
+<h2>Shipping: </h2>
+
+<% if @current_user_address.exists? %>
+  <div id = "address" style="border:1px solid black; padding:10px; width:49%; text-align:center; display: inline-block; float: left">
+    <h3>Ship to: </h3>
+      <h4> <%= @current_user_address[0].name %> </h4>
+      <h4> <%= @current_user_address[0].address %> </h4>
+      <h5> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state%> <%= @current_user_address[0].zip %> </h5>
+      <h5> <%= @current_user_address[0].country %> </h5>
+      <%= button_to "Remove Address", address_path(@current_user_address[0].id), method: :delete, data: { confirm: 'Are you sure you want to delete this address?' } %>
+  </div>
+<% end %>
+<div style="width:49%; text-align:center; display: inline-block; float: right; height: 325px">
+  <div class="grey lighten-2 total-container">
+    <div class="center">
+      <p class='order-summary'>Order Summary</p>
+    </div>
+    <div class='grey-text darken-4 subtotals'>
+      <p>Item Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
+      <p>Item Tax:</p>
+    </div>
+    <div class='subtotals'>
+      <p>Total:</p>
+    </div>
+  </div>
+</div>
+</br>
+
+<div id = "address" style="border:1px solid black; padding:10px; width:49%; text-align:center; display: inline-block; float: left; margin-top: 15px">
+  <h3>New Shipping Address:</h3>
+<%= form_for Address.new do |f| %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
+  <%= f.text_field :country, :placeholder => "Country", :required => true %>
+  <%= f.text_field :state, :placeholder => "State", :required => true %>
+  <%= f.text_field :city, :placeholder => "City", :required => true %>
+  <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
+  <%= f.text_field :address, :placeholder => "Address", :required => true %>
+  <%= f.hidden_field :active, :value => 'no' %>
+  <%= f.submit "Create Shipping Address" %>
+<% end %>
+</div>
+
+<h3> Other Shipping Addresses: </h3>
+<% current_user.addresses.each do |address| %>
+  <% if address.active === 'no' %>
+  <div style="width:49%; border: 1px solid black; text-align:center; display: inline-block; float: right; height: 220px">
+      <h5> <%= address.name %> </h5>
+      <h5> <%= address.address %> </h5>
+      <h6> <%= address.city %>, <%= address.state%> <%= address.zip %> </h6>
+      <h6> <%= address.country %> </h6>
+      <%= form_for address do |f| %>
+        <%= f.hidden_field :active, :value => 'yes' %>
+        <%= f.submit "Ship to this address" %>
+      <% end %>
+      <%= button_to "Remove Address", address_path(address.id), method: :delete, data: { confirm: 'Are you sure you want to delete this address?' } %>
+    </div>
+  <% end %>
+<% end %>
+</br> </br>
+
+<% if @current_user_address.exists? %>
+  <%= button_to "Next", new_charge_path, :class => "btn green", method: :get, :style => "margin-left: 45%; margin-top: 10px" %>
+<% end %>
+
+<%= render partial: 'partials/footer' %>
