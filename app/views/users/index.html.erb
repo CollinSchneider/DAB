@@ -7,7 +7,7 @@
                 <span class="card-title" id='logo'>Deal Baked</span>
                 <div class="row">
                   <div class="input-field col s12" id='login-content'>
-                    <%= form_tag sessions_path do %>
+                    <%= form_tag sessions_path, :class => 'login-form' do %>
                       <%= text_field_tag :email %>
                       <%= password_field_tag :password %> </br>
                       <%= submit_tag "Log In", :class => 'btn waves-effect grey darken-3', :style=> "width:300px" %> </br> </br>
@@ -15,8 +15,8 @@
                   </div>
                   <div class="input-field col s12 ToggleOff" id='signup-content'>
                     <%= form_for @user do |f| %>
-                    <%= f.email_field :email %>
-                    <%= f.password_field :password %>
+                    <%= f.email_field :email, :class => 'login-inputs' %>
+                    <%= f.password_field :password, :class => 'login-inputs' %>
                     <%= f.hidden_field :status, :value => 2 %>
                     <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
                     <% end %>
@@ -31,7 +31,7 @@
               <p style="color:red"> <%= flash[:error] %> </p>
               <div class="card-action">
                 <p id='signup-button'class='black-text'>Not a member? <a id='sign-up-tag' href="">Sign Up!</a></p>
-                <p id='login-button' class='black-text ToggleOff'>Already a member? <a id='sign-up-tag' href="">Log In!</a></p>
+                <p id='login-button' class='black-text ToggleOff'>Already a member? <a id='sign-up-tag' class='login-button' href="">Log In!</a></p>
               </div>
             </div>
           </div>
@@ -44,31 +44,31 @@
 <script>
   $(document).ready(function() {
 
-    // $('#sign-up-tag').click(function(){
-    //   console.log('signup');
-    //   $('#signup-content').toggle();
-    //   $('#login-content').toggle();
-    // })
+    $('#sign-up-tag').click(function(){
+      console.log('signup');
+      $('#signup-content').toggle();
+      $('#login-content').toggle();
+    })
 
-  //   function toggleSignUp(){
-  //     $('.ToggleOff').removeClass('ToggleOff')
-  //     $('#login-content').addClass('ToggleOff')
-  //     $('#signup-button').addClass('ToggleOff')
-  //   }
-  //
-  //   function toggleLogIn(){
-  //     $('.ToggleOff').removeClass('ToggleOff');
-  //     $('#signup-content').addClass('ToggleOff')
-  //     $('#login-button').addClass('ToggleOff')
-  //   }
-  //
-  //   $('#sign-up-tag').on('click', function() {
-  //     toggleSignUp()
-  //   });
-  //
-  //   $('#login-tag').on('click', function() {
-  //     toggleLogIn()
-  //   });
+    function toggleSignUp(){
+      $('.ToggleOff').removeClass('ToggleOff')
+      $('#login-content').addClass('ToggleOff')
+      $('#signup-button').addClass('ToggleOff')
+    }
+
+    function toggleLogIn(){
+      $('.ToggleOff').removeClass('ToggleOff');
+      $('#signup-content').addClass('ToggleOff')
+      $('#login-button').addClass('ToggleOff')
+    }
+
+    $('#sign-up-tag').hover(function() {
+      toggleSignUp()
+    });
+
+    $('.login-button').hover(function() {
+      toggleLogIn()
+    });
   });
 
 
