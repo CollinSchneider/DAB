@@ -80,11 +80,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def cart
     authenticate_anybody
     @order = Order.new
     total_amount
     cart_counter
+  end
+
+  def update
+    user = User.find(params[:id])
+    user.update(user_params)
+    flash[:success] = "Information Updated!"
+    redirect_to request.referrer
   end
 
   def destroy

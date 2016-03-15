@@ -23,21 +23,3 @@
   <% end %>
 </div>
 <% end %>
-
-<script>
-  var active = true;
-
-  function scroller(){
-    $(window).scroll(function() {
-      var url = $('.pagination > a').attr('href');
-      if(active && url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
-        active = false;
-        return $.getScript(url);
-      }
-    });
-  }
-
-  $(document).ready(function(){
-    scroller()
-  })
-</script>

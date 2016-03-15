@@ -1,0 +1,10 @@
+<h3> <%= @user.email || @user.name %> </h3>
+
+<h6> <%= flash[:success] %></h6>
+
+<%= form_for @user do |f| %>
+  <p> Email <%= f.text_field :email, :placeholder => @user.email %> </p>
+  <p> Password <%= f.password_field :password %> </p>
+  <p> Password Confirmation <%= f.password_field :password_confirmation %> </p>
+  <%=f.submit "Submit", class: "btn btn-primary" %>
+<%end%>

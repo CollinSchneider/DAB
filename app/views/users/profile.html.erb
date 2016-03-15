@@ -12,9 +12,10 @@
         <h5 id='product-title'>My Account</h5>
         <p id='user-name'><%= current_user.name %></p>
         <p><%= current_user.email %></p>
-        <%= form_for current_user do |f| %>
-          <%= f.submit "Change Account Info / Password", :class => "btn waves-effect grey lighten-3 black-text" %>
-        <% end %>
+        <%= link_to "Change Account Information", user_path(current_user.id), :class => "btn waves-effect grey lighten-3 black-text", method: :get %>
+        <!-- <#%= form_for current_user do |f| %>
+          <#%= f.submit "Change Account Info / Password", :class => "btn waves-effect grey lighten-3 black-text" %>
+        <#% end %> -->
       </div>
     </div>
 </div>
