@@ -319,3 +319,11 @@
 .login-form {
   color: black;
 }
+
+#email {
+  text-align: center;
+}
+
+#password {
+  text-align: center;
+}
