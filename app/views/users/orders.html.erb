@@ -4,9 +4,10 @@
 
 <% current_user.orders.each do |order| %>
   <div class="order" style = "border: 1px solid black; width: 50%">
-    <%= order.created_at %>
+    <h5><%= order.created_at.strftime("%d %b. %Y") %>: </h5>
     <% order.order_items.each do |item| %>
-      <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %>
+        <%= image_tag item.product_item.product.image.url(:thumb) %>
+      <h6><%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %></h6>
     <% end %>
   </div>
 <% end %>
