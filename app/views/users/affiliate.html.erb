@@ -19,7 +19,7 @@
     <% item.order_items.each do |order| %>
       <% if order.status === 0 %>
         <div id = "affiliate-order-div">
-          <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
+          <%= image_tag order.product_item.product.image.url(:medium) %>
           <h3> <%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h3>
             <h5> Send to: <%= order.order.address.name %> </h5>
             <h6> <%= order.order.address.address %> </h6>

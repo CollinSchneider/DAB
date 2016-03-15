@@ -26,7 +26,7 @@
                     <!-- <button class="btn waves-effect light-blue darken-4" type="submit" name="action" style='width:300px;'><i class="fa fa-facebook fa-1"></i>  LOGIN WITH FACEBOOK</button> -->
                     <%= link_to "LOGIN WITH FACEBOOK", "/auth/facebook", id: "sign_in", :class => 'btn light-blue darken-4', :style => 'width:300px;'%>
                   </div>
-                  
+
               </div>
               <p style="color:red"> <%= flash[:error] %> </p>
               <div class="card-action">
@@ -43,25 +43,35 @@
 
 <script>
   $(document).ready(function() {
-    function toggleSignUp(){
-      $('.ToggleOff').removeClass('ToggleOff')
-      $('#login-content').addClass('ToggleOff')
-      $('#signup-button').addClass('ToggleOff')
-    }
-    
-    function toggleLogIn(){
-      $('.ToggleOff').removeClass('ToggleOff');
-      $('#signup-content').addClass('ToggleOff')
-      $('#login-button').addClass('ToggleOff')
-    }
 
-    $('#sign-up-tag').on('click', function() {
-      toggleSignUp()
-    });
-      
-    $('#login-tag').on('click', function() {
-      toggleLogIn()
-    });
+    // $('#sign-up-tag').click(function(){
+    //   console.log('signup');
+    //   $('#signup-content').toggle();
+    //   $('#login-content').toggle();
+    // })
+
+  //   function toggleSignUp(){
+  //     $('.ToggleOff').removeClass('ToggleOff')
+  //     $('#login-content').addClass('ToggleOff')
+  //     $('#signup-button').addClass('ToggleOff')
+  //   }
+  //
+  //   function toggleLogIn(){
+  //     $('.ToggleOff').removeClass('ToggleOff');
+  //     $('#signup-content').addClass('ToggleOff')
+  //     $('#login-button').addClass('ToggleOff')
+  //   }
+  //
+  //   $('#sign-up-tag').on('click', function() {
+  //     toggleSignUp()
+  //   });
+  //
+  //   $('#login-tag').on('click', function() {
+  //     toggleLogIn()
+  //   });
   });
+
+
+
 </script>
 <%= render partial: 'partials/footer' %>

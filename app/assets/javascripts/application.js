@@ -22,3 +22,40 @@ $(window).scroll(function() {
     return $.getScript(url);
   }
 });
+
+$(document).ready(function() {
+
+  // $('#sign-up-tag').click(function(){
+  //   console.log('signup');
+  //   $('#signup-content').toggle();
+  //   $('#login-content').toggle();
+  // })
+
+  function toggleSignUp(){
+    $('.ToggleOff').removeClass('ToggleOff')
+    $('#login-content').addClass('ToggleOff')
+    $('#signup-button').addClass('ToggleOff')
+  }
+
+//   function toggleLogIn(){
+//     $('.ToggleOff').removeClass('ToggleOff');
+//     $('#signup-content').addClass('ToggleOff')
+//     $('#login-button').addClass('ToggleOff')
+//   }
+//
+//   $('#sign-up-tag').on('click', function() {
+//     toggleSignUp()
+//   });
+//
+//   $('#login-tag').on('click', function() {
+//     toggleLogIn()
+//   });
+});
+
+$(document).ready(function(){
+  setTimeout(function(){
+    $('.ToggleOff').removeClass('ToggleOff')
+    $('#login-content').addClass('ToggleOff')
+    $('#signup-button').addClass('ToggleOff')
+  }, 2000)
+})

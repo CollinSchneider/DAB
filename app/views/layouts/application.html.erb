@@ -30,6 +30,33 @@
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       $('select').material_select();
+
+        $('#sign-up-tag').click(function(){
+          console.log('signup');
+          $('#signup-content').toggle();
+          $('#login-content').toggle();
+        })
+
+        function toggleSignUp(){
+          $('.ToggleOff').removeClass('ToggleOff')
+          $('#login-content').addClass('ToggleOff')
+          $('#signup-button').addClass('ToggleOff')
+        }
+
+        function toggleLogIn(){
+          $('.ToggleOff').removeClass('ToggleOff');
+          $('#signup-content').addClass('ToggleOff')
+          $('#login-button').addClass('ToggleOff')
+        }
+
+        $('#sign-up-tag').on('click', function() {
+          toggleSignUp()
+        });
+
+        $('#login-tag').on('click', function() {
+          toggleLogIn()
+        });
+
     });
   </script>
 
