@@ -1,6 +1,60 @@
 <%= render partial: 'partials/header' %>
 
-<div class="container" id='user-account-container'>
+<div class="container">
+  <div class="row">
+    <div class="col s12 center">
+      <div class="account-content">
+        <p class='account-header'>My Account</p>
+        <p class='account-name'><%= current_user.name %></p>
+        <p class='account-email'><%= current_user.email %></p>
+        <div class='account-change-section'>
+          <%= link_to "Change Account Information", user_path(current_user.id), :class => "account-change-link", method: :get %>
+        </div>
+        <div class='account-change-section'>
+          <a class='account-change-link' href="/profile/addresses">Change Shipping Information</a>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p class='account-header center'>Order History</p>
+        <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header">
+              <i class="material-icons">done</i>Order#: 123456789
+            </div>
+            <div class="collapsible-body">
+              <p>
+                Status: <span class='order-status'>Shipped</span><br>
+                SubTotal: $200
+              </p>
+              <div class="row order-info">
+                <div class="col l1 m1 s4"> 
+                  <img style='width:100px' src="http://www.vphosted.com/sf/_langid-1/_hc-00001988/_/vp/images/b09/product/230x150/labels/circle-labels-sm-001.jpg" alt="">
+                </div>
+                <div class="col l2 m2 s3"> 
+                  <p>Product Name</p>
+                </div>
+                <div class="col l2 s9 hide-on-med-and-down"> 
+                  <p>Aparrel</p>
+                </div>
+                <div class="col l2 m2 s3"> 
+                  <p>Quantity: 1</p>
+                </div>
+                <div class="col l3 s9 hide-on-med-and-down"> 
+                  <p>Item Total  : $100</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container" id='user-account-container'>
     <div class="row">
       <div class="col l3 s12">
         <div class="collection">
@@ -13,13 +67,10 @@
         <p id='user-name'><%= current_user.name %></p>
         <p><%= current_user.email %></p>
         <%= link_to "Change Account Information", user_path(current_user.id), :class => "btn waves-effect grey lighten-3 black-text", method: :get %>
-        <!-- <#%= form_for current_user do |f| %>
-          <#%= f.submit "Change Account Info / Password", :class => "btn waves-effect grey lighten-3 black-text" %>
-        <#% end %> -->
       </div>
     </div>
 </div>
-
+ -->
 <!-- <h1> <%= current_user.name %>! </h1>
 <p><%= current_user.email %> </p>
 

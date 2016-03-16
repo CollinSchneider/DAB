@@ -369,3 +369,51 @@
 .cart-product-details {
   margin-top: -25px;
 }
+
+.account-header {
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.account-name {
+  font-size: 24px;
+}
+.account-email {
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+.account-change-link {
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+}
+.account-change-link:hover {
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  background-color: #e6e6e6;
+}
+.order-status {
+  color: green;
+}
+.order-info {
+  margin-top: -30px;
+}
+
+.account-change-section {
+  margin-bottom: 25px;
+}
+
+.acount-address-info {
+  margin-top: -15px;
+}
+
+.make-primary {
+  margin-top: 20px;
+}
+
+.shipping-header {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-top: -10px;
+}
