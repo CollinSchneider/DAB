@@ -27,7 +27,7 @@
               <p><strong>Price</strong>: <span>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</span></p>
             </div>
             <%= form_for cart do |f| %>
-              <%= f.select :quantity, :id => 'add-to-cart-qty' do %>
+              <%= f.select :quantity, :id => 'add-to-cart-qty', :value => cart.quantity do %>
                 <% (1..10).each do |a| %>
                   <%= content_tag(:option, a, value: a) %>
                 <% end %>

@@ -40,7 +40,7 @@
     <%= render :partial => 'product'%>
   </div>
 
-  <p class="pagination hidden" style="margin-left:47%">
+  <p class="pagination" style="margin-left:47%">
     <%= link_to_next_page(@products, 'Next Page', :remote => true) %>
   </p>
 
@@ -49,14 +49,15 @@
 <%= render partial: 'partials/footer' %>
 
 <script>
-  var active = true;
+
+  var loading = false;
 
   function scroller(){
     $(window).scroll(function() {
       var url = $('.pagination > a').attr('href');
-      if(active && url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
-        active = false;
+      if(!loading && url && $(window).scrollTop()>$(document).height()-$(window).height()-25) {
         return $.getScript(url);
+        return loading = true;
       }
     });
   }
@@ -64,4 +65,5 @@
   $(document).ready(function(){
     scroller()
   })
+
 </script>

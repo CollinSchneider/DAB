@@ -27,7 +27,7 @@ class OrderItemsController < ApplicationController
 
   private
   def order_items_params
-    params.require(:order_item).permit(:product_item_id, :affiliate_id, :user_id, :shipping_number, :status)
+    params.require(:order_item).permit(:product_item_id, :affiliate_id, :user_id, :shipping_number, :shipping_method, :status)
   end
 
 end

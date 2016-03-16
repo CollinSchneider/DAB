@@ -29,54 +29,58 @@ class UsersController < ApplicationController
     authenticate_affiliate
     @total_orders = 0
     @total_sales = 0
-    @todays_orders = []
-    @weeks_orders = []
-    @months_orders = []
+    todays_orders = []
+    weeks_orders = []
+    months_orders = []
 
     current_user.products.each do |product|
       product.product_items.each do |item|
         item.order_items.each do |order|
-          @total_orders += 1
-          @total_sales += order.product_item.product.price.to_i
+          @total_orders += order.quantity
+          @total_sales += order.product_item.product.price.to_i * order.quantity
 
           if order.created_at >= past_24_hours
-            @todays_orders.push(order)
-            @weeks_orders.push(order)
-            @months_orders.push(order)
+            todays_orders.push(order)
+            weeks_orders.push(order)
+            months_orders.push(order)
           elsif order.created_at >= past_7_days
-            @weeks_orders.push(order)
-            @months_orders.push(order)
+            weeks_orders.push(order)
+            months_orders.push(order)
           elsif order.created_at >= past_30_days
-            @months_orders.push(order)
+            months_orders.push(order)
           end
         end
       end
     end
-    todays_sales = @todays_orders.map { |item| item.product_item.product.price.to_i }
+    todays_sales = todays_orders.map { |item| item.product_item.product.price.to_i * item.quantity }
     @todays_sales = todays_sales.reduce(:+)
-    weeks_sales = @weeks_orders.map{ |item| item.product_item.product.price.to_i }
+    todays_orders = todays_orders.map { |order| order.quantity }
+    @todays_orders = todays_orders.reduce(:+)
+    weeks_sales = weeks_orders.map{ |item| item.product_item.product.price.to_i * item.quantity }
     @weeks_sales = weeks_sales.reduce(:+)
-    months_sales = @months_orders.map{ |item| item.product_item.product.price.to_i }
+    weeks_orders = weeks_orders.map { |order| order.quantity }
+    @weeks_orders = weeks_orders.reduce(:+)
+    months_sales = months_orders.map{ |item| item.product_item.product.price.to_i * item.quantity }
     @months_sales = months_sales.reduce(:+)
+    months_orders = months_orders.map { |order| order.quantity }
+    @months_orders = months_orders.reduce(:+)
   end
 
   def create
-    authenticate_anybody
     user = User.create( user_params )
-    if User.where('email = ?', user.email).length > 1
-      user.delete
-      flash[:error] = "Email is already in use"
-      # redirect_to request.referrer
-    elsif user.password.length < 8
-      user.delete
-      flash[:error] = "Password must be at least 8 characters long"
+    if user.save
+      if user.status === 0
+        session[:user_id] = user.id
+      elsif user.status === 1
+        flash[:success] = "New Affiliate Created!"
+        redirect_to request.referrer
+      elsif user.status === 2
+        flash[:success] = "New Admin Created!"
+        redirect_to request.referrer
+      end
     else
-      # if user.save
-        if user.status === 0
-          session[:user_id] = user.id
-        elsif user.status != 0
-          redirect_to request.referrer
-        end
+      # flash[:error] = user.errors.full_messages
+      redirect_to request.referrer
     end
   end
 
@@ -93,8 +97,12 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    user.update(user_params)
-    flash[:success] = "Information Updated!"
+    updated_user = user.update(user_params)
+    if user.save
+      flash[:success] = "Information Updated!"
+    else
+      flash[:error] = user.errors.full_messages
+    end
     redirect_to request.referrer
   end
 
@@ -106,7 +114,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :password, :status)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :status)
   end
 
   private

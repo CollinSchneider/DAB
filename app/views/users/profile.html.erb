@@ -8,7 +8,9 @@
         <p class='account-name'><%= current_user.name %></p>
         <p class='account-email'><%= current_user.email %></p>
         <div class='account-change-section'>
-          <%= link_to "Change Account Information", user_path(current_user.id), :class => "account-change-link", method: :get %>
+          <!-- <#% if current_user.password_digest.exists? %> -->
+            <%= link_to "Change Account Information", account_path, :class => "account-change-link", method: :get %>
+          <!-- <#% end %> -->
         </div>
         <div class='account-change-section'>
           <a class='account-change-link' href="/profile/addresses">Change Shipping Information</a>
@@ -19,36 +21,47 @@
     <div class="row">
       <div class="col s12">
         <p class='account-header center'>Order History</p>
+        <% current_user.orders.each do |order| %>
+        <% order_total = 0 %>
         <ul class="collapsible" data-collapsible="accordion">
           <li>
             <div class="collapsible-header">
-              <i class="material-icons">done</i>Order#: 123456789
+              <i class="material-icons">done</i><%= order.created_at.strftime("%b %d, %Y") %> Order:
             </div>
             <div class="collapsible-body">
+              <% order.order_items.each do |item| %>
               <p>
-                Status: <span class='order-status'>Shipped</span><br>
-                SubTotal: $200
+                Status:
+                <% if item.status === 0 %><span class='order-status'>Waiting to be shipped</span><br>
+                <% elsif item.status === 1 %><span class='order-status'>Shipped</span><br>
+                Shipping Carrier: <%= item.shipping_method %></br> Shipping Number: <%= item.shipping_number %>
+                <% end %>
+              </br>
               </p>
               <div class="row order-info">
-                <div class="col l1 m1 s4"> 
-                  <img style='width:100px' src="http://www.vphosted.com/sf/_langid-1/_hc-00001988/_/vp/images/b09/product/230x150/labels/circle-labels-sm-001.jpg" alt="">
+                <div class="col l1 m1 s4">
+                  <%= image_tag item.product_item.product.image.url(:thumb) %>
                 </div>
-                <div class="col l2 m2 s3"> 
-                  <p>Product Name</p>
+                <div class="col l2 m2 s3">
+                  <p> Product: (<%= item.product_item.description %>) <%= item.product_item.product.title %> </p>
                 </div>
-                <div class="col l2 s9 hide-on-med-and-down"> 
-                  <p>Aparrel</p>
+                <div class="col l2 s9 hide-on-med-and-down">
+                  <p> Category: <%= item.product_item.product.category %> </p>
                 </div>
-                <div class="col l2 m2 s3"> 
-                  <p>Quantity: 1</p>
+                <div class="col l2 m2 s3">
+                  <p>Quantity: <%= item.quantity %></p>
                 </div>
-                <div class="col l3 s9 hide-on-med-and-down"> 
-                  <p>Item Total  : $100</p>
+                <div class="col l3 s9 hide-on-med-and-down">
+                  <p>Item Total: </br> $<%= item.quantity * item.product_item.product.price.to_i %>.00 </p>
+                  <% order_total += item.quantity * item.product_item.product.price.to_i %>
                 </div>
               </div>
+              <% end %>
+                <h6 style="margin-left: 60%; font-weight: bold"> Order Total: $<%= order_total %>.00 </h6>
             </div>
           </li>
         </ul>
+        <% end %>
       </div>
     </div>
   </div>

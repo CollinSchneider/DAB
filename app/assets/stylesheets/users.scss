@@ -1,12 +1,32 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#affiliate-order-div {
-  border: 1px solid black;
-  display: inline-block;
-  width: 32%;
-  margin: 5px;
+.error-div {
+  background: rgba(255, 0, 15, .7);
+  width: 99%;
+  margin-left: .5%;
+  // height: 70px;
   text-align: center;
-  padding: 10px;
-  background: white;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.error-text {
+  color: white;
+  font-size: 18px;
+}
+
+.success-div {
+  background: rgba(10, 208, 0, .7);
+  width: 99%;
+  margin-left: .5%;
+  // height: 70px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.success-text {
+  color: white;
+  font-size: 18px;
 }

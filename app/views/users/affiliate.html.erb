@@ -3,10 +3,14 @@
 
 <h4> Sales last 24 hours: </h4>
 <h6> $<%= @todays_sales %>.00 </h6>
+<h6> <%= @todays_orders %> Orders </h6>
 <h4> Sales in the last week: </h4>
 <h6> $<%= @weeks_sales %>.00 </h6>
+<h6> <%= @weeks_orders %> Orders </h6>
 <h4> Sales in the last month: </h4>
 <h6> $<%= @months_sales %>.00 </h6>
+<h6> <%= @months_orders %> Orders </h6>
+
 
 
 <h4>Total Sales: </h4>
@@ -31,9 +35,9 @@
             <%= f.select :shipping_method do %>
             <% ['UPS', 'USPS', 'FedEx'].each do |a| %>
               <%= content_tag(:option, a, value: a) %>
+              <% end %>
             <% end %>
-          <% end %>
-            <%= f.text_field :shipping_number, :placeholder => "Shipping Number", :required => true %>
+            <%= f.text_field :shipping_number %>
             <%= f.submit "Mark Order as Shipped"%>
           <% end %>
           </div>

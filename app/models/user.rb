@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   has_many :product_items, through: :products
   has_many :cart_items, :dependent => :destroy
 
+  validates :password, confirmation: true, length: { in: 6..20 }
+  validates :password_confirmation, presence: true
+  validates :email, presence: true, uniqueness: true
+
   def self.from_omniauth(auth)
     if(auth.info.email)
       where(email: auth.info.email).first_or_create do |user|

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/profile/orders' => 'users#orders'
   get '/profile/addresses' => 'users#addresses'
   get '/shipping' => 'users#shipping'
+  get '/account' => 'users#account'
 
   get '/best-sellers' => 'products#best_sellers'
   get '/new-arrivals' => 'products#new_arrivals'
