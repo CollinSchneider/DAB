@@ -15,13 +15,14 @@
   <% end %>
 
     <div class='col s12 center'>
-      <h4>Shopping Cart</h4>
+      <h4 class='account-header'>Shopping Cart</h4>
     </div>
   </div>
   <div class="row">
     <% if current_user.cart_items.length === 0 %>
-      <div class="col s12">
-        <p>Your shopping cart is empty! Start <a href="/products">shopping</a></p>
+      <div class="col s12 center">  
+        <p>Your shopping cart is empty! To view our offerings, hit the button below to view all the best deals around the web !</p>
+        <a class='btn waves-effect grey darken-3' href="/products">Checkout the Store</a></p>
       </div>
     <% else %>
       <div class='col l8 s12 center'>
@@ -31,21 +32,47 @@
               <%= image_tag cart.product_item.product.image.url(:thumb) %>
             </div>
           </div>
-          <div class='col s8 cart-product-details'>
+          <div class='col s7 cart-product-details'>
             <div class='left cart-product-info'>
               <p class='cart-product-title'><%= cart.product_item.product.title %></p>
-              <p><strong>Price</strong>: <span>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</span></p>
+              <table class='cart-price-table'>
+                <tbody>
+                  <tr>
+                    <td class='cart-table-left'><strong>Price</strong>:</td>
+                    <td class='cart-table-right'>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- <p><strong>Price</strong>: <span>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</span></p> -->
             </div>
             <%= form_for cart, :id => "update-cart-form" do |f| %>
-              <p>Quantity: <%= f.select :quantity, (1..10), :id => 'cart-quantity-select', :selected => cart.quantity %></p>
+              <p>Quantity: <%= f.select :quantity, (1..5), :id => 'cart-quantity-select', :selected => cart.quantity %></p>
             <% end %>
-            <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete, :class => 'btn red' %>
             <div class='left grey-text darken-4 cart-shipping-info'>
-              <p><strong>Shipping Availability</strong><span></span></p>
-              <p><strong>Ships In</strong><span></span></p>
-              <p class='hide-on-med-and-down'><strong>Shipping Policy</strong><span></span></p>
-              <p class='hide-on-med-and-down'><strong>Return Policy</strong><span></span></p>
+              <table class='cart-shipping-table'>
+                <tbody>
+                  <tr>
+                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Availability</strong>:</td>
+                    <td class='cart-table-right'></td>
+                  </tr>
+                  <tr>
+                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Ships In</strong>:</td>
+                    <td class='cart-table-right'></td>
+                  </tr>
+                  <tr class='hide-on-med-and-down'>
+                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Shipping Policy</strong>:</td>
+                    <td class='cart-table-right'></td>
+                  </tr>
+                  <tr class='hide-on-med-and-down'>
+                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Return Policy</strong>:</td>
+                    <td class='cart-table-right'></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
+          <div class="col s1">
+            <%= button_to "X", cart_item_path(cart.id), method: :delete, :class => 'remove-item' %>
           </div>
 
         <% end %>
@@ -58,13 +85,12 @@
           </div>
           <div class='grey-text darken-4 subtotals'>
             <p>Order Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
-            <p>Sales Tax:</p>
           </div>
           <div class='subtotals'>
-            <p>Total:</p>
+            <p>Total: <span class='right amount'>$<%= @amount %>.00</span></p>
           </div>
           <div class='right checkout-button'>
-            <%= button_to "Checkout", shipping_path, :class => "btn blue", method: :get %>
+            <%= button_to "Checkout", shipping_path, :class => "btn waves-effect grey darken-3", method: :get %>
           </div>
         </div>
       </div>

@@ -338,12 +338,12 @@
 }
 
 .total-container {
-  min-height: 240px;
+  min-height: 194px;
 }
 
 .checkout-button {
   margin-right: 10px;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .amount {
@@ -353,6 +353,7 @@
 .cart-shipping-info {
   font-size: 12px;
   text-align: left;
+  margin-top: -12px;
 }
 
 .cart-product-info {
@@ -416,4 +417,67 @@
   text-transform: uppercase;
   font-size: 20px;
   margin-top: -10px;
+}
+
+.edit_cart_item {
+  max-width: 196px;
+}
+
+#start-shopping {
+  text-decoration: underline;
+  color: black;
+}
+
+#cart-shipping-headers {
+  margin-bottom: -7px;
+}
+
+.remove-item {
+  background-color: #eee;
+  border: none;
+}
+
+.remove-item:hover {
+  color: red;
+}
+
+.cart-price-table {
+  font-size: 14px;
+  background-color: #eee;
+  margin-bottom: -10px;
+}
+
+.cart-shipping-table {
+  font-size: 12px;
+  background-color: #eee;
+  margin-bottom: -10px;
+}
+
+tr:hover {
+  background-color: #eee;
+}
+
+.cart-shipping-table tr {
+  line-height: 0px;
+}
+
+.cart-table-left {
+  padding-left: 0px;
+  width: 145px;
+}
+
+.select-dropdown {
+  color: black;
+}
+
+.dropdown-content {
+  color: black;
+}
+
+.cart-shipping-table {
+  color: #9e9e9e;
+}
+
+#cart-shipping-headers {
+  color: #9e9e9e;
 }
