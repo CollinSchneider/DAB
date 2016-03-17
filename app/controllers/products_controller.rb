@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def index
     authenticate_anybody
     cart_counter
-    @products = Product.page(params[:page]).per(3)
+    @products = Product.order(:priority).paginate(:per_page => 3, :page => params[:page])
   end
 
   def show
@@ -83,6 +83,7 @@ class ProductsController < ApplicationController
     authenticate_admin
     product = Product.find(params[:id])
     product.update(product_params)
+    flash[:success] = "Product updated!"
     redirect_to request.referrer
   end
 

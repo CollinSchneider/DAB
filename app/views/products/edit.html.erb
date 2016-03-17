@@ -1,9 +1,18 @@
+<% if flash[:success] %>
+  <div class="success-div">
+    <h6 class = "success-text"> <%= flash[:success] %> </h6>
+  </div>
+<% end %>
+<% if flash[:error] %>
+  <div class="error-div">
+    <h6 class = "error-text"> <%= flash[:error] %> </h6>
+  </div>
+<% end %>
+
 <h1>Edit <%= @product.title %> </h1>
-<%= button_to "Delete #{@product.title}", product_path(@product.id), method: :delete %>
-<h6> <%= flash[:success] %> </h6>
-<h6> <%= flash[:error] %> </h6>
 
 <div class="container" id='main-content'>
+  <div style = "width: 49%; background: white; display: inline-block">
     <%= form_for (ProductItem.new) do |f| %>
       <%= f.hidden_field :product_id, :value => @product.id %>
       <%= f.text_field :description, :placeholder => "Item's Description (Large, red)", :required => true %>
@@ -11,17 +20,16 @@
       <%= f.hidden_field :status, :value => 0 %>
       <%= f.submit "Create item for #{@product.title} Product" %>
     <% end %>
-    <!-- <div class="row black-text">
-      <nav class='grey lighten-5' id='breadcrumbs-nav'>
-        <div class="nav-wrapper black-text">
-          <div class="col s12 black-text">
-            <a href="../index.html" class="breadcrumb black-text">DealBaked HomePage</a>
-            <a href="../views/category.html" class="breadcrumb black-text">Category 1</a>
-          </div>
-        </div>
-      </nav>
-    </div> -->
+  </div>
+  <div style="width: 49%; display: inline-block">
+    <% @product.product_items.each do |item| %>
+      <h5><%= item.description %>: <%= item.quantity %> </h5>
+      <%= button_to "Delete #{item.description} #{ @product.title }", product_item_path(item.id), method: :delete, :class => "btn red" %>
+    <% end %>
+  </div>
+
     <div class="row">
+      <%= form_for @product do |f| %>
       <div class="col l6 s12">
         <%= image_tag @product.image.url(:medium), :id => "product-image", :class => "materialboxed responsive-img" %>
         <ul id='product-images-list'>
@@ -41,67 +49,46 @@
       </div>
       <div class="col l6 s12">
         <div id="product-content">
-          <h2> Product Status: <%= @product.status %> </h2>
-          <% @product.product_items.each do |item| %>
-            <h3> <%= item.description %> Status: <%= item.status %> </h3>
-          <% end %>
           <div class="row">
-            <h4 id='product-title'> <%= @product.title %> </h4>
-            <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
-
-              <% @product.product_items.each do |item| %>
-                <h6><%= item.description %>: <%= item.quantity %> </h6>
-                <%= button_to "Delete #{item.description} #{ @product.title }", product_item_path(item.id), method: :delete %>
-            <% end %>
+              <h6>Title: <%= f.text_field :title, :value => @product.title, :required => true %> </h6>
+              <h6> Price: <%= f.text_field :price, :value => @product.price, :required => true %> </h6>
+              <h6>Priority: <%= f.number_field :priority, :min => 1, :max => 5, :placeholder => "Order product displays in, 5 coming first", :required => true %>
           </div>
 
           <div class="row">
             <div id='product-info'>
               <hr>
-              <p><strong>Desciption:</strong><br>
-                <%= @product.description %>
+                <h6>Description: <%= f.text_field :description, :value => @product.description, :required => true %> </h6>
               </p>
               <hr>
-              <p><strong>Features:</strong>
                 <ul id='feature-list'>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_one %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
+                  <li> Feature One: <%= f.text_field :feature_one, :value => @product.feature_one, :required => true %> </li>
+                  <li> Feature Two: <%= f.text_field :feature_two, :value => @product.feature_two %> </li>
+                  <li> Feature Three: <%= f.text_field :feature_three, :value => @product.feature_three %> </li>
+                  <li> Feature Four: <%= f.text_field :feature_four, :value => @product.feature_four %> </li>
+                  <li> Feature Five: <%= f.text_field :feature_five, :value => @product.feature_five %> </li>
                 </ul>
               </p>
             </div>
           </div>
-          <div class="row">
-            <div id='product-info'>
-              <hr>
-              <p><strong>Shipping Information:</strong><br></p>
-              <ul id='shipping-list'>
-                <li>
-                  <span class='grey-text'id='shipping-header'>Shipping Policy</span><br>
-                  <span>Discounted Shipping</span>
-                </li>
-                <li>
-                  <span class='grey-text'id='shipping-header'>Shipping Availability</span><br>
-                  <span>Canada, USA</span>
-                </li>
-                <li>
-                  <span class='grey-text'id='shipping-header'>Discounted Shipping</span><br>
-                  <span>$10.00 first item / $10.00 each additional</span>
-                </li>
-                <li>
-                  <span class='grey-text'id='shipping-header'>Ships In</span><br>
-                  <span>2-3 weeks</span>
-                </li>
-                <li>
-                  <span class='grey-text'id='shipping-header'>Return Policy</span><br>
-                  <span>Final sale, not eligible for return</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+            <%= f.submit "Update #{@product.title}", :class => "btn blue" %> </br> </br>
+          <% end %>
+          <%= button_to "Delete #{@product.title}", product_path(@product.id), method: :delete, :class => 'btn red' %>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+  if($('.success-div')){
+    setTimeout(function(){
+      $('.success-div').fadeOut()
+    }, 5000)
+  }
+
+  if($('.error-div')){
+    setTimeout(function(){
+      $('.error-div').fadeOut()
+    }, 5000)
+  }
+  </script>

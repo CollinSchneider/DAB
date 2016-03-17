@@ -2,7 +2,7 @@ $("<%=j render(:partial => 'product') %>")
 .appendTo($(".infinite-table"));
 
 // Update pagination link
-<% if @products.last_page? %>
+<% if @products.current_page === @products.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')
