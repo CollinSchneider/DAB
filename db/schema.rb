@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317165040) do
+ActiveRecord::Schema.define(version: 20160317211812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,8 +122,8 @@ ActiveRecord::Schema.define(version: 20160317165040) do
     t.integer  "model"
     t.string   "size"
     t.string   "picture"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "status"
     t.integer  "user_id"
     t.string   "admin_notes"
@@ -138,6 +138,22 @@ ActiveRecord::Schema.define(version: 20160317165040) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "priority"
+    t.string   "image_two_file_name"
+    t.string   "image_two_content_type"
+    t.integer  "image_two_file_size"
+    t.datetime "image_two_updated_at"
+    t.string   "image_three_file_name"
+    t.string   "image_three_content_type"
+    t.integer  "image_three_file_size"
+    t.datetime "image_three_updated_at"
+    t.string   "image_four_file_name"
+    t.string   "image_four_content_type"
+    t.integer  "image_four_file_size"
+    t.datetime "image_four_updated_at"
+    t.string   "image_five_file_name"
+    t.string   "image_five_content_type"
+    t.integer  "image_five_file_size"
+    t.datetime "image_five_updated_at"
   end
 
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree

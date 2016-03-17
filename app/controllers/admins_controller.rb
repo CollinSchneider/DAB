@@ -69,6 +69,7 @@ class AdminsController < ApplicationController
   end
 
   def products
+    @affiliates = User.where('status = ?', 1)
   end
 
   def users

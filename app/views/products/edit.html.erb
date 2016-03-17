@@ -25,9 +25,18 @@
       <div class="col l6 s12">
         <%= image_tag @product.image.url(:medium), :id => "product-image", :class => "materialboxed responsive-img" %>
         <ul id='product-images-list'>
-          <li><%= image_tag @product.image.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
-          <li><%= image_tag @product.image.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
-          <li><%= image_tag @product.image.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+          <% if @product.image_two.exists? %>
+            <li><%= image_tag @product.image_two.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+          <% end %>
+          <% if @product.image_three.exists? %>
+            <li><%= image_tag @product.image_three.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+          <% end %>
+          <% if @product.image_four.exists? %>
+            <li><%= image_tag @product.image_four.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+          <% end %>
+          <% if @product.image_five.exists? %>
+            <li><%= image_tag @product.image_five.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+          <% end %>
         </ul>
       </div>
       <div class="col l6 s12">

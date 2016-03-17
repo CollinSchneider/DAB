@@ -28,6 +28,14 @@ class UsersController < ApplicationController
     cart_counter
   end
 
+  def addresses
+    cart_counter
+  end
+
+  def account
+    cart_counter
+  end
+
   def affiliate
     authenticate_affiliate
     @total_orders = 0

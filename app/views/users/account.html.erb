@@ -13,18 +13,28 @@
 </div>
 <% end %>
 
+<button type="button" id="toggle-password">Change Password</button>
+<button type="button" id="toggle-info">Change Info</button>
+
 <div class="container">
   <div class="row">
     <div class="col s12 center">
       <div class="account-content">
         <p class='account-header'>Edit Account Info</p>
-		<%= form_for current_user do |f| %>
-		  <p> Email <%= f.email_field :email, :value => current_user.email %> </p>
-      <p> Name <%= f.text_field :name, :value => current_user.name %> </p>
-		  <p> Password <%= f.password_field :password %> </p>
-		  <p> Password Confirmation <%= f.password_field :password_confirmation %> </p>
-		  <%=f.submit "Submit", class: "btn btn-primary" %>
-		<%end%>
+      <div id="change-info">
+  		<%= form_for current_user do |f| %>
+  		  <p> Email <%= f.email_field :email, :value => current_user.email %> </p>
+        <p> Name <%= f.text_field :name, :value => current_user.name %> </p>
+  		  <%=f.submit "Submit", class: "btn btn-primary" %>
+  		<%end%>
+    </div>
+    <div id = "change-password">
+      <%= form_for current_user do |f| %>
+        <p> Password <%= f.password_field :password %> </p>
+        <p> Password Confirmation <%= f.password_field :password_confirmation %> </p>
+        <%=f.submit "Change Password", class: "btn btn-primary" %>
+      <% end %>
+    </div>
       </div>
     </div>
   </div>
@@ -32,3 +42,19 @@
 
 
 <%= render partial: 'partials/footer' %>
+
+<script>
+  $('#toggle-password').click(function(){
+    $('#change-info').toggle();
+    $('#change-password').toggle();
+    $('#toggle-info').toggle();
+    $('#toggle-password').toggle();
+  })
+
+  $('#toggle-info').click(function(){
+    $('#change-info').toggle();
+    $('#change-password').toggle();
+    $('#toggle-info').toggle();
+    $('#toggle-password').toggle();
+  })
+</script>
