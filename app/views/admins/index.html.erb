@@ -1,108 +1,95 @@
-<h2> <%= current_user.email %> Admin Page </h2>
-<h3> <%= flash[:error] %></h3>
 
-<h3>Total Page Views: </h3>
-<h5> <%= @total_visits.count %> </h5>
+    <%= render partial: 'nav' %>
 
-
-<h3> Users: </h3>
-<% if @users.length === 0 %>
-  <h6>No users have signed-up!</h6>
-<% else %>
-  <% @users.each do |user| %>
-    <h5><%= user.name || user.email %></h5>
-    <%= button_to "X", user_path(user.id), method: :delete, data: { confirm: 'Are you sure you want to delete this user?' } %>
-  <% end %>
-<% end %>
-
-<h3> Affiliates: </h3>
-<% if @affiliates.length === 0 %>
-  <h6> No affiliates have signed-up!</h6>
-<% else %>
-  <% @affiliates.each do |affiliate| %>
-    <h5> <%= affiliate.email %> </h5>
-    <%= button_to "X", user_path(affiliate.id), method: :delete, data: { confirm: 'Are you sure you want to delete '+ affiliate.email || affiliate.name } %>
-  <% end %>
-<% end %>
-
-<h3>Total Orders on DealBaked: </h3>
-<h5> <%= @total_orders %> </h5>
-<h3> Total sales: </h3>
-<h5>$<%= @total_sales %>.00 </h5>
-</br>
-
-<h3>Orders past 24 hours: </h3>
-<h5> <%= @orders_24_hours %> </h5>
-<h3> Sales past 24 hours: </h3>
-<h5>$<%= @sales_24_hours %>.00 </h5>
-</br>
-
-<h3>Orders past 7 days: </h3>
-<h5> <%= @orders_7_days %> </h5>
-<h3> Sales past 7 days: </h3>
-<h5>$<%= @sales_7_days %>.00 </h5>
-</br>
-
-<h3> Orders past 30 days: </h3>
-<h5> <%= @orders_30_days %> </h5>
-<h3> Sales past 30 days: </h3>
-<h5> <%= @sales_30_days %>.00 </h5>
-
-
-</br></br></br>
-
-<div class="user-form">
-
-<% if @affiliates.length === 0 %>
-  <h6>Cannot create any products until affiliates have signed-up for DealBaked!</h6>
-<% else %>
-  <%= form_for @product, html: { multipart: true } do |f| %>
-    <%= f.hidden_field :total_orders, :value => 0 %>
-    <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
-    <%= f.text_field :description, :placeholder => "Product Description", :required => true %>
-    <%= f.label "Main Image" %>
-    <%= f.file_field :image, :required => true %> </br>
-    <!-- <#%= f.label "Image Two" %>
-    <#%= f.file_field :image_two %> </br>
-    <#%= f.label "Image Three" %>
-    <#%= f.file_field :image_three %> </br>
-    <#%= f.label "Image Four" %>
-    <#%= f.file_field :image_four %> </br>
-    <#%= f.label "Image Five" %>
-    <#%= f.file_field :image_five %> </br> -->
-    <%= f.select :category, :required => true do %>
-      <% ['Apparel', 'Essentials', 'Accessories', 'Art_Culture', 'Tech', 'Gadgets'].each do |a| %>
-        <%= content_tag(:option, a, value: a,) %>
-      <% end %>
-    <% end %>
-    <%= f.number_field :price, :placeholder => "Product Price", :required => true %>
-    <!-- <#%= f.text_field :picture, :placeholder => "Product Picture", :required => true %> -->
-    <%= f.select :user_id, :required => true do %>
-      <% @affiliates.each do |a| %>
-        <%= content_tag(:option, a.email, value: a.id,) %>
-      <% end %>
-    <% end %>
-    <%= f.hidden_field :status, :value => 1 %>
-    <%= f.hidden_field :total_orders, :value => 0 %>
-    <%= f.text_field :feature_one, :placeholder => "Feature One" %>
-    <%= f.text_field :feature_two, :placeholder => "Feature Two" %>
-    <%= f.text_field :feature_three, :placeholder => "Feature Three" %>
-    <%= f.text_field :feature_four, :placeholder => "Feature Four" %>
-    <%= f.text_field :feature_five, :placeholder => "Feature Five" %>
-    <%= f.submit "Create Product" %>
-  <% end %>
-<% end %>
-
-</div>
-
-<div class = "user-forms">
-  <h3> Create an Affiliate: </h3>
-  <%= form_for (User.new) do |f| %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.hidden_field :status, :value => 1 %>
-  <%= f.submit "Create Affiliate" %>
-  <% end %>
-</div>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12 center">
+            <p class='account-header'>Overall Metrics</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
+            <p> <%= '%.3f' % ((@total_orders.to_f/@total_show_impressions.count)*100 )%>% (<%= @total_orders %>/<%= @total_show_impressions.count %>)</p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Sales</strong><p>
+            <p> $<%= @total_sales %>.00 </p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Impressions</strong><p>
+            <p><%= @total_impressions.count %> </p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Unique Visitors</strong><p>
+            <p><%= @total_unique_views.count %></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 center">
+            <p class='account-header'> <%= past_7_days.strftime("%b %d, %Y") %> to <%= Time.now.strftime("%b %d, %Y") %> </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
+            <p><%= '%.3f' % ((@orders_7_days.to_f/@weeks_show_impressions.count)*100) %>% (<%= @orders_7_days %>/<%= @weeks_show_impressions.count %>)</p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Sales</strong><p>
+            <p>$<%= @sales_7_days %>.00 </p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Impressions</strong><p>
+            <p> <%= @weeks_impressions.count %> </p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Unique Visitors</strong><p>
+            <p><%= @weeks_unique_views.count %></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 center">
+            <p class='account-header'>Week Orders</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 center">
+            <div class="row">
+              <div class="col l3 m6 s12 center">
+                <p class='dashboard-headers'><strong>Total Orders</strong></p>
+                <p>78</p>
+              </div>
+              <div class="col l3 m6 s12 center">
+                <p class='dashboard-headers'><strong>Products Sold</strong></p>
+                <p><%= @orders_7_days %> </p>
+              </div>
+              <div class="col l3 m6 s12 center">
+                <p class='dashboard-headers'><strong>Top Selling Product</strong></p>
+                <p> <%= @top_selling_week_product_item.description %> <%= @top_selling_week_product_item.product.title %> </p>
+              </div>
+              <div class="col l3 m6 s12 center">
+                <p class='dashboard-headers'><strong>Top Selling Affiliate</strong></p>
+                <p>$2000</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 center">
+                <p class='account-header'>Top Selling Products</p>
+              </div>
+            </div>
+            <% @top_selling_products.each do |product| %>
+            <div class="row">
+              <div class="col l3 m6 s12 center">
+                <%= image_tag product.image.url(:thumb), :style => "width: 100px" %>
+                <p> <%= product.title %>: <%= product.total_orders %> orders </p>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -38,6 +38,11 @@ Rails.application.routes.draw do
   resources :users
   resources :orders
   resources :admins
+    get '/admin-affiliates' => 'admins#affiliates'
+    get '/admin-orders' => 'admins#orders'
+    get '/admin-products' => 'admins#products'
+    get '/admin-users' => 'admins#users'
+
   resources :affiliates
   resources :products
   resources :product_items

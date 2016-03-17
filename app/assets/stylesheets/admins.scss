@@ -6,3 +6,89 @@
   text-align: center;
   padding: 15px;
 }
+
+#logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+#login {
+  width: 400px;
+}
+
+header, main, footer {
+  padding-left: 240px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+.logo {
+  text-align: center;
+  margin-top: 32px;
+  margin-bottom: 80px;
+}
+
+.account-header {
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.account-name {
+  font-size: 24px;
+}
+.account-email {
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+.account-change-link {
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+}
+.account-change-link:hover {
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  background-color: #e6e6e6;
+}
+.order-status {
+  color: green;
+}
+.order-info {
+  margin-top: -30px;
+}
+
+.dashboard-headers {
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+
+.dashboard-tabs {
+  color: black;
+}
+
+.tabs .tab a {
+    color: black;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: color 5.28s ease;
+}
+
+.order-status-pending {
+  color: red;
+}
+
+.order-status-shipped {
+  color: orange;
+}
+
+.order-status-delivered {
+  color: green;
+}
