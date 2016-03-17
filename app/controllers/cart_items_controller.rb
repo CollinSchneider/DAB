@@ -31,6 +31,22 @@ class CartItemsController < ApplicationController
     redirect_to request.referrer
   end
 
+  def check_product_status
+    cart_item.product_item.status = 1
+    cart_item.product_item.save
+    inventory_status = 0
+    product_item_count = cart_item.product_item.product.product_items.count
+    cart_item.product_item.product.product_items.each do |item|
+      if item.status === 1
+        inventory_status += 1
+        if inventory_status === product_item_count
+          item.product.status = 1
+          item.product.save
+        end
+      end
+    end
+  end
+
   def update
     cart_item = CartItem.find(params[:id])
     original_cart_item_quantity = cart_item.quantity
@@ -47,11 +63,27 @@ class CartItemsController < ApplicationController
     cart_item.product_item.product.save
     flash[:success] = "Quantity updated!"
     if cart_item.product_item.quantity < 0
-      cart_item.quantity = original_cart_item_quantity
+      cart_item.quantity += cart_item.product_item.quantity
       cart_item.save
-      cart_item.product_item.quantity = original_product_item_quantity
+      cart_item.product_item.quantity -= cart_item.product_item.quantity
       cart_item.product_item.save
-      flash[:success] = "Not enough inventory, cannot update quantity"
+
+      cart_item.product_item.status = 1
+      cart_item.product_item.save
+      inventory_status = 0
+      product_item_count = cart_item.product_item.product.product_items.count
+      cart_item.product_item.product.product_items.each do |item|
+        if item.status === 1
+          inventory_status += 1
+          if inventory_status === product_item_count
+            item.product.status = 1
+            item.product.save
+          end
+        end
+      end
+
+      flash[:success] = "Quantity updated, only enough product inventory for ", cart_item.quantity
+      # flash[:error] = "Not enough inventory, cannot update quantity"
     elsif cart_item.product_item.quantity === 0
       cart_item.product_item.status = 1
       cart_item.product_item.save

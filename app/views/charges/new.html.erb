@@ -2,6 +2,11 @@
 
 <div class="container" id='main-content'>
 
+  <div class="checkout-steps" style="width: 100%; text-align: center">
+    <h2>Checkout</h2>
+    <h4 style="color:grey; display:inline-block; margin-left: 50px"> <a href="/shipping" style = "color:grey">1. Shipping</a></h4> <h4 style = "color:black; display:inline-block; margin-left: 50px"> 2. Payment </h4>
+  </div>
+
 <%= form_tag charges_path do %>
   <article>
     <% if flash[:error].present? %>
@@ -10,19 +15,46 @@
       </div>
     <% end %>
     <label class="amount">
-      <% current_user.cart_items.each do |item| %>
-        <h4> <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %> at $<%= item.product_item.product.price %>.00 each = <strong style = "font-weight:bold">$<%= item.product_item.product.price.to_i  * item.quantity.to_i %>.00</strong> </h4>
-        <% end %>
-      <h3>Total Amount: $<%= @amount %>.00</h3>
+      <table id = "checkout-table">
+        <tr>
+          <th> <h5>Product</h5> </th>
+          <th> <h5>Price</h5> </th>
+          <th> <h5>Quantity</h5> </th>
+          <th> <h5>Total</h5> </th>
+        </tr>
+          <% current_user.cart_items.each do |item| %>
+            <tr>
+              <td><h6><%= image_tag item.product_item.product.image.url(:thumb) %> <%= item.product_item.description %> <%= item.product_item.product.title %></h6> </td>
+              <td><h6> $<%= item.product_item.product.price %></h6> </td>
+              <td><h6> <%= item.quantity %></h6> </td>
+              <td><h6> $<%= item.quantity * item.product_item.product.price.to_i %> </h6></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><h6><strong>Total Amount: $<%= @amount %>.00</h6></strong></td>
+          </tr>
+        </table>
     </label> </br>
-    <a href="/cart">Cart incorrect?</a></br></br>
-  </br></br>
-
+    <!-- <a href="/cart">Cart incorrect?</a></br> -->
+  <div style="border: 1px solid black; width: 75%; text-align: center; margin-left: 12.5%; background: white;">
+    <div style="display: inline-block; vertical-align:top">
+      <h3>Shipping Info: </h3>
+    </div>
+    <div style ="display: inline-block">
+      <h4> <%= @current_user_address[0].name %> </h4>
+      <h4> <%= @current_user_address[0].address %> </h4>
+      <h5> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state%> <%= @current_user_address[0].zip %> </h5>
+      <h5> <%= @current_user_address[0].country %> </h5>
+    </div>
+  </div> </br>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
+          data-description="DealBaked Checkout"
           data-amount=<%= @stripe_amount %>
           data-locale="auto"></script>
 <% end %>

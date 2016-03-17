@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col s12 center">
-            <p class='account-header'>Orders for March 13 - March 19, 2016</p>
+            <p class='account-header'>Orders for <%= (past_7_days).strftime('%b %d, %Y') %> to <%= Time.now.strftime('%b %d, %Y') %></p>
           </div>
         </div>
         <div class="row">
@@ -175,11 +175,13 @@
         <div class="row">
           <div class="col s12 center">
             <label>Affiliate Selelct</label>
-            <select class="browser-default">
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Affiliate 1</option>
-              <option value="2">Affiliate 2</option>
-              <option value="3">Affiliate 3</option>
+            <!-- <select class="browser-default"> -->
+              <!-- <option value="" disabled selected>Choose your option</option> -->
+              <!-- <$%= @affiliates.each do |affiliate| %> -->
+              <%= select_tag "affiliates", options_from_collection_for_select(@affiliates, "id", "email"), prompt: "Select Affiliate" %>
+
+              <!-- <option value=affiliate.id> <#%= affiliate.name || affiliate.email %> </option> -->
+              <!-- <#% end %> -->
             </select>
             <ul class="collapsible" data-collapsible="accordion">
               <li>

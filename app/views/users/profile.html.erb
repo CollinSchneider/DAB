@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col s12">
         <p class='account-header center'>Order History</p>
-        <% current_user.orders.each do |order| %>
+        <% current_user.orders.order('created_at DESC').each do |order| %>
         <% order_total = 0 %>
         <ul class="collapsible" data-collapsible="accordion">
           <li>
@@ -32,8 +32,8 @@
               <% order.order_items.each do |item| %>
               <p>
                 Status:
-                <% if item.status === 0 %><span class='order-status'>Waiting to be shipped</span><br>
-                <% elsif item.status === 1 %><span class='order-status'>Shipped</span><br>
+                <% if item.status === 0 %><span class='order-status-pending'>Waiting to be shipped</span><br>
+                <% elsif item.status === 1 %><span class='order-status-shipped'>Shipped</span><br>
                 Shipping Carrier: <%= item.shipping_method %></br> Shipping Number: <%= item.shipping_number %>
                 <% end %>
               </br>

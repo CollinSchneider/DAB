@@ -65,6 +65,7 @@ class AdminsController < ApplicationController
     @weeks_orders = Order.where('created_at >= ?', past_7_days)
     @weeks_pending_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 0)
     @weeks_delivered_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 1)
+    @affiliates = User.where('status = ?', 1)
   end
 
   def products

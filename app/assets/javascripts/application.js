@@ -31,7 +31,3 @@
 // $(document).ready(function(){
 //   scroller()
 // })
-
-if($('.error')){
-  $('.error').fadeOut('slow')
-}

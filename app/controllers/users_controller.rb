@@ -4,6 +4,9 @@ class UsersController < ApplicationController
     if current_user
       redirect_to products_path
     end
+  end
+
+  def signup
     @user = User.new
   end
 
@@ -71,6 +74,7 @@ class UsersController < ApplicationController
     if user.save
       if user.status === 0
         session[:user_id] = user.id
+        redirect_to products_path
       elsif user.status === 1
         flash[:success] = "New Affiliate Created!"
         redirect_to request.referrer
@@ -79,7 +83,7 @@ class UsersController < ApplicationController
         redirect_to request.referrer
       end
     else
-      # flash[:error] = user.errors.full_messages
+      flash[:error] = user.errors.full_messages
       redirect_to request.referrer
     end
   end

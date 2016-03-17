@@ -2,6 +2,18 @@
 
 <div class="content" id='main-content'>
   <div class="row">
+
+  <% if flash[:error] %>
+    <div class="error-div">
+      <h5 class = "error-text"> <%= flash[:error] %></h5>
+    </div>
+  <% end %>
+  <% if flash[:success] %>
+    <div class="success-div">
+      <h5 class = "success-text"> <%= flash[:success] %></h5>
+    </div>
+  <% end %>
+
     <div class='col s12 center'>
       <h4>Shopping Cart</h4>
     </div>
@@ -13,8 +25,6 @@
       </div>
     <% else %>
       <div class='col l8 s12 center'>
-        <h5> <%= flash[:error] %></h5>
-        <h5> <%= flash[:success] %></h5>
         <% current_user.cart_items.each do |cart| %>
           <div class="col s4 cart-product-image">
             <div>
@@ -26,15 +36,10 @@
               <p class='cart-product-title'><%= cart.product_item.product.title %></p>
               <p><strong>Price</strong>: <span>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</span></p>
             </div>
-            <%= form_for cart do |f| %>
-              <%= f.select :quantity, :id => 'add-to-cart-qty', :value => cart.quantity do %>
-                <% (1..10).each do |a| %>
-                  <%= content_tag(:option, a, value: a) %>
-                <% end %>
-              <% end %>
-            <%= f.submit "Update Quantity" %>
+            <%= form_for cart, :id => "update-cart-form" do |f| %>
+              <p>Quantity: <%= f.select :quantity, (1..10), :id => 'cart-quantity-select', :selected => cart.quantity %></p>
             <% end %>
-            <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete %>
+            <%= button_to "Remove From Cart", cart_item_path(cart.id), method: :delete, :class => 'btn red' %>
             <div class='left grey-text darken-4 cart-shipping-info'>
               <p><strong>Shipping Availability</strong><span></span></p>
               <p><strong>Ships In</strong><span></span></p>
@@ -52,14 +57,14 @@
             <p class='order-summary'>Order Summary</p>
           </div>
           <div class='grey-text darken-4 subtotals'>
-            <p>Item Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
-            <p>Item Tax:</p>
+            <p>Order Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
+            <p>Sales Tax:</p>
           </div>
           <div class='subtotals'>
             <p>Total:</p>
           </div>
           <div class='right checkout-button'>
-            <%= button_to "Checkout", shipping_path, :class => "btn red", method: :get %>
+            <%= button_to "Checkout", shipping_path, :class => "btn blue", method: :get %>
           </div>
         </div>
       </div>
@@ -68,3 +73,24 @@
 </div>
 
 <%= render partial: 'partials/footer' %>
+
+
+<script>
+
+  $('select').on('change', function(){
+    $(this).closest('form').submit()
+  })
+
+  if($('.success-div')){
+    setTimeout(function(){
+      $('.success-div').fadeOut()
+    }, 5000)
+  }
+
+  if($('.error-div')){
+    setTimeout(function(){
+      $('.error-div').fadeOut()
+    }, 5000)
+  }
+
+</script>

@@ -13,16 +13,7 @@
                       <%= submit_tag "Log In", :class => 'btn waves-effect grey darken-3', :style=> "width:300px" %> </br> </br>
                       <% end %>
                   </div>
-                  <div class="input-field col s12 ToggleOff" id='signup-content'>
-                    <%= form_for @user do |f| %>
-                    <%= f.text_field :name, :class => 'login-inputs black-text', :placeholder => 'name' %>
-                    <%= f.email_field :email, :class => 'login-inputs black-text', :placeholder => 'email@address.com' %>
-                    <%= f.password_field :password, :class => 'login-inputs black-text', :placeholder => 'password' %>
-                    <%= f.password_field :password_confirmation, :class => 'login-inputs black-text', :placeholder => 'confirm password' %>
-                    <%= f.hidden_field :status, :value => 2 %>
-                    <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
-                    <% end %>
-                  </div>
+
                   <p class='black-text'>OR</p>
                   <div class="input-field col s12">
                     <!-- <button class="btn waves-effect light-blue darken-4" type="submit" name="action" style='width:300px;'><i class="fa fa-facebook fa-1"></i>  LOGIN WITH FACEBOOK</button> -->
@@ -30,14 +21,11 @@
                   </div>
 
               </div>
-                <!-- <#% if flash[:error] %>
-                  <#% flash[:error].each do |error| %>
-                    <p class = "error" style = "color: red"> <#%= error %> </p>
-                  <#% end %>
-                <#% end %> -->
+                <% if flash[:error] %>
+                  <p class = "error" style = "color: red"> <%= flash[:error] %> </p>
+                <% end %>
               <div class="card-action">
-                <p id='signup-button'class='black-text'>Not a member? <a id='sign-up-tag' href="">Sign Up!</a></p>
-                <p id='login-button' class='black-text ToggleOff'>Already a member? <a id='sign-up-tag' class='login-button' href="">Log In!</a></p>
+                <p id='signup-button'class='black-text'>Not a member? <a id='sign-up-tag' href="/signup">Sign Up!</a></p>
               </div>
             </div>
           </div>
@@ -49,7 +37,7 @@
 
 <%= render partial: 'partials/footer' %>
 
-<script>
+<!-- <script>
 $(document).ready(function() {
 
   function toggleSignUp(){
@@ -73,4 +61,4 @@ $(document).ready(function() {
   });
 });
 
-</script>
+</script> -->

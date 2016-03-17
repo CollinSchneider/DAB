@@ -1,0 +1,42 @@
+
+<div class="container" id='landing-container'>
+  <div id="cover-photo">
+    <div class="row">
+      <div class="col s12">
+        <div class="card white center" id='login-container'>
+          <div class="card-content white-text">
+            <span class="card-title" id='logo'>Deal Baked</span>
+            <div class="row">
+              <div class="input-field col s12" id='login-content'>
+                <%= form_for @user do |f| %>
+                  <%= f.text_field :name, :class => 'login-inputs black-text', :placeholder => 'name' %>
+                  <%= f.email_field :email, :class => 'login-inputs black-text', :placeholder => 'email@address.com' %>
+                  <%= f.password_field :password, :class => 'login-inputs black-text', :placeholder => 'password' %>
+                  <%= f.password_field :password_confirmation, :class => 'login-inputs black-text', :placeholder => 'confirm password' %>
+                  <%= f.hidden_field :status, :value => 0 %>
+                  <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
+                <% end %>
+              </div>
+
+              <p class='black-text'>OR</p>
+              <div class="input-field col s12">
+                <%= link_to "LOGIN WITH FACEBOOK", "/auth/facebook", id: "sign_in", :class => 'btn light-blue darken-4', :style => 'width:300px;'%>
+              </div>
+
+          </div>
+            <% if flash[:error] %>
+              <% flash[:error].each do |error| %>
+                <p class = "error" style = "color: red"> <%= error %> </p>
+              <% end %>
+            <% end %>
+            <div class="card-action">
+              <p id='login-button' class='black-text'>Already a member? <a id='sign-up-tag' class='login-button' href="/">Log In!</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'partials/footer' %>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/profile/addresses' => 'users#addresses'
   get '/shipping' => 'users#shipping'
   get '/account' => 'users#account'
+  get '/signup' => 'users#signup'
 
   get '/best-sellers' => 'products#best_sellers'
   get '/new-arrivals' => 'products#new_arrivals'
