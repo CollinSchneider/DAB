@@ -59,7 +59,7 @@
             <div class="row">
               <div class="col l3 m6 s12 center">
                 <p class='dashboard-headers'><strong>Total Orders</strong></p>
-                <p>78</p>
+                <p><%= @weeks_orders %> </p>
               </div>
               <div class="col l3 m6 s12 center">
                 <p class='dashboard-headers'><strong>Products Sold</strong></p>
@@ -67,11 +67,11 @@
               </div>
               <div class="col l3 m6 s12 center">
                 <p class='dashboard-headers'><strong>Top Selling Product</strong></p>
-                <p> <%= @top_selling_week_product_item.description %> <%= @top_selling_week_product_item.product.title %> </p>
+                <p> <%= @top_selling_week_product[0] %> : <%= @top_selling_week_product[1] %> orders</p>
               </div>
               <div class="col l3 m6 s12 center">
                 <p class='dashboard-headers'><strong>Top Selling Affiliate</strong></p>
-                <p>$2000</p>
+                <p><%= @top_selling_affiliate[0] %>: $<%= @top_selling_affiliate[1] %></p>
               </div>
             </div>
             <div class="row">
