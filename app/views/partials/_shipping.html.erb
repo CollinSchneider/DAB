@@ -1,0 +1,15 @@
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper grey lighten-5">
+      <%= link_to "Deal Baked", products_path, :class => 'brand-logo center', :id => 'logo' %>
+      <a href="#" data-activates="mobile" class="button-collapse hide-on-med-and-up"><i class="material-icons black-text">menu</i></a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+</script>

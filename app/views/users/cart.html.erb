@@ -43,7 +43,6 @@
                   </tr>
                 </tbody>
               </table>
-              <!-- <p><strong>Price</strong>: <span>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</span></p> -->
             </div>
             <%= form_for cart, :id => "update-cart-form" do |f| %>
               <p>Quantity: <%= f.select :quantity, (1..5), :id => 'cart-quantity-select', :selected => cart.quantity %></p>
@@ -76,6 +75,7 @@
           </div>
 
         <% end %>
+      <% end %>
       </div>
 
       <div class="col l4 s12 order-summary">
@@ -94,7 +94,6 @@
           </div>
         </div>
       </div>
-    <% end %>
   </div>
 </div>
 
