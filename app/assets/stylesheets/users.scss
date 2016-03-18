@@ -38,3 +38,15 @@
 #toggle-info {
   display: none;
 }
+
+.edit-item-form {
+  width: 30%;
+}
+
+#product-items-div {
+  border: 1px solid black;
+  width: 49%;
+  display: inline-block;
+  height: 200px;
+  overflow: scroll;
+}

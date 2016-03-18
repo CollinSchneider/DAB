@@ -42,9 +42,9 @@
           <div class="row">
             <h4 id='product-title'> <%= @product.title %> </h4>
             <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
-            <!-- <% @product.product_items.each do |item| %>
+            <% @product.product_items.each do |item| %>
               <h6> <%= item.description %> <%= item.quantity %> </h6>
-            <% end %> -->
+            <% end %>
           </div>
           <div class="row" style='margin-top:-25px'>
             <div class="input-field col s12 center">

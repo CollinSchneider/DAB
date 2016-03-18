@@ -21,12 +21,24 @@
       <%= f.submit "Create item for #{@product.title} Product" %>
     <% end %>
   </div>
-  <div style="width: 49%; display: inline-block">
+  <div id = "product-items-div">
+    <h4> <%= @product.title %>'s Item Inventory: </h4>
     <% @product.product_items.each do |item| %>
-      <h5><%= item.description %>: <%= item.quantity %> </h5>
-      <%= button_to "Delete #{item.description} #{ @product.title }", product_item_path(item.id), method: :delete, :class => "btn red" %>
+      <h5><%= item.description %> <%= item.product.title %>: <%= item.quantity %> item(s) in stock </h5>
+      <!-- <button type="button" id ="edit-item-div">Edit Item</button> -->
+      <div class="edit-item-form">
+        <h6>Edit:</h6>
+        <%= form_for item do |f| %>
+        <%= f.label :description %>
+        <%= f.text_field :description, :value => item.description %>
+        <%= f.label :quantity %>
+        <%= f.number_field :quantity, :value => item.quantity %>
+        <%= f.submit "Update Item", :class => "btn blue"%>
+        <% end %>
+        <%= button_to "Delete #{item.description} #{ @product.title }", product_item_path(item.id), method: :delete, :class => "btn red" %>
+      </div>
     <% end %>
-  </div>
+  </div> </br></br>
 
     <div class="row">
       <%= form_for @product do |f| %>
@@ -78,7 +90,7 @@
       </div>
     </div>
   </div>
-
+</div>
   <script>
   if($('.success-div')){
     setTimeout(function(){

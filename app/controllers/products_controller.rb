@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def index
     authenticate_anybody
     cart_counter
-    @products = Product.order(:priority).paginate(:per_page => 3, :page => params[:page])
+    @products = Product.order(priority: :desc).paginate(:per_page => 3, :page => params[:page])
   end
 
   def show

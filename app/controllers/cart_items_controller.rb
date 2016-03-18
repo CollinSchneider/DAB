@@ -6,8 +6,14 @@ class CartItemsController < ApplicationController
     if @cart_item.quantity <= product_item.quantity
       product_item.quantity = (product_item.quantity - @cart_item.quantity)
       product_item.save
-      # flash[:success] = @cart_item.quantity, product_item.description, product_item.product.title, " added to cart!"
-      flash[:success] = "Added to cart!"
+      # current_user.cart_items.each do |user_cart_item|
+      #   if user_cart_item.product_item_id === @cart_item.product_item.id
+      #     user_cart_item.quantity += @cart_item.quantity
+      #     @cart_item.delete
+      #   end
+      # end
+
+      flash[:success] = "#{@cart_item.quantity} #{@cart_item.product_item.description} #{@cart_item.product_item.product.description} added to cart!"
       if product_item.quantity === 0
         product_item.status = 1
         product_item.save
@@ -24,9 +30,33 @@ class CartItemsController < ApplicationController
         end
       end
     else
-      flash[:error] = "Not enough inventory"
-      @cart_item.destroy
-      # flash[:error] = "Not enough inventory, only have ", product_item.quantity, product_item.product.title, " left."
+      @cart_item.quantity = @cart_item.product_item.quantity
+      @cart_item.product_item.quantity = 0
+      @cart_item.save
+      @cart_item.product_item.save
+
+      # current_user.cart_items.each do |user_cart_item|
+      #   if user_cart_item.product_item_id === @cart_item.product_item.id
+      #     user_cart_item.quantity += @cart_item.quantity
+      #     @cart_item.delete
+      #   end
+      # end
+
+      product_item.status = 1
+      product_item.save
+      inventory_status = 0
+      product_item_count = product_item.product.product_items.count
+      product_item.product.product_items.each do |item|
+        if item.status === 1
+          inventory_status += 1
+          if inventory_status === product_item_count
+            item.product.status = 1
+            item.product.save
+          end
+        end
+      end
+
+      flash[:success] = "Only enough inventory for #{@cart_item.quantity} #{@cart_item.product_item.description} #{@cart_item.product_item.product.title}"
     end
     redirect_to request.referrer
   end
@@ -61,7 +91,7 @@ class CartItemsController < ApplicationController
 
     cart_item.product_item.save
     cart_item.product_item.product.save
-    flash[:success] = "Quantity updated!"
+    flash[:success] = "Quantity updated to #{cart_item.quantity}!"
     if cart_item.product_item.quantity < 0
       cart_item.quantity += cart_item.product_item.quantity
       cart_item.save
@@ -82,8 +112,7 @@ class CartItemsController < ApplicationController
         end
       end
 
-      flash[:success] = "Quantity updated, only enough product inventory for ", cart_item.quantity
-      # flash[:error] = "Not enough inventory, cannot update quantity"
+      flash[:success] = "Quantity updated, only enough product inventory for #{cart_item.quantity}"
     elsif cart_item.product_item.quantity === 0
       cart_item.product_item.status = 1
       cart_item.product_item.save
@@ -112,7 +141,7 @@ class CartItemsController < ApplicationController
     product_item.save
     product_item.product.save
     cart_item.destroy
-    flash[:success] = "Item Removed!"
+    flash[:success] = "#{cart_item.product_item.product.title} Removed!"
     redirect_to request.referrer
   end
 

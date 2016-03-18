@@ -20,7 +20,7 @@
   </div>
   <div class="row">
     <% if current_user.cart_items.length === 0 %>
-      <div class="col s12 center">  
+      <div class="col s12 center">
         <p>Your shopping cart is empty! To view our offerings, hit the button below to view all the best deals around the web !</p>
         <a class='btn waves-effect grey darken-3' href="/products">Checkout the Store</a></p>
       </div>
@@ -34,7 +34,7 @@
           </div>
           <div class='col s7 cart-product-details'>
             <div class='left cart-product-info'>
-              <p class='cart-product-title'><%= cart.product_item.product.title %></p>
+              <p class='cart-product-title'><%= cart.product_item.description %> <%= cart.product_item.product.title %></p>
               <table class='cart-price-table'>
                 <tbody>
                   <tr>
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="col s1">
-            <%= button_to "X", cart_item_path(cart.id), method: :delete, :class => 'remove-item' %>
+            <%= button_to "X", cart_item_path(cart.id), method: :delete, :class => 'remove-item', data: { confirm: "Remove #{cart.product_item.product.title} from cart?" } %>
           </div>
 
         <% end %>

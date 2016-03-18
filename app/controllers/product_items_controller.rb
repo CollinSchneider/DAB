@@ -20,6 +20,28 @@ class ProductItemsController < ApplicationController
   def update
     product_item = ProductItem.find(params[:id])
     product_item.update(product_params)
+    if product_item.quantity > 0
+      product_item.status = 0
+      product_item.product.status = 0
+      product_item.save
+      product_item.product.save
+    elsif product_item.quantity === 0
+      product_item.status = 1
+      product_item.save
+
+      inventory_status = 0
+      product_item_count = product_item.product.product_items.count
+      product_item.product.product_items.each do |item|
+        if item.status === 1
+          inventory_status += 1
+          if inventory_status === product_item_count
+            item.product.status = 1
+            item.product.save
+          end
+        end
+      end
+    end
+    flash[:success] = "Updated #{product_item.description} #{product_item.product.title}"
     redirect_to request.referrer
   end
 
