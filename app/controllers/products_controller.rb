@@ -27,6 +27,7 @@ class ProductsController < ApplicationController
     @product_item = ProductItem.new
   end
 
+
   def tech
     cart_counter
     @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 3, :page => params[:page])

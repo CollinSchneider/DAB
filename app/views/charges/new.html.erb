@@ -1,8 +1,18 @@
 <%= render partial: 'partials/shipping' %>
 
-<div class="container">
 
-  
+<div class="container">
+  <% if flash[:error] %>
+    <div class="error-div">
+      <h5 class = "error-text"> <%= flash[:error] %></h5>
+    </div>
+  <% end %>
+  <% if flash[:success] %>
+    <div class="success-div">
+      <h5 class = "success-text"> <%= flash[:success] %></h5>
+    </div>
+  <% end %>
+
   <div class="row" id='step-top-row'>
     <div class="col s12 center">
       <p class='account-header'><strong>Checkout</strong></p>
@@ -28,7 +38,7 @@
           <p class='acount-address-info'> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state%> <%= @current_user_address[0].zip %> </p>
           <p class='acount-address-info'> <%= @current_user_address[0].country %> </p>
         </div>
-        
+
       </div>
       <div class="row">
         <div class="col s12">
@@ -40,7 +50,7 @@
                   <p><%= flash[:error] %></p>
                 </div>
               <% end %>
-              
+
               <table class='cart-price-table'>
                 <tbody>
                   <tr>
@@ -57,10 +67,10 @@
               </table>
             <% end %>
           </div>
-          
+
         </div>
       </div>
-      
+
     </div>
     <div class="col s12 l6 grey lighten-2" id='step-top-row'>
         <div class="total-container">
@@ -68,11 +78,11 @@
             <p class='account-header'>Order Summary</p>
           </div>
           <div class='grey-text darken-4 subtotals'>
-            <p>Item Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
-            <p>Sales Tax:</p>
+            <p>Item Subtotal: <span class='right amount'>$<%= @amount %></span></p>
+            <p>Sales Tax: <span class = "right amount">$<%= '%.2f' % (@amount * @rate.combined_rate) %></span></p>
           </div>
           <div class='subtotals'>
-            <p>Total:</p>
+            <p>Total: <span class = "right amount">$<%= '%.2f' % (@amount*(1+@rate.combined_rate)) %> </span> </p>
           </div>
           <div class='center hide-on-med-and-down'>
             <p><a  class='shipping-links' href="">Shipping</a> | <a  class='shipping-links' href="">Returns</a> | <a  class='shipping-links' href="">FAQs</a></p>
@@ -96,7 +106,7 @@
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="DealBaked Checkout"
-          data-amount=<%= @stripe_amount %>
+          data-amount=<%= '%.0f' % (@stripe_amount*(1+@rate.combined_rate))%>
           data-locale="auto"></script>
 
 </div>

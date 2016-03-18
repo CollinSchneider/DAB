@@ -13,3 +13,4 @@
 /tmp
 
 .env
+config/environment_variables.yml

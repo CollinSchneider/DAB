@@ -11,10 +11,27 @@ class ChargesController < ApplicationController
 		@stripe_amount = @amount*100
 	end
 
+	def current_user_address
+		@current_user_address = current_user.addresses.where('active = ?', 'yes')
+	end
+
+	def tax_rate
+		total_price
+		current_user_address
+		client = Taxjar::Client.new(api_key: '3f169a7225ca6da1b9b743d28b17af7a')
+		@rate = client.rates_for_location(@current_user_address[0].zip, {
+			:city => @current_user_address[0].city
+			})
+		if @rate == nil
+			flash[:error] = "Cannot find address, please update or use a different address."
+		end
+	end
+
 	def new
 		total_price
 		cart_counter
-		@current_user_address = current_user.addresses.where('active = ?', 'yes')
+		current_user_address
+		tax_rate
 		@new_address = Address.new
 	end
 
@@ -23,7 +40,8 @@ class ChargesController < ApplicationController
 	  # Amount in cents
 	  # @amount = 500
 		total_price
-		@current_user_address = current_user.addresses.where('active = ?', 'yes')
+		tax_rate
+		current_user_address
 
 		if current_user.addresses.length == 0
 			flash[:error] = "Must fill out shipping address before checking out!"
@@ -46,7 +64,7 @@ class ChargesController < ApplicationController
 
 		  charge = Stripe::Charge.create(
 		    :customer    => customer.id,
-		    :amount      => @stripe_amount,
+		    :amount      => @stripe_amount*(1+@rate.combined_rate),
 		    :description => 'Rails Stripe customer',
 		    :currency    => 'usd'
 		  )

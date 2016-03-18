@@ -41,7 +41,9 @@ gem 'kaminari', :git => 'git@github.com:amatsuda/kaminari.git'
 
 gem 'jquery-infinite-pages'
 
+gem 'avalara'
 
+gem 'taxjar-ruby', require: 'taxjar'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'dotenv'

@@ -19,8 +19,12 @@ class UsersController < ApplicationController
 
   def shipping
     cart_counter
-    @current_user_address = current_user.addresses.where('active = ?', 'yes')
     total_amount
+    @current_user_address = current_user.addresses.where('active = ?', 'yes')
+    client = Taxjar::Client.new(api_key: '3f169a7225ca6da1b9b743d28b17af7a')
+    @rate = client.rates_for_location(@current_user_address[0].zip, {
+      :city => @current_user_address[0].city
+    })
   end
 
   def profile
@@ -31,6 +35,7 @@ class UsersController < ApplicationController
   def addresses
     cart_counter
   end
+
 
   def account
     cart_counter

@@ -1,7 +1,7 @@
 <%= render partial: 'partials/shipping' %>
 
 <div class="container">
-  
+
   <div class="row" id='step-top-row'>
     <div class="col s12 center">
       <p class='account-header'><strong>Checkout</strong></p>
@@ -67,7 +67,7 @@
           <% end %>
         </div>
       </div>
-          
+
       <p class='shipping-disclaimer-text'>
         DealBaked ships to all 50 U.S. states. We cannot ship to P.O. Boxes.<br>
         We're constantly working on expanding our shipping options and adding international shipping.
@@ -80,10 +80,10 @@
           </div>
           <div class='grey-text darken-4 subtotals'>
             <p>Item Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
-            <p>Sales Tax:</p>
+            <p>Sales Tax: <span class = "right amount"> $<%= '%.2f' % (@rate.combined_rate*@amount) %> </span></p>
           </div>
           <div class='subtotals'>
-            <p>Total:</p>
+            <p>Total: <span class = "right amount">$<%= '%.2f' % (@amount + (@rate.combined_rate*@amount)) %></span> </p>
           </div>
           <div class='center'>
             <p><a  class='shipping-links' href="">Shipping</a> | <a  class='shipping-links' href="">Returns</a> | <a  class='shipping-links' href="">FAQs</a></p>
