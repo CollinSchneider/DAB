@@ -1,64 +1,102 @@
-<%= render partial: 'partials/header' %>
+<%= render partial: 'partials/shipping' %>
 
-<div class="container" id='main-content'>
+<div class="container">
 
-  <div class="checkout-steps" style="width: 100%; text-align: center">
-    <h2>Checkout</h2>
-    <h4 style="color:grey; display:inline-block; margin-left: 50px"> <a href="/shipping" style = "color:grey">1. Shipping</a></h4> <h4 style = "color:black; display:inline-block; margin-left: 50px"> 2. Payment </h4>
+  
+  <div class="row" id='step-top-row'>
+    <div class="col s12 center">
+      <p class='account-header'><strong>Checkout</strong></p>
+    </div>
   </div>
 
-<%= form_tag charges_path do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <label class="amount">
-      <table id = "checkout-table">
-        <tr>
-          <th> <h5>Product</h5> </th>
-          <th> <h5>Price</h5> </th>
-          <th> <h5>Quantity</h5> </th>
-          <th> <h5>Total</h5> </th>
-        </tr>
-          <% current_user.cart_items.each do |item| %>
-            <tr>
-              <td><h6><%= image_tag item.product_item.product.image.url(:thumb) %> <%= item.product_item.description %> <%= item.product_item.product.title %></h6> </td>
-              <td><h6> $<%= item.product_item.product.price %></h6> </td>
-              <td><h6> <%= item.quantity %></h6> </td>
-              <td><h6> $<%= item.quantity * item.product_item.product.price.to_i %> </h6></td>
-            </tr>
-          <% end %>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><h6><strong>Total Amount: $<%= @amount %>.00</h6></strong></td>
-          </tr>
-        </table>
-    </label> </br>
-    <!-- <a href="/cart">Cart incorrect?</a></br> -->
-  <div style="border: 1px solid black; width: 75%; text-align: center; margin-left: 12.5%; background: white;">
-    <div style="display: inline-block; vertical-align:top">
-      <h3>Shipping Info: </h3>
+  <div class="row" id='step-top-row'>
+    <div class="col s4 offset-s2" id='step-col'>
+      <p class='account-steps' id='inactive' style='text-align: right;'><a class='account-steps-link'href="/shipping">1. Shipping</a></p>
     </div>
-    <div style ="display: inline-block">
-      <h4> <%= @current_user_address[0].name %> </h4>
-      <h4> <%= @current_user_address[0].address %> </h4>
-      <h5> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state%> <%= @current_user_address[0].zip %> </h5>
-      <h5> <%= @current_user_address[0].country %> </h5>
+    <div class="col s4" id='step-col'>
+      <p class='account-steps'>2. Payment</p>
     </div>
-  </div> </br>
-  </article>
+  </div>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  <div class="row">
+    <div class="col l6 s12">
+      <div class="row" id='step-top-row'>
+        <div class="col s12">
+          <p class='account-steps'>Shipping Address</p>
+          <p class='acount-address-info'><strong><%= @current_user_address[0].name %></strong></p>
+          <p class='acount-address-info'> <%= @current_user_address[0].address %> </p>
+          <p class='acount-address-info'> <%= @current_user_address[0].city %>, <%= @current_user_address[0].state%> <%= @current_user_address[0].zip %> </p>
+          <p class='acount-address-info'> <%= @current_user_address[0].country %> </p>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <p class='account-steps' style='margin-bottom:0px'>Items</p>
+          <div class='left cart-product-info'>
+            <% current_user.cart_items.each do |item| %>
+              <% if flash[:error].present? %>
+                <div id="error_explanation">
+                  <p><%= flash[:error] %></p>
+                </div>
+              <% end %>
+              
+              <table class='cart-price-table'>
+                <tbody>
+                  <tr>
+                    <th class='checkout-td'><%= item.product_item.product.title %></th>
+                    <th class='checkout-td'>Quantity:</th>
+                    <th class='checkout-td'>Price:</th>
+                  </tr>
+                  <tr>
+                    <td class='checkout-td'><%= image_tag item.product_item.product.image.url(:thumb) %></td>
+                    <td class='checkout-td'><%= item.quantity %></td>
+                    <td class='checkout-td'>$<%= item.product_item.product.price.to_i * item.quantity %>.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            <% end %>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="col s12 l6 grey lighten-2" id='step-top-row'>
+        <div class="total-container">
+          <div class="center">
+            <p class='account-header'>Order Summary</p>
+          </div>
+          <div class='grey-text darken-4 subtotals'>
+            <p>Item Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
+            <p>Sales Tax:</p>
+          </div>
+          <div class='subtotals'>
+            <p>Total:</p>
+          </div>
+          <div class='center hide-on-med-and-down'>
+            <p><a  class='shipping-links' href="">Shipping</a> | <a  class='shipping-links' href="">Returns</a> | <a  class='shipping-links' href="">FAQs</a></p>
+          </div>
+          <div class="center hide-on-med-and-down">
+            <p><strong class='shipping-contact-header'>Contact US</strong><br>
+              <a class='shipping-links' href="mailto:support@dealbaked.com">support@dealbaked.com</a>
+            </p>
+          </div>
+          <div class="center hide-on-med-and-down">
+            <p class='shipping-contact-header'>
+              DealBaked inc.<br>
+              350 Sunny Street<br>
+              Miami, FL 06900
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="DealBaked Checkout"
           data-amount=<%= @stripe_amount %>
           data-locale="auto"></script>
-<% end %>
 
 </div>
-
-<%= render partial: 'partials/footer' %>
