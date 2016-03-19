@@ -1,12 +1,18 @@
 <%= render partial: 'partials/header' %>
 
-<div class="container" id='main-content' style="min-height:460px">
-  <div class="row">
+<div class="container">
+	<div class="row">
     <div class="col s12">
       <div class="row center grey darken-3" id="info-header-container">
         <h4 class="white-text" id="info-header">Essentials</h4>
       </div>
+		</div>
+	</div>
+</div>
 
+<div class="container" id='main-content' style="min-height:460px">
+  <div class="row">
+    <div class="col s12">
 		<div class="infinite-table">
 		    <%= render :partial => 'essential'%>
 		  </div>
