@@ -7,15 +7,18 @@ module ApplicationHelper
   end
 
   def cart_counter
-    cart_quantity = []
-    current_user.cart_items.each do |item|
-      cart_quantity.push(item.quantity)
+    if current_user != nil
+      cart_quantity = []
+      current_user.cart_items.each do |item|
+        cart_quantity.push(item.quantity)
+      end
+      @cart_quantity = cart_quantity.reduce(:+)
     end
-    @cart_quantity = cart_quantity.reduce(:+)
   end
 
   def current_user_address
-    current_user.addresses.each do |address|
+    if current_user != nil
+      @current_user_address = current_user.addresses.where('active = ?', 'yes')
     end
   end
 

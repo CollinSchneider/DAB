@@ -11,20 +11,35 @@ class UsersController < ApplicationController
   end
 
   def total_amount
-    product_prices = current_user.cart_items.map do |cart_item|
-      cart_item.quantity.to_i * cart_item.product_item.product.price.to_i
+    if current_user != nil
+      product_prices = current_user.cart_items.map do |cart_item|
+        cart_item.quantity.to_i * cart_item.product_item.product.price.to_i
+      end
+      @amount = product_prices.reduce(0, :+)
     end
-    @amount = product_prices.reduce(0, :+)
+  end
+
+  # def current_user_address
+  #   if current_user != nil
+  #     @current_user_address = current_user.addresses.where('active = ?', 'yes')
+  #   end
+  # end
+
+  def calc_tax_rate
+    if current_user != nil
+      client = Taxjar::Client.new(api_key: '3f169a7225ca6da1b9b743d28b17af7a')
+      @rate = client.rates_for_location(@current_user_address[0].zip, {
+        :city => @current_user_address[0].city
+      })
+    end
   end
 
   def shipping
+    authenticate_user
     cart_counter
     total_amount
-    @current_user_address = current_user.addresses.where('active = ?', 'yes')
-    client = Taxjar::Client.new(api_key: '3f169a7225ca6da1b9b743d28b17af7a')
-    @rate = client.rates_for_location(@current_user_address[0].zip, {
-      :city => @current_user_address[0].city
-    })
+    current_user_address
+    calc_tax_rate
   end
 
   def profile
@@ -35,7 +50,6 @@ class UsersController < ApplicationController
   def addresses
     cart_counter
   end
-
 
   def account
     cart_counter
@@ -107,9 +121,14 @@ class UsersController < ApplicationController
 
   def cart
     authenticate_anybody
-    @order = Order.new
-    total_amount
-    cart_counter
+    # authenticate_user
+    # if current_user = nil
+    #   redirect_to root_path
+    # else
+      @order = Order.new
+      total_amount
+      cart_counter
+    # end
   end
 
   def update
