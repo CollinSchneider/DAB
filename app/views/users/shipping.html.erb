@@ -80,10 +80,23 @@
           </div>
           <div class='grey-text darken-4 subtotals'>
             <p>Item Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
-            <p>Sales Tax: <span class = "right amount"> $<%= '%.2f' % (@rate.combined_rate*@amount) %> </span></p>
+            <p>Sales Tax: <span class = "right amount">
+              <% if @rate != nil %>
+                $<%= '%.2f' % (@rate.combined_rate*@amount) %>
+               <% else %>
+                -
+              <% end %>
+              </span></p>
           </div>
           <div class='subtotals'>
-            <p>Total: <span class = "right amount">$<%= '%.2f' % (@amount + (@rate.combined_rate*@amount)) %></span> </p>
+            <p>Total: <span class = "right amount">
+              <% if @rate != nil %>
+                $<%= '%.2f' % (@amount + (@rate.combined_rate*@amount)) %>
+              <% else %>
+                $<%= @amount %>
+              <% end %>
+              </span> </p>
+
           </div>
           <div class='center'>
             <p><a  class='shipping-links' href="">Shipping</a> | <a  class='shipping-links' href="">Returns</a> | <a  class='shipping-links' href="">FAQs</a></p>

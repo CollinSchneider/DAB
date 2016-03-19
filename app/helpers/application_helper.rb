@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
     def calc_tax_rate
-      if current_user != nil
+      if current_user != nil && @current_user_address[0] != nil
         client = Taxjar::Client.new(api_key: '3f169a7225ca6da1b9b743d28b17af7a')
         @rate = client.rates_for_location(@current_user_address[0].zip, {
           :city => @current_user_address[0].city
