@@ -22,6 +22,7 @@ module ApplicationHelper
         @rate = client.rates_for_location(@current_user_address[0].zip, {
           :city => @current_user_address[0].city
         })
+        binding.pry
       end
     end
 
