@@ -40,48 +40,6 @@ class UsersController < ApplicationController
     cart_counter
   end
 
-  def affiliate
-    authenticate_affiliate
-    @total_orders = 0
-    @total_sales = 0
-    todays_orders = []
-    weeks_orders = []
-    months_orders = []
-
-    current_user.products.each do |product|
-      product.product_items.each do |item|
-        item.order_items.each do |order|
-          @total_orders += order.quantity
-          @total_sales += order.product_item.product.price.to_i * order.quantity
-
-          if order.created_at >= past_24_hours
-            todays_orders.push(order)
-            weeks_orders.push(order)
-            months_orders.push(order)
-          elsif order.created_at >= past_7_days
-            weeks_orders.push(order)
-            months_orders.push(order)
-          elsif order.created_at >= past_30_days
-            months_orders.push(order)
-          end
-        end
-      end
-    end
-
-    todays_sales = todays_orders.map { |item| item.product_item.product.price.to_i * item.quantity }
-    @todays_sales = todays_sales.reduce(:+)
-    todays_orders = todays_orders.map { |order| order.quantity }
-    @todays_orders = todays_orders.reduce(:+)
-    weeks_sales = weeks_orders.map{ |item| item.product_item.product.price.to_i * item.quantity }
-    @weeks_sales = weeks_sales.reduce(:+)
-    weeks_orders = weeks_orders.map { |order| order.quantity }
-    @weeks_orders = weeks_orders.reduce(:+)
-    months_sales = months_orders.map{ |item| item.product_item.product.price.to_i * item.quantity }
-    @months_sales = months_sales.reduce(:+)
-    months_orders = months_orders.map { |order| order.quantity }
-    @months_orders = months_orders.reduce(:+)
-  end
-
   def create
     user = User.create( user_params )
     if user.save

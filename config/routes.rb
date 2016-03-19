@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get '/contact' => 'products#contact'
   get '/returns' => 'products#returns'
 
-  get '/affiliate' => 'users#affiliate'
   get '/profile' => 'users#profile'
   get '/profile/orders' => 'users#orders'
   get '/profile/addresses' => 'users#addresses'
@@ -40,13 +39,19 @@ Rails.application.routes.draw do
 
   resources :users
   resources :orders
-  resources :admins
+  # resources :admins
+    get '/admins' => 'admins#index'
     get '/admin-affiliates' => 'admins#affiliates'
     get '/admin-orders' => 'admins#orders'
     get '/admin-products' => 'admins#products'
     get '/admin-users' => 'admins#users'
 
-  resources :affiliates
+  # resources :affiliates
+    get '/affiliate' => 'affiliates#index'
+    get '/affiliate-orders' => 'affiliates#orders'
+    get '/affiliate-update' => 'affiliates#update'
+    get '/affiliate-products' => 'affiliates#products'
+
   resources :products
   resources :product_items
   resources :cart_items
