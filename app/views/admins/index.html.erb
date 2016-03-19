@@ -67,11 +67,19 @@
               </div>
               <div class="col l3 m6 s12 center">
                 <p class='dashboard-headers'><strong>Top Selling Product</strong></p>
-                <p> <%= @top_selling_week_product[0] %> : <%= @top_selling_week_product[1] %> sales</p>
+                <% if @top_selling_week_product != nil %>
+                  <p> <%= @top_selling_week_product[0] %> : <%= @top_selling_week_product[1] %> sales</p>
+                <% else %>
+                  <p> No items sold this week! </p>
+                <% end %>
               </div>
               <div class="col l3 m6 s12 center">
                 <p class='dashboard-headers'><strong>Top Selling Affiliate</strong></p>
-                <p><%= @top_selling_affiliate[0] %>: $<%= @top_selling_affiliate[1] %></p>
+                <% if @top_selling_affiliate != nil %>
+                  <p><%= @top_selling_affiliate[0] %>: $<%= @top_selling_affiliate[1] %></p>
+                <% else %>
+                  <p> No sales this week! </p>
+                <% end %>
               </div>
             </div>
             <div class="row">
