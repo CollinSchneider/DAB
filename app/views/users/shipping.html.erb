@@ -20,29 +20,39 @@
   <div class="row">
     <div class="col s12 l6" id='step-top-row'>
       <p class="account-steps" id='account-steps-header'><strong>Choose Shipping Address</strong></p>
+      <% if @current_user_address[0] != nil %>
+        <div class="row">
+          <div class="col s9">
+            <p class='acount-address-info'><strong> <%= @current_user_address[0].name %> </strong></p>
+            <p class='acount-address-info'><%= @current_user_address[0].address %></p>
+            <p class='acount-address-info'><%= @current_user_address[0].city %>, <%= @current_user_address[0].state %> <%= @current_user_address[0].zip %></p>
+            <p class='acount-address-info'><%= @current_user_address[0].country %></p>
+          </div>
+          <div class="col s3">
+            <i class="small green-text material-icons">done</i>
+          </div>
+        </div>
+      <% end %>
       <% if current_user.addresses.length > 0 %>
           <% current_user.addresses.each do |address| %>
-          <div class="row">
-            <div class="col s9">
-              <!-- <p class='account-address-name'><strong><#%= current_user.name %></strong></p> -->
-              <p class='acount-address-info'><strong> <%= address.name %> </strong></p>
-              <p class='acount-address-info'><%= address.address %></p>
-              <p class='acount-address-info'><%= address.city %>, <%= address.state %> <%= address.zip %></p>
-              <p class='acount-address-info'><%= address.country %></p>
-            </div>
-            <div class="col s3">
-              <% if address.active === 'yes' %>
-                <i class="small green-text material-icons">done</i>
-              <% end %>
-              <% if address.active === 'no' %>
+            <% if address.active === 'no' %>
+            <div class="row">
+              <div class="col s9">
+                <!-- <p class='account-address-name'><strong><#%= current_user.name %></strong></p> -->
+                <p class='acount-address-info'><strong> <%= address.name %> </strong></p>
+                <p class='acount-address-info'><%= address.address %></p>
+                <p class='acount-address-info'><%= address.city %>, <%= address.state %> <%= address.zip %></p>
+                <p class='acount-address-info'><%= address.country %></p>
+              </div>
+              <div class="col s3">
                 <%= form_for address do |f| %>
                   <%= f.hidden_field :active, :value => 'yes' %>
                   <%= f.submit "Select", :class => 'select-address'%>
                 <% end %>
-              <% end %>
+              </div>
             </div>
-          </div>
-         <% end %>
+           <% end %>
+          <% end %>
         <% end %>
         <div class="row">
           <div class="col s12 center-align">

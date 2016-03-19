@@ -76,9 +76,14 @@ class AffiliatesController < ApplicationController
   end
 
   def update
+    @pending_orders = OrderItem.where('affiliate_id = ? AND status = ?', current_user.id, 1)
   end
 
   def orders
+    @all_order_items = OrderItem.where('affiliate_id = ?', current_user.id)
+    @pending_order_items = OrderItem.where('affiliate_id = ? AND status = ?', current_user.id, 0)
+    @shipped_order_items = OrderItem.where('affiliate_id = ? AND status = ?', current_user.id, 1)
+    @delivered_order_items = OrderItem.where('affiliate_id = ? AND status = ?', current_user.id, 2)
   end
 
 end
