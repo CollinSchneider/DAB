@@ -67,14 +67,9 @@ class UsersController < ApplicationController
 
   def cart
     authenticate_anybody
-    # authenticate_user
-    # if current_user = nil
-    #   redirect_to root_path
-    # else
       @order = Order.new
       total_amount
       cart_counter
-    # end
   end
 
   def update
