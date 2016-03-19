@@ -28,6 +28,14 @@ class AdminsController < ApplicationController
       @total_sales += item.product_item.product.price.to_i * item.quantity
 
       if item.created_at >= past_24_hours
+        # binding.pry
+        @orders_24_hours += item.quantity
+        @sales_24_hours += item.product_item.product.price.to_i * item.quantity
+        @orders_7_days += item.quantity
+        @sales_7_days += item.product_item.product.price.to_i * item.quantity
+        @orders_30_days +=item.quantity
+        @sales_30_days += item.product_item.product.price.to_i * item.quantity
+      elsif item.created_at >= past_7_days
         if affiliate_week_sales[item.product_item.product.user.email] === nil
           affiliate_week_sales[item.product_item.product.user.email] = item.product_item.product.price.to_i * item.quantity
         else
@@ -41,14 +49,6 @@ class AdminsController < ApplicationController
         end
         @top_selling_week_product = @top_selling_week_product_array.max_by{|a,b|a}
         @top_selling_affiliate = affiliate_week_sales.max_by{|a,b| a}
-
-        @orders_24_hours += item.quantity
-        @sales_24_hours += item.product_item.product.price.to_i * item.quantity
-        @orders_7_days += item.quantity
-        @sales_7_days += item.product_item.product.price.to_i * item.quantity
-        @orders_30_days +=item.quantity
-        @sales_30_days += item.product_item.product.price.to_i * item.quantity
-      elsif item.created_at >= past_7_days
         @orders_7_days += item.quantity
         @sales_7_days += item.product_item.product.price.to_i * item.quantity
         @orders_30_days += item.quantity

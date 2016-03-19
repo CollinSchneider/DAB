@@ -32,10 +32,10 @@ class CartItemsController < ApplicationController
       end
     else
       @cart_item.quantity = @cart_item.product_item.quantity
-      @cart_item.product_item.quantity = 0
       @cart_item.save
+      @cart_item.product_item.quantity = 0
       @cart_item.product_item.save
-      UserMailer.low_inventory_email(product_item.product.user, product_item).deliver
+      # UserMailer.low_inventory_email(product_item.product.user, product_item).deliver
       # current_user.cart_items.each do |user_cart_item|
       #   if user_cart_item.product_item_id === @cart_item.product_item.id
       #     user_cart_item.quantity += @cart_item.quantity
