@@ -13,7 +13,7 @@
                   <%= f.email_field :email, :class => 'login-inputs black-text', :placeholder => 'email@address.com' %>
                   <%= f.password_field :password, :class => 'login-inputs black-text', :placeholder => 'password' %>
                   <%= f.password_field :password_confirmation, :class => 'login-inputs black-text', :placeholder => 'confirm password' %>
-                  <%= f.hidden_field :status, :value => 1 %>
+                  <%= f.hidden_field :status, :value => 0 %>
                   <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
                 <% end %>
               </div>

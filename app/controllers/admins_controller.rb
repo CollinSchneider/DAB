@@ -21,44 +21,57 @@ class AdminsController < ApplicationController
     @orders_30_days = 0
     @sales_30_days = 0
     affiliate_week_sales = {}
-    @top_selling_week_product_array = {}
+    top_selling_week_product_array = {}
 
     total_orders.each do |item|
       @total_orders += item.quantity
       @total_sales += item.product_item.product.price.to_i * item.quantity
 
       if item.created_at >= past_24_hours
-        # binding.pry
+
         @orders_24_hours += item.quantity
         @sales_24_hours += item.product_item.product.price.to_i * item.quantity
         @orders_7_days += item.quantity
         @sales_7_days += item.product_item.product.price.to_i * item.quantity
         @orders_30_days +=item.quantity
         @sales_30_days += item.product_item.product.price.to_i * item.quantity
-      elsif item.created_at >= past_7_days
-        if affiliate_week_sales[item.product_item.product.user.email] === nil
-          affiliate_week_sales[item.product_item.product.user.email] = item.product_item.product.price.to_i * item.quantity
-        else
-          affiliate_week_sales[item.product_item.product.user.email] += item.product_item.product.price.to_i * item.quantity
-        end
 
-        if @top_selling_week_product_array[item.product_item.product.title] === nil
-          @top_selling_week_product_array[item.product_item.product.title] = item.quantity
-        else
-          @top_selling_week_product_array[item.product_item.product.title] += item.quantity
-        end
-        @top_selling_week_product = @top_selling_week_product_array.max_by{|a,b|a}
-        @top_selling_affiliate = affiliate_week_sales.max_by{|a,b| a}
+      elsif item.created_at >= past_7_days
+
+        get_top_selling_product(top_selling_week_product_array, item.quantity, item.product_item.product.title)
+        get_top_selling_affiliate(affiliate_week_sales, item.product_item.product.user.email, item.product_item.product.price.to_i, item.quantity)
+
         @orders_7_days += item.quantity
         @sales_7_days += item.product_item.product.price.to_i * item.quantity
         @orders_30_days += item.quantity
         @sales_30_days += item.product_item.product.price.to_i * item.quantity
+
       elsif item.created_at >= past_30_days
+
         @orders_30_days += item.quantity
         @sales_30_days += item.product_item.product.price.to_i * item.quantity
+
       end
 
     end
+  end
+
+  def get_top_selling_product(array, quantity, title)
+    if array[title] === nil
+      array[title] = quantity
+    else
+      array[title] += quantity
+    end
+    @top_selling_week_product = array.max_by{|a,b| a}
+  end
+
+  def get_top_selling_affiliate(array, email, price, quantity)
+    if array[email] === nil
+      array[email] = price * quantity
+    else
+      array[email] += price * quantity
+    end
+    @top_selling_affiliate = array.max_by{|a,b| a}
   end
 
   def orders

@@ -67,7 +67,7 @@ class UsersController < ApplicationController
         end
       end
     end
-    
+
     todays_sales = todays_orders.map { |item| item.product_item.product.price.to_i * item.quantity }
     @todays_sales = todays_sales.reduce(:+)
     todays_orders = todays_orders.map { |order| order.quantity }
@@ -87,9 +87,11 @@ class UsersController < ApplicationController
     if user.save
       if user.status === 0
         session[:user_id] = user.id
+        UserMailer.user_welcome_email(user).deliver
         redirect_to products_path
       elsif user.status === 1
         flash[:success] = "New Affiliate Created!"
+        UserMailer.affiliate_welcome_email(user).deliver
         redirect_to request.referrer
       elsif user.status === 2
         flash[:success] = "New Admin Created!"
