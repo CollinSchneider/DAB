@@ -1,0 +1,93 @@
+
+    <%= render partial: 'partials/affiliate' %>
+
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12 center">
+            <p class='account-header'>Overall Metrics</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l2 m6 s12 center">
+            <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
+              <p> <%= '%.3f' % ((@total_products_sold.to_f/@total_views)*100 )%>%  ( <%= @total_orders %>/<%= @total_views %>)</p>
+          </div>
+          <div class="col l2 m6 s12 center">
+            <p class='dashboard-headers'><strong>Sales</strong><p>
+              <p> $<%= @total_sales %> </p>
+          </div>
+          <div class="col l2 m6 s12 center">
+            <p class='dashboard-headers'><strong>Impressions</strong><p>
+              <p><%= @total_views %></p>
+          </div>
+          <div class="col l2 m6 s12 center">
+            <p class='dashboard-headers'><strong>Products Sold</strong><p>
+              <p> <%= @total_products_sold %> </p>
+          </div>
+          <div class="col l2 m6 s12 center">
+            <p class='dashboard-headers'><strong>Total Orders</strong><p>
+            <p> <%= @total_orders %> </p>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col s12 center">
+            <p class='account-header'> <%= past_7_days.strftime("%b %d, %Y") %> to <%= Time.now.strftime("%b %d, %Y") %> </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
+            <p> <%= '%.3f' % ((@weeks_products_sold.to_f/@weeks_views)*100) %>% (<%= @weeks_orders %>/<%= @weeks_views %>) </p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Sales</strong><p>
+            <p> $<%= @weeks_sales %> </p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Impressions</strong><p>
+              <p> <%= @weeks_views %> </p>
+          </div>
+          <div class="col l3 m6 s12 center">
+            <p class='dashboard-headers'><strong>Products Sold</strong><p>
+              <p><%= @weeks_products_sold %> </p>
+          </div>
+        <div class="row">
+          <div class="col s12 center">
+            <p class='account-header'>Week Orders</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 center">
+            <div class="row">
+              <div class="col l6 m6 s12 center">
+                <p class='dashboard-headers'><strong>Orders</strong></p>
+                <p> <%= @weeks_orders %> </p>
+              </div>
+              <div class="col l6 m6 s12 center">
+                <p class='dashboard-headers'><strong>Top Selling Product</strong></p>
+                <p><%= @weeks_top_product[0] %>: <%= @weeks_top_product[1] %> sold</p>
+              </div>
+              <!-- <div class="col l3 m6 s12 center">
+                <p class='dashboard-headers'><strong>Most Viewed Product</strong></p>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col s12 center">
+                <p class='account-header'>Top Selling Products</p>
+              </div>
+            </div>
+            <div class="row">
+              <% @top_selling_products.each do |product| %>
+              <div class="col l3 m6 s12 center">
+                <%= image_tag product.image.url(:thumb) %>
+                <h6> <%= product.title %>: <%= product.total_orders %> Orders </h6>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

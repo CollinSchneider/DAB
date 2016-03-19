@@ -1,3 +1,7 @@
+
+<%= render partial: 'partials/affiliate' %>
+
+
 <h2> Hello <%= current_user.email %>!</h2>
 
 
@@ -10,8 +14,6 @@
 <h4> Sales in the last month: </h4>
 <h6> $<%= @months_sales %>.00 </h6>
 <h6> <%= @months_orders %> Orders </h6>
-
-
 
 <h4>Total Sales: </h4>
 <h6> <%= @total_orders %> sales to date!</h6>
