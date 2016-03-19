@@ -1,13 +1,151 @@
 <%= render partial: 'partials/affiliate' %>
 
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col s12">
-        <h1>Orders</h1>
-      </div>
-    </div>
-  </div>
-</main>
-</body>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12 center">
+            <p class='account-header'>Orders for <%= (past_7_days).strftime('%b %d, %Y') %> to <%= Time.now.strftime('%b %d, %Y') %></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#all">All</a></li>
+              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#pending">Pending</a></li>
+              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#shipped">Shipped</a></li>
+              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#delivered">Delivered</a></li>
+            </ul>
+          </div>
+          <div id="all" class="col s12">
+            <ul class="collapsible" data-collapsible="accordion">
+            <% @all_order_items.each do |order| %>
+            <li>
+              <div class="collapsible-header">
+                <i class="material-icons">done</i> Order # <%= order.id %>
+              </div>
+              <div class="collapsible-body">
+                <p>
+                  Status:
+                  <% if order.status === 0 %>
+                    <span class = "order-status-pending">Pending</span><br>
+                  <% elsif order.status === 1 %>
+                    <span class = "order-status-shipped">Shipped</span><br>
+                    Tracking Info: <%= order.shipping_method %>: <%= order.shipping_number %>
+                  <% elsif order.status === 2 %>
+                    <span class = "order-status-delivered">Delivered</span><br>
+                  <% end %>
+                </p>
+                <div class="row order-info">
+                  <div class="col l1 m1 s4">
+                    <%= image_tag order.product_item.product.image.url(:thumb), :style => "width:100px" %>
+                  </div>
+                  <div class="col l2 m2 s3">
+                    <p> Product: <%= order.product_item.description %> <%= order.product_item.product.title %> </p>
+                  </div>
+                  <div class="col l2 m2 s3">
+                    <p>Quantity: <%= order.quantity %></p>
+                  </div>
+                  <div class="col l3 s9 hide-on-med-and-down">
+                    <p>Order Total: $<%= order.product_item.product.price.to_i * order.quantity %> </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+          </div>
+          <div id="pending" class="col s12">
+            <ul class="collapsible" data-collapsible="accordion">
+              <% @pending_order_items.each do |order| %>
+              <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">done</i> Order # <%= order.id %>
+                </div>
+                <div class="collapsible-body">
+                  <p>
+                    Status: <span class = "order-status-pending">Pending</span><br>
+                  </p>
+                  <div class="row order-info">
+                    <div class="col l1 m1 s4">
+                      <%= image_tag order.product_item.product.image.url(:thumb), :style => "width:100px" %>
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p> Product: <%= order.product_item.description %> <%= order.product_item.product.title %> </p>
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p>Quantity: <%= order.quantity %></p>
+                    </div>
+                    <div class="col l3 s9 hide-on-med-and-down">
+                      <p>Order Total: $<%= order.product_item.product.price.to_i * order.quantity %> </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+          <div id="shipped" class="col s12">
+            <ul class="collapsible" data-collapsible="accordion">
+              <% @shipped_order_items.each do |order| %>
+              <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">done</i> Order # <%= order.id %>
+                </div>
+                <div class="collapsible-body">
+                  <p>
+                    Status: <span class = "order-status-shipped">Shipped</span><br>
+                    Tracking Info: <%= order.shipping_method %>: <%= order.shipping_number %>
+                  </p>
+                  <div class="row order-info">
+                    <div class="col l1 m1 s4">
+                      <%= image_tag order.product_item.product.image.url(:thumb), :style => "width:100px" %>
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p> Product: <%= order.product_item.description %> <%= order.product_item.product.title %> </p>
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p>Quantity: <%= order.quantity %></p>
+                    </div>
+                    <div class="col l3 s9 hide-on-med-and-down">
+                      <p>Order Total: $<%= order.product_item.product.price.to_i * order.quantity %> </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <% end %>
+            </ul>
+            <div id="delivered" class="col s12">
+              <ul class="collapsible" data-collapsible="accordion">
+                <% @delivered_order_items.each do |order| %>
+                <li>
+                  <div class="collapsible-header">
+                    <i class="material-icons">done</i> Order # <%= order.id %>
+                  </div>
+                  <div class="collapsible-body">
+                    <p>
+                      Status: <span class = "order-status-delivered">Delivered</span><br>
+                    </p>
+                    <div class="row order-info">
+                      <div class="col l1 m1 s4">
+                        <%= image_tag order.product_item.product.image.url(:thumb), :style => "width:100px" %>
+                      </div>
+                      <div class="col l2 m2 s3">
+                        <p> Product: <%= order.product_item.description %> <%= order.product_item.product.title %> </p>
+                      </div>
+                      <div class="col l2 m2 s3">
+                        <p>Quantity: <%= order.quantity %></p>
+                      </div>
+                      <div class="col l3 s9 hide-on-med-and-down">
+                        <p>Order Total: $<%= order.product_item.product.price.to_i * order.quantity %> </p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <% end %>
+              </ul>
+          </div>
+        </div>
+        </div>
+    </main>
+  </body>
 </html>
