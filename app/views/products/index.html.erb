@@ -50,20 +50,20 @@
 
 <script>
 
-  var loading = false;
-
-  function scroller(){
-    $(window).scroll(function() {
-      var url = $('.pagination > a').attr('href');
-      if(!loading && url && $(window).scrollTop()>$(document).height()-$(window).height()-25) {
-        return $.getScript(url);
-        return loading = true;
-      }
-    });
-  }
-
-  $(document).ready(function(){
-    scroller()
-  })
+  // var loading = false;
+  //
+  // function scroller(){
+  //   $(window).scroll(function() {
+  //     var url = $('.pagination > a').attr('href');
+  //     if(!loading && url && $(window).scrollTop()>$(document).height()-$(window).height()-25) {
+  //       return $.getScript(url);
+  //       return loading = true;
+  //     }
+  //   });
+  // }
+  //
+  // $(document).ready(function(){
+  //   scroller()
+  // })
 
 </script>
