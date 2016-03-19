@@ -35,7 +35,9 @@
           <% end %>
         <% end %>
           <li><a class='black-text'href="/cart"><i class="material-icons">shopping_cart</i></a></li>
-          <li><div class='cart-popup'><span class='cart-number'><%= @cart_quantity %></span></div></li>
+          <% if @cart_quantity != nil %>
+            <li><div class='cart-popup'><span class='cart-number'><%= @cart_quantity %></span></div></li>
+          <% end %>
         </ul>
       </div>
     </nav>
