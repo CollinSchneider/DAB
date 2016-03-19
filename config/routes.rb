@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/about-affiliates' => 'products#affiliates', as: :about_affiliates
   get '/about-shipping' => 'products#shipping', as: :about_shipping
   get '/contact' => 'products#contact'
+  get '/returns' => 'products#returns'
 
   get '/affiliate' => 'users#affiliate'
   get '/profile' => 'users#profile'
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   get '/shipping' => 'users#shipping'
   get '/account' => 'users#account'
   get '/signup' => 'users#signup'
+
 
   get '/best-sellers' => 'products#best_sellers'
   get '/new-arrivals' => 'products#new_arrivals'
