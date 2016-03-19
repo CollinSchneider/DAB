@@ -9,82 +9,87 @@
 
 <div class="container">
   <div class="row">
-    <div class="col s12 center">
-      <div class="account-content">
-        <p class='account-header'>Manage Your Shipping Addresses</p>
+    <div class="col s12">
+      <div class="col l4 m5 s12 left" id='account-page-links'>
+        <div class='account-change-section'>
+          <a class='account-change-link' href="/profile">My Account</a>
+        </div>
+        <div class='account-change-section'>
+          <!-- <#% if current_user.password_digest.exists? %> -->
+            <%= link_to "Account Information", account_path, :class => "account-change-link", method: :get %>
+          <!-- <#% end %> -->
+        </div>
+        <div class='account-change-section'>
+          <a class='account-change-link' href="/password">Change Password</a>
+        </div>
+        <div class='account-change-section' id='account-link-active'>
+          <a class='account-change-link' href="/profile/addresses">Shipping Addresses</a>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <% if current_user.addresses.length > 0 %>
-          <% current_user.addresses.each do |address| %>
-          <div class="row">
-            <div class="col l3 m3 s6 offset-l3 offset-m3">
-              <!-- <p class='account-address-name'><strong><#%= current_user.name %></strong></p> -->
-              <p class='acount-address-info'><strong> <%= address.name %> </strong></p>
-              <p class='acount-address-info'><%= address.address %></p>
-              <p class='acount-address-info'><%= address.city %>, <%= address.state %> <%= address.zip %></p>
-              <p class='acount-address-info'><%= address.country %></p>
+      <div class="col l8 m7 s12">
+        <div class="row">
+          <div class="col s12 center">
+            <div class="account-content">
+              <p class='account-header'>Manage Your Shipping Addresses</p>
             </div>
-            <div class="col l3 s6 right-align">
-              <% if address.active === 'yes' %>
-                <i class="small green-text material-icons">done</i>
-              <% end %>
-              <% if address.active === 'no' %>
-              <%= button_to "x", address_path(address.id),:class => "remove-item", method: :delete %>
-                <%= form_for address do |f| %>
-                  <%= f.hidden_field :active, :value => 'yes' %>
-                  <%= f.submit "Make Default", :class => 'select-address'%>
-                <% end %>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <% if current_user.addresses.length > 0 %>
+                <% current_user.addresses.each do |address| %>
+                <div class="row">
+                  <div class="col l10 m8 s6" style='padding-left: 50px'>
+                    <!-- <p class='account-address-name'><strong><#%= current_user.name %></strong></p> -->
+                    <p class='acount-address-info'><strong> <%= address.name %> </strong></p>
+                    <p class='acount-address-info'><%= address.address %></p>
+                    <p class='acount-address-info'><%= address.city %>, <%= address.state %> <%= address.zip %></p>
+                    <p class='acount-address-info'><%= address.country %></p>
+                  </div>
+                  <div class="col l2 m4 s6 right-align">
+                    <% if address.active === 'yes' %>
+                      <i class="small green-text material-icons">done</i>
+                    <% end %>
+                    <% if address.active === 'no' %>
+                    <%= button_to "x", address_path(address.id),:class => "remove-item", method: :delete %>
+                      <div class="hide-on-med-and-down">
+                        <%= form_for address do |f| %>
+                          <%= f.hidden_field :active, :value => 'yes' %>
+                          <%= f.submit "Make Default", :class => 'select-address'%>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+               <% end %>
               <% end %>
             </div>
           </div>
-         <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 center-align">
-        <a class="btn waves-effect grey darken-3 modal-trigger center" href="#modal1">Add Address</a>
-      </div>
-    </div>
+          <div class="row">
+            <div class="col s12 center-align">
+              <a class="btn waves-effect grey darken-3 modal-trigger center" href="#modal1">Add Address</a>
+            </div>
+          </div>
 
-    <!-- Begin Modal -->
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        <h4 style='text-align: center;'>Add Shipping Address</h4>
-        <%= form_for Address.new do |f| %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
-          <%= f.text_field :country, :placeholder => "Country", :required => true %>
-          <%= f.text_field :address, :placeholder => "Address", :required => true %>
-          <%= f.text_field :city, :placeholder => "City", :required => true %>
-          <%= f.text_field :state, :placeholder => "State", :required => true %>
-          <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
-          <%= f.hidden_field :active, :value => 'no' %>
-          <%= f.submit "Create Shipping Address", :class => 'btn waves-effect grey darken-3 center' %>
-        <% end %>
-      </div>
+          <!-- Begin Modal -->
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h4 style='text-align: center;'>Add Shipping Address</h4>
+              <%= form_for Address.new do |f| %>
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+                <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
+                <%= f.text_field :country, :placeholder => "Country", :required => true %>
+                <%= f.text_field :address, :placeholder => "Address", :required => true %>
+                <%= f.text_field :city, :placeholder => "City", :required => true %>
+                <%= f.text_field :state, :placeholder => "State", :required => true %>
+                <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
+                <%= f.hidden_field :active, :value => 'no' %>
+                <%= f.submit "Create Shipping Address", :class => 'btn waves-effect grey darken-3 center' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>  
     </div>
-    <!-- <div class="col s12 center">
-      <div class="account-content">
-        <p class='shipping-header'>Add Shipping Address</p>
-      </div>
-    </div>
-    <div class="col l8 offset-l2 s12 center">
-      <%= form_for Address.new do |f| %>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
-        <%= f.text_field :address, :placeholder => "Address", :required => true %>
-        <%= f.text_field :state, :placeholder => "State", :required => true %>
-        <%= f.text_field :city, :placeholder => "City", :required => true %>
-        <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
-        <%= f.text_field :country, :placeholder => "Country", :required => true %>
-        <%= f.hidden_field :active, :value => 'no' %>
-        <%= f.submit "Create Shipping Address", :class => 'grey white-text waves-light btn make-primary'%>
-      <% end %>
-
-    </div> -->
   </div>
 </div>
 

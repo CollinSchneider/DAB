@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/shipping' => 'users#shipping'
   get '/account' => 'users#account'
   get '/signup' => 'users#signup'
+  get '/password' => 'users#password'
 
 
   get '/best-sellers' => 'products#best_sellers'
