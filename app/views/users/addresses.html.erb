@@ -1,5 +1,12 @@
 <%= render partial: 'partials/header' %>
 
+<script>
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+</script>
+
 <div class="container">
   <div class="row">
     <div class="col s12 center">
@@ -19,15 +26,15 @@
               <p class='acount-address-info'><%= address.city %>, <%= address.state %> <%= address.zip %></p>
               <p class='acount-address-info'><%= address.country %></p>
             </div>
-            <div class="col s6">
+            <div class="col l3 s6 right-align">
               <% if address.active === 'yes' %>
-                <p> [ Default ] </p>
-                <%= link_to "Remove", address_path(address.id),:class => "red waves-light btn", method: :delete %>
+                <i class="small green-text material-icons">done</i>
               <% end %>
               <% if address.active === 'no' %>
+              <%= button_to "x", address_path(address.id),:class => "remove-item", method: :delete %>
                 <%= form_for address do |f| %>
                   <%= f.hidden_field :active, :value => 'yes' %>
-                  <%= f.submit "Make Primary Address", :class => 'white black-text waves-light btn make-primary'%>
+                  <%= f.submit "Make Default", :class => 'select-address'%>
                 <% end %>
               <% end %>
             </div>
@@ -36,7 +43,30 @@
         <% end %>
       </div>
     </div>
-    <div class="col s12 center">
+    <div class="row">
+      <div class="col s12 center-align">
+        <a class="btn waves-effect grey darken-3 modal-trigger center" href="#modal1">Add Address</a>
+      </div>
+    </div>
+
+    <!-- Begin Modal -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 style='text-align: center;'>Add Shipping Address</h4>
+        <%= form_for Address.new do |f| %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
+          <%= f.text_field :country, :placeholder => "Country", :required => true %>
+          <%= f.text_field :address, :placeholder => "Address", :required => true %>
+          <%= f.text_field :city, :placeholder => "City", :required => true %>
+          <%= f.text_field :state, :placeholder => "State", :required => true %>
+          <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
+          <%= f.hidden_field :active, :value => 'no' %>
+          <%= f.submit "Create Shipping Address", :class => 'btn waves-effect grey darken-3 center' %>
+        <% end %>
+      </div>
+    </div>
+    <!-- <div class="col s12 center">
       <div class="account-content">
         <p class='shipping-header'>Add Shipping Address</p>
       </div>
@@ -54,7 +84,7 @@
         <%= f.submit "Create Shipping Address", :class => 'grey white-text waves-light btn make-primary'%>
       <% end %>
 
-    </div>
+    </div> -->
   </div>
 </div>
 
