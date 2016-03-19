@@ -385,14 +385,13 @@
 .account-change-link {
   text-decoration: none;
   color: black;
-  border: 1px solid black;
+  border: none;
   padding: 10px;
 }
 .account-change-link:hover {
   text-decoration: none;
   color: black;
-  border: 1px solid black;
-  background-color: #e6e6e6;
+  border: none;
 }
 .order-status {
   color: green;
@@ -549,4 +548,14 @@ tr:hover {
 
 .cart-price-table th {
   font-weight: normal;
+}
+
+#account-page-links {
+  margin-top: 25px;
+  border-right: 1px solid lightgrey;
+}
+
+#account-link-active {
+  font-weight: bold;
+  border-left: 3px solid black;
 }

@@ -2,22 +2,32 @@
 
 <div class="container">
   <div class="row">
-    <div class="col s12 center">
-      <div class="account-content">
-        <p class='account-header'>My Account</p>
-        <p class='account-name'><%= current_user.name %></p>
-        <p class='account-email'><%= current_user.email %></p>
+    <div class="col s12">
+      <div class="col l4 m5 s6 left" id='account-page-links'>
+        <div class='account-change-section' id='account-link-active'>
+          <a class='account-change-link' href="/profile">My Account</a>
+        </div>
         <div class='account-change-section'>
           <!-- <#% if current_user.password_digest.exists? %> -->
-            <%= link_to "Change Account Information", account_path, :class => "account-change-link", method: :get %>
+            <%= link_to "Account Information", account_path, :class => "account-change-link", method: :get %>
           <!-- <#% end %> -->
         </div>
         <div class='account-change-section'>
-          <a class='account-change-link' href="/profile/addresses">Change Shipping Information</a>
+          <a class='account-change-link' href="/password">Change Password</a>
         </div>
+        <div class='account-change-section'>
+          <a class='account-change-link' href="/profile/addresses">Shipping Addresses</a>
         </div>
       </div>
+      <div class="col l8 m7 s6 center">
+       <div class="account-content">
+        <p class='account-header'>My Account</p>
+        <p class='account-name'><%= current_user.name %></p>
+        <p class='account-email'><%= current_user.email %></p>
+        </div>  
+      </div>
     </div>
+  </div>
     <div class="row">
       <div class="col s12">
         <p class='account-header center'>Order History</p>
@@ -66,83 +76,5 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="container" id='user-account-container'>
-    <div class="row">
-      <div class="col l3 s12">
-        <div class="collection">
-          <a class='collection-item black-text grey lighten-3 active' href="/profile/orders">Order History</a>
-          <a class='collection-item black-text grey lighten-3' href="/profile/addresses">Shipping Address</a>
-        </div>
-      </div>
-      <div class="col l9 s12 center">
-        <h5 id='product-title'>My Account</h5>
-        <p id='user-name'><%= current_user.name %></p>
-        <p><%= current_user.email %></p>
-        <%= link_to "Change Account Information", user_path(current_user.id), :class => "btn waves-effect grey lighten-3 black-text", method: :get %>
-      </div>
-    </div>
-</div>
- -->
-<!-- <h1> <%= current_user.name %>! </h1>
-<p><%= current_user.email %> </p>
-
-<p><%= flash[:error] %></p>
-
-<%= form_for @new_address do |f| %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-  <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
-  <%= f.text_field :country, :placeholder => "Country", :required => true %>
-  <%= f.text_field :state, :placeholder => "State", :required => true %>
-  <%= f.text_field :city, :placeholder => "City", :required => true %>
-  <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
-  <%= f.text_field :address, :placeholder => "Address", :required => true %>
-  <%= f.hidden_field :active, :value => 'no' %>
-  <%= f.submit "Create Shipping Address" %>
-<% end %>
-
-<% if current_user.addresses.length > 0 %>
-  <h3>Shipping Addresses: </h3>
-  <% current_user.addresses.each do |address| %>
-  <div id = "address" style="border:1px solid black; padding:10px; width:50%; margin-left:25%; text-align:center; margin-top:5px">
-    <% if address.active === 'yes' %>
-      <h4> Primary: </h4>
-    <% end %>
-    <h5><%= address.name %> </h5>
-    <h5><%= address.country %> </h5>
-    <h5> <%= address.state %> </h5>
-    <h5><%= address.city %></h5>
-    <h5><%=address.zip %></h5>
-    <h5><%= address.address %></h5>
-    <% if address.active === 'no' %>
-      <%= form_for address do |f| %>
-        <%= f.hidden_field :active, :value => 'yes' %>
-        <%= f.submit "Make Primary Address" %>
-      <% end %>
-    <% end %>
-    <%= button_to "Remove Address", address_path(address.id), method: :delete %>
-  </div>
-  <% end %>
-<% end %>
-
-<h3>Orders Waiting to be Shipped:</h3>
-<% current_user.order_items.each do |order| %>
-  <% if order.status === 0 %>
-  <div style = "display:inline-block">
-    <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
-    <h5><%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h5>
-  </div>
-  <% end %>
-<% end %>
-
-<h3>Orders Currently in Shipping:</h3>
-<% current_user.order_items.each do |order| %>
-  <% if order.status === 1 %>
-  <div style = "display:inline-block">
-    <%= image_tag order.product_item.product.picture, :style => "width: 150px; height: 300px" %>
-    <h5><%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h5>
-  </div>
-  <% end %>
-<% end %> -->
 
 <%= render partial: 'partials/footer' %>
