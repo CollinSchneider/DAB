@@ -18,11 +18,6 @@
                 <% end %>
               </div>
 
-              <p class='black-text'>OR</p>
-              <div class="input-field col s12">
-                <%= link_to "LOGIN WITH FACEBOOK", "/auth/facebook", id: "sign_in", :class => 'btn light-blue darken-4', :style => 'width:300px;'%>
-              </div>
-
           </div>
             <% if flash[:error] %>
               <% flash[:error].each do |error| %>

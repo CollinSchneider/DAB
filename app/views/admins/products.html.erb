@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col s12">
-            <p class='account-header'>Add a Product</p>
+            <p class='account-header' style='text-align:center'>Add a Product</p>
             <%= form_for Product.new, html: { multipart: true } do |f| %>
               <%= f.hidden_field :total_orders, :value => 0 %>
               <%= f.text_field :title, :placeholder => "Product Title", :required => true %>
