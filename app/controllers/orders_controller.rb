@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.affiliate_id, :product_id => item.product_id)
     end
     users_cart.each { |item| item.destroy }
-    UserMailer.purchase_confirmation_email(current_user, new_order).deliver
+    # UserMailer.purchase_confirmation_email(current_user, new_order).deliver
     redirect_to request.referrer
   end
 

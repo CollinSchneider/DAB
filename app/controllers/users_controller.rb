@@ -58,7 +58,6 @@ class UsersController < ApplicationController
     user = current_user
     user.update(user_password_params)
     user.skip_user_validation = true
-    binding.pry
     if user.save
       flash[:success] = "Information Updated!"
     else
@@ -72,11 +71,11 @@ class UsersController < ApplicationController
     if user.save
       if user.status === 0
         session[:user_id] = user.id
-        UserMailer.user_welcome_email(user).deliver
+        # UserMailer.user_welcome_email(user).deliver
         redirect_to products_path
       elsif user.status === 1
         flash[:success] = "New Affiliate Created!"
-        UserMailer.affiliate_welcome_email(user).deliver
+        # UserMailer.affiliate_welcome_email(user).deliver
         redirect_to request.referrer
       elsif user.status === 2
         flash[:success] = "New Admin Created!"
