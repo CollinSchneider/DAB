@@ -47,7 +47,7 @@ class ChargesController < ApplicationController
 		# 	flash[:error] = "Must fill out shipping address before checking out!"
 		# 	redirect_to profile_path
 		# else
-			new_order = Order.create( :user_id => current_user.id, :address_id => @current_user_address[0].id )
+			new_order = Order.create( :user_id => current_user.id, :address_id => @current_user_address[0].id, :pre_tax_total => @amount, :tax_amount => (@amount * (@rate.combined_rate)) )
 
 			current_user.cart_items.each do |item|
 				order_item = OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.id, :quantity => item.quantity)
@@ -55,9 +55,8 @@ class ChargesController < ApplicationController
 				product.total_orders += item.quantity
 				product.save
 				item.destroy
-		# end
+		end
 
-		binding.pry
 
 		  customer = Stripe::Customer.create(
 		    :email => params[:stripeEmail],
@@ -71,7 +70,7 @@ class ChargesController < ApplicationController
 		    :currency    => 'usd'
 		  )
 
-		end
+		# end
 
 		rescue Stripe::CardError => e
 		  flash[:error] = e.message
@@ -80,7 +79,7 @@ class ChargesController < ApplicationController
 
 	private
 	def order_params
-		params.require(:order).permit(:user_id)
+		params.require(:order).permit(:user_id, :address_id, :pre_tax_total, :tax_amount)
 	end
 
 end

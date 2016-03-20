@@ -17,4 +17,10 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "Low inventory on DealBaked")
   end
 
+  def purchase_confirmation_email(user, order)
+    @user = user
+    @order = order
+    mail(to: @user.email, subject: "DealBaked Order")
+  end
+
 end

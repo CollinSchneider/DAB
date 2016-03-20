@@ -1,0 +1,12 @@
+<h5> Thanks for your order, <%= @user.name %>! </h5>
+
+<p>
+  We'll keep you updated with the progress and shipping information of your order! </br>
+  Order Details:
+  <ul>
+    <%= @order.order_items.each do |item| %>
+    <li> <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %> ... $<%= item.product_item.product.price %> x <%= item.quantity %> = <%= item.product_item.product.price.to_i * item.quantity %> </li>
+  </ul>
+</p>
+
+<h6> Thanks, </br> Your friends at DealBaked </h6>
