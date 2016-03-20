@@ -38,7 +38,9 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
-  resources :users
+  resources :users do
+    put 'updated_account', :action => :update_account
+  end
   resources :orders
   # resources :admins
     get '/admins' => 'admins#index'

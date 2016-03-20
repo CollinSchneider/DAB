@@ -33,11 +33,12 @@
           <a class='account-change-link' href="/profile/addresses">Shipping Addresses</a>
         </div>
       </div>
-      <div class="col l8 m7 s12 center" style='height:400px'>  
+      <div class="col l8 m7 s12 center" style='height:400px'>
         <div class="account-content">
           <p class='account-header'>Edit Account Information</p>
           <div id="change-info">
-          <%= form_for current_user do |f| %>
+          <%= form_for current_user, {:url => user_updated_account_path(current_user.id), :method => 'put'} do |f| %>
+          <!-- <#%= form_for current_user do |f| %> -->
             <p> Email <%= f.email_field :email, :value => current_user.email %> </p>
             <p> Name <%= f.text_field :name, :value => current_user.name %> </p>
             <%=f.submit "Submit", class: "btn waves-effect grey darken-3 center" %>

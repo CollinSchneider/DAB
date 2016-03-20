@@ -40,6 +40,32 @@ class UsersController < ApplicationController
     cart_counter
   end
 
+  def update_account
+    # user = User.find(params[:id])
+    user = current_user
+    user.update(user_account_params)
+    binding.pry
+    if user.save
+      flash[:success] = "Information Updated!"
+    else
+      flash[:error] = user.errors.full_messages
+    end
+    redirect_to request.referrer
+  end
+
+  def update_password
+    # user = User.find(params[:id])
+    user = current_user
+    user.update(user_password_params)
+    binding.pry
+    if user.save
+      flash[:success] = "Information Updated!"
+    else
+      flash[:error] = user.errors.full_messages
+    end
+    redirect_to request.referrer
+  end
+
   def create
     user = User.create( user_params )
     if user.save
@@ -92,6 +118,16 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation, :status)
+  end
+
+  private
+  def user_account_params
+    params.require(:user).permit(:email, :name)
+  end
+
+  private
+  def user_password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 
   private

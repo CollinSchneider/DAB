@@ -71,7 +71,7 @@
             <%= f.text_field :address, :placeholder => "Address", :required => true %>
             <%= f.text_field :city, :placeholder => "City", :required => true %>
             <%= f.text_field :state, :placeholder => "State", :required => true %>
-            <%= f.number_field :zip, :placeholder => "Zip Code", :required => true %>
+            <%= f.number_field :zip, :placeholder => "Zip Code", :maxlength => 5, :required => true %>
             <%= f.hidden_field :active, :value => 'no' %>
             <%= f.submit "Create Shipping Address", :class => 'btn waves-effect grey darken-3 center' %>
           <% end %>
