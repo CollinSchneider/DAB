@@ -1,2 +1,10 @@
+<%= render partial: 'partials/header' %>
 
-<h2>Thanks for your order <%= current_user.name || current_user.email %>! You will be charged $<%= @amount %>.00 </h2>
+<div class="container">
+	<div class="col s12">
+		<p class='account-header'>Thank you for your order!</p>
+	</div>
+</div>
+
+
+<%= render partial: 'partials/footer' %>

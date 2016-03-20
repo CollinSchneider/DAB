@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/signup' => 'users#signup'
   get '/password' => 'users#password'
 
-
+  post '/charges' => 'charges#create'
   get '/best-sellers' => 'products#best_sellers'
   get '/new-arrivals' => 'products#new_arrivals'
 

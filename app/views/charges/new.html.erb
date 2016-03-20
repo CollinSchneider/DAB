@@ -102,11 +102,12 @@
         </div>
       </div>
   </div>
-
-<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+<%= form_tag charges_path do %>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="DealBaked Checkout"
           data-amount=<%= '%.0f' % (@stripe_amount*(1+@rate.combined_rate))%>
           data-locale="auto"></script>
+<% end %>
 
 </div>
