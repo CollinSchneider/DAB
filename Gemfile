@@ -41,6 +41,8 @@ gem 'kaminari', :git => 'git://github.com/amatsuda/kaminari.git'
 
 gem 'jquery-infinite-pages'
 
+gem 'rails_12factor'
+
 gem 'avalara'
 
 gem 'taxjar-ruby', require: 'taxjar'
