@@ -30,7 +30,7 @@ class AddressesController < ApplicationController
       address.active = 'no'
       address.save
     end
-    address.update(address_params)e
+    address.update(address_params)
     redirect_to request.referrer
   end
 
