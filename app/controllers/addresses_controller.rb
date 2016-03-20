@@ -3,12 +3,16 @@ class AddressesController < ApplicationController
   def create
     authenticate_user
     address = Address.create(address_params)
-    current_user.addresses.each do |add|
-      add.active = 'no'
-      add.save
+    if address.save
+      current_user.addresses.each do |add|
+        add.active = 'no'
+        add.save
+      end
+      address.active = 'yes'
+      flash[:success] = "Address Saved!"
+    else
+      flash[:error] = "Invalid zip code, cannot save address"
     end
-    address.active = 'yes'
-    address.save
     redirect_to request.referrer
   end
 
@@ -21,12 +25,11 @@ class AddressesController < ApplicationController
 
   def update
     authenticate_user
-    all_addresses = Address.all
-    all_addresses.each do |address|
+    address = Address.find(params[:id])
+    current_user.addresses.each do |address|
       address.active = 'no'
       address.save
     end
-    address = Address.find(params[:id])
     address.update(address_params)
     redirect_to request.referrer
   end
