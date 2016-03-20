@@ -8,9 +8,12 @@ class User < ActiveRecord::Base
   has_many :product_items, through: :products
   has_many :cart_items, :dependent => :destroy
 
-  validates :password, confirmation: true, length: { in: 6..20 }
-  validates :password_confirmation, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :password, confirmation: true, length: { in: 6..20 }, unless: :skip_user_validation
+  validates :password_confirmation, presence: true, unless: :skip_user_validation
+  validates :email, presence: true, uniqueness: true, unless: :skip_user_validation
+
+  attr_accessor :skip_user_validation
+
 
   def self.from_omniauth(auth)
     if(auth.info.email)

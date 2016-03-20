@@ -39,7 +39,8 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :users do
-    put 'updated_account', :action => :update_account
+    put 'update_account', :action => :update_account
+    put 'update_password', :action => :update_password
   end
   resources :orders
   # resources :admins

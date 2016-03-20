@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     # user = User.find(params[:id])
     user = current_user
     user.update(user_account_params)
-    binding.pry
+    user.skip_user_validation = true
     if user.save
       flash[:success] = "Information Updated!"
     else
@@ -57,6 +57,7 @@ class UsersController < ApplicationController
     # user = User.find(params[:id])
     user = current_user
     user.update(user_password_params)
+    user.skip_user_validation = true
     binding.pry
     if user.save
       flash[:success] = "Information Updated!"
