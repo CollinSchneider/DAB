@@ -37,7 +37,7 @@ gem 'impressionist'
 
 gem 'will_paginate', '~> 3.0.7'
 
-gem 'kaminari', :git => 'git@github.com:amatsuda/kaminari.git'
+gem 'kaminari', :git => 'git://github.com/amatsuda/kaminari.git'
 
 gem 'jquery-infinite-pages'
 
