@@ -42,11 +42,11 @@ class ChargesController < ApplicationController
 		total_price
 		tax_rate
 		current_user_address
-
-		if current_user.addresses.length == 0
-			flash[:error] = "Must fill out shipping address before checking out!"
-			redirect_to profile_path
-		else
+		# '%.0f' % (@stripe_amount*(1+@rate.combined_rate)
+		# if current_user.addresses.length == 0
+		# 	flash[:error] = "Must fill out shipping address before checking out!"
+		# 	redirect_to profile_path
+		# else
 			new_order = Order.create( :user_id => current_user.id, :address_id => @current_user_address[0].id )
 
 			current_user.cart_items.each do |item|
@@ -55,7 +55,9 @@ class ChargesController < ApplicationController
 				product.total_orders += item.quantity
 				product.save
 				item.destroy
-			end
+		# end
+
+		binding.pry
 
 		  customer = Stripe::Customer.create(
 		    :email => params[:stripeEmail],
@@ -64,7 +66,7 @@ class ChargesController < ApplicationController
 
 		  charge = Stripe::Charge.create(
 		    :customer    => customer.id,
-		    :amount      => @stripe_amount*(1+@rate.combined_rate),
+		    :amount      => (@stripe_amount * (1+@rate.combined_rate)).ceil,
 		    :description => 'Rails Stripe customer',
 		    :currency    => 'usd'
 		  )
