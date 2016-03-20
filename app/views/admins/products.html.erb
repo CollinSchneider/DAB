@@ -26,12 +26,13 @@
                   <%= content_tag(:option, a, value: a,) %>
                 <% end %>
               <% end %>
-              <%= f.number_field :price, :placeholder => "Product Price", :required => true %>
+              <%= f.number_field :price, :placeholder => "Product Price", :required => true, :min => 0 %>
               <%= f.select :user_id, :required => true do %>
                 <% @affiliates.each do |a| %>
                   <%= content_tag(:option, a.email, value: a.id,) %>
                 <% end %>
               <% end %>
+              <%= f.number_field :priority, :placeholder => "Priority 1-5 product will be listed in, 5 coming first", :required => true, :min => 0, :max => 5 %>
               <%= f.hidden_field :status, :value => 1 %>
               <%= f.hidden_field :total_orders, :value => 0 %>
               <%= f.text_field :feature_one, :placeholder => "Feature One" %>
@@ -41,7 +42,7 @@
               <%= f.text_field :feature_five, :placeholder => "Feature Five" %>
               <%= f.submit "Create Product" %>
             <% end %>
-          
+
           </div>
         </div>
       </div>

@@ -43,6 +43,7 @@
                 <p class='acount-address-info'><%= address.address %></p>
                 <p class='acount-address-info'><%= address.city %>, <%= address.state %> <%= address.zip %></p>
                 <p class='acount-address-info'><%= address.country %></p>
+                <p class='acount-address-info'>Active? <%= address.active %></p>
               </div>
               <div class="col s3">
                 <%= form_for address do |f| %>
