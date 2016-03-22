@@ -13,14 +13,15 @@
             datatype: 'json',
           }).done(function(data){
             var allOrders = data.all;
-            console.log(allOrders)
-            console.log(allOrders.length)
+            // console.log(allOrders)
+            // console.log(allOrders.length)
             for(i = 0; i < allOrders.length; i++){
               var order = allOrders[i];
+              console.log(order)
               var newLi = $('<li>');
               $('#affiliate-specific-orders').append(newLi);
-              var collapsibleDiv = $('<div class = "collapsible-body">');
-              newLi.append(collapsibleDiv);
+              newLi.append($('<div class = "collapsible-body">'));
+              // newLi.append(collapsibleDiv);
               var orderInfo = $('<p>').text('Order Quantity: ' + order.quantity);
               newLi.append(orderInfo);
               console.log(orderInfo)
