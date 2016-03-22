@@ -16,7 +16,8 @@
             console.log(allOrders)
             console.log(allOrders.length)
             for(i = 0; i < allOrders.length; i++){
-              $('#affiliate-specific-orders').append($('<li>')).append('<div class = "collapsible-body">');
+              var collapsibleLi = $('#affiliate-specific-orders').append($('<li>'));
+              collapsibleLi.append('<div class = "collapsible-body">');
             }
           })
         });
