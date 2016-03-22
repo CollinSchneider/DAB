@@ -46,6 +46,7 @@ class AffiliatesController < ApplicationController
               top_product_hash[order.product_item.product.title] = order.quantity
             end
             @weeks_top_product = top_product_hash.max_by{|a,b| a}
+            
           elsif order.created_at >= past_30_days
             months_orders.push(order)
           end
