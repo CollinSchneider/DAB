@@ -65,10 +65,10 @@
                   <p>Item Total: </br> $<%= item.quantity * item.product_item.product.price.to_i %>.00 </p>
                 </div>
               </div>
-              <% end %>
               <h6 style="margin-left: 60%; font-weight: bold"> Subtotal: $<%= item.order.pre_tax_total %> </h6>
               <h6 style="margin-left: 60%; font-weight: bold"> Tax: $<%= (item.order.tax_amount) %> </h6>
               <h6 style="margin-left: 60%; font-weight: bold"> Total: $<%= (item.order.pre_tax_total + item.order.tax_amount) %> </h6>
+              <% end %>
             </div>
           </li>
         </ul>
