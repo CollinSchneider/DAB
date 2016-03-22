@@ -70,16 +70,15 @@
         <div class="row">
           <div class="col s12">
             <ul class="tabs">
-              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#test1">All</a></li>
+              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#all">All</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#pending">Pending</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#shipped">Shipped</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#test4">Delivered</a></li>
             </ul>
           </div>
-          <div id="test1" class="col s12">
+          <div id="all" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <% @weeks_orders.each do |order| %>
-              <% order_total = 0 %>
             <li>
               <div class="collapsible-header">
                 <i class="material-icons">done</i> Order #<%= order.id %>
@@ -106,12 +105,13 @@
                   </div>
                   <div class="col l3 s9 hide-on-med-and-down">
                     <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                    <% order_total += item.quantity * item.product_item.product.price.to_i %>
                   </div>
                 </div>
+                <h6> Tax: $<%= item.order.tax_amount %> + </h6>
+                <h6> Subtotal: $<%= item.order.pre_tax_total %> </h6>
+                <h6> Total: $<%= item.order.tax_amount + item.order.pre_tax_total %></h6>
               </div>
               <% end %>
-              SubTotal: <strong>$<%= order_total %></strong>
             </li>
             <% end %>
           </ul>
@@ -149,7 +149,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- SubTotal: <strong>$<#%= order_total %></strong> -->
               </li>
             <% end %>
           </ul>
@@ -184,6 +183,39 @@
                     <div class="col l3 s9 hide-on-med-and-down">
                       <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
                       <% order_total += item.quantity * item.product_item.product.price.to_i %>
+                    </div>
+                  </div>
+                </div>
+                <!-- SubTotal: <strong>$<#%= order_total %></strong> -->
+              </li>
+            <% end %>
+          </ul>
+          </div>
+          <div id="delivered" class="col s12">
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">done</i> Order #<%= item.id %>
+                </div>
+                <div class="collapsible-body">
+                  <p>
+                    Status:
+                  </p>
+                  <div class="row order-info">
+                    <div class="col l1 m1 s4">
+                      <!-- <#%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %> -->
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p> Product:  </p>
+                    </div>
+                    <div class="col l2 s9 hide-on-med-and-down">
+                      <p> Affiliate: </p>
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p>Quantity: <%= item.quantity %></p>
+                    </div>
+                    <div class="col l3 s9 hide-on-med-and-down">
+                      <p>Item Total: $ </p>
                     </div>
                   </div>
                 </div>
