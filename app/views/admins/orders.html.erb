@@ -12,8 +12,8 @@
             type: "POST",
             datatype: 'json',
           }).done(function(data){
-            var all-orders = data.all;
-            for(i = 0; i < data.all.length; i++){
+            var allOrders = data.all;
+            for(i = 0; i < allOrders.length; i++){
               $('#affiliate-specific-orders').append($('<li>')).append('<div class = "collapsible-body">');
             }
           })
