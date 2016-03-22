@@ -119,7 +119,6 @@
           <div id="pending" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <% @weeks_pending_orders.each do |item| %>
-              <% order_total = 0 %>
               <li>
                 <div class="collapsible-header">
                   <i class="material-icons">done</i> Order #<%= item.id %>
@@ -145,7 +144,6 @@
                     </div>
                     <div class="col l3 s9 hide-on-med-and-down">
                       <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                      <% order_total += item.quantity * item.product_item.product.price.to_i %>
                     </div>
                   </div>
                 </div>
@@ -156,7 +154,6 @@
           <div id="shipped" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <% @weeks_delivered_orders.each do |item| %>
-              <% order_total = 0 %>
               <li>
                 <div class="collapsible-header">
                   <i class="material-icons">done</i> Order #<%= item.id %>
@@ -182,16 +179,14 @@
                     </div>
                     <div class="col l3 s9 hide-on-med-and-down">
                       <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                      <% order_total += item.quantity * item.product_item.product.price.to_i %>
                     </div>
                   </div>
                 </div>
-                <!-- SubTotal: <strong>$<#%= order_total %></strong> -->
               </li>
             <% end %>
           </ul>
           </div>
-          <div id="delivered" class="col s12">
+          <!-- <div id="delivered" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <li>
                 <div class="collapsible-header">
@@ -203,7 +198,7 @@
                   </p>
                   <div class="row order-info">
                     <div class="col l1 m1 s4">
-                      <!-- <#%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %> -->
+                      <#%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %>
                     </div>
                     <div class="col l2 m2 s3">
                       <p> Product:  </p>
@@ -219,10 +214,10 @@
                     </div>
                   </div>
                 </div>
-                <!-- SubTotal: <strong>$<#%= order_total %></strong> -->
+                SubTotal: <strong>$<#%= order_total %></strong>
               </li>
           </ul>
-          </div>
+          </div> -->
 
         </div>
         <div class="row">
