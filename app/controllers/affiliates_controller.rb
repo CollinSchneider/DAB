@@ -19,9 +19,6 @@ class AffiliatesController < ApplicationController
 
     current_user.products.each do |product|
       @total_views += product.impressionist_count
-      # if top_product_hash[product.title] === nil
-      #   top_product_hash[product.title] = product.impressionist_count
-      # end
       product.impressions.each do |impression|
         if impression.created_at >= past_7_days
           @weeks_views += 1
@@ -40,13 +37,14 @@ class AffiliatesController < ApplicationController
           elsif order.created_at >= past_7_days
             weeks_orders.push(order)
             months_orders.push(order)
-            if top_product_hash[order.product_item.product.title] != nil
-              top_product_hash[order.product_item.product.title] += order.quantity
-            else
+
+            if top_product_hash[order.product_item.product.title] === nil
               top_product_hash[order.product_item.product.title] = order.quantity
+            else
+              top_product_hash[order.product_item.product.title] += order.quantity
             end
             @weeks_top_product = top_product_hash.max_by{|a,b| a}
-            
+
           elsif order.created_at >= past_30_days
             months_orders.push(order)
           end
