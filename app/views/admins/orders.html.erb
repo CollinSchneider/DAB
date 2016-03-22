@@ -2,6 +2,22 @@
 
     <%= render partial: 'nav' %>
 
+    <script>
+      $(document).ready(function () { 
+        $('.browser-default').on('change', function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: '/admin-affiliate-order',
+            data: {affiliate_id: $('.browser-default')[0].value},
+            type: "POST",
+            datatype: 'json',
+          }).done(function(data){
+            console.log(data)
+          })
+        });
+      });
+    </script>
+
     <main>
       <div class="container">
         <div class="row">
@@ -147,8 +163,8 @@
             <!-- <select class="browser-default"> -->
               <!-- <option value="" disabled selected>Choose your option</option> -->
               <!-- <$%= @affiliates.each do |affiliate| %> -->
-              <%= select_tag "affiliates", options_from_collection_for_select(@affiliates, "id", "email"), prompt: "Select Affiliate" %>
-
+                <%= select_tag "affiliates", options_from_collection_for_select(@affiliates, "id", "email"), prompt: "Select Affiliate", :class => 'browser-default' %>
+              </form>
               <!-- <option value=affiliate.id> <#%= affiliate.name || affiliate.email %> </option> -->
               <!-- <#% end %> -->
             </select>
