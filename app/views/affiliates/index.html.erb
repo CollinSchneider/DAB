@@ -67,7 +67,7 @@
               </div>
               <div class="col l6 m6 s12 center">
                 <p class='dashboard-headers'><strong>Top Selling Product</strong></p>
-                <% if @weeks_top_product.length > 0 %>
+                <% if @weeks_top_product != nil %>
                   <p><%= @weeks_top_product[0] %>: <%= @weeks_top_product[1] %> sold</p>
                 <% end %>
               </div>
