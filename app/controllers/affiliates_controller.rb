@@ -76,7 +76,6 @@ class AffiliatesController < ApplicationController
   end
 
   def update
-    binding.pry
     @pending_orders = OrderItem.where('affiliate_id = ? AND status = ?', current_user.id, 1)
   end
 
