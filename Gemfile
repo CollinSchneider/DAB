@@ -33,7 +33,7 @@ gem 'stripe'
 
 gem 'paperclip'
 
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk', '< 2.0'
 
 gem 'omniauth-facebook'
 
