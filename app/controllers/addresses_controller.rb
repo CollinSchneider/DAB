@@ -11,7 +11,7 @@ class AddressesController < ApplicationController
       address.active = 'yes'
       flash[:success] = "Address Saved!"
     else
-      flash[:error] = "Invalid zip code, cannot save address"
+      flash[:error] = "Invalid zip code, please enter valid a five digit zip-code!"
     end
     redirect_to request.referrer
   end

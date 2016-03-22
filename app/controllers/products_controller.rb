@@ -77,7 +77,8 @@ class ProductsController < ApplicationController
       item.delete
     end
     product.delete
-    redirect_to request.referrer
+    flash[:success] = "#{product.title} deleted!"
+    redirect_to admins_path
   end
 
   def update

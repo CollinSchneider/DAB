@@ -15,6 +15,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'faker'
 
+# gem 'nokogiri', '~> 1.5.0'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -31,17 +33,19 @@ gem 'stripe'
 
 gem 'paperclip'
 
+gem 'aws-sdk', '< 2.0'
+
 gem 'omniauth-facebook'
 
 gem 'impressionist'
 
 gem 'will_paginate', '~> 3.0.7'
 
-gem 'kaminari', :git => 'git@github.com:amatsuda/kaminari.git'
+gem 'kaminari', :git => 'git://github.com/amatsuda/kaminari.git'
 
 gem 'jquery-infinite-pages'
 
-gem 'avalara'
+gem 'rails_12factor'
 
 gem 'taxjar-ruby', require: 'taxjar'
 # Use Unicorn as the app server
