@@ -107,9 +107,9 @@
                     <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
                   </div>
                 </div>
-                <h6> Tax: $<%= item.order.tax_amount %> + </h6>
-                <h6> Subtotal: $<%= item.order.pre_tax_total %> </h6>
-                <h6> Total: $<%= item.order.tax_amount + item.order.pre_tax_total %></h6>
+                <h6 style="margin-left: 60%; font-weight: bold"> Subtotal: $<%= item.order.pre_tax_total %> </h6>
+                <h6 style="margin-left: 60%; font-weight: bold"> Tax: $<%= '%.2f' % (item.order.tax_amount) %> </h6>
+                <h6 style="margin-left: 60%; font-weight: bold"> Total: $<%= '%.2f' % (item.order.pre_tax_total.to_f + item.order.tax_amount.to_f) %> </h6>
               </div>
               <% end %>
             </li>
