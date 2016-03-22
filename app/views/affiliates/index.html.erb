@@ -9,23 +9,23 @@
           </div>
         </div>
         <div class="row">
-          <div class="col l2 m6 s12 center">
+          <div class="col l2r m6 s12 center">
             <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
               <p> <%= '%.3f' % ((@total_products_sold.to_f/@total_views)*100 )%>%  ( <%= @total_orders %>/<%= @total_views %>)</p>
           </div>
-          <div class="col l2 m6 s12 center">
+          <div class="col l2r m6 s12 center">
             <p class='dashboard-headers'><strong>Sales</strong><p>
               <p> $<%= @total_sales %> </p>
           </div>
-          <div class="col l2 m6 s12 center">
+          <div class="col l2r m6 s12 center">
             <p class='dashboard-headers'><strong>Impressions</strong><p>
               <p><%= @total_views %></p>
           </div>
-          <div class="col l2 m6 s12 center">
+          <div class="col l2r m6 s12 center">
             <p class='dashboard-headers'><strong>Products Sold</strong><p>
               <p> <%= @total_products_sold %> </p>
           </div>
-          <div class="col l2 m6 s12 center">
+          <div class="col l2r m6 s12 center">
             <p class='dashboard-headers'><strong>Total Orders</strong><p>
             <p> <%= @total_orders %> </p>
           </div>
@@ -67,7 +67,9 @@
               </div>
               <div class="col l6 m6 s12 center">
                 <p class='dashboard-headers'><strong>Top Selling Product</strong></p>
-                <p><%= @weeks_top_product[0] %>: <%= @weeks_top_product[1] %> sold</p>
+                <% if @weeks_top_product.length > 0 %>
+                  <p><%= @weeks_top_product[0] %>: <%= @weeks_top_product[1] %> sold</p>
+                <% end %>
               </div>
               <!-- <div class="col l3 m6 s12 center">
                 <p class='dashboard-headers'><strong>Most Viewed Product</strong></p>
