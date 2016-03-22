@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     get '/admin-orders' => 'admins#orders'
     get '/admin-products' => 'admins#products'
     get '/admin-users' => 'admins#users'
+    post '/admin-affiliate-order' => 'admins#update_affiliate_orders'
 
   # resources :affiliates
     get '/affiliate' => 'affiliates#index'
