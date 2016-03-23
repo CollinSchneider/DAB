@@ -73,7 +73,50 @@ class AdminsController < ApplicationController
     @weeks_orders = Order.where('created_at >= ?', past_7_days)
     @weeks_pending_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 0)
     @weeks_delivered_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 1)
-    @affiliates = User.where(status: 1)
+    @affiliates = User.order('name').where(status: 1)
+
+    if params[:search]
+      @affiliates = User.where('name LIKE ? AND status = ?', "%#{params[:search]}%", 1)
+    else
+      @affiliates = User.where('status = ?', 1)
+    end
+
+    affiliate_order_hash = {}
+    @affiliates.each do |affiliate|
+      affiliate.products.each do |product|
+        product.product_items.each do |item|
+          item.order_items.each do |order|
+            if order.status === 0
+              if affiliate_order_hash[order.product_item.product.user.name] === nil
+                affiliate_order_hash[order.product_item.product.user.name] = 1
+              else
+                affiliate_order_hash[order.product_item.product.user.name] += 1
+              end
+            end
+            # if order.status === 0
+            #   if affiliate_order_hash[order.product_item.product.user.name][order.status] != nil
+            #     affiliate_order_hash[order.product_item.product.user.name][order.status] += 1
+            #   else
+            #     affiliate_order_hash[order.product_item.product.user.name][order.status] = 1
+            #   end
+            # elsif order.status === 1
+            #   if affiliate_order_hash[order.product_item.product.user.name][order.status.to_s] === nil
+            #     affiliate_order_hash[order.product_item.product.user.name][order.status.to_s] = 1
+            #   else
+            #     affiliate_order_hash[order.product_item.product.user.name][order.status.to_s] += 1
+            #   end
+            # elsif order.status === 2
+            #   if affiliate_order_hash[order.product_item.product.user.name][order.status] === nil
+            #     affiliate_order_hash[order.product_item.product.user.name][order.status] = 1
+            #   else
+            #     affiliate_order_hash[order.product_item.product.user.name][order.status] += 1
+            #   end
+            # end
+            @affiliate_orders = affiliate_order_hash
+          end
+        end
+      end
+    end
   end
 
   def update_affiliate_orders

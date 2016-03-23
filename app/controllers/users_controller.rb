@@ -6,6 +6,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    authenticate_admin
+    @user = User.find(params[:id])
+  end
+
   def signup
     @user = User.new
   end
