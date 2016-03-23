@@ -1,7 +1,6 @@
 
 
     <%= render partial: 'nav' %>
-
     <main>
       <div class="container">
         <div class="row">
@@ -49,3 +48,12 @@
     </main>
   </body>
 </html>
+
+<script>
+  $('#new_product').submit(function(){
+    console.log('submitted.....')
+    $('#new_product').replaceWith(
+      '<iframe src="//giphy.com/embed/hsR3qsqZXwS6A" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>'
+    )
+  })
+</script>

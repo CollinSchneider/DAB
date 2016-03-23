@@ -2,35 +2,6 @@
 
     <%= render partial: 'nav' %>
 
-    <script>
-      $(document).ready(function () {
-        $('.browser-default').on('change', function(e) {
-          e.preventDefault();
-          $.ajax({
-            url: '/admin-affiliate-order',
-            data: {affiliate_id: $('.browser-default')[0].value},
-            type: "POST",
-            datatype: 'json',
-          }).done(function(data){
-            var allOrders = data.all;
-            // console.log(allOrders)
-            // console.log(allOrders.length)
-            for(i = 0; i < allOrders.length; i++){
-              var order = allOrders[i];
-              console.log(order)
-              var newLi = $('<li>');
-              $('#affiliate-specific-orders').append(newLi);
-              newLi.append($('<div class = "collapsible-body">'));
-              // newLi.append(collapsibleDiv);
-              var orderInfo = $('<p>').text('Order Quantity: ' + order.quantity);
-              newLi.append(orderInfo);
-              console.log(order.product_item.description)
-            }
-          })
-        });
-      });
-    </script>
-
     <!-- <li>
       <div class="collapsible-header">
         <i class="material-icons">done</i>Order#: 123456789
@@ -234,11 +205,15 @@
               <%= submit_tag "Get All", :name => nil %>
             <% end %>
 
+            <% if @affiliates.length === 0 %>
+              <h5>No affiliates match your search!</h5>
+            <% else %>
             <% @affiliates.each do |affiliate| %>
-              <%= link_to user_path(affiliate.id) do %>
-                <h6> <%= affiliate.name || affiliate.email %>
-                  <% if @affiliate_orders[affiliate.name] %><%= @affiliate_orders[affiliate.name] %> Pending Orders <% end %></h6>
-                <% end %>
+                <%= link_to user_path(affiliate.id) do %>
+                  <h6> <%= affiliate.name || affiliate.email %>
+                    <% if @affiliate_orders[affiliate.name] %><%= @affiliate_orders[affiliate.name] %> Pending Orders <% end %></h6>
+                  <% end %>
+              <% end %>
             <% end %>
             </div>
 
