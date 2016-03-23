@@ -3,7 +3,7 @@
     <%= render partial: 'nav' %>
 
     <script>
-      $(document).ready(function () { 
+      $(document).ready(function () {
         $('.browser-default').on('change', function(e) {
           e.preventDefault();
           $.ajax({
@@ -12,11 +12,53 @@
             type: "POST",
             datatype: 'json',
           }).done(function(data){
-            console.log(data)
+            var allOrders = data.all;
+            // console.log(allOrders)
+            // console.log(allOrders.length)
+            for(i = 0; i < allOrders.length; i++){
+              var order = allOrders[i];
+              console.log(order)
+              var newLi = $('<li>');
+              $('#affiliate-specific-orders').append(newLi);
+              newLi.append($('<div class = "collapsible-body">'));
+              // newLi.append(collapsibleDiv);
+              var orderInfo = $('<p>').text('Order Quantity: ' + order.quantity);
+              newLi.append(orderInfo);
+              console.log(order.product_item.description)
+            }
           })
         });
       });
     </script>
+
+    <!-- <li>
+      <div class="collapsible-header">
+        <i class="material-icons">done</i>Order#: 123456789
+      </div>
+      <div class="collapsible-body">
+        <p>
+          Status: <span class='order-status-pending'>Pending</span><br>
+          SubTotal: $200
+        </p>
+        <div class="row order-info">
+          <div class="col l1 m1 s4">
+            <img style='width:100px' src="http://www.vphosted.com/sf/_langid-1/_hc-00001988/_/vp/images/b09/product/230x150/labels/circle-labels-sm-001.jpg" alt="">
+          </div>
+          <div class="col l2 m2 s3">
+            <p>Product Name</p>
+          </div>
+          <div class="col l2 s9 hide-on-med-and-down">
+            <p>Affiliate</p>
+          </div>
+          <div class="col l2 m2 s3">
+            <p>Quantity: 1</p>
+          </div>
+          <div class="col l3 s9 hide-on-med-and-down">
+            <p>Item Total  : $100</p>
+          </div>
+        </div>
+      </div>
+    </li> -->
 
     <main>
       <div class="container">
@@ -28,16 +70,15 @@
         <div class="row">
           <div class="col s12">
             <ul class="tabs">
-              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#test1">All</a></li>
+              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#all">All</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#pending">Pending</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#shipped">Shipped</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#test4">Delivered</a></li>
             </ul>
           </div>
-          <div id="test1" class="col s12">
+          <div id="all" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <% @weeks_orders.each do |order| %>
-              <% order_total = 0 %>
             <li>
               <div class="collapsible-header">
                 <i class="material-icons">done</i> Order #<%= order.id %>
@@ -64,12 +105,13 @@
                   </div>
                   <div class="col l3 s9 hide-on-med-and-down">
                     <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                    <% order_total += item.quantity * item.product_item.product.price.to_i %>
                   </div>
                 </div>
+                <h6> Tax: $<%= item.order.tax_amount %> + </h6>
+                <h6> Subtotal: $<%= item.order.pre_tax_total %> </h6>
+                <h6> Total: $<%= item.order.tax_amount + item.order.pre_tax_total %></h6>
               </div>
               <% end %>
-              SubTotal: <strong>$<%= order_total %></strong>
             </li>
             <% end %>
           </ul>
@@ -77,7 +119,6 @@
           <div id="pending" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <% @weeks_pending_orders.each do |item| %>
-              <% order_total = 0 %>
               <li>
                 <div class="collapsible-header">
                   <i class="material-icons">done</i> Order #<%= item.id %>
@@ -103,11 +144,9 @@
                     </div>
                     <div class="col l3 s9 hide-on-med-and-down">
                       <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                      <% order_total += item.quantity * item.product_item.product.price.to_i %>
                     </div>
                   </div>
                 </div>
-                <!-- SubTotal: <strong>$<#%= order_total %></strong> -->
               </li>
             <% end %>
           </ul>
@@ -115,7 +154,6 @@
           <div id="shipped" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <% @weeks_delivered_orders.each do |item| %>
-              <% order_total = 0 %>
               <li>
                 <div class="collapsible-header">
                   <i class="material-icons">done</i> Order #<%= item.id %>
@@ -141,15 +179,45 @@
                     </div>
                     <div class="col l3 s9 hide-on-med-and-down">
                       <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                      <% order_total += item.quantity * item.product_item.product.price.to_i %>
                     </div>
                   </div>
                 </div>
-                <!-- SubTotal: <strong>$<#%= order_total %></strong> -->
               </li>
             <% end %>
           </ul>
           </div>
+          <!-- <div id="delivered" class="col s12">
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">done</i> Order #
+                </div>
+                <div class="collapsible-body">
+                  <p>
+                    Status:
+                  </p>
+                  <div class="row order-info">
+                    <div class="col l1 m1 s4">
+                      <#%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %>
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p> Product:  </p>
+                    </div>
+                    <div class="col l2 s9 hide-on-med-and-down">
+                      <p> Affiliate: </p>
+                    </div>
+                    <div class="col l2 m2 s3">
+                      <p>Quantity: </p>
+                    </div>
+                    <div class="col l3 s9 hide-on-med-and-down">
+                      <p>Item Total: $ </p>
+                    </div>
+                  </div>
+                </div>
+                SubTotal: <strong>$<#%= order_total %></strong>
+              </li>
+          </ul>
+          </div> -->
 
         </div>
         <div class="row">
@@ -168,36 +236,9 @@
               <!-- <option value=affiliate.id> <#%= affiliate.name || affiliate.email %> </option> -->
               <!-- <#% end %> -->
             </select>
-            <ul class="collapsible" data-collapsible="accordion">
-              <li>
-                <div class="collapsible-header">
-                  <i class="material-icons">done</i>Order#: 123456789
-                </div>
-                <div class="collapsible-body">
-                  <p>
-                    Status: <span class='order-status-pending'>Pending</span><br>
-                    SubTotal: $200
-                  </p>
-                  <div class="row order-info">
-                    <div class="col l1 m1 s4">
-                      <img style='width:100px' src="http://www.vphosted.com/sf/_langid-1/_hc-00001988/_/vp/images/b09/product/230x150/labels/circle-labels-sm-001.jpg" alt="">
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p>Product Name</p>
-                    </div>
-                    <div class="col l2 s9 hide-on-med-and-down">
-                      <p>Affiliate</p>
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p>Quantity: 1</p>
-                    </div>
-                    <div class="col l3 s9 hide-on-med-and-down">
-                      <p>Item Total  : $100</p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
+            <ul class="collapsible" data-collapsible="accordion" id = "affiliate-specific-orders">
+
+              <!-- <li>
                 <div class="collapsible-header">
                   <i class="material-icons">done</i>Order#: 123456789
                 </div>
@@ -251,8 +292,9 @@
                       <p>Item Total  : $100</p>
                     </div>
                   </div>
-                </div>
-              </li>
+                </div> -->
+              <!-- </li> -->
+
             </ul>
           </div>
         </div>

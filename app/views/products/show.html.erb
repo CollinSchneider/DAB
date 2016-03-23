@@ -42,9 +42,6 @@
           <div class="row">
             <h4 id='product-title'> <%= @product.title %> </h4>
             <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
-            <% @product.product_items.each do |item| %>
-              <h6> <%= item.description %> <%= item.quantity %> </h6>
-            <% end %>
           </div>
           <div class="row" style='margin-top:-25px'>
             <div class="input-field col s12 center">
@@ -79,10 +76,18 @@
               <p><strong>Features:</strong>
                 <ul id='feature-list'>
                   <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_one %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
+                  <% if @product.feature_two.length > 0 %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
+                  <% end %>
+                  <% if @product.feature_three.length > 0 %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
+                  <% end %>
+                  <% if @product.feature_four.length > 0 %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
+                  <% end %>
+                  <% if @product.feature_five.length > 0 %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
+                  <% end %>
                 </ul>
               </p>
             </div>

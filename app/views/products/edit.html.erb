@@ -35,7 +35,7 @@
         <%= f.number_field :quantity, :value => item.quantity %>
         <%= f.submit "Update Item", :class => "btn blue"%>
         <% end %>
-        <%= button_to "Delete #{item.description} #{ @product.title }", product_item_path(item.id), method: :delete, :class => "btn red", data: { confirm: "Delete #{product_item.description} #{product_item.product.title}?" } %>
+        <%= button_to "Delete #{item.description} #{ @product.title }", product_item_path(item.id), method: :delete, :class => "btn red", data: { confirm: "Delete #{item.description} #{item.product.title}?" } %>
       </div>
     <% end %>
   </div> </br></br>
@@ -85,7 +85,7 @@
           </div>
             <%= f.submit "Update #{@product.title}", :class => "btn blue" %> </br> </br>
           <% end %>
-          <%= button_to "Delete #{@product.title}", product_path(@product.id), method: :delete, :class => 'btn red', data: { confirm: "Delete #{product.title}?" } %>
+          <%= button_to "Delete #{@product.title}", product_path(@product.id), method: :delete, :class => 'btn red', data: { confirm: "Delete #{@product.title}?" } %>
         </div>
       </div>
     </div>
