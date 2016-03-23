@@ -31,21 +31,19 @@ class AffiliatesController < ApplicationController
 
           if order.created_at >= past_24_hours
             todays_orders.push(order)
-            weeks_orders.push(order)
-            months_orders.push(order)
+          end
 
-          elsif order.created_at >= past_7_days
+          if order.created_at >= past_7_days
             weeks_orders.push(order)
-            months_orders.push(order)
-
             if top_product_hash[order.product_item.product.title] === nil
               top_product_hash[order.product_item.product.title] = order.quantity
             else
               top_product_hash[order.product_item.product.title] += order.quantity
             end
             @weeks_top_product = top_product_hash.max_by{|a,b| a}
+          end
 
-          elsif order.created_at >= past_30_days
+          if order.created_at >= past_30_days
             months_orders.push(order)
           end
           if total_order_hash[order.order.id] === nil

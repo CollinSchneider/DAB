@@ -81,7 +81,7 @@
               <% @weeks_orders.each do |order| %>
             <li>
               <div class="collapsible-header">
-                <i class="material-icons">done</i> Order #<%= order.id %>
+                <i class="material-icons">done</i> Order #<%= order.id %>; <strong>$<%= '%.2f' % (order.pre_tax_total.to_f + order.tax_amount.to_f) %></strong>
               </div>
               <% order.order_items.each do |item| %>
               <div class="collapsible-body">
@@ -107,9 +107,6 @@
                     <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
                   </div>
                 </div>
-                <h6 style="margin-left: 60%; font-weight: bold"> Subtotal: $<%= item.order.pre_tax_total %> </h6>
-                <h6 style="margin-left: 60%; font-weight: bold"> Tax: $<%= '%.2f' % (item.order.tax_amount) %> </h6>
-                <h6 style="margin-left: 60%; font-weight: bold"> Total: $<%= '%.2f' % (item.order.pre_tax_total.to_f + item.order.tax_amount.to_f) %> </h6>
               </div>
               <% end %>
             </li>

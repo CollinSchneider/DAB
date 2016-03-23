@@ -31,26 +31,21 @@ class AdminsController < ApplicationController
 
         @orders_24_hours += item.quantity
         @sales_24_hours += item.product_item.product.price.to_i * item.quantity
-        @orders_7_days += item.quantity
-        @sales_7_days += item.product_item.product.price.to_i * item.quantity
-        @orders_30_days +=item.quantity
-        @sales_30_days += item.product_item.product.price.to_i * item.quantity
 
-      elsif item.created_at >= past_7_days
+      end
+      if item.created_at >= past_7_days
 
         get_top_selling_product(top_selling_week_product_array, item.quantity, item.product_item.product.title)
         get_top_selling_affiliate(affiliate_week_sales, item.product_item.product.user.email, item.product_item.product.price.to_i, item.quantity)
 
         @orders_7_days += item.quantity
         @sales_7_days += item.product_item.product.price.to_i * item.quantity
+
+      end
+      if item.created_at >= past_30_days
+
         @orders_30_days += item.quantity
         @sales_30_days += item.product_item.product.price.to_i * item.quantity
-
-      elsif item.created_at >= past_30_days
-
-        @orders_30_days += item.quantity
-        @sales_30_days += item.product_item.product.price.to_i * item.quantity
-
       end
 
     end
