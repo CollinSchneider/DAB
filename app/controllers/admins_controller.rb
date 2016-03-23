@@ -139,6 +139,11 @@ class AdminsController < ApplicationController
     @begining_of_week = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_week, 0).length
     @begining_of_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 0).length
     @begining_of_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 0).length
+    if params[:search]
+      @users = User.where('name LIKE ? AND status = ?', "%#{params[:search]}%", 0)
+    else
+      @users = User.where('status = ?', 0)
+    end
   end
 
   def affiliates

@@ -32,12 +32,28 @@
       </div>
       <div class="row">
         <div class="col 12">
-          
+
         </div>
       </div>
       <div class="row">
         <div class="col s12">
           <p class='account-header' style='text-align:center'>User Order History</p>
+          <%= form_tag admin_users_path, :method => 'get' do %>
+            <%= text_field_tag :search, params[:search], :placeholder => "Search for User" %>
+            <%= submit_tag "Search", :name => nil %>
+          <% end %>
+          <%= form_tag admin_users_path, :method => 'get' do %>
+            <%= hidden_field_tag :search, params[:search], :value => nil %>
+            <%= submit_tag "Get All", :name => nil %>
+          <% end %>
+
+          <% if @users.length === 0 %>
+            <h5>No users match your search!</h5>
+          <% else %>
+            <% @users.each do |user| %>
+              <h6> <%= link_to user.name || user.email, user_path(user.id) %> </h6>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
