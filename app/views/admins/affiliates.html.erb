@@ -14,9 +14,30 @@
       <% end %>
       <div class="container">
         <div class="row">
+        <div class="col s12">
+          <p class='account-header' style='text-align:center'>Affiliate Statistics</p>
+        </div>
+        </div>
+        <div class="row center">
+          <div class="col l3 m3 s6" style='margin-top: 10px;'>
+            <p class="dashboard-headers"><strong>Total Affilaites</strong></p>
+            <p><%= @total %></p>
+          </div>
+          <div class="col l3 m3 s6" style='margin-top: 10px;'>
+            <p class="dashboard-headers"><strong>New this Week</strong></p>
+            <p><%= @begining_of_week%></p>
+          </div>
+          <div class="col l3 m3 s6" style='margin-top: 10px;'>
+            <p class="dashboard-headers"><strong>New this Month</strong></p>
+            <p><%= @begining_of_month%></p>
+          </div>
+          <div class="col l3 m3 s6" style='margin-top: 10px;'>
+            <p class="dashboard-headers"><strong>New this Year</strong></p>
+            <p><%= @begining_of_year%></p>
+          </div>
+        </div>
+        <div class="row">
           <div class="col s12">
-            <h1>Hello World</h1>
-              <h3> Create an Affiliate: </h3>
               <div class="input-field col s12" id='login-content'>
                 <%= form_for User.new do |f| %>
                   <%= f.text_field :name, :class => 'login-inputs black-text', :placeholder => 'name' %>

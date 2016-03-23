@@ -97,9 +97,17 @@ class AdminsController < ApplicationController
   end
 
   def users
+    @total = User.where(status: 0).length
+    @begining_of_week = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_week, 0).length
+    @begining_of_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 0).length
+    @begining_of_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 0).length
   end
 
   def affiliates
+    @total = User.where(status: 1).length
+    @begining_of_week = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_week, 1).length
+    @begining_of_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 1).length
+    @begining_of_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 1).length
   end
 
   def updated

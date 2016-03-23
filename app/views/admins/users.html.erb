@@ -1,14 +1,44 @@
+<%= render partial: 'nav' %>
 
-    <%= render partial: 'nav' %>
-
-    <main>
-      <div class="container">
-        <div class="row">
-          <div class="col s12">
-            <p class='account-header' style='text-align:center'>Users</p>
-          </div>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <p class='account-header' style='text-align:center'>User Statistics</p>
         </div>
       </div>
-    </main>
-  </body>
-</html>
+      <div class="row center">
+        <div class="col l3 m3 s6" style='margin-top: 10px;'>
+          <p class="dashboard-headers"><strong>Total Users</strong></p>
+          <p><%= @total %></p>
+        </div>
+        <div class="col l3 m3 s6" style='margin-top: 10px;'>
+          <p class="dashboard-headers"><strong>New this Week</strong></p>
+          <p><%= @begining_of_week%></p>
+        </div>
+        <div class="col l3 m3 s6" style='margin-top: 10px;'>
+          <p class="dashboard-headers"><strong>New this Month</strong></p>
+          <p><%= @begining_of_month%></p>
+        </div>
+        <div class="col l3 m3 s6" style='margin-top: 10px;'>
+          <p class="dashboard-headers"><strong>New this Year</strong></p>
+          <p><%= @begining_of_year%></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <p class='account-header' style='text-align:center'>User Info</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col 12">
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <p class='account-header' style='text-align:center'>User Order History</p>
+        </div>
+      </div>
+    </div>
+  </main>
