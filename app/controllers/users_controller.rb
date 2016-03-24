@@ -74,7 +74,6 @@ class UsersController < ApplicationController
   def create
     user = User.create( user_params )
     if user.save
-      binding.pry
       if user.status === 0
         session[:user_id] = user.id
         UserMailer.user_welcome_email(user).deliver
