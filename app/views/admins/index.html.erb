@@ -90,10 +90,12 @@
             <% @top_selling_products.each do |product| %>
             <div class="row">
               <div class="col l3 m6 s12 center">
-                <%= image_tag product.image.url(:thumb), :style => "width: 100px" %>
+                <%= link_to product_path(product.id) do %>
+                  <%= image_tag product.image.url(:thumb), :style => "width: 100px" %>
+                <% end %>
                 <p> <%= product.title %>: <%= product.total_orders %> orders </p>
               </div>
-              <% end %>
+            <% end %>
             </div>
           </div>
         </div>

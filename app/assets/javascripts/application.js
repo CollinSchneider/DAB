@@ -31,3 +31,15 @@
 // $(document).ready(function(){
 //   scroller()
 // })
+
+if($('.success-div')){
+  setTimeout(function(){
+    $('.success-div').fadeOut()
+  }, 5000)
+}
+
+if($('.error-div')){
+  setTimeout(function(){
+    $('.error-div').fadeOut()
+  }, 5000)
+}

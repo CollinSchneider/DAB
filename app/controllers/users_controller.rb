@@ -74,9 +74,10 @@ class UsersController < ApplicationController
   def create
     user = User.create( user_params )
     if user.save
+      binding.pry
       if user.status === 0
         session[:user_id] = user.id
-        # UserMailer.user_welcome_email(user).deliver
+        UserMailer.user_welcome_email(user).deliver
         redirect_to products_path
       elsif user.status === 1
         flash[:success] = "New Affiliate Created!"
@@ -94,6 +95,23 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_orders = @user.orders.order('created_at')
+    @total_spent = 0
+    @user.orders.each do |order|
+      @total_spent += order.pre_tax_total.to_f + order.tax_amount.to_f
+    end
+
+    @users_total_orders = 0
+    @user.products.each do |product|
+      product.product_items.each do |item|
+        item.order_items.each do |order|
+          @users_total_orders += order.quantity
+        end
+      end
+    end
+    # @users_pending_orders = OrderItem.where('user_id = ? AND status = ?', @user.id, 0)
+    # @users_delivered_orders = OrderItem.where('user_id = ? AND status = ?', @user.id, 1)
+    # @users_delivered_orders = OrderItem.where('user_id = ? AND status = ?', @user.id, 2)
   end
 
   def cart

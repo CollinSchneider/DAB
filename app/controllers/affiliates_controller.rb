@@ -73,7 +73,7 @@ class AffiliatesController < ApplicationController
   end
 
   def update
-    @pending_orders = OrderItem.where('affiliate_id = ? AND status = ?', current_user.id, 1)
+    @pending_orders = OrderItem.where('affiliate_id = ? AND status = ?', current_user.id, 0).order('user_id')
   end
 
   def orders

@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col l2r m6 s12 center">
             <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
-              <p> <%= '%.3f' % ((@total_products_sold.to_f/@total_views)*100 )%>%  ( <%= @total_orders %>/<%= @total_views %>)</p>
+              <p> <%= '%.3f' % ((@total_orders.to_f/@total_views)*100 )%>%  ( <%= @total_orders %>/<%= @total_views %>)</p>
           </div>
           <div class="col l2r m6 s12 center">
             <p class='dashboard-headers'><strong>Sales</strong><p>
@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col l3 m6 s12 center">
             <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
-            <p> <%= '%.3f' % ((@weeks_products_sold.to_f/@weeks_views)*100) %>% (<%= @weeks_orders %>/<%= @weeks_views %>) </p>
+            <p> <%= '%.3f' % ((@weeks_orders.to_f/@weeks_views)*100) %>% (<%= @weeks_orders %>/<%= @weeks_views %>) </p>
           </div>
           <div class="col l3 m6 s12 center">
             <p class='dashboard-headers'><strong>Sales</strong><p>

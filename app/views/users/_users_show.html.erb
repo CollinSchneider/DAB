@@ -1,0 +1,40 @@
+<h4>Email: </h4>
+<h6><%= @user.email %></h6>
+
+<h4> Total Orders: </h4>
+<h6><%= @user_orders.count %> </h6>
+
+<h4> Total amount spent: </h4>
+<h6> $<%= @total_spent %> </h6>
+
+<h4> Date Joined: </h4>
+<h6><%= @user.created_at.strftime("%b %d, %Y") %></h6>
+
+<% if @user_orders.length > 0 %>
+  <h3> Past Orders: </h3>
+    <% @user_orders.each do |order| %>
+      <div class="order" style = "border: 1px solid black; text-align: center">
+        <h4> <%= order.created_at.strftime("%b %d, %Y") %> </h4>
+        <% order.order_items.each do |item| %>
+          <%= image_tag item.product_item.product.image.url(:thumb), :style => "display: inline-block" %>
+          <div style="display: inline-block">
+            <h5> <%= item.product_item.description %> <%= item.product_item.product.title %> </h5>
+            <h6> $<%= item.product_item.product.price %> x <%= item.quantity %> items = $<%= item.product_item.product.price.to_i * item.quantity %> </h6>
+          </div> </br>
+          <h5>
+            <% if item.status === 0 %> Order item is Pending
+            <% elsif item.status === 1 %> Order item has been shipped </br>
+            Shipping Info: </br>
+            <%= item.shipping_method %>: <%= item.shipping_number %>(shipping number)
+            <% elsif item.status === 2 %> Order item has been delivered
+            <% end %>
+          </h5>
+        <% end %>
+        <h6>Subtotal: <strong>$<%='%.2f' % order.pre_tax_total %></strong></h6>
+        <h6>Tax: <strong>$<%= '%.2f' % order.tax_amount %></strong></h6>
+        <h6>Total: <strong>$<%= '%.2f' % (order.pre_tax_total.to_f + order.tax_amount.to_f) %></strong></h6>
+      </div>
+    <% end %>
+<% else %>
+  <h4> <%= @user.name %> has not made any orders </h4>
+<% end %>

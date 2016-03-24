@@ -11,9 +11,13 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, length: { in: 6..20 }, unless: :skip_user_validation
   validates :password_confirmation, presence: true, unless: :skip_user_validation
   validates :email, presence: true, uniqueness: true, unless: :skip_user_validation
+  before_save :downcase_fields
 
   attr_accessor :skip_user_validation
 
+  def downcase_fields
+    self.email.downcase!
+  end
 
   def self.from_omniauth(auth)
     if(auth.info.email)

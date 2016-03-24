@@ -1,1 +1,13 @@
+<%= link_to "Home", admins_path %>
+
 <h3> <%= @user.name || @user.email %> </h3>
+
+<% if @user.status === 0 %>
+
+  <%= render partial: 'users_show' %>
+
+<% elsif @user.status === 1 %>
+
+  <%= render partial: 'affiliates_show' %>
+
+<% end %>

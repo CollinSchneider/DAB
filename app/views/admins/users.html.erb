@@ -42,9 +42,11 @@
             <%= text_field_tag :search, params[:search], :placeholder => "Search for User" %>
             <%= submit_tag "Search", :name => nil %>
           <% end %>
-          <%= form_tag admin_users_path, :method => 'get' do %>
-            <%= hidden_field_tag :search, params[:search], :value => nil %>
-            <%= submit_tag "Get All", :name => nil %>
+          <% if @users.length != @users_count %>
+            <%= form_tag admin_users_path, :method => 'get' do %>
+              <%= hidden_field_tag :search, params[:search], :value => nil %>
+              <%= submit_tag "Get All", :name => nil %>
+            <% end %>
           <% end %>
 
           <% if @users.length === 0 %>

@@ -6,7 +6,7 @@
       <div class="col s12">
         <h1>Pending Orders</h1>
         <% @pending_orders.each do |order| %>
-        <div id = "affiliate-order-div">
+        <div id = "affiliate-order-div" style ="border: 1px solid black; width: 49%; display: inline-block; text-align: center; padding: 10px">
           <%= image_tag order.product_item.product.image.url(:medium) %>
           <h3> <%= order.quantity %> <%= order.product_item.description %> of <%= order.product_item.product.title %> </h3>
             <h5> Send to: <%= order.order.address.name %> </h5>
@@ -21,7 +21,8 @@
               <%= content_tag(:option, a, value: a) %>
               <% end %>
             <% end %>
-            <%= f.text_field :shipping_number %>
+            <%= f.label "Shipping Number" %>
+            <%= f.text_field :shipping_number, :placeholder => "Shipping Number" %>
             <%= f.submit "Mark Order as Shipped"%>
           <% end %>
           </div>

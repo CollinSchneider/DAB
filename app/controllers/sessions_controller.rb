@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:email].downcase)
     if !user
       flash[:error] = "No users found with this email"
       redirect_to users_path
