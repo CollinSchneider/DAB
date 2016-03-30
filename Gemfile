@@ -52,6 +52,8 @@ gem 'taxjar-ruby', require: 'taxjar'
 # gem 'unicorn'
 gem 'dotenv'
 
+gem 'prawn'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -146,7 +146,11 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    pdf-core (0.6.1)
     pg (0.18.4)
+    prawn (2.1.0)
+      pdf-core (~> 0.6.1)
+      ttfunk (~> 1.4.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -220,6 +224,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    ttfunk (1.4.0)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -254,6 +259,7 @@ DEPENDENCIES
   omniauth-facebook
   paperclip
   pg (~> 0.15)
+  prawn
   pry
   rails (= 4.2.5)
   rails_12factor
