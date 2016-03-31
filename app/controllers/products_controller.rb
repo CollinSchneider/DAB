@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   impressionist :actions=>[:show,:index]
 
   def index
+    binding.pry
     authenticate_anybody
     cart_counter
     @products = Product.order(priority: :desc).paginate(:per_page => 3, :page => params[:page])

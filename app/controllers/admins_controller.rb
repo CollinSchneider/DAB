@@ -56,7 +56,6 @@ class AdminsController < ApplicationController
       format.pdf do
         pdf = OverallMetricsPdf.new(@total_impressions, @total_unique_views, @total_sales, @total_orders, @total_show_impressions, @weeks_impressions, @weeks_show_impressions, @weeks_unique_views, @orders_7_days, @sales_7_days, @weeks_orders, @top_selling_week_product, @top_selling_affiliate, @top_selling_products)
         send_data pdf.render, filename: @file_name,
-                              # filename: "DealBaked #{past_7_days.strftime("%b %d, %Y")} to #{Time.now.strftime("%b %d, %Y")}",
                               type: 'application/pdf',
                               disposition: 'inline'
       end
