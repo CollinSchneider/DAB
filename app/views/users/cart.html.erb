@@ -22,14 +22,14 @@
     <% if current_user.cart_items.length === 0 %>
       <div class="col s12 center">
         <p>Your shopping cart is empty! To view our offerings, hit the button below to view all the best deals around the web !</p>
-        <a class='btn waves-effect grey darken-3' href="/products">Checkout the Store</a></p>
+        <a class='btn waves-effect grey darken-3' href="/products">Checkout the Store</a>
       </div>
     <% else %>
-      <div class="row" style='margin-top: 10px;'>
         <div class='col l8 s12 center'>
           <% current_user.cart_items.each do |cart| %>
+          <div class="row" style='margin-top: 10px;'>
             <div class="col s4 cart-product-image">
-              <div>
+              <div style='float:right;'>
                 <%= image_tag cart.product_item.product.image.url(:thumb) %>
               </div>
             </div>
