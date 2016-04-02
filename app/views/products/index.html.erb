@@ -40,20 +40,24 @@
 
 <script>
 
-  // var loading = false;
-  //
-  // function scroller(){
-  //   $(window).scroll(function() {
-  //     var url = $('.pagination > a').attr('href');
-  //     if(!loading && url && $(window).scrollTop()>$(document).height()-$(window).height()-25) {
-  //       return $.getScript(url);
-  //       return loading = true;
-  //     }
-  //   });
-  // }
-  //
-  // $(document).ready(function(){
-  //   scroller()
-  // })
+var active = false
+
+function scroller(){
+  $(window).scroll(function() {
+    var url = $('.pagination > a').attr('href');
+    if($(window).scrollTop()>$(document).height()-$(window).height()-50){
+      if(!active && url){
+        active = true;
+        $.getScript(url).then(function(){
+          active = false;
+        })
+      }
+    }
+  });
+}
+
+  $(document).ready(function(){
+    scroller()
+  })
 
 </script>
