@@ -74,7 +74,7 @@
                   <%= f.submit 'ADD TO CART', :class => 'btn grey darken-3', :id => 'add-to-cart-btn', :style => 'margin-top:10px;'  %>
                 </div>
               <% end %>
-                
+
               <% else %>
               <h4> SOLD OUT </h4>
             <% end %>
@@ -90,10 +90,18 @@
               <p><strong>Features:</strong>
                 <ul id='feature-list'>
                   <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_one %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
-                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
+                  <% if @product.feature_two != nil %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
+                  <% end %>
+                  <% if @product.feature_three != nil %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
+                  <% end %>
+                  <% if @product.feature_four != nil %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
+                  <% end %>
+                  <% if @product.feature_five != nil %>
+                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
+                  <% end %>
                 </ul>
               </p>
             </div>
