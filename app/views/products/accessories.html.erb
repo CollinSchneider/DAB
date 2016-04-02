@@ -17,19 +17,25 @@
 <%= render partial: 'partials/footer' %>
 
 <script>
-  var active = true;
 
-  function scroller(){
-    $(window).scroll(function() {
-      var url = $('.pagination > a').attr('href');
-      if(active && url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
-        active = false;
-        return $.getScript(url);
+var active = false
+
+function scroller(){
+  $(window).scroll(function() {
+    var url = $('.pagination > a').attr('href');
+    if($(window).scrollTop()>$(document).height()-$(window).height()-50){
+      if(!active && url){
+        active = true;
+        $.getScript(url).then(function(){
+          active = false;
+        })
       }
-    });
-  }
+    }
+  });
+}
 
   $(document).ready(function(){
     scroller()
   })
+
 </script>

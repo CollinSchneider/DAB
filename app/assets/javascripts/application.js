@@ -11,22 +11,28 @@
 // about supported directives.
 //
 //= require jquery
+// = require jquery.infinite-pages
 //= require jquery_ujs
 //= require turbolinks
 
-// var active = true;
+// var active = false
 //
 // function scroller(){
 //   $(window).scroll(function() {
 //     var url = $('.pagination > a').attr('href');
-//     console.log($(window).scrollTop());
-//     if(active && url && $(window).scrollTop()>$(document).height()-$(window).height()-10){
-//       active = false;
-//       // $('.pagination > a')[0].click()
-//       return $.getScript(url);
+//     // console.log($(window).scrollTop());
+//     if($(window).scrollTop()>$(document).height()-$(window).height()-50){
+//       console.log(active);
+//       if(!active && url){
+//         active = true;
+//         $.getScript(url).then(function(){
+//           active = false;
+//         })
+//       }
 //     }
 //   });
 // }
+//
 //
 // $(document).ready(function(){
 //   scroller()
