@@ -2,29 +2,19 @@
 
 <div class = "container" id='main-content'>
 
-<div class="row">
-
-  <div class="col 16 m12 s12 product">
-    <div class="card">
+  <div class="row">
+      <div class="col l6 m12 s12">
        <%= link_to best_sellers_path do %>
-        <div class="card-image">
-          <img src="http://www.thewallpapers.org/photo/64315/Summer-and-Nature-Scenery-032.jpg" class = "responsive-img" style = "max-height: 350px" alt="" />
-        </div>
+          <img src="http://www.thewallpapers.org/photo/64315/Summer-and-Nature-Scenery-032.jpg" class = "responsive-img" style = "max-height: 350px;width: 100%" alt="" />
         <% end %>
       </div>
-    </div>
 
-    <div class="col 16 m12 s12 product">
-      <div class="card">
-         <%= link_to new_arrivals_path do %>
-          <div class="card-image">
-            <img src="http://onehdwallpaper.com/wp-content/uploads/2015/07/Beautiful-Scenery-HD-Wallpapers-Pictures.jpg" class = "responsive-img" style = "max-height: 350px" alt="" />
-          </div>
-          <% end %>
-        </div>
+      <div class="col l6 m12 s12">
+       <%= link_to new_arrivals_path do %>
+          <img src="http://onehdwallpaper.com/wp-content/uploads/2015/07/Beautiful-Scenery-HD-Wallpapers-Pictures.jpg" class = "responsive-img" style = "max-height: 350px;width: 100%" alt="" />
+        <% end %>
       </div>
-
-    </div>
+  </div>
 
   <div class="infinite-table">
     <%= render :partial => 'product'%>
