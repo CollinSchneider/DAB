@@ -9,25 +9,45 @@
           </div>
         </div>
         <div class="row">
-          <div class="col l2r m6 s12 center">
+          <div class="col l2r m2 s12 center">
             <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
-              <p> <%= '%.3f' % ((@total_orders.to_f/@total_views)*100 )%>%  ( <%= @total_orders %>/<%= @total_views %>)</p>
+              <% if @total_views === 0 %>
+              <p> No views! </p>
+              <% else %>
+                <p> <%= '%.3f' % ((@total_orders.to_f/@total_views)*100 )%>%  (<%= @total_orders %>/<%= @total_views %>)</p>
+              <% end %>
           </div>
-          <div class="col l2r m6 s12 center">
+          <div class="col l2r m2 s12 center">
             <p class='dashboard-headers'><strong>Sales</strong><p>
-              <p> $<%= @total_sales %> </p>
+              <% if @total_sales != nil %>
+                <p> $<%= @total_sales %> </p>
+              <% else %>
+                <p> No sales yet </p>
+              <% end %>
           </div>
-          <div class="col l2r m6 s12 center">
+          <div class="col l2r m2 s12 center">
             <p class='dashboard-headers'><strong>Impressions</strong><p>
-              <p><%= @total_views %></p>
+              <% if @total_views != nil %>
+                <p><%= @total_views %></p>
+              <% else %>
+                <p> No views yet</p>
+              <% end %>
           </div>
-          <div class="col l2r m6 s12 center">
+          <div class="col l2r m2 s12 center">
             <p class='dashboard-headers'><strong>Products Sold</strong><p>
-              <p> <%= @total_products_sold %> </p>
+              <% if @total_products_sold != nil %>
+                <p> <%= @total_products_sold %> </p>
+              <% else %>
+                <p> No products sold yet</p>
+              <% end %>
           </div>
-          <div class="col l2r m6 s12 center">
+          <div class="col l2r m2 s12 center">
             <p class='dashboard-headers'><strong>Total Orders</strong><p>
-            <p> <%= @total_orders %> </p>
+              <% if @total_orders != nil %>
+                <p> <%= @total_orders %> </p>
+              <% else %>
+                <p>No orders yet</p>
+              <% end %>
           </div>
         </div>
       </div>
@@ -39,11 +59,19 @@
         <div class="row">
           <div class="col l3 m6 s12 center">
             <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
-            <p> <%= '%.3f' % ((@weeks_orders.to_f/@weeks_views)*100) %>% (<%= @weeks_orders %>/<%= @weeks_views %>) </p>
+              <% if @weeks_views === 0 %>
+                <p>No views this week!</p>
+              <% else %>
+                <p> <%= '%.3f' % ((@weeks_orders.to_f/@weeks_views)*100) %>% (<%= @weeks_orders %>/<%= @weeks_views %>) </p>
+              <% end %>
           </div>
           <div class="col l3 m6 s12 center">
             <p class='dashboard-headers'><strong>Sales</strong><p>
-            <p> $<%= @weeks_sales %> </p>
+            <% if @week_sales != nil %>
+              <p> $<%= @weeks_sales %> </p>
+            <% else %>
+              <p> No sales this week</p>
+            <% end %>
           </div>
           <div class="col l3 m6 s12 center">
             <p class='dashboard-headers'><strong>Impressions</strong><p>
@@ -51,7 +79,11 @@
           </div>
           <div class="col l3 m6 s12 center">
             <p class='dashboard-headers'><strong>Products Sold</strong><p>
-              <p><%= @weeks_products_sold %> </p>
+              <% if @weeks_products_sold != nil %>
+                <p><%= @weeks_products_sold %> </p>
+              <% else %>
+                <p>No products sold this week</p>
+              <% end %>
           </div>
         <div class="row">
           <div class="col s12 center">
