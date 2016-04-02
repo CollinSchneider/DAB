@@ -25,55 +25,56 @@
         <a class='btn waves-effect grey darken-3' href="/products">Checkout the Store</a></p>
       </div>
     <% else %>
-      <div class='col l8 s12 center'>
-        <% current_user.cart_items.each do |cart| %>
-          <div class="col s4 cart-product-image">
-            <div>
-              <%= image_tag cart.product_item.product.image.url(:thumb) %>
+      <div class="row" style='margin-top: 10px;'>
+        <div class='col l8 s12 center'>
+          <% current_user.cart_items.each do |cart| %>
+            <div class="col s4 cart-product-image">
+              <div>
+                <%= image_tag cart.product_item.product.image.url(:thumb) %>
+              </div>
+            </div>
+            <div class='col s7 cart-product-details'>
+              <div class='left cart-product-info'>
+                <p class='cart-product-title'><%= cart.product_item.description %> <%= cart.product_item.product.title %></p>
+                <table class='cart-price-table'>
+                  <tbody>
+                    <tr>
+                      <td class='cart-table-left'><strong>Price</strong>:</td>
+                      <td class='cart-table-right'>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <%= form_for cart, :id => "update-cart-form" do |f| %>
+                <p>Quantity: <%= f.select :quantity, (1..5), :id => 'cart-quantity-select', :selected => cart.quantity %></p>
+              <% end %>
+              <div class='left grey-text darken-4 cart-shipping-info'>
+                <table class='cart-shipping-table'>
+                  <tbody>
+                    <tr>
+                      <td class='cart-table-left' id='cart-shipping-headers'><strong>Availability</strong>:</td>
+                      <td class='cart-table-right'></td>
+                    </tr>
+                    <tr>
+                      <td class='cart-table-left' id='cart-shipping-headers'><strong>Ships In</strong>:</td>
+                      <td class='cart-table-right'></td>
+                    </tr>
+                    <tr class='hide-on-med-and-down'>
+                      <td class='cart-table-left' id='cart-shipping-headers'><strong>Shipping Policy</strong>:</td>
+                      <td class='cart-table-right'></td>
+                    </tr>
+                    <tr class='hide-on-med-and-down'>
+                      <td class='cart-table-left' id='cart-shipping-headers'><strong>Return Policy</strong>:</td>
+                      <td class='cart-table-right'></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col s1">
+              <%= button_to "X", cart_item_path(cart.id), method: :delete, :class => 'remove-item' %>
             </div>
           </div>
-          <div class='col s7 cart-product-details'>
-            <div class='left cart-product-info'>
-              <p class='cart-product-title'><%= cart.product_item.description %> <%= cart.product_item.product.title %></p>
-              <table class='cart-price-table'>
-                <tbody>
-                  <tr>
-                    <td class='cart-table-left'><strong>Price</strong>:</td>
-                    <td class='cart-table-right'>$<%= cart.product_item.product.price.to_i * cart.quantity.to_i %>.00</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <%= form_for cart, :id => "update-cart-form" do |f| %>
-              <p>Quantity: <%= f.select :quantity, (1..5), :id => 'cart-quantity-select', :selected => cart.quantity %></p>
-            <% end %>
-            <div class='left grey-text darken-4 cart-shipping-info'>
-              <table class='cart-shipping-table'>
-                <tbody>
-                  <tr>
-                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Availability</strong>:</td>
-                    <td class='cart-table-right'></td>
-                  </tr>
-                  <tr>
-                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Ships In</strong>:</td>
-                    <td class='cart-table-right'></td>
-                  </tr>
-                  <tr class='hide-on-med-and-down'>
-                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Shipping Policy</strong>:</td>
-                    <td class='cart-table-right'></td>
-                  </tr>
-                  <tr class='hide-on-med-and-down'>
-                    <td class='cart-table-left' id='cart-shipping-headers'><strong>Return Policy</strong>:</td>
-                    <td class='cart-table-right'></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="col s1">
-            <%= button_to "X", cart_item_path(cart.id), method: :delete, :class => 'remove-item' %>
-          </div>
-
         <% end %>
       </div>
       <div class="col l4 s12 order-summary">
