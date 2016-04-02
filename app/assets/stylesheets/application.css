@@ -344,7 +344,7 @@
 }
 
 .total-container {
-  min-height: 194px;
+  min-height: 245px;
 }
 
 .checkout-button {
@@ -438,7 +438,7 @@
 }
 
 .remove-item {
-  background-color: #eee;
+  background-color: #fafafa;
   border: none;
 }
 
@@ -448,18 +448,18 @@
 
 .cart-price-table {
   font-size: 14px;
-  background-color: #eee;
+  background-color: #fafafa;
   margin-bottom: -10px;
 }
 
 .cart-shipping-table {
   font-size: 12px;
-  background-color: #eee;
+  background-color: #fafafa;
   margin-bottom: -10px;
 }
 
 tr:hover {
-  background-color: #eee;
+  background-color: #fafafa;
 }
 
 .cart-shipping-table tr {

@@ -64,17 +64,33 @@
       <div id="modal1" class="modal">
         <div class="modal-content">
           <h4 style='text-align: center;'>Add Shipping Address</h4>
+          <div class="row">
           <%= form_for Address.new do |f| %>
             <%= f.hidden_field :user_id, :value => current_user.id %>
-            <%= f.text_field :name, :placeholder => "Shipping Name", :required => true %>
-            <%= f.text_field :country, :placeholder => "Country", :required => true %>
+            <div class="col s12">
+              <%= f.text_field :name, :placeholder => "Name", :required => true %>
+            </div>
+            <div class="col s8">
             <%= f.text_field :address, :placeholder => "Address", :required => true %>
-            <%= f.text_field :city, :placeholder => "City", :required => true %>
-            <%= f.text_field :state, :placeholder => "State", :required => true %>
+            </div>
+            <div class="col s4">
+              <%= f.text_field :city, :placeholder => "City", :required => true %>
+            </div>
+            <div class="col s4">
+              <%= f.text_field :state, :placeholder => "State", :required => true %>
+            </div>
+            <div class="col s4">
             <%= f.number_field :zip, :placeholder => "Zip Code", :maxlength => 5, :required => true %>
-            <%= f.hidden_field :active, :value => 'no' %>
-            <%= f.submit "Create Shipping Address", :class => 'btn waves-effect grey darken-3 center' %>
+            </div>
+            <div class="col s4">
+              <%= f.text_field :country, :placeholder => "Country", :required => true %>
+            </div>
+              <%= f.hidden_field :active, :value => 'no' %>
+            <div class="col s12 right-align">
+              <%= f.submit "Submit", :class => 'btn waves-effect grey darken-3 center' %>
+            </div>
           <% end %>
+          </div>
         </div>
       </div>
 
@@ -83,7 +99,7 @@
         We're constantly working on expanding our shipping options and adding international shipping.
       </p>
     </div>
-    <div class="col s12 l6 grey lighten-2 hide-on-med-and-down" id='step-top-row'>
+    <div class="col s12 l6 grey lighten-3 hide-on-med-and-down" id='step-top-row'>
         <div class="total-container">
           <div class="center">
             <p class='account-header'>Order Summary</p>
@@ -97,6 +113,7 @@
                 -
               <% end %>
               </span></p>
+            <p>Shipping: <span class='right amount'>Free</span></p>
           </div>
           <div class='subtotals'>
             <p>Total: <span class = "right amount">
