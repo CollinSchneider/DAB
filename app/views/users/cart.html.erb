@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="col s1">
-            <%= button_to "X", cart_item_path(cart.id), method: :delete, :class => 'remove-item', data: { confirm: "Remove #{cart.product_item.product.title} from cart?" } %>
+            <%= button_to "X", cart_item_path(cart.id), method: :delete, :class => 'remove-item' %>
           </div>
 
         <% end %>
@@ -83,6 +83,9 @@
           </div>
           <div class='grey-text darken-4 subtotals'>
             <p>Order Subtotal: <span class='right amount'>$<%= @amount %>.00</span></p>
+          </div>
+          <div class='grey-text darken-4 subtotals'>
+            <p>Shipping: <span class='right amount'>Free</span></p>
           </div>
           <div class='subtotals'>
             <p>Total: <span class='right amount'>$<%= @amount %>.00</span></p>

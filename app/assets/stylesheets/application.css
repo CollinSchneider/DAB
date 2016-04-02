@@ -17,6 +17,12 @@
    display: none;
  }
 
+ hr {
+  margin-left: 0px;
+  border-top: 0.5px #eeeeee;
+  max-width: 435px;
+ }
+
  .row {
    margin-bottom: 0px;
  }

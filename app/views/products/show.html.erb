@@ -1,5 +1,12 @@
 <%= render partial: 'partials/header' %>
 
+<script>
+  (document).ready(function() {
+    // Select - Single
+    $('select:not([multiple])').material_select();
+});
+</script>
+
 <div class="container" id='main-content'>
   <% if current_user.status === 2 %>
     <%= button_to "Edit #{@product.title}", edit_product_path(@product.id), method: :get %>
@@ -17,11 +24,8 @@
   <% end %>
 
     <div class="row">
-      <!-- <h3> <%= @product.impressionist_count %> Views </h3>
-      <h3> <%= @product.impressionist_count(:filter=>:ip_address) %> Unique IP Views </h3>
-      <h3> <%= @product.impressionist_count(:filter=>:session_hash) %> Unique Session Views </h3> -->
       <div class="col l6 s12">
-        <%= image_tag @product.image.url(:medium), :id => "product-image", :class => "materialboxed responsive-img" %>
+        <%= image_tag @product.image.url(:large), :class => "responsive-img", :style => 'height:448px;width:597px;' %>
         <ul id='product-images-list'>
           <% if @product.image_two.exists? %>
             <li><%= image_tag @product.image_two.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
@@ -42,25 +46,35 @@
           <div class="row">
             <h4 id='product-title'> <%= @product.title %> </h4>
             <h5 id='product-price'><strong> $<%= @product.price %> </strong></h5>
+            <!--<% @product.product_items.each do |item| %>
+              <h6> <%= item.description %> <%= item.quantity %> </h6>
+            <% end %> -->
           </div>
-          <div class="row" style='margin-top:-25px'>
+          <div class="row" style='margin-top:-40px;margin-bottom:-10px;'>
             <div class="input-field col s12 center">
             <% if @product.product_items.where('status = ?', 0).exists? %>
               <%= form_for @cart_item do |f| %>
+                <div class="col l4 m4 s6" style='margin-left:-20px;'>
                 <%= f.select :product_item_id, :class => "browser-default", :id => "add-to-cart-qty" do %>
                   <% @product.product_items.where('status = ?', 0).each do |item| %>
                     <%= content_tag(:option, item.description, value: item.id) %>
                     <% end %>
                   <% end %>
-                <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
-                  <% (1..5).each do |a| %>
-                    <%= content_tag(:option, a, value: a) %>
+                </div>
+                <div class="col l2 m2 s6">
+                  <%= f.select :quantity, :class => 'browser-default', :id => 'add-to-cart-qty' do %>
+                    <% (1..5).each do |a| %>
+                      <%= content_tag(:option, a, value: a) %>
+                    <% end %>
                   <% end %>
-                <% end %>
-                <%= f.hidden_field :affiliate_id, :value => @product.user_id %>
-                <%= f.hidden_field :user_id, :value => current_user.id %>
-                <%= f.submit 'ADD TO CART', :class => 'btn grey darken-3', :id => 'add-to-cart-btn'  %>
+                </div>
+                  <%= f.hidden_field :affiliate_id, :value => @product.user_id %>
+                  <%= f.hidden_field :user_id, :value => current_user.id %>
+                <div class="col l6 m6 s12">
+                  <%= f.submit 'ADD TO CART', :class => 'btn grey darken-3', :id => 'add-to-cart-btn', :style => 'margin-top:10px;'  %>
+                </div>
               <% end %>
+                
               <% else %>
               <h4> SOLD OUT </h4>
             <% end %>
@@ -76,18 +90,10 @@
               <p><strong>Features:</strong>
                 <ul id='feature-list'>
                   <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_one %> </li>
-                  <% if @product.feature_two.length > 0 %>
-                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
-                  <% end %>
-                  <% if @product.feature_three.length > 0 %>
-                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
-                  <% end %>
-                  <% if @product.feature_four.length > 0 %>
-                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
-                  <% end %>
-                  <% if @product.feature_five.length > 0 %>
-                    <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
-                  <% end %>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_two %> </li>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_three %> </li>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_four %> </li>
+                  <li><i class="grey-text darken-3 fa fa-check fa-1x"></i> <%= @product.feature_five %> </li>
                 </ul>
               </p>
             </div>
@@ -128,15 +134,15 @@
 <%= render partial: 'partials/footer' %>
 
 <script>
-// if($('.success-div')){
-//   setTimeout(function(){
-//     $('.success-div').fadeOut()
-//   }, 5000)
-// }
-//
-// if($('.error-div')){
-//   setTimeout(function(){
-//     $('.error-div').fadeOut()
-//   }, 5000)
-// }
+if($('.success-div')){
+  setTimeout(function(){
+    $('.success-div').fadeOut()
+  }, 5000)
+}
+
+if($('.error-div')){
+  setTimeout(function(){
+    $('.error-div').fadeOut()
+  }, 5000)
+}
 </script>
