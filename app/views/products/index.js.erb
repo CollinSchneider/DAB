@@ -6,5 +6,5 @@ $("<%=j render(:partial => 'product') %>")
   $('.pagination').remove();
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@products, 'Next Page', :remote => true) %>");
+    .html("<%=j link_to_next_page(@products, '', :remote => true) %>");
 <% end %>
