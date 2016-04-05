@@ -1,4 +1,15 @@
 class Product < ActiveRecord::Base
+  # extend FriendlyId
+  # friendly_id :title, :use => :slugged
+  validates_presence_of :slug
+  validates :title,
+    presence: true,
+    :uniqueness => {:message => "A product already exists with this title!"}
+
+  def to_param
+    slug
+  end
+
   belongs_to :user
   has_many :product_items, :dependent => :destroy
   has_many :cart_items, through: :product_items, :dependent => :destroy

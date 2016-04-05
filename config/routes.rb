@@ -58,6 +58,8 @@ Rails.application.routes.draw do
     get '/affiliate-products' => 'affiliates#products'
 
   resources :products
+  # resources :products, :except => ['show']
+    # get 'products/:slug' => 'products#show'
   resources :product_items
   resources :cart_items
   resources :order_items

@@ -48,7 +48,6 @@ class AdminsController < ApplicationController
         @orders_30_days += item.quantity
         @sales_30_days += item.product_item.product.price.to_i * item.quantity
       end
-
     end
     @file_name = "DealBaked-Metrics-#{Time.now.strftime('%m/%d/%Y')}"
     respond_to do |format|

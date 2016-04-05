@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
 
-  # require 'prawn'
-
   def index
-  # Prawn::Document.generate("hello.pdf") do
-  #   text "Hello World!"
-  # end
     if current_user
       redirect_to products_path
     end
@@ -51,7 +46,6 @@ class UsersController < ApplicationController
   end
 
   def update_account
-    # user = User.find(params[:id])
     user = current_user
     user.update(user_account_params)
     user.skip_user_validation = true

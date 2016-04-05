@@ -9,7 +9,7 @@
 
 <div class="container" id='main-content'>
   <% if current_user.status === 2 %>
-    <%= button_to "Edit #{@product.title}", edit_product_path(@product.id), method: :get %>
+    <%= button_to "Edit #{@product.title}", edit_product_path(@product.slug), method: :get %>
   <% end %>
 
   <% if flash[:error] %>

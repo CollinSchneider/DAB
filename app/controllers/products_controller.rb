@@ -11,7 +11,8 @@ class ProductsController < ApplicationController
   def show
     authenticate_anybody
     cart_counter
-    @product = Product.find(params[:id])
+    # @product = Product.find(params[:id])
+    @product = Product.find_by(slug: params[:id])
     @product_item = ProductItem.new
     @cart_item = CartItem.new
   end
@@ -23,10 +24,9 @@ class ProductsController < ApplicationController
 
   def edit
     authenticate_admin
-    @product = Product.find(params[:id])
+    @product = Product.find_by(slug: params[:id])
     @product_item = ProductItem.new
   end
-
 
   def tech
     cart_counter
@@ -66,13 +66,8 @@ class ProductsController < ApplicationController
     @new_arrivals = Product.order(created_at: :desc).paginate(:page => params[:page], :per_page => 3)
   end
 
-  def edit
-    authenticate_admin
-    @product = Product.find(params[:id])
-  end
-
   def destroy
-    product = Product.find(params[:id])
+    product = Product.find_by(slug: params[:id])
     product.product_items.each do |item|
       item.delete
     end
@@ -83,27 +78,36 @@ class ProductsController < ApplicationController
 
   def update
     authenticate_admin
-    product = Product.find(params[:id])
+    product = Product.find_by(slug: params[:id])
     product.update(product_params)
-    flash[:success] = "Product updated!"
-    redirect_to request.referrer
+    product.slug = product.title.downcase.gsub(" ", "-")
+    product.save
+    if product.save
+      flash[:success] = "Product updated!"
+      redirect_to edit_product_path(product.slug)
+    else
+      flash[:error] = product.errors.full_messages
+      redirect_to request.referrer
+    end
   end
 
   def create
     authenticate_admin
     product = Product.create( product_params )
+    product.slug = product.title.downcase.gsub(" ", "-")
     if product.save
       flash[:success] = "Product created!"
-      redirect_to edit_product_path(product.id)
+      redirect_to edit_product_path(product.slug)
     else
-      flash[:error] = "Product not created, cannot have an image type of " + product.image_content_type
+      # flash[:error] = "Product not created, cannot have an image type of " + product.image_content_type
+      flash[:error] = product.errors.full_messages
       redirect_to request.referrer
     end
   end
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :slug)
   end
 
 end
