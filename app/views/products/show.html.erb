@@ -39,6 +39,9 @@
           <% if @product.image_five.exists? %>
             <li><%= image_tag @product.image_five.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
           <% end %>
+          <% if @product.embedded_video != nil %>
+            <%= @product.embedded_video %>
+          <% end %>
         </ul>
       </div>
       <div class="col l6 s12">

@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
     cart_counter
     # @product = Product.find(params[:id])
     @product = Product.find_by(slug: params[:id])
+    @embedded_video = %Q{<iframe #{@product.embedded_video}></iframe>}.html_safe
     @product_item = ProductItem.new
     @cart_item = CartItem.new
   end
@@ -107,7 +108,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :slug)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :embedded_video, :slug)
   end
 
 end

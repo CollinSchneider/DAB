@@ -1,0 +1,6 @@
+development:
+  GMAIL_USERNAME: Collin.Thomas.Schneider@gmail.com
+  GMAIL_PASSWORD: Thomas34?
+production:
+  GMAIL_USERNAME: Collin.Thomas.Schneider@gmail.com
+  GMAIL_PASSWORD: Thomas34?
