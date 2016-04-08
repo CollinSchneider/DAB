@@ -141,6 +141,7 @@
       </div>
     </div>
     <div class="row">
+    <% if @related_products != nil %>
       <h3>Related Products:</h3>
       <% @related_products.each do |product| %>
         <div class="col 14 m4 s12 product" style="display:inline-block">
@@ -164,6 +165,7 @@
             </div>
           </div>
       <% end %>
+    <% end %>
     </div>
   </div>
 
