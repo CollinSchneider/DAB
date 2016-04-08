@@ -29,8 +29,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'friendly_id'
-
 gem 'stripe'
 
 gem 'paperclip'
@@ -45,7 +43,7 @@ gem 'will_paginate', '~> 3.0.7'
 
 gem 'kaminari', :git => 'git://github.com/amatsuda/kaminari.git'
 
-gem 'jquery-infinite-pages'
+# gem 'jquery-infinite-pages'
 
 gem 'rails_12factor'
 
