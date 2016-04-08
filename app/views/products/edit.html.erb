@@ -57,6 +57,18 @@
           <% if @product.image_five.exists? %>
             <li><%= image_tag @product.image_five.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
           <% end %>
+          <% if @product.embedded_video != '' %>
+            <%= @product.embedded_video %>
+            (<%= @product.video_status %>)
+          <% else %>
+            <%= f.label "Youtube Link" %>
+            <%= f.text_field :embedded_video %>
+            <%= f.select :video_status do %>
+              <% ['Main Image', 'Sub-Image'].each do |a| %>
+                <%= content_tag(:option, a, value: a,) %>
+              <% end %>
+            <% end %>
+          <% end %>
         </ul>
       </div>
       <div class="col l6 s12">
@@ -85,7 +97,7 @@
           </div>
             <%= f.submit "Update #{@product.title}", :class => "btn blue" %> </br> </br>
           <% end %>
-          <%= button_to "Delete #{@product.title}", product_path(@product.id), method: :delete, :class => 'btn red', data: { confirm: "Delete #{@product.title}?" } %>
+          <%= button_to "Delete #{@product.title}", product_path(@product.slug), method: :delete, :class => 'btn red', data: { confirm: "Delete #{@product.title}?" } %>
         </div>
       </div>
     </div>

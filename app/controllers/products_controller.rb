@@ -13,7 +13,10 @@ class ProductsController < ApplicationController
     cart_counter
     # @product = Product.find(params[:id])
     @product = Product.find_by(slug: params[:id])
-    @embedded_video = %Q{<iframe #{@product.embedded_video}></iframe>}.html_safe
+    @related_products = Product.where('category = ?', @product.category).order(total_orders: :desc)
+    if @product.embedded_video != nil
+      @embedded_video = @product.embedded_video.html_safe
+    end
     @product_item = ProductItem.new
     @cart_item = CartItem.new
   end
@@ -69,9 +72,6 @@ class ProductsController < ApplicationController
 
   def destroy
     product = Product.find_by(slug: params[:id])
-    product.product_items.each do |item|
-      item.delete
-    end
     product.delete
     flash[:success] = "#{product.title} deleted!"
     redirect_to admins_path
@@ -82,6 +82,9 @@ class ProductsController < ApplicationController
     product = Product.find_by(slug: params[:id])
     product.update(product_params)
     product.slug = product.title.downcase.gsub(" ", "-")
+    if product.embedded_video.present?
+      product.embedded_video = convert_youtube_url(product.embedded_video)
+    end
     product.save
     if product.save
       flash[:success] = "Product updated!"
@@ -92,10 +95,23 @@ class ProductsController < ApplicationController
     end
   end
 
+  def convert_youtube_url(youtube_url)
+  if youtube_url[/youtu\.be\/([^\?]*)/]
+    youtube_id = $1
+  else
+    youtube_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
+    youtube_id = $5
+  end
+    %Q{<iframe title='YouTube video player' width='300' height='200' src='http://www.youtube.com/embed/#{ youtube_id }' frameborder='0' allowfullscreen></iframe>}
+  end
+
   def create
     authenticate_admin
     product = Product.create( product_params )
     product.slug = product.title.downcase.gsub(" ", "-")
+    if product.embedded_video.present?
+      product.embedded_video = convert_youtube_url(product.embedded_video)
+    end
     if product.save
       flash[:success] = "Product created!"
       redirect_to edit_product_path(product.slug)
@@ -108,7 +124,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :embedded_video, :slug)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :embedded_video, :video_status, :slug)
   end
 
 end

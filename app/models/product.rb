@@ -1,10 +1,15 @@
 class Product < ActiveRecord::Base
-  # extend FriendlyId
-  # friendly_id :title, :use => :slugged
+
   validates_presence_of :slug
   validates :title,
     presence: true,
     :uniqueness => {:message => "A product already exists with this title!"}
+
+  validates :video_status,
+    :presence => {:message => "error -> Video placement can't be blank if you are providing a video!"}, if: Proc.new { |product| product.embedded_video != '' }
+
+  validates :embedded_video,
+    :presence => {:message => "error -> Cannot have a video placement without proving a YouTube URL!"}, if: Proc.new {|product| product.video_status != ''}
 
   def to_param
     slug

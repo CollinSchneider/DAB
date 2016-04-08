@@ -39,9 +39,10 @@
           <% if @product.image_five.exists? %>
             <li><%= image_tag @product.image_five.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
           <% end %>
-          <% if @product.embedded_video != nil %>
-            <%= @product.embedded_video %>
+          <% if @embedded_video != nil %>
+            <%= @embedded_video %>
           <% end %>
+          <!-- <iframe title='YouTube video player' width='640' height='390' src='http://www.youtube.com/embed/WJPtq3laocU' frameborder='0' allowfullscreen></iframe> -->
         </ul>
       </div>
       <div class="col l6 s12">
@@ -139,6 +140,31 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <h3>Related Products:</h3>
+      <% @related_products.each do |product| %>
+        <div class="col 14 m4 s12 product" style="display:inline-block">
+          <div class="card">
+             <%= link_to product_path(product.slug) do %>
+              <div class="card-image">
+                <%= image_tag product.image.url(:large), :class => "responsive-img" %>
+                <div class="card-title" id = "card-category-title">
+                  <div style="font-size: 18px; font-weight: bold; color:white">
+                    <%= product.title %> </br>
+                  </div>
+                  <div style="font-size:16px">
+                      $<%= product.price %>.00 </br>
+                      <% if product.status === 1 %>
+                        SOLD OUT
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
     </div>
   </div>
 

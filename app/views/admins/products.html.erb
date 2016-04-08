@@ -27,7 +27,13 @@
               <%= f.file_field :image_four %> </br>
               <%= f.label "Image Five" %>
               <%= f.file_field :image_five %> </br>
-              <%= f.text_field :embedded_video, :placeholder => "Embedded Video" %>
+              <%= f.text_field :embedded_video, :placeholder => "Youtube URL" %>
+              <%= f.label "Video Placement" %>
+              <%= f.select :video_status do %>
+                <% ['', 'Main Image', 'Sub-Image'].each do |a| %>
+                  <%= content_tag(:option, a, value: a,) %>
+                <% end %>
+              <% end %>
               <%= f.select :category, :required => true do %>
                 <% ['Apparel', 'Essentials', 'Accessories', 'Art_Culture', 'Tech', 'Gadgets'].each do |a| %>
                   <%= content_tag(:option, a, value: a,) %>
