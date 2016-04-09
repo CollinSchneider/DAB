@@ -13,7 +13,7 @@ class CartItemsController < ApplicationController
       #   end
       # end
 
-      flash[:success] = "#{@cart_item.quantity} #{@cart_item.product_item.description} #{@cart_item.product_item.product.description} added to cart!"
+      flash[:success] = "#{@cart_item.quantity} #{@cart_item.product_item.description} #{@cart_item.product_item.product.title} added to cart!"
       if product_item.quantity === 0
         # UserMailer.low_inventory_email(product_item.product.user, product_item).deliver
         product_item.status = 1

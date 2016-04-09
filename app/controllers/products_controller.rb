@@ -102,7 +102,7 @@ class ProductsController < ApplicationController
     youtube_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
     youtube_id = $5
   end
-    %Q{<iframe title='YouTube video player' width='300' height='200' src='http://www.youtube.com/embed/#{ youtube_id }' frameborder='0' allowfullscreen></iframe>}
+    %Q{<iframe title='YouTube video player' class = "product-video" src='http://www.youtube.com/embed/#{ youtube_id }' frameborder='0' allowfullscreen></iframe>}
   end
 
   def create

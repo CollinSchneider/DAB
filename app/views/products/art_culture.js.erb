@@ -1,6 +1,13 @@
+var rendered;
+function loadProducts(){
+  rendered = $("<%=j render(:partial => 'product') %>")
+};
+function appendProducts(){
+  rendered.appendTo($('.infinite-table'))
+}
+loadProducts()
+setTimeout(appendProducts, 200);
 
-  $("<%=j render(:partial => 'art_culture') %>")
-  .appendTo($(".infinite-table"));
 
 // Update pagination link
 <% if @art_culture.current_page === @art_culture.total_pages %>

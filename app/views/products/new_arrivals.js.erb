@@ -1,6 +1,12 @@
-
-  $("<%=j render(:partial => 'new_arrival') %>")
-  .appendTo($(".infinite-table"));
+var rendered;
+function loadProducts(){
+  rendered = $("<%=j render(:partial => 'product') %>")
+};
+function appendProducts(){
+  rendered.appendTo($('.infinite-table'))
+}
+loadProducts()
+setTimeout(appendProducts, 200);
 
 // Update pagination link
 <% if @new_arrivals.current_page === @new_arrivals.total_pages %>

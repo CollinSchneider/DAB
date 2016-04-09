@@ -4,7 +4,7 @@
   <% slice.each do |apparel| %>
     <div class="col 14 m4 s12 product" style="display:inline-block">
       <div class="card">
-         <%= link_to product_path(apparel.id) do %>
+         <%= link_to product_path(apparel.slug) do %>
           <div class="card-image">
             <%= image_tag apparel.image.url(:medium), :class => "responsive-img" %>
             <div class="card-title" id = "card-category-title">
