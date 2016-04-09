@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   def index
     authenticate_anybody
     cart_counter
+    @active_banners = Banner.where('status = ?', 'Active')
     @products = Product.order(priority: :desc).paginate(:per_page => 3, :page => params[:page])
   end
 
@@ -70,6 +71,10 @@ class ProductsController < ApplicationController
     @new_arrivals = Product.order(created_at: :desc).paginate(:page => params[:page], :per_page => 3)
   end
 
+  def featured
+    @featured = Product.where('featured = ?', 'Featured').paginate(:page => params[:page], :per_page => 3)
+  end
+
   def destroy
     product = Product.find_by(slug: params[:id])
     product.delete
@@ -124,7 +129,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :embedded_video, :video_status, :slug)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :embedded_video, :video_status, :featured, :slug)
   end
 
 end

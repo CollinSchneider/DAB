@@ -1,0 +1,42 @@
+<%= render partial: 'partials/header' %>
+
+<div class="container" id='main-content' style="min-height:460px">
+  <div class="row">
+    <div class="col s12">
+      <div class="infinite-table">
+		    <%= render :partial => 'featured'%>
+		  </div>
+
+		  <p class="pagination hidden" style="margin-left:47%">
+		    <%= link_to_next_page(@featured, '', :remote => true) %>
+		  </p>
+
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'partials/footer' %>
+
+<script>
+
+var active = false
+
+function scroller(){
+  $(window).scroll(function() {
+    var url = $('.pagination > a').attr('href');
+    if($(window).scrollTop()>$(document).height()-$(window).height()-50){
+      if(!active && url){
+        active = true;
+        $.getScript(url).then(function(){
+          active = false;
+        })
+      }
+    }
+  });
+}
+
+  $(document).ready(function(){
+    scroller()
+  })
+
+</script>

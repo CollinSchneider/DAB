@@ -135,5 +135,9 @@ class AdminsController < ApplicationController
     redirect_to request.referrer
   end
 
+  def editing
+    @banner = Banner.new
+    @banners = Banner.all
+  end
 
 end

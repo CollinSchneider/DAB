@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
   validates_presence_of :slug
   validates :title,
     presence: true,
-    :uniqueness => {:message => "A product already exists with this title!"}
+    :uniqueness => {:message => "error -> A product already exists with this title!"}
 
   validates :video_status,
     :presence => {:message => "error -> Video placement can't be blank if you are providing a video!"}, if: Proc.new { |product| product.embedded_video != '' }

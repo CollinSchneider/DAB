@@ -1,0 +1,24 @@
+<% @featured.each_slice(3) do |slice| %>
+<div class="row">
+
+  <% slice.each do |feature| %>
+    <div class="col 14 m4 s12 product" style="display:inline-block">
+      <div class="card">
+         <%= link_to product_path(feature.slug) do %>
+          <div class="card-image">
+            <%= image_tag feature.image.url(:medium), :class => "responsive-img" %>
+            <div class="card-title" id = "card-category-title">
+              <div style="font-size: 18px; font-weight: bold; color:white">
+                <%= feature.title %>
+              </div>
+              <div style="font-size:16px">
+                  $<%= feature.price %>.00
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
+<% end %>

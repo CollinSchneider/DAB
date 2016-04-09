@@ -53,6 +53,12 @@
               <%= f.text_field :feature_three, :placeholder => "Feature Three" %>
               <%= f.text_field :feature_four, :placeholder => "Feature Four" %>
               <%= f.text_field :feature_five, :placeholder => "Feature Five" %>
+              <%= f.label "Featured Product?" %>
+              <%= f.select :featured do %>
+                <%= ['Featured', 'Not-Featured'].each do |a| %>
+                  <%= content_tag(:option, a, value: a,) %>
+                <% end %>
+              <% end %>
               <%= f.submit "Create Product" %>
             <% end %>
 

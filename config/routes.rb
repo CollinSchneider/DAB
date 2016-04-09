@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post '/charges' => 'charges#create'
   get '/best-sellers' => 'products#best_sellers'
   get '/new-arrivals' => 'products#new_arrivals'
+  get '/featured' => 'products#featured'
 
   get '/cart' => 'users#cart'
   get '/tech' => 'products#tech'
@@ -50,12 +51,14 @@ Rails.application.routes.draw do
     get '/admin-products' => 'admins#products'
     get '/admin-users' => 'admins#users'
     post '/admin-affiliate-order' => 'admins#update_affiliate_orders'
+    get '/admin-editing' => 'admins#editing'
 
   # resources :affiliates
     get '/affiliate' => 'affiliates#index'
     get '/affiliate-orders' => 'affiliates#orders'
     get '/affiliate-update' => 'affiliates#update'
     get '/affiliate-products' => 'affiliates#products'
+
 
   resources :products
   # resources :products, :except => ['show']
@@ -65,6 +68,7 @@ Rails.application.routes.draw do
   resources :order_items
   resources :charges
   resources :addresses
+  resources :banners
 
   root 'users#index'
 
