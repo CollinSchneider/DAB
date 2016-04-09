@@ -58,7 +58,7 @@
             <li><%= image_tag @product.image_five.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
           <% end %>
           <% if @product.embedded_video != '' %>
-            <%= @product.embedded_video %>
+            <%= @product.embedded_video.html_safe %>
             (<%= @product.video_status %>)
           <% else %>
             <%= f.label "Youtube Link" %>

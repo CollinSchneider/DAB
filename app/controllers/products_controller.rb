@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
     cart_counter
     # @product = Product.find(params[:id])
     @product = Product.find_by(slug: params[:id])
-    @related_products = Product.where('category = ?', @product.category).order(total_orders: :desc)
+    @related_products = Product.where('category = ? AND id != ?', @product.category, @product.id).order(total_orders: :desc)
     if @product.embedded_video != nil
       @embedded_video = @product.embedded_video.html_safe
     end
