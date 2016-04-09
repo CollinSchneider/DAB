@@ -1,17 +1,16 @@
 var rendered;
 function loadProducts(){
-  rendered = $("<%=j render(:partial => 'product') %>")
+  rendered = $("<%=j render(:partial => 'best_seller') %>")
 };
 function appendProducts(){
   rendered.appendTo($('.infinite-table'))
 }
 loadProducts()
 setTimeout(appendProducts, 200);
-
 // Update pagination link
 <% if @best_sellers.current_page === @best_sellers.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@best_sellers, 'Next Page', :remote => true) %>");
+    .html("<%=j link_to_next_page(@best_sellers, '', :remote => true) %>");
 <% end %>
