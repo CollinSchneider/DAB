@@ -52,6 +52,8 @@ gem 'taxjar-ruby', require: 'taxjar'
 # gem 'unicorn'
 gem 'dotenv'
 
+gem 'google-analytics-rails', '1.1.0'
+
 gem 'prawn'
 
 # Use Capistrano for deployment

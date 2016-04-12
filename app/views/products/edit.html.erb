@@ -43,26 +43,27 @@
     <div class="row">
       <%= form_for @product do |f| %>
       <div class="col l6 s12">
-        <%= image_tag @product.image.url(:medium), :id => "product-image", :class => "materialboxed responsive-img" %>
+        <%= image_tag @product.image.url(:large), :id => "main-image", :class => "responsive-img", :style => 'height:448px;width:597px' %>
         <ul id='product-images-list'>
           <% if @product.image_two.exists? %>
-            <li><%= image_tag @product.image_two.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+            <li><%= image_tag @product.image_two.url(:medium), :class => "show-pic responsive-img", :style => "width:150px" %></li>
           <% end %>
           <% if @product.image_three.exists? %>
-            <li><%= image_tag @product.image_three.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+            <li><%= image_tag @product.image_three.url(:medium), :class => "show-pic responsive-img", :style => "width:150px" %></li>
           <% end %>
           <% if @product.image_four.exists? %>
-            <li><%= image_tag @product.image_four.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
+            <li><%= image_tag @product.image_four.url(:medium), :class => "show-pic responsive-img", :style => "width:150px" %></li>
           <% end %>
           <% if @product.image_five.exists? %>
-            <li><%= image_tag @product.image_five.url(:medium), :class => "materialboxed responsive-img", :style => "width:150px" %></li>
-          <% end %>
+            <li><%= image_tag @product.image_five.url(:medium), :class => "show-pic responsive-img", :style => "width:150px" %></li>
+          <% end %> </br>
           <% if @product.embedded_video != '' && @product.embedded_video != nil %>
             <%= @product.embedded_video.html_safe %>
             (<%= @product.video_status %>)
           <% else %>
             <%= f.label "Youtube Link" %>
-            <%= f.text_field :embedded_video %>
+            <%= f.text_field :embedded_video, :placeholder => "Youtube Video URL" %>
+            <%= f.label "Video Placement" %>
             <%= f.select :video_status do %>
               <% ['', 'Main Image', 'Sub-Image'].each do |a| %>
                 <%= content_tag(:option, a, value: a,) %>
@@ -105,6 +106,20 @@
   </div>
 </div>
   <script>
+  $('.show-pic').click(function(){
+    var thisImage = $(this);
+    var mainImage = $('#main-image');
+    var mainImageSrc = mainImage.attr('src');
+    mainImage.attr('src', thisImage[0].currentSrc);
+    thisImage.attr('src', mainImageSrc);
+  })
+
+  $('.show-pic').mouseover(function(){
+    $('.show-pic').css({
+      cursor: 'pointer'
+    })
+  })
+
   if($('.success-div')){
     setTimeout(function(){
       $('.success-div').fadeOut()

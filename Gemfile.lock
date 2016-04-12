@@ -81,6 +81,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    google-analytics-rails (1.1.0)
     hashie (3.4.3)
     http (0.8.14)
       addressable (~> 2.3)
@@ -251,6 +252,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dotenv
   faker
+  google-analytics-rails (= 1.1.0)
   impressionist
   jbuilder (~> 2.0)
   jquery-infinite-pages
