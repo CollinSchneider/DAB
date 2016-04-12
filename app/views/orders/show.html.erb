@@ -1,0 +1,21 @@
+<h2> Order # <%= @order.id %> for <%= @order.user.name %> </h2>
+<h3> Order placed on <%= @order.created_at.strftime('%B %d, %Y; %l:%M %p') %> </h3>
+
+<div class="orders" style = "text-align: center">
+
+  <% @order.order_items.each do |item| %>
+  <div style = "border: 1px solid black; width: 33%; margin-left: 33%">
+  <%= image_tag item.product_item.product.image.url(:thumb), :style => "display:inline-block" %>
+    <h5 style = "display:inline-block"> <%= item.quantity %> <%= item.product_item.description %> <%= item.product_item.product.title %> at $<%= item.product_item.product.price %> each </h5>
+    <h5> Vendor: <%= item.product_item.product.user.name %> <%= mail_to item.product_item.product.user.email %> </h5>
+    <% if item.status === 0 %>
+      <h5> Order is pending </h5>
+    <% elsif item.status === 1 %>
+      <h5> Order was marked as shipped at <%= item.modified_at.strftime('%B %d, %Y; %l:%M %p') %> </h5>
+      <h5> Shipping Method: <%= item.shipping_method %> </h5>
+      <h5> Tracking Number: <%= item.shipping_number %> </h5>
+    <% end %>
+  </div>
+  <% end %>
+
+</div>

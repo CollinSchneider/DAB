@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   def downcase_fields
     self.email.downcase!
+    self.name.downcase!
   end
 
   def self.from_omniauth(auth)
