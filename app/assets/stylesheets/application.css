@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+ @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+ 
  .hidden {
    display: none;
  }
