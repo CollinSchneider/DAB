@@ -51,6 +51,31 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col s12 center">
+          <p class='account-header'>Orders By Affiliate</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 center">
+
+          <%= form_tag admin_affiliates_path, :method => 'get' do %>
+            <%= text_field_tag :search, params[:search], :placeholder => "Search for Affiliate" %>
+            <%= submit_tag "Search", :name => nil %>
+          <% end %>
+          <% if @affiliates.length != @total_affiliates %>
+            <%= form_tag admin_affiliates_path, :method => 'get' do %>
+              <%= hidden_field_tag :search, params[:search], :value => nil %>
+              <%= submit_tag "Get All", :name => nil %>
+            <% end %>
+          <% end %>
+
+          <%= render partial: 'affiliates' %>
+
+          </div>
+        </div>
+
     </main>
   </body>
 </html>

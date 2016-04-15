@@ -1,0 +1,36 @@
+
+<div class="affiliates">
+
+  <% if @affiliates.length === 0 %>
+    <h5>No affiliates match your search!</h5>
+  <% else %>
+  <% @affiliates.each do |affiliate| %>
+  <div style="border:1px solid black; width: 25%; margin-left: 37.5%">
+    <%= link_to user_path(affiliate.id) do %>
+      <h6> <%= affiliate.name || affiliate.email %>
+        <% pending_orders = 0 %>
+        <% shipped_orders = 0 %>
+        <% delivered_orders = 0 %>
+        <% affiliate.products.each do |product| %>
+          <% product.product_items.each do |item| %>
+            <% item.order_items.each do |order| %>
+              <% if order.status === 0 %>
+                <% pending_orders += 1 %>
+              <% elsif order.status === 1 %>
+                <% shipped_orders +=1 %>
+              <% elsif order.status === 2 %>
+                <% delivered_orders += 1 %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <h6>Pending Orders: <%= pending_orders %> </h6>
+        <h6> Shipped Orders: <%= shipped_orders %> </h6>
+        <h6> Delivered Orders: <%= delivered_orders %> </h6>
+      <% end %>
+    </div>
+    <% end %>
+  <% end %>
+  <%= will_paginate @affiliates, inner_window: 3, outer_window: 1 %>
+
+</div>

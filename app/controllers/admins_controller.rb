@@ -83,13 +83,10 @@ class AdminsController < ApplicationController
     @weeks_orders = Order.where('created_at >= ?', past_7_days)
     @weeks_pending_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 0)
     @weeks_delivered_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 1)
-    # @affiliates = User.order('name').where(status: 1)
     @total_affiliates = User.where('status = ?', 1).count
 
     if params[:search]
-      @affiliates = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search]}%", 1, "%#{params[:search]}%", 1)
-    else
-      @affiliates = User.where('status = ?', 1)
+      @order_search = Order.where('id = ?', "#{params[:search]}").paginate(:page => params[:page], :per_page => 5)
     end
 
   end
@@ -116,9 +113,9 @@ class AdminsController < ApplicationController
     @begining_of_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 0).length
     @users_count = User.where('status = ?', 0).count
     if params[:search]
-      @users = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search]}%", 0, "%#{params[:search]}%", 0)
+      @users = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 0, "%#{params[:search].downcase}%", 0).order(:name).paginate(:page => params[:page], :per_page => 5)
     else
-      @users = User.where('status = ?', 0)
+      @users = User.where('status = ?', 0).order(:name).paginate(:page => params[:page], :per_page => 5)
     end
   end
 
@@ -127,6 +124,13 @@ class AdminsController < ApplicationController
     @begining_of_week = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_week, 1).length
     @begining_of_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 1).length
     @begining_of_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 1).length
+    @total_affiliates = User.where('status = ?', 1).count
+
+    if params[:search]
+      @affiliates = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 1, "%#{params[:search].downcase}%", 1).order(:name).paginate(:page => params[:page], :per_page => 2)
+    else
+      @affiliates = User.where('status = ?', 1).order(:name).paginate(:page => params[:page], :per_page => 2)
+    end
   end
 
   def updated
@@ -135,5 +139,9 @@ class AdminsController < ApplicationController
     redirect_to request.referrer
   end
 
+  def editing
+    @banner = Banner.new
+    @banners = Banner.all
+  end
 
 end

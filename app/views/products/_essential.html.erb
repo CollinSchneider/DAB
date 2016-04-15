@@ -4,7 +4,7 @@
   <% slice.each do |essential| %>
     <div class="col 14 m4 s12 product" style="display:inline-block">
       <div class="card">
-         <%= link_to product_path(essential.id) do %>
+         <%= link_to product_path(essential.slug) do %>
           <div class="card-image">
             <%= image_tag essential.image.url(:medium), :class => "responsive-img" %>
             <div class="card-title" id = "card-category-title">

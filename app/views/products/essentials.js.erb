@@ -1,11 +1,17 @@
-
-  $("<%=j render(:partial => 'essential') %>")
-  .appendTo($(".infinite-table"));
+var rendered;
+function loadProducts(){
+  rendered = $("<%=j render(:partial => 'essential') %>")
+};
+function appendProducts(){
+  rendered.appendTo($('.infinite-table'))
+}
+loadProducts()
+setTimeout(appendProducts, 200);
 
 // Update pagination link
 <% if @essentials.current_page === @essentials.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@essentials, 'Next Page', :remote => true) %>");
+    .html("<%=j link_to_next_page(@essentials, '', :remote => true) %>");
 <% end %>

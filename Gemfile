@@ -31,6 +31,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'stripe'
 
+gem 'omniauth-stripe-connect'
+
+gem 'meta-tags'
+
 gem 'paperclip'
 
 gem 'aws-sdk', '< 2.0'
@@ -51,6 +55,8 @@ gem 'taxjar-ruby', require: 'taxjar'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'dotenv'
+
+gem 'google-analytics-rails', '1.1.0'
 
 gem 'prawn'
 

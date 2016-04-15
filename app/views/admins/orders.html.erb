@@ -44,9 +44,9 @@
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#all">All</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#pending">Pending</a></li>
               <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#shipped">Shipped</a></li>
-              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#test4">Delivered</a></li>
             </ul>
           </div>
+
           <div id="all" class="col s12">
             <ul class="collapsible" data-collapsible="accordion">
               <% @weeks_orders.each do |order| %>
@@ -89,7 +89,7 @@
               <% @weeks_pending_orders.each do |item| %>
               <li>
                 <div class="collapsible-header">
-                  <i class="material-icons">done</i> Order #<%= item.id %>
+                  <i class="material-icons">done</i> Order Item #<%= item.id %>
                 </div>
                 <div class="collapsible-body">
                   <p>
@@ -118,130 +118,20 @@
               </li>
             <% end %>
           </ul>
-          </div>
-          <div id="shipped" class="col s12">
-            <ul class="collapsible" data-collapsible="accordion">
-              <% @weeks_delivered_orders.each do |item| %>
-              <li>
-                <div class="collapsible-header">
-                  <i class="material-icons">done</i> Order #<%= item.id %>
-                </div>
-                <div class="collapsible-body">
-                  <p>
-                    Status: <%if item.status === 0 %> <span class='order-status-pending'>Pending</span> <% elsif item.status === 1 %> <span class='order-status-shipped'>Shipped</span><br>
-                    Tracking Info: <%= item.shipping_method %>: <%= item.shipping_number %>
-                    <% end %>
-                  </p>
-                  <div class="row order-info">
-                    <div class="col l1 m1 s4">
-                      <%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %>
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p> Product: <%= item.product_item.description %> <%= item.product_item.product.title %> </p>
-                    </div>
-                    <div class="col l2 s9 hide-on-med-and-down">
-                      <p> Affiliate: <%= item.product_item.product.user.name || item.product_item.product.user.email %></p>
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p>Quantity: <%= item.quantity %></p>
-                    </div>
-                    <div class="col l3 s9 hide-on-med-and-down">
-                      <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-          </div>
-          <!-- <div id="delivered" class="col s12">
-            <ul class="collapsible" data-collapsible="accordion">
-              <li>
-                <div class="collapsible-header">
-                  <i class="material-icons">done</i> Order #
-                </div>
-                <div class="collapsible-body">
-                  <p>
-                    Status:
-                  </p>
-                  <div class="row order-info">
-                    <div class="col l1 m1 s4">
-                      <#%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %>
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p> Product:  </p>
-                    </div>
-                    <div class="col l2 s9 hide-on-med-and-down">
-                      <p> Affiliate: </p>
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p>Quantity: </p>
-                    </div>
-                    <div class="col l3 s9 hide-on-med-and-down">
-                      <p>Item Total: $ </p>
-                    </div>
-                  </div>
-                </div>
-                SubTotal: <strong>$<#%= order_total %></strong>
-              </li>
-          </ul>
-          </div> -->
-
-        </div>
-        <div class="row">
-          <div class="col s12 center">
-            <p class='account-header'>Orders By Affiliate</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12 center">
-
-            <%= form_tag admin_orders_path, :method => 'get' do %>
-              <%= text_field_tag :search, params[:search], :placeholder => "Search for Admin" %>
-              <%= submit_tag "Search", :name => nil %>
-            <% end %>
-            <% if @affiliates.length != @total_affiliates %>
-              <%= form_tag admin_orders_path, :method => 'get' do %>
-                <%= hidden_field_tag :search, params[:search], :value => nil %>
-                <%= submit_tag "Get All", :name => nil %>
-              <% end %>
-            <% end %>
-
-            <% if @affiliates.length === 0 %>
-              <h5>No affiliates match your search!</h5>
-            <% else %>
-            <% @affiliates.each do |affiliate| %>
-            <div style="border:1px solid black; width: 25%; margin-left: 37.5%">
-              <%= link_to user_path(affiliate.id) do %>
-                <h6> <%= affiliate.name || affiliate.email %>
-                  <% pending_orders = 0 %>
-                  <% shipped_orders = 0 %>
-                  <% delivered_orders = 0 %>
-                  <% affiliate.products.each do |product| %>
-                    <% product.product_items.each do |item| %>
-                      <% item.order_items.each do |order| %>
-                        <% if order.status === 0 %>
-                          <% pending_orders += 1 %>
-                        <% elsif order.status === 1 %>
-                          <% shipped_orders +=1 %>
-                        <% elsif order.status === 2 %>
-                          <% delivered_orders += 1 %>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                  <h6>Pending Orders: <%= pending_orders %> </h6>
-                  <h6> Shipped Orders: <%= shipped_orders %> </h6>
-                  <h6> Delivered Orders: <%= delivered_orders %> </h6>
-                <% end %>
-              </div>
-              <% end %>
-            <% end %>
-            </div>
-
           </div>
         </div>
       </div>
+
+      <%= form_tag admin_orders_path, :method => 'get' do %>
+        <%= text_field_tag :search, params[:search], :placeholder => "Search by Order Number" %>
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>
+      <% if @order_search != nil %>
+        <% @order_search.each do |order| %>
+          <%= link_to "#{order.id}", order_path(order.id) %>
+        <% end %>
+      <% end %>
+
     </main>
   </body>
 </html>

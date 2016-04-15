@@ -1,6 +1,6 @@
 var rendered;
 function loadProducts(){
-  rendered = $("<%=j render(:partial => 'accessory') %>")
+  rendered = $("<%=j render(:partial => 'featured') %>")
 };
 function appendProducts(){
   rendered.appendTo($('.infinite-table'))
@@ -8,11 +8,10 @@ function appendProducts(){
 loadProducts()
 setTimeout(appendProducts, 200);
 
-
 // Update pagination link
-<% if @accessories.current_page === @accessories.total_pages %>
+<% if @featured.current_page === @featured.total_pages %>
   $('.pagination').remove();
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@accessories, '', :remote => true) %>");
+    .html("<%=j link_to_next_page(@featured, '', :remote => true) %>");
 <% end %>
