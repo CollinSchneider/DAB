@@ -31,6 +31,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'stripe'
 
+gem 'omniauth-stripe-connect'
+
+gem 'meta-tags'
+
 gem 'paperclip'
 
 gem 'aws-sdk', '< 2.0'

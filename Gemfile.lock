@@ -116,6 +116,8 @@ GEM
       mime-types (>= 1.16, < 3)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    meta-tags (2.1.0)
+      actionpack (>= 3.0.0)
     method_source (0.8.2)
     mime-types (2.99.1)
     mimemagic (0.3.0)
@@ -141,6 +143,9 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    omniauth-stripe-connect (2.3.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (>= 1.0.3)
     paperclip (4.3.6)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -258,7 +263,9 @@ DEPENDENCIES
   jquery-infinite-pages
   jquery-rails
   kaminari!
+  meta-tags
   omniauth-facebook
+  omniauth-stripe-connect
   paperclip
   pg (~> 0.15)
   prawn

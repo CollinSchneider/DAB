@@ -18,6 +18,9 @@ class ProductsController < ApplicationController
     if @product.embedded_video != nil
       @embedded_video = @product.embedded_video.html_safe
     end
+    set_meta_tags title: @product.title,
+                  description: @product.description,
+                  keywords: @product.meta_keyword
     @product_item = ProductItem.new
     @cart_item = CartItem.new
   end
@@ -129,7 +132,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :embedded_video, :video_status, :featured, :slug)
+    params.require(:product).permit(:user_id, :title, :description, :price, :category, :status, :feature_one, :feature_two, :feature_three, :feature_four, :feature_five, :total_orders, :image, :image_two, :image_three, :image_four, :image_five, :priority, :embedded_video, :video_status, :featured, :meta_keyword, :slug)
   end
 
 end
