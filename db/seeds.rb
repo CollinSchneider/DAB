@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# ProductItem.destroy_all
-# Product.destroy_all
+ProductItem.destroy_all
+Product.destroy_all
 #
 # 50.times do
 #   Product.create(
@@ -48,13 +48,13 @@
 #   )
 # end
 
-10.times do
-  OrderItem.create(
-  order_id: [66, 67, 68, 69, 70].sample,
-  user_id: [59, 79].sample,
-  affiliate_id: [72, 75, 42].sample,
-  status: 0,
-  product_item_id: 1124,
-  quantity: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].sample
-  )
-end
+# 10.times do
+#   OrderItem.create(
+#   order_id: [66, 67, 68, 69, 70].sample,
+#   user_id: [59, 79].sample,
+#   affiliate_id: [72, 75, 42].sample,
+#   status: 0,
+#   product_item_id: 1124,
+#   quantity: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].sample
+#   )
+# end
