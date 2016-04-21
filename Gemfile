@@ -43,6 +43,10 @@ gem 'omniauth-facebook'
 
 gem 'impressionist'
 
+gem 'sitemap_generator'
+
+gem 'whenever', :require => false
+
 gem 'will_paginate', '~> 3.0.7'
 
 gem 'kaminari', :git => 'git://github.com/amatsuda/kaminari.git'
