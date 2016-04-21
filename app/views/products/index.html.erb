@@ -1,43 +1,20 @@
 <%= render partial: 'partials/header' %>
 
-<div class = "container" id='main-content'>
-
+<div class="container" id='main-content'style="min-height:460px">
   <div class="row">
-      <% if @active_banners != nil %>
-        <% @active_banners.each do |banner| %>
-        <div class="col l6 m12 s12" style= "display:inline-block">
-          <% if banner.link_to === 'Best Sellers' %>
-            <%= link_to best_sellers_path do %>
-              <%= image_tag banner.image.url(:medium), :class => "responsive-img", :style => "max-height:350px; width:100%;display:inline-block" %>
-            <% end %>
-          <% elsif banner.link_to === 'New Arrivals' %>
-            <%= link_to new_arrivals_path do %>
-              <%= image_tag banner.image.url(:medium), :class => "responsive-img", :style => "max-height:350px; width:100%; display:inline-block" %>
-            <% end %>
-          <% elsif banner.link_to === 'Featured' %>
-            <%= link_to featured_path do %>
-              <%= image_tag banner.image.url(:medium), :class => "responsive-img", :style => "max-height:350px; width:100%; display:inline-block" %>
-            <% end %>
-          <% end %>
-        </div>
-        <% end %>
-      <% end %>
+    <div class="col s12">
+      <div class="row center grey darken-3" id="info-header-container">
+        <h4 class="white-text" id="info-header">Best Sellers</h4>
+      </div>
+      <div class="infinite-table">
+	    <%= render :partial => 'product'%>
+	  </div>
 
-      <!-- <div class="col l6 m12 s12">
-       <%= link_to new_arrivals_path do %>
-          <img src="http://onehdwallpaper.com/wp-content/uploads/2015/07/Beautiful-Scenery-HD-Wallpapers-Pictures.jpg" class = "responsive-img" style = "max-height: 350px;width: 100%" alt="" />
-        <% end %>
-      </div> -->
+	  <p class="pagination hidden" style="margin-left:47%">
+	    <%= link_to_next_page(@products, '', :remote => true) %>
+	  </p>
+    </div>
   </div>
-
-  <div class="infinite-table">
-    <%= render :partial => 'product'%>
-  </div>
-
-  <p class="pagination" style="margin-left:47%">
-    <%= link_to_next_page(@products, '', :remote => true) %>
-  </p>
-
 </div>
 
 <%= render partial: 'partials/footer' %>
