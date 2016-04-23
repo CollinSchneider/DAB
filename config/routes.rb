@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   get '/view' => 'products#view'
   get '/sell' => 'affiliates#sell'
 
@@ -69,6 +73,7 @@ Rails.application.routes.draw do
   resources :charges
   resources :addresses
   resources :banners
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 
   root 'users#index'
 
