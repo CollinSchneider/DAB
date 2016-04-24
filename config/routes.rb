@@ -65,8 +65,6 @@ Rails.application.routes.draw do
 
 
   resources :products
-  # resources :products, :except => ['show']
-    # get 'products/:slug' => 'products#show'
   resources :product_items
   resources :cart_items
   resources :order_items
@@ -74,6 +72,8 @@ Rails.application.routes.draw do
   resources :addresses
   resources :banners
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  # get '/reset_password' => 'users#reset_password', as: :password_reset
+  # get '/reset_password/:token/edit' => 'users#new_password', as: :create_password_reset
 
   root 'users#index'
 

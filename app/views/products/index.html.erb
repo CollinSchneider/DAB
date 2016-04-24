@@ -1,6 +1,22 @@
 <%= render partial: 'partials/header' %>
 
 <div class="container" id='main-content'style="min-height:460px">
+  <div class="content">
+    <% if flash[:success] %>
+      <div class="success-div">
+        <p class ="success-text">
+          <%= flash[:success] %>
+        </p>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="error-div">
+        <p class ="error-text">
+          <%= flash[:error] %>
+        </p>
+      </div>
+    <% end %>
+  </div>
   <div class="row">
     <% if @active_banners != nil %>
       <% @active_banners.each do |banner| %>

@@ -153,7 +153,7 @@ class UsersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:user_id, :affiliate_id, :product_id, :shipping_number, :status)
+    params.require(:order).permit(:user_id, :affiliate_id, :product_id, :shipping_number, :status, :reset_digest, :reset_sent_at)
   end
 
 end
