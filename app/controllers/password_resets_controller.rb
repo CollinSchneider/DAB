@@ -15,7 +15,7 @@ class PasswordResetsController < ApplicationController
       flash[:error] = "Email sent to #{@user.email} with password reset instructions"
       redirect_to root_path
     else
-      flash.now[:error] = "Email address not found"
+      flash.now[:error] = "No users with this email"
       render 'new'
     end
   end
@@ -23,7 +23,7 @@ class PasswordResetsController < ApplicationController
   def update
     user = User.find_by_reset_digest(params[:id])
     time_difference = Time.now - user.reset_sent_at
-    if Time.now.utc < (@user.reset_sent_at.utc + 20.minutes)
+    # if Time.now - 4.hours < user.reset_sent_at
       user.update(user_password_params)
       user.skip_user_validation = true
       if user.save
@@ -37,7 +37,7 @@ class PasswordResetsController < ApplicationController
         flash[:error] = user.errors.full_messages
         redirect_to request.referrer
       end
-    end
+    # end
   end
 
   def new
