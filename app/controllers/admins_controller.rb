@@ -49,16 +49,15 @@ class AdminsController < ApplicationController
         @sales_30_days += item.product_item.product.price.to_i * item.quantity
       end
     end
-    @file_name = "DealBaked-Metrics-#{Time.now.strftime('%m/%d/%Y')}"
-    respond_to do |format|
-      format.html
-      format.pdf do
-        pdf = OverallMetricsPdf.new(@total_impressions, @total_unique_views, @total_sales, @total_orders, @total_show_impressions, @weeks_impressions, @weeks_show_impressions, @weeks_unique_views, @orders_7_days, @sales_7_days, @weeks_orders, @top_selling_week_product, @top_selling_affiliate, @top_selling_products)
-        send_data pdf.render, filename: @file_name,
-                              type: 'application/pdf',
-                              disposition: 'inline'
-      end
+
+  @users = User.all
+  respond_to do |format|
+    format.html
+    format.csv do
+      headers['Content-Disposition'] = "attachment; filename=\"user-list\""
+      headers['Content-Type'] ||= 'text/csv'
     end
+  end
   end
 
   def get_top_selling_product(array, quantity, title)

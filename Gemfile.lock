@@ -56,6 +56,8 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.2)
+    chartjs-ror (2.2.0)
+      rails (>= 3.1)
     chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -259,6 +261,7 @@ DEPENDENCIES
   aws-sdk (< 2.0)
   bcrypt (~> 3.1.7)
   byebug
+  chartjs-ror
   coffee-rails (~> 4.1.0)
   dotenv
   faker

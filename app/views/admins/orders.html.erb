@@ -32,7 +32,12 @@
     </li> -->
 
     <main>
-      <div class="container">
+      <div class="container" id='main-content'>
+        <div class="row">
+          <div class="col s12 left">
+            <h3>Orders</h3>
+          </div>
+        </div>
         <div class="row">
           <div class="col s12 center">
             <p class='account-header'>Orders for <%= (past_7_days).strftime('%b %d, %Y') %> to <%= Time.now.strftime('%b %d, %Y') %></p>

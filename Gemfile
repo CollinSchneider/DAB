@@ -45,6 +45,8 @@ gem 'impressionist'
 
 gem 'sitemap_generator'
 
+gem 'chartjs-ror'
+
 gem 'whenever', :require => false
 
 gem 'will_paginate', '~> 3.0.7'

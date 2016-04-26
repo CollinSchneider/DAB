@@ -38,6 +38,9 @@
 //   scroller()
 // })
 
+//= require Chart
+//= require excanvas
+
 if($('.success-div')){
   setTimeout(function(){
     $('.success-div').fadeOut()
