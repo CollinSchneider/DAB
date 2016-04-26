@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     authenticate_anybody
     cart_counter
     @active_banners = Banner.where('status = ?', 'Active')
-    @products = Product.order(priority: :desc).paginate(:per_page => 3, :page => params[:page])
+    @products = Product.order(priority: :desc).paginate(:per_page => 6, :page => params[:page])
   end
 
   def show
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     cart_counter
     # @product = Product.find(params[:id])
     @product = Product.find_by(slug: params[:id])
-    @related_products = Product.where('category = ? AND id != ?', @product.category, @product.id).order(total_orders: :desc)
+    @related_products = Product.where('category = ? AND id != ?', @product.category, @product.id).order(total_orders: :desc).limit(3)
     if @product.embedded_video != nil
       @embedded_video = @product.embedded_video.html_safe
     end
@@ -38,44 +38,44 @@ class ProductsController < ApplicationController
 
   def tech
     cart_counter
-    @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 3, :page => params[:page])
+    @tech = Product.where('category = ?', 'Tech').paginate(:per_page => 6, :page => params[:page])
   end
 
   def art_culture
     cart_counter
-    @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 3, :page => params[:page])
+    @art_culture = Product.where('category = ?', 'Art_Culture').paginate(:per_page => 6, :page => params[:page])
   end
 
   def gadgets
     cart_counter
-    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 3, :page => params[:page])
+    @gadgets = Product.where('category = ?', 'Gadgets').paginate(:per_page => 6, :page => params[:page])
   end
 
   def apparel
     cart_counter
-    @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 3, :page => params[:page])
+    @apparel = Product.where('category = ?', 'Apparel').paginate(:per_page => 6, :page => params[:page])
   end
 
   def accessories
     cart_counter
-    @accessories = Product.where('category = ?', 'Accessories').paginate(:page => params[:page], :per_page => 3)
+    @accessories = Product.where('category = ?', 'Accessories').paginate(:page => params[:page], :per_page => 6)
   end
 
   def essentials
     cart_counter
-    @essentials = Product.where('category = ?', 'Essentials').paginate(:page => params[:page], :per_page => 3)
+    @essentials = Product.where('category = ?', 'Essentials').paginate(:page => params[:page], :per_page => 6)
   end
 
   def best_sellers
-    @best_sellers = Product.order(total_orders: :desc).paginate(:page => params[:page], :per_page => 3)
+    @best_sellers = Product.order(total_orders: :desc).paginate(:page => params[:page], :per_page => 6)
   end
 
   def new_arrivals
-    @new_arrivals = Product.order(created_at: :desc).paginate(:page => params[:page], :per_page => 3)
+    @new_arrivals = Product.order(created_at: :desc).paginate(:page => params[:page], :per_page => 6)
   end
 
   def featured
-    @featured = Product.where('featured = ?', 'Featured').paginate(:page => params[:page], :per_page => 3)
+    @featured = Product.where('featured = ?', 'Featured').paginate(:page => params[:page], :per_page => 6)
   end
 
   def destroy

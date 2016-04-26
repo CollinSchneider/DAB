@@ -1,0 +1,38 @@
+<h2>Reset Password for <%= @user.name || @user.email %> </h2>
+
+<% if Time.now.utc - @user.reset_sent_at.utc <= 402*20 %>
+  <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+    <%= hidden_field_tag :email, @user.email %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+    <%= f.submit "Update password", class: "btn btn-primary" %>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div class="error-div">
+      <% if flash[:error].length > 1 %>
+        <%= flash[:error].each do |error| %>
+          <p class = "error-text">
+            <%= error %>
+          </p>
+        <% end %>
+      <% else %>
+        <p class = "error-text">
+          <%= flash[:error] %>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+
+<% else %>
+  <h3>Link has expired, you have 20 minutes to reset your password after receiving the email</h3>
+  <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+    <%= f.hidden_field :email, :value => @user.email %>
+    <%= f.submit "Send a new password reset email" %>
+  <% end %>
+<% end %>

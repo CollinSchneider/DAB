@@ -1,5 +1,6 @@
 class UserMailer < ApplicationMailer
-  default from: "CollinThomasSchneider@yahoo.com"
+  # default from: "CollinThomasSchneider@yahoo.com"
+  default from: "support@dealbaked.com"
 
   def user_welcome_email(user)
     @user = user
@@ -9,6 +10,11 @@ class UserMailer < ApplicationMailer
   def affiliate_welcome_email(affiliate)
     @user = affiliate
     mail(to: @user.email, subject: "Welcome to DealBaked!")
+  end
+
+  def password_reset(user)
+    @user = user
+    mail(to: user.email, subject: "Reset Dealbaked Password")
   end
 
   def low_inventory_email(user, product_item)
