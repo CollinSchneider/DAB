@@ -659,3 +659,166 @@ tr:hover {
   padding: 0px 0px 20px 10px;
   color: #297edc;
 }
+
+/*Landing Modal CSS*/
+
+#landing-logo {
+  font: 400 36px/1.5 'Pacifico', Helvetica, sans-serif;
+  color: black;
+  text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
+}
+
+.modal { width: 400px; /*overflow-y: hidden !important ;*/}
+
+.input-field label {
+  color: black;
+}
+
+.input-field input[type=text]:focus + label {
+  color: black;
+}
+
+.input-field input[type=text]{
+  color: black;
+}
+
+.input-field input[type=text]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+}
+
+ .input-field input[type=text].valid {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+}
+
+.input-field input[type=email]:focus + label {
+  color: black;
+}
+
+.input-field input[type=email]{
+  color: black;
+}
+
+.input-field input[type=email]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+}
+
+ .input-field input[type=email].valid {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+}
+
+.input-field input[type=password]:focus + label {
+  color: black;
+}
+
+.input-field input[type=password]{
+  color: black;
+}
+
+.input-field input[type=password]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+}
+
+ .input-field input[type=password].valid {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+}
+
+.landing-header {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.landing-sub {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 14px;
+  text-align: center;
+}
+.landing-min {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 12px;
+}
+
+.landing-login {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.landing-login:hover {
+  color: blue;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.landing-buttons {
+  margin-bottom: 15px;
+  border: 3px solid black;
+  height: 50px;
+}
+
+.landing-buttons:hover {
+  background-color: black;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.landing-buttons:hover p{
+  color: white;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.landing-buttons p {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.landing-button {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 14px;
+  text-transform: uppercase;
+  background-color: white;
+  margin-bottom: 15px;
+  border: 3px solid black;
+  height: 50px;
+  margin-top: -5px;
+  width: 100%;
+}
+
+.landing-button:hover {
+  background-color: black;
+  color: white;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.index {
+  height:255px;
+}
+
+.login {
+  height: 255px;
+  display: none;
+}
+
+.signup {
+  display: none;
+}

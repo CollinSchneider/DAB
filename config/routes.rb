@@ -43,6 +43,10 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
+  # User Login/Signup
+  post '/login' => 'sessions#create'
+  post '/create' => 'users#create'
+
   resources :users do
     put 'update_account', :action => :update_account
     put 'update_password', :action => :update_password

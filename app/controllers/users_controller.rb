@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   def index
+    @products = Product.order(priority: :desc).paginate(:per_page => 6, :page => params[:page])
+    @active_banners = Banner.where('status = ?', 'Active')
     if current_user
       redirect_to products_path
     end
@@ -71,12 +73,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create( user_params )
+    user = User.create( email: params[:email], password: params[:password], name: params[:name], status: 0 )
+    binding.pry
     if user.save
       if user.status === 0
+        binding.pry
         session[:user_id] = user.id
+        binding.pry
         UserMailer.user_welcome_email(user).deliver
-        redirect_to products_path
+        binding.pry
+        redirect_to root_path
       elsif user.status === 1
         flash[:success] = "New Affiliate Created!"
         # UserMailer.affiliate_welcome_email(user).deliver

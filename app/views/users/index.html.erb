@@ -1,4 +1,183 @@
-    <div class="container" id='landing-container'>
+<%= render partial: 'partials/header' %>
+
+<script>
+$(document).ready(function(){
+  // Landing Page Modal Scripts 
+  scroller()
+  $('#login').openModal({
+  dismissible: false, 
+  opacity: .5, 
+  in_duration: 300, 
+  out_duration: 200,
+      }
+    );
+ });
+
+  var active = false
+
+  function scroller(){
+    $(window).scroll(function() {
+      var url = $('.pagination > a').attr('href');
+      if($(window).scrollTop()>$(document).height()-$(window).height()-50){
+        if(!active && url){
+          active = true;
+          $('.pagination > a').text('Retrieving products...')
+          $.getScript(url).then(function(){
+            active = false;
+          })
+        }
+      }
+    });
+  }
+</script>    
+<!-- Login Modal -->
+<div id="login" class="modal">
+  <div class="modal-content">
+    <div class="row initial">
+      <div class="col s12 center">
+        <span id='landing-logo'>Deal Baked</span>
+        <p class='landing-header'>Lorem Ipsum Dolor Sit Amet</p>
+
+        <!-- Landing -->
+        <div class="index">
+        <p class='landing-sub'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia nunc quis elit convallis auctor quis id metus</p>
+          <p class='landing-min'>Gain Instant Access Now</p>
+          <a href="#" class='login-email' onclick="$('.index').css('display', 'none');$('.signup').css('display', 'block');">
+            <div class='landing-buttons'>
+              <p>Continue with Email</p>
+            </div>
+          </a>
+          <a href="/auth/facebook">
+            <div class='landing-buttons'>
+              <p> Continue with Facebook</p>
+            </div>
+          </a>
+        <a href="#" onclick="$('.index').css('display', 'none');$('.login').css('display', 'block');">
+          <p class='landing-login'>Login</p>
+        </a>
+        </div>
+        <!-- End Landing -->
+
+        <!-- Signup -->
+        <div class="signup" class='height:1200px;'>
+          <div class="row">
+            <form action='/create' method="POST">
+              <div class="input-field col s12">
+                <input name='name' id="name" type="text" class="validate">
+                <label for="name">Name</label>
+              </div>
+              <div class="input-field col s12">
+                <input name='email' id="email" type="email" class="validate">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <input name='password' id="password" type="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+              <div class="input-field col s12">
+                <input name='password_confirmation' id="password_confirmation" type="password" class="validate">
+                <label for="confirm">Confirm Password</label>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              </div>
+              <div class='input-field col s12'>
+                <button class='landing-button'>Join Now</<button>
+              </div>
+            </form>
+            <a href="#" onclick="$('.signup').css('display', 'none');$('.index').css('display', 'block');">
+              <p class='landing-login'>Already a Member?</p>
+            </a>
+          </div>
+        </div>
+        <!-- End Signup -->
+
+        <!-- Login -->
+        <div class="login">
+          <div class="row">
+            <form action='/login' method="POST">
+              <div class="input-field col s12">
+                <input name='email' id="email" type="email" class="validate">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <input name='password' id="password" type="password" class="validate">
+                <label for="password">Password</label>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              </div>
+              <div class='input-field col s12'>
+                  <button class='landing-button'>Login</<button>
+              </div>
+            </form>
+            <a href="/password_resets/new">
+              <p class='landing-login'>Forgot Password?</p>
+            </a>
+            <a href="#" onclick="$('.login').css('display', 'none');$('.index').css('display', 'block');">
+              <p class='landing-login'>Not a member?</p>
+            </a>
+          </div>
+        </div>
+        <!-- End Login -->
+
+      </div>
+    </div>
+  </div> <!-- End Modal Content-->
+</div>
+<!-- End Login Modal -->
+
+<!-- Begin Main Content -->
+<div class="container" id='main-content'style="min-height:460px">
+  <div class="content">
+    <% if flash[:success] %>
+      <div class="success-div">
+        <p class ="success-text">
+          <%= flash[:success] %>
+        </p>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="error-div">
+        <p class ="error-text">
+          <%= flash[:error] %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% if @active_banners != nil %>
+      <% @active_banners.each do |banner| %>
+      <div class="col l6 m12 s12" style= "display:inline-block">
+        <% if banner.link_to === 'Best Sellers' %>
+          <%= link_to best_sellers_path do %>
+            <%= image_tag banner.image.url(:medium), :class => "responsive-img", :style => "max-height:350px; width:100%;display:inline-block" %>
+          <% end %>
+        <% elsif banner.link_to === 'New Arrivals' %>
+          <%= link_to new_arrivals_path do %>
+            <%= image_tag banner.image.url(:medium), :class => "responsive-img", :style => "max-height:350px; width:100%; display:inline-block" %>
+          <% end %>
+        <% elsif banner.link_to === 'Featured' %>
+          <%= link_to featured_path do %>
+            <%= image_tag banner.image.url(:medium), :class => "responsive-img", :style => "max-height:350px; width:100%; display:inline-block" %>
+          <% end %>
+        <% end %>
+      </div>
+      <% end %>
+    <% end %>
+
+    <div class="row">
+      <div class="col s12">
+        <div class="infinite-table">
+        <%= render :partial => 'product'%>
+      </div>
+
+      <p class="pagination hidden" style="margin-left:47%">
+        <%= link_to_next_page(@products, '', :remote => true) %>
+      </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Main Content -->
+
+<!--     <div class="container" id='landing-container'>
       <div id="cover-photo">
         <div class="row">
           <div class="col s12">
@@ -16,7 +195,6 @@
 
                   <p class='black-text'>OR</p>
                   <div class="input-field col s12">
-                    <!-- <button class="btn waves-effect light-blue darken-4" type="submit" name="action" style='width:300px;'><i class="fa fa-facebook fa-1"></i>  LOGIN WITH FACEBOOK</button> -->
                     <%= link_to "LOGIN WITH FACEBOOK", "/auth/facebook", id: "sign_in", :class => 'btn light-blue darken-4', :style => 'width:300px;'%>
                   </div>
 
@@ -34,32 +212,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <%= render partial: 'partials/footer' %>
-
-<!-- <script>
-$(document).ready(function() {
-
-  function toggleSignUp(){
-    $('.ToggleOff').removeClass('ToggleOff')
-    $('#login-content').addClass('ToggleOff')
-    $('#signup-button').addClass('ToggleOff')
-  }
-
-  function toggleLogIn(){
-    $('.ToggleOff').removeClass('ToggleOff');
-    $('#signup-content').addClass('ToggleOff')
-    $('#login-button').addClass('ToggleOff')
-  }
-
-  $('#sign-up-tag').hover(function(){
-    toggleSignUp()
-  });
-
-  $('.login-button').hover(function(){
-    toggleLogIn()
-  });
-});
-
-</script> -->
