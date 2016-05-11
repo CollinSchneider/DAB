@@ -16,8 +16,12 @@ class User < ActiveRecord::Base
   attr_accessor :skip_user_validation, :skip_email
 
   def downcase_fields
-    self.email.downcase!
-    self.name.downcase!
+    if email != nil
+      self.email.downcase!
+    end
+    if name != nil
+      self.name.downcase!
+    end
   end
 
   def self.from_omniauth(auth)
