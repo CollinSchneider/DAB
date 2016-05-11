@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     if(auth.info.email)
       where(email: auth.info.email).first_or_create do |user|
+        user.skip_user_validation = true
       	user.email = auth.info.email
       	user.status = 0
         user.provider = auth.provider
@@ -35,6 +36,7 @@ class User < ActiveRecord::Base
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
        user.email = auth.info.email
        user.status = 0
+       user.skip_user_validation = true
         user.provider = auth.provider
         user.uid = auth.uid
         user.name = auth.info.name
