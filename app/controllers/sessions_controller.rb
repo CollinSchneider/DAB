@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
 
   def facebook_create
     user = User.from_omniauth(env["omniauth.auth"])
+    user.skip_user_validation = true
     session[:user_id] = user.id
     redirect_to root_url
   end
