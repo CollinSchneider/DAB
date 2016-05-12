@@ -92,7 +92,62 @@
                 <%= f.text_field :country, :placeholder => "Country", :required => true %>
                 <%= f.text_field :address, :placeholder => "Address", :required => true %>
                 <%= f.text_field :city, :placeholder => "City", :required => true %>
-                <%= f.text_field :state, :placeholder => "State", :required => true %>
+                <%= f.select :state do %>
+                  <% [
+                    'Alabama',
+                    'Alaska',
+                    'Arizona',
+                    'Arkansas',
+                    'California',
+                    'Colorado',
+                    'Connecticut',
+                    'Delaware',
+                    'Florida',
+                    'Georgia',
+                    'Hawaii',
+                    'Idaho',
+                    'Illinois',
+                    'Indiana',
+                    'Iowa',
+                    'Kansas',
+                    'Kentucky',
+                    'Louisiana',
+                    'Maine',
+                    'Maryland',
+                    'Massachusetts',
+                    'Michigan',
+                    'Minnesota',
+                    'Mississippi',
+                    'Missouri',
+                    'Montana',
+                    'Nebraska',
+                    'Nevada',
+                    'New Hampshire',
+                    'New Jersey',
+                    'New Mexico',
+                    'New York',
+                    'North Carolina',
+                    'North Dakota',
+                    'Ohio',
+                    'Oklahoma',
+                    'Oregon',
+                    'Pennsylvania',
+                    'Rhode Island',
+                    'South Carolina',
+                    'South Dakota',
+                    'Tennessee',
+                    'Texas',
+                    'Utah',
+                    'Vermont',
+                    'Virginia',
+                    'Washington',
+                    'West Virginia',
+                    'Wisconsin',
+                    'Wyoming'
+                  ].each do |a| %>
+                    <%= content_tag(:option, a, value: a,) %>
+                  <% end %>
+                <% end %>
                 <%= f.number_field :zip, :placeholder => "Zip Code", :input_html => {:maxlength => 5, :size => 5}, :required => true %>
                 <%= f.hidden_field :active, :value => 'no' %>
                 <%= f.submit "Create Shipping Address", :class => 'btn waves-effect grey darken-3 center' %>

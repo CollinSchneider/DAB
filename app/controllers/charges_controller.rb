@@ -18,13 +18,13 @@ class ChargesController < ApplicationController
 	def tax_rate
 		total_price
 		current_user_address
-		client = Taxjar::Client.new(api_key: '3f169a7225ca6da1b9b743d28b17af7a')
-		@rate = client.rates_for_location(@current_user_address[0].zip, {
-			:city => @current_user_address[0].city
-			})
-		if @rate == nil
-			flash[:error] = "Cannot find address, please update or use a different address."
-		end
+		# client = Taxjar::Client.new(api_key: '3f169a7225ca6da1b9b743d28b17af7a')
+		# @rate = client.rates_for_location(@current_user_address[0].zip, {
+		# 	:city => @current_user_address[0].city
+		# 	})
+		# if @rate == nil
+		# 	flash[:error] = "Cannot find address, please update or use a different address."
+		# end
 	end
 
 	def new
@@ -47,7 +47,7 @@ class ChargesController < ApplicationController
 		# 	flash[:error] = "Must fill out shipping address before checking out!"
 		# 	redirect_to profile_path
 		# else
-			new_order = Order.create( :user_id => current_user.id, :address_id => @current_user_address[0].id, :pre_tax_total => @amount, :tax_amount => (@amount * (@rate.combined_rate)) )
+			new_order = Order.create( :user_id => current_user.id, :address_id => @current_user_address[0].id, :pre_tax_total => @amount)
 
 			current_user.cart_items.each do |item|
 				order_item = OrderItem.create(:order_id => new_order.id, :status => 0, :user_id => current_user.id, :affiliate_id => item.product_item.product.user_id, :product_item_id => item.product_item.id, :quantity => item.quantity)
@@ -65,7 +65,7 @@ class ChargesController < ApplicationController
 
 		  charge = Stripe::Charge.create(
 		    :customer    => customer.id,
-		    :amount      => (@stripe_amount * (1+@rate.combined_rate)).ceil,
+		    :amount      => @stripe_amount,
 		    :description => 'Rails Stripe customer',
 		    :currency    => 'usd'
 		  )

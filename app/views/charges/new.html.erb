@@ -68,10 +68,10 @@
           </div>
           <div class='grey-text darken-4 subtotals'>
             <p>Item Subtotal: <span class='right amount'>$<%= @amount %></span></p>
-            <p>Sales Tax: <span class = "right amount">$<%= '%.2f' % (@amount * @rate.combined_rate) %></span></p>
+            <p>Sales Tax: </p>
           </div>
           <div class='subtotals'>
-            <p>Total: <span class = "right amount">$<%= '%.2f' % (@amount*(1+@rate.combined_rate)) %> </span> </p>
+            <p>Total: <span class = "right amount">$<%= @amount %> </span> </p>
           </div>
           <div class='center hide-on-med-and-down'>
             <p><a  class='shipping-links' href="">Shipping</a> | <a  class='shipping-links' href="">Returns</a> | <a  class='shipping-links' href="">FAQs</a></p>
@@ -95,7 +95,7 @@
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="DealBaked Checkout"
-          data-amount=<%= '%.0f' % (@stripe_amount*(1+@rate.combined_rate))%>
+          data-amount=<%= '%.0f' % (@stripe_amount)%>
           data-locale="auto"></script>
 <% end %>
 
