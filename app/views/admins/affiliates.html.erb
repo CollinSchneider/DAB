@@ -77,15 +77,15 @@
                     <th class='right'>Action</th>
                   </tr>
 
-                  <% @affiliates.each do  |affiliate| %>
+                  <% @all_affiliates.each do |affiliate| %>
                     <tr>
-                      <td><%=  affiliate.id %></td>
-                      <td><%=  affiliate.email %></td>
-                      <td><%=  affiliate.email %></td>
+                      <td><%= affiliate.id %></td>
+                      <td><%= affiliate.email %></td>
+                      <td><%= affiliate.email %></td>
                       <td class='right'><a class='action-icons' href=""><i class="fa fa-eye" aria-hidden="true"></i></a><a class='action-icons' href=""></i></a></td>
                     </tr>
                   <% end %>
-                  
+
                 </tbody>
               </table>
             </div>
