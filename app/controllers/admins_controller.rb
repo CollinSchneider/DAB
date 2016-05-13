@@ -82,7 +82,7 @@ class AdminsController < ApplicationController
     @total_affiliates = User.where('status = ?', 1).count
 
     # All Affiliates
-    @affiliates = User.where('status = ?', 1)
+    @all_affiliates = User.where('status = ?', 1)
 
     # Calculate New Affilaites For Current Month
     @total_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 1).length
@@ -94,6 +94,25 @@ class AdminsController < ApplicationController
       @affiliates = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 1, "%#{params[:search].downcase}%", 1).order(:name).paginate(:page => params[:page], :per_page => 2)
     else
       @affiliates = User.where('status = ?', 1).order(:name).paginate(:page => params[:page], :per_page => 2)
+    end
+  end
+
+  def users
+    # Calculate Total Users
+    @total_users = User.where(status: 0).count
+
+    # All Users
+    @all_users = User.where(status: 0).order(email: :asc)
+  
+    # Calculate New Users for Current Month 
+    @total_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 0).length
+
+    # Calculate Total Users For Current Year 
+    @total_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 0).length
+    if params[:search]
+      @users = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 0, "%#{params[:search].downcase}%", 0).order(:name).paginate(:page => params[:page], :per_page => 5)
+    else
+      @users = User.where('status = ?', 0).order(:name).paginate(:page => params[:page], :per_page => 5)
     end
   end
 
@@ -128,19 +147,6 @@ class AdminsController < ApplicationController
 
   def products
     @affiliates = User.where('status = ?', 1)
-  end
-
-  def users
-    @total = User.where(status: 0).length
-    @begining_of_week = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_week, 0).length
-    @begining_of_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 0).length
-    @begining_of_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 0).length
-    @users_count = User.where('status = ?', 0).count
-    if params[:search]
-      @users = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 0, "%#{params[:search].downcase}%", 0).order(:name).paginate(:page => params[:page], :per_page => 5)
-    else
-      @users = User.where('status = ?', 0).order(:name).paginate(:page => params[:page], :per_page => 5)
-    end
   end
 
   def updated
