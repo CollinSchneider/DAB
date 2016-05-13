@@ -31,7 +31,6 @@ class UsersController < ApplicationController
     cart_counter
     total_amount
     current_user_address
-    calc_tax_rate
   end
 
   def profile
