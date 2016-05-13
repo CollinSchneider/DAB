@@ -39,26 +39,23 @@
                   <%= content_tag(:option, a, value: a,) %>
                 <% end %>
               <% end %>
-              <%= f.submit "Create New Banner" %>
+              <%= f.submit "Create New Banner", :class=> 'btn btn' %>
             <% end %>
 
             <% @banners.each do |banner| %>
               <div id = "banner-div" style="border:1px solid black; width: 49%; display: inline-block; text-align: center">
                 <%= image_tag banner.image.url(:medium), :class => "responsive-img" %>
-                <div id = "banner-info">
+                <div class="banner-info" id = "banner-info-<%=banner.id%>">
                   <h6> Title: <%= banner.description %></h6>
                   <h6> Status: <%= banner.status %> </h6>
                   <h6> Linked Page: <%= banner.link_to %></h6>
-                  <%= button_to "Delete #{banner.description} banner", banner_path(banner.id), method: :delete %>
-                  <button type="button" class="edit-button">Edit Banner</button>
+                  <button type="button" class="edit-button" id="edit-banner-<%=banner.id%>">Edit Banner</button>
                 </div>
-                <div id="edit-banner-div" style="display:none">
+                <div class="edit-banner-div" id="edit-div-<%=banner.id%>" style="display:none">
                   <h3>Edit Banner Div....</h3>
                   <%= form_for banner do |f| %>
                     <p> Banner Description </p>
                     <%= f.text_field :description, :placeholder => "Description...", :required => true %>
-                    <p> Banner Image </p>
-                    <%= f.file_field :image, :required => true %> </br>
                     <p> Make Active? </p>
                     <%= f.select :status, :required => true do %>
                       <% ['Active', 'Non-Active'].each do |a| %>
@@ -71,9 +68,10 @@
                         <%= content_tag(:option, a, value: a,) %>
                       <% end %>
                     <% end %>
-                    <%= f.submit "Create New Banner" %>
+                    <%= f.submit "Update Banner", :class => 'btn btn' %> <br/>
+                    <%= button_to "Delete #{banner.description} banner", banner_path(banner.id), :class => 'btn btn-red', method: :delete %>
                   <% end %>
-                  <button type="button" class="cancel-button">Cancel</button>
+                  <button type="button" class="cancel-button" id="cancel-button-<%=banner.id%>">Cancel</button>
                 </div>
               </div>
             <% end %>
@@ -84,24 +82,32 @@
       </div>
     </main>
     <script>
-      $('.edit-banner').click(function(){
-        console.log('banner id: ' + $(this).attr('id'));
-        // $('#edit-banner-div').css({
-        //   display: 'inherit'
-        // });
-        // $('#banner-info').css({
-        //   display: 'none'
-        // })
+    $(document).ready(function(){
+      $('.edit-button').click(function(){
+        var id = $(this).attr('id');
+        id = id.split('-');
+        var bannerId = id[2];
+        console.log(bannerId);
+        $("#edit-div-"+bannerId).css({
+          display: 'inherit'
+        })
+        $('#banner-info-'+bannerId).css({
+          display: 'none'
+        })
       })
-      $('.cancel').click(function(){
-        console.log('banner id: ' + $(this).attr('id'));
-        // $('#edit-banner-div').css({
-        //   display: 'none'
-        // });
-        // $('#banner-info').css({
-        //   display: 'inherit'
-        // })
+      $('.cancel-button').click(function(){
+        var id = $(this).attr('id');
+        id = id.split('-');
+        var bannerId = id[2];
+        console.log(bannerId);
+        $("#edit-div-"+bannerId).css({
+          display: 'none'
+        })
+        $('#banner-info-'+bannerId).css({
+          display: 'inherit'
+        })
       })
+    })
     </script>
 
   </body>
