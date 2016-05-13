@@ -18,46 +18,81 @@
             <h3>Affiliates</h3>
           </div>
         </div>
-        <div class="row center">
-          <div class="col l3 m3 s6" style='margin-top: 10px;'>
-            <p class="dashboard-headers"><strong>Total Affilaites</strong></p>
-            <p><%= @total %></p>
-          </div>
-          <div class="col l3 m3 s6" style='margin-top: 10px;'>
-            <p class="dashboard-headers"><strong>New this Week</strong></p>
-            <p><%= @begining_of_week%></p>
-          </div>
-          <div class="col l3 m3 s6" style='margin-top: 10px;'>
-            <p class="dashboard-headers"><strong>New this Month</strong></p>
-            <p><%= @begining_of_month%></p>
-          </div>
-          <div class="col l3 m3 s6" style='margin-top: 10px;'>
-            <p class="dashboard-headers"><strong>New this Year</strong></p>
-            <p><%= @begining_of_year%></p>
+        <div class="row">
+        <div class="col l4 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-user-plus" aria-hidden="true"></i>Total Affiliates</strong><p>
+            </div>
+            <div class="metric-body">
+              <h4><%= @total_affiliates%></h4>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col s12">
-              <div class="input-field col s12" id='login-content'>
-                <%= form_for User.new do |f| %>
-                  <%= f.text_field :name, :class => 'login-inputs black-text', :placeholder => 'name' %>
-                  <%= f.email_field :email, :class => 'login-inputs black-text', :placeholder => 'email@address.com' %>
-                  <%= f.password_field :password, :class => 'login-inputs black-text', :placeholder => 'password' %>
-                  <%= f.password_field :password_confirmation, :class => 'login-inputs black-text', :placeholder => 'confirm password' %>
-                  <%= f.hidden_field :status, :value => 1 %>
-                  <%= f.submit "Create User", :class => "btn waves-effect grey darken-3", :style=> "width:300px" %>
-                <% end %>
-              </div>
+        <div class="col l4 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-calendar-plus-o" aria-hidden="true"></i>New This Month</strong><p>
+            </div>
+            <div class="metric-body">
+              <h4><%= @total_month%></h4>
+            </div>
+          </div>
+        </div>
+        <div class="col l4 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-calendar-check-o" aria-hidden="true"></i>New This Year</strong><p>
+            </div>
+            <div class="metric-body">
+              <h4><%= @total_year%></h4>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col s12 center">
-          <p class='account-header'>Orders By Affiliate</p>
+        <div class="col l6 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <h5>Affiliates/Year</h5>
+            </div>
+            <div style='max-height:300px'>
+              <canvas id="myChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col l6 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-user-plus" aria-hidden="true"></i>All Affiliates</strong><p>
+            </div>
+            <div class="metric-body">
+              <table class='cms-table'>
+                <tbody>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Total Sales</th>
+                    <th class='right'>Action</th>
+                  </tr>
+
+                  <% @affiliates.each do  |affiliate| %>
+                    <tr>
+                      <td><%=  affiliate.id %></td>
+                      <td><%=  affiliate.email %></td>
+                      <td><%=  affiliate.email %></td>
+                      <td class='right'><a class='action-icons' href=""><i class="fa fa-eye" aria-hidden="true"></i></a><a class='action-icons' href=""></i></a></td>
+                    </tr>
+                  <% end %>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col s12 center">
 
           <%= form_tag admin_affiliates_path, :method => 'get' do %>
@@ -74,7 +109,7 @@
           <%= render partial: 'affiliates' %>
 
           </div>
-        </div>
+        </div> -->
 
     </main>
   </body>
