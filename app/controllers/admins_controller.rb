@@ -116,6 +116,13 @@ class AdminsController < ApplicationController
     end
   end
 
+  def products
+    @total_products = Product.all.count
+    @total_month = Product.where('created_at >=', Time.zone.now.beginning_of_month)
+    @all_products = Product.all
+    @affiliates = User.where('status = ?', 1)
+  end
+
   def get_top_selling_product(array, quantity, title)
     if array[title] === nil
       array[title] = quantity
@@ -143,10 +150,6 @@ class AdminsController < ApplicationController
     respond_to do |format|
       format.json { render :json => data }
     end
-  end
-
-  def products
-    @affiliates = User.where('status = ?', 1)
   end
 
   def updated

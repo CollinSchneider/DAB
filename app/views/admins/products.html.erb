@@ -22,7 +22,7 @@
               <p><i id='fa-metric' class="fa fa-shopping-cart" aria-hidden="true"></i>Total Products</strong><p>
             </div>
             <div class="metric-body">
-              <h4>200</h4>
+              <h4><%= @total_products %></h4>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
               <p><i id='fa-metric' class="fa fa-calendar-plus-o" aria-hidden="true"></i>New This Month</strong><p>
             </div>
             <div class="metric-body">
-              <h4>15</h4>
+              <h4><%= @total_month %></h4>
             </div>
           </div>
         </div>
@@ -51,10 +51,19 @@
                     <th>#</th>
                     <th>Product</th>
                     <th>Category</th>
-                    <th>Affiliate</th>
-                    <th>Quantiy</th>
+                    <th>Price</th>
                     <th class='right'>Action</th>
                   </tr>
+
+                  <% @all_products.each do |product| %>
+                    <tr>
+                      <td><%= product.id %></td>
+                      <td><%= product.title %></td>
+                      <td><%= product.category %></td>
+                      <td><%= product.price %></td>
+                      <td class='right'><a class='action-icons' href=""><i class="fa fa-eye" aria-hidden="true"></i></a><a class='action-icons' href=""></i></a></td>
+                    </tr>
+                  <% end %>
                   <tr>
                     <td>1</td>
                     <td>Product 1</td>
