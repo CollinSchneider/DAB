@@ -117,6 +117,33 @@ $(document).ready(function(){
         </div>
         <!-- End Login -->
 
+        <!-- Login -->
+        <div class="login">
+          <div class="row">
+            <form action='/login' method="POST">
+              <div class="input-field col s12">
+                <input name='email' id="email" type="email" class="validate">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <input name='password' id="password" type="password" class="validate">
+                <label for="password">Password</label>
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              </div>
+              <div class='input-field col s12'>
+                  <button class='landing-button'>Login</<button>
+              </div>
+            </form>
+            <a href="/password_resets/new">
+              <p class='landing-login'>Forgot Password?</p>
+            </a>
+            <a href="#" onclick="$('.login').css('display', 'none');$('.index').css('display', 'block');">
+              <p class='landing-login'>Not a member?</p>
+            </a>
+          </div>
+        </div>
+        <!-- End Login -->
+
       </div>
     </div>
   </div> <!-- End Modal Content-->

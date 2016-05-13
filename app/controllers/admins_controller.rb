@@ -60,6 +60,43 @@ class AdminsController < ApplicationController
   end
   end
 
+  def orders
+    # Calculate Month Orders
+    @month_orders = Order.where('extract(month from created_at) = ?', Date.today.month).count
+
+    # Calulate Month Sales
+    @month_sales = 0;
+    month_orders = OrderItem.where('extract(month from created_at) = ?', Date.today.month)
+    month_orders.each do |order_item|
+      @month_sales += item.product_item.product.price.to_i * item.quantity
+    end
+
+    # if params[:search]
+    #   @order_search = Order.where('id = ?', "#{params[:search]}").paginate(:page => params[:page], :per_page => 5)
+    # end
+
+  end
+
+  def affiliates
+    # Calculate Total Affiliates
+    @total_affiliates = User.where('status = ?', 1).count
+
+    # All Affiliates
+    @affiliates = User.where('status = ?', 1)
+
+    # Calculate New Affilaites For Current Month
+    @total_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 1).length
+
+    # Calculate Total Affiliates For Current Year
+    @total_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 1).length
+
+    if params[:search]
+      @affiliates = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 1, "%#{params[:search].downcase}%", 1).order(:name).paginate(:page => params[:page], :per_page => 2)
+    else
+      @affiliates = User.where('status = ?', 1).order(:name).paginate(:page => params[:page], :per_page => 2)
+    end
+  end
+
   def get_top_selling_product(array, quantity, title)
     if array[title] === nil
       array[title] = quantity
@@ -76,18 +113,6 @@ class AdminsController < ApplicationController
       array[email] += price * quantity
     end
     @top_selling_affiliate = array.max_by{|a,b| a}
-  end
-
-  def orders
-    @weeks_orders = Order.where('created_at >= ?', past_7_days)
-    @weeks_pending_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 0)
-    @weeks_delivered_orders = OrderItem.where('created_at >= ? AND status = ?', past_7_days, 1)
-    @total_affiliates = User.where('status = ?', 1).count
-
-    if params[:search]
-      @order_search = Order.where('id = ?', "#{params[:search]}").paginate(:page => params[:page], :per_page => 5)
-    end
-
   end
 
   def update_affiliate_orders
@@ -115,20 +140,6 @@ class AdminsController < ApplicationController
       @users = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 0, "%#{params[:search].downcase}%", 0).order(:name).paginate(:page => params[:page], :per_page => 5)
     else
       @users = User.where('status = ?', 0).order(:name).paginate(:page => params[:page], :per_page => 5)
-    end
-  end
-
-  def affiliates
-    @total = User.where(status: 1).length
-    @begining_of_week = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_week, 1).length
-    @begining_of_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 1).length
-    @begining_of_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 1).length
-    @total_affiliates = User.where('status = ?', 1).count
-
-    if params[:search]
-      @affiliates = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 1, "%#{params[:search].downcase}%", 1).order(:name).paginate(:page => params[:page], :per_page => 2)
-    else
-      @affiliates = User.where('status = ?', 1).order(:name).paginate(:page => params[:page], :per_page => 2)
     end
   end
 

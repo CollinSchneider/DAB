@@ -2,35 +2,6 @@
 
     <%= render partial: 'nav' %>
 
-    <!-- <li>
-      <div class="collapsible-header">
-        <i class="material-icons">done</i>Order#: 123456789
-      </div>
-      <div class="collapsible-body">
-        <p>
-          Status: <span class='order-status-pending'>Pending</span><br>
-          SubTotal: $200
-        </p>
-        <div class="row order-info">
-          <div class="col l1 m1 s4">
-            <img style='width:100px' src="http://www.vphosted.com/sf/_langid-1/_hc-00001988/_/vp/images/b09/product/230x150/labels/circle-labels-sm-001.jpg" alt="">
-          </div>
-          <div class="col l2 m2 s3">
-            <p>Product Name</p>
-          </div>
-          <div class="col l2 s9 hide-on-med-and-down">
-            <p>Affiliate</p>
-          </div>
-          <div class="col l2 m2 s3">
-            <p>Quantity: 1</p>
-          </div>
-          <div class="col l3 s9 hide-on-med-and-down">
-            <p>Item Total  : $100</p>
-          </div>
-        </div>
-      </div>
-    </li> -->
-
     <main>
       <div class="container" id='main-content'>
         <div class="row">
@@ -38,96 +9,111 @@
             <h3>Orders</h3>
           </div>
         </div>
-        <div class="row">
-          <div class="col s12 center">
-            <p class='account-header'>Orders for <%= (past_7_days).strftime('%b %d, %Y') %> to <%= Time.now.strftime('%b %d, %Y') %></p>
+
+        <!-- Order Page -->
+      <div class="row">
+        <div class="col l6 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-star" aria-hidden="true"></i>Total Month Orders</strong><p>
+            </div>
+            <div class="metric-body">
+              <h4><%= @month_orders %></h4>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col s12">
-            <ul class="tabs">
-              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#all">All</a></li>
-              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#pending">Pending</a></li>
-              <li class="tab col l3 m3 s6"><a class='dashboard-tabs' href="#shipped">Shipped</a></li>
-            </ul>
-          </div>
-
-          <div id="all" class="col s12">
-            <ul class="collapsible" data-collapsible="accordion">
-              <% @weeks_orders.each do |order| %>
-            <li>
-              <div class="collapsible-header">
-                <i class="material-icons">done</i> Order #<%= order.id %>; <strong>$<%= '%.2f' % (order.pre_tax_total.to_f + order.tax_amount.to_f) %></strong>
-              </div>
-              <% order.order_items.each do |item| %>
-              <div class="collapsible-body">
-                <p>
-                  Status: <%if item.status === 0 %> <span class='order-status-pending'>Pending</span> <% elsif item.status === 1 %> <span class='order-status-shipped'>Shipped</span><br>
-                  Tracking Info: <%= item.shipping_method %>: <%= item.shipping_number %>
-                  <% end %>
-                </p>
-                <div class="row order-info">
-                  <div class="col l1 m1 s4">
-                    <%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %>
-                  </div>
-                  <div class="col l2 m2 s3">
-                    <p> Product: <%= item.product_item.description %> <%= item.product_item.product.title %> </p>
-                  </div>
-                  <div class="col l2 s9 hide-on-med-and-down">
-                    <p> Affiliate: <%= item.product_item.product.user.name || item.product_item.product.user.email %></p>
-                  </div>
-                  <div class="col l2 m2 s3">
-                    <p>Quantity: <%= item.quantity %></p>
-                  </div>
-                  <div class="col l3 s9 hide-on-med-and-down">
-                    <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                  </div>
-                </div>
-              </div>
-              <% end %>
-            </li>
-            <% end %>
-          </ul>
-          </div>
-          <div id="pending" class="col s12">
-            <ul class="collapsible" data-collapsible="accordion">
-              <% @weeks_pending_orders.each do |item| %>
-              <li>
-                <div class="collapsible-header">
-                  <i class="material-icons">done</i> Order Item #<%= item.id %>
-                </div>
-                <div class="collapsible-body">
-                  <p>
-                    Status: <%if item.status === 0 %> <span class='order-status-pending'>Pending</span> <% elsif item.status === 1 %> <span class='order-status-shipped'>Shipped</span><br>
-                    Tracking Info: <%= item.shipping_method %>: <%= item.shipping_number %>
-                    <% end %>
-                  </p>
-                  <div class="row order-info">
-                    <div class="col l1 m1 s4">
-                      <%= image_tag item.product_item.product.image.url(:thumb), :style => "width:100px" %>
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p> Product: <%= item.product_item.description %> <%= item.product_item.product.title %> </p>
-                    </div>
-                    <div class="col l2 s9 hide-on-med-and-down">
-                      <p> Affiliate: <%= item.product_item.product.user.name || item.product_item.product.user.email %></p>
-                    </div>
-                    <div class="col l2 m2 s3">
-                      <p>Quantity: <%= item.quantity %></p>
-                    </div>
-                    <div class="col l3 s9 hide-on-med-and-down">
-                      <p>Item Total: $<%= item.quantity * item.product_item.product.price.to_i %> </p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            <% end %>
-          </ul>
+        <div class="col l6 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-trophy" aria-hidden="true"></i>Total Month Sales</strong><p>
+            </div>
+            <div class="metric-body">
+              <h4>$<%= @month_sales %></h4>
+            </div>
           </div>
         </div>
       </div>
 
-      <%= form_tag admin_orders_path, :method => 'get' do %>
+      <div class="row">
+        <div class="col l6 s12 center">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <h5>Month Orders</h5>
+            </div>
+            <div style='max-height:300px'>
+              <canvas id="myChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col l6 s12 center">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <h5>Month Sales</h5>
+            </div>
+            <div style='max-height:300px'>
+              <canvas id="myChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+
+        <div class="col l4 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-fighter-jet" aria-hidden="true"></i>Quick Download</strong><p>
+            </div>
+            <div class="metric-body">
+              <div class="cms-button">
+                <p>Download</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col l4 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-calendar" aria-hidden="true"></i>Download by Month</strong><p>
+            </div>
+            <div class="metric-body">
+              <div class="row">
+                <div class="col s6" style='padding-right: 0px;'>
+                  <input class='date-picker' type="month">
+                </div>
+                <div class="col s6" style='padding-left: 0px;'>
+                  <div class="cms-button">
+                  <p>Download</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col l4 s12">
+          <div class="metric-box">
+            <div class="metric-heading">
+              <p><i id='fa-metric' class="fa fa-search" aria-hidden="true"></i>Search</strong><p>
+            </div>
+            <div class="metric-body">
+              <div class="row">
+                <div class="col s6" style='padding-right: 0px;'>
+                  <input class='date-picker browser-default' type="number" style='margin-bottom: 0px;'>
+                </div>
+                <div class="col s6" style='padding-left: 0px;'>
+                  <div class="cms-button">
+                  <p>Download</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <%= form_tag admin_orders_path, :method => 'get' do %>
         <%= text_field_tag :search, params[:search], :placeholder => "Search by Order Number" %>
         <%= submit_tag "Search", :name => nil %>
       <% end %>
@@ -135,7 +121,7 @@
         <% @order_search.each do |order| %>
           <%= link_to "#{order.id}", order_path(order.id) %>
         <% end %>
-      <% end %>
+      <% end %> -->
 
     </main>
   </body>
