@@ -11,7 +11,6 @@ class AdminsController < ApplicationController
     @weeks_show_impressions = Impression.where('action_name = ? AND created_at >= ?', 'show', past_7_days)
     @top_selling_products = Product.order(total_orders: :desc).limit(4)
     @weeks_orders = Order.where('created_at >= ?', past_7_days).count
-    @month_orders = Order.where('created_at >= ?', Time.now - 30.days)
     @month_views = Impression.where('action_name = ? And created_at >= ?', 'index', Time.now - 30.days)
 
     total_orders = OrderItem.all
@@ -64,13 +63,14 @@ class AdminsController < ApplicationController
 
   def orders
     # Calculate Month Orders
-    @month_orders = Order.where('extract(month from created_at) = ?', Date.today.month).count
+    @month_orders = Order.where('created_at >= ?', Time.now - 30.days).count
+    @month_orders_data = Order.where('created_at >= ?', Time.now - 30.days)
 
     # Calulate Month Sales
     @month_sales = 0;
     month_orders = OrderItem.where('extract(month from created_at) = ?', Date.today.month)
     month_orders.each do |order_item|
-      @month_sales += item.product_item.product.price.to_i * item.quantity
+      @month_sales += order_item.product_item.product.price.to_i * order_item.quantity
     end
 
     # if params[:search]
@@ -105,11 +105,11 @@ class AdminsController < ApplicationController
 
     # All Users
     @all_users = User.where(status: 0).order(email: :asc)
-  
-    # Calculate New Users for Current Month 
+
+    # Calculate New Users for Current Month
     @total_month = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_month, 0).length
 
-    # Calculate Total Users For Current Year 
+    # Calculate Total Users For Current Year
     @total_year = User.where('created_at >= ? AND status = ? ', Time.zone.now.beginning_of_year, 0).length
     if params[:search]
       @users = User.where('name LIKE ? AND status = ? OR email like ? AND status = ?', "%#{params[:search].downcase}%", 0, "%#{params[:search].downcase}%", 0).order(:name).paginate(:page => params[:page], :per_page => 5)
