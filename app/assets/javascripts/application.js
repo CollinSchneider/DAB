@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-// = require jquery.infinite-pages
 //= require jquery_ujs
 //= require turbolinks
 
@@ -38,8 +37,6 @@
 //   scroller()
 // })
 
-//= require Chart
-//= require excanvas
 
 if($('.success-div')){
   setTimeout(function(){

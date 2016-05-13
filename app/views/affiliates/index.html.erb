@@ -1,4 +1,3 @@
-
     <%= render partial: 'partials/affiliate' %>
 
     <main>
@@ -8,6 +7,12 @@
             <p class='account-header'>Overall Metrics</p>
           </div>
         </div>
+        <% @now = Time.now() %>
+        <%= @now.strftime('%B %d, %Y') %>
+        <%= (@now - 1.day).strftime('%B %d, %Y') %>
+        <% @month_orders = Order.where('created_at = ?', Time.now() - 100.days) %>
+        <%= @month_orders.count %>
+        <%= area_chart @month_orders.group_by_day(:created_at, format: "%B %d, %Y").count, discrete: true %>
         <div class="row">
           <div class="col l2r m2 s12 center">
             <p class='dashboard-headers'><strong>Conversion Rate</strong><p>
