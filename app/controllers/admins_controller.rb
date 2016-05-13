@@ -11,6 +11,8 @@ class AdminsController < ApplicationController
     @weeks_show_impressions = Impression.where('action_name = ? AND created_at >= ?', 'show', past_7_days)
     @top_selling_products = Product.order(total_orders: :desc).limit(4)
     @weeks_orders = Order.where('created_at >= ?', past_7_days).count
+    @month_orders = Order.where('created_at >= ?', Time.now - 30.days)
+    @month_views = Impression.where('action_name = ? And created_at >= ?', 'index', Time.now - 30.days)
 
     total_orders = OrderItem.all
     @total_orders = 0
