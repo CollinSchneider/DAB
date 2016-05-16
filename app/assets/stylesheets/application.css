@@ -898,3 +898,8 @@ tr:hover {
 .signup {
   display: none;
 }
+
+.password {
+  height: 255px;
+  display: none;
+}
