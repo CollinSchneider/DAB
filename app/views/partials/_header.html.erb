@@ -1,8 +1,11 @@
 <div class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper grey lighten-5">
-        <%= link_to "Deal Baked", products_path, :class => 'brand-logo center', :id => 'logo' %>
+      <div class="nav-wrapper white">
+        <%= link_to "Deal Baked", products_path, :class => 'brand-logo left hide-on-small-and-down', :id => 'logo' %>
+        <%= link_to "Deal Baked", products_path, :class => 'hide-on-med-and-up brand-logo center', :id => 'logo' %>
+  
         <a href="#" data-activates="mobile" class="button-collapse hide-on-med-and-up"><i class="material-icons black-text">menu</i></a>
+        
         <ul class="side-nav" id="mobile">
           <li>
           <% if current_user %>
@@ -24,7 +27,6 @@
         </ul>
         <ul class="right">
         <% if current_user %>
-          <!-- <li><input ng-model="search.$" placeholder = "SEARCH PRODUCTS" class = "black-text"></li> -->
           <li class='hide-on-small-and-down'> <%= link_to sessions_path, :class => "dropdown-button black-text", method: :delete do %> Sign Out <% end %></li>
           <% if current_user.status === 0 %>
             <li class='hide-on-small-and-down'><a class="dropdown-button black-text" href="/profile" data-beloworigin='true' data-hover="true" data-activates="account"><i class="material-icons">perm_identity</i></a></li>
@@ -39,10 +41,18 @@
             <li><div class='cart-popup'><span class='cart-number'><%= @cart_quantity %></span></div></li>
           <% end %>
         </ul>
+        <ul class="center hide-on-med-and-down" id='cat-nav'>
+            <li><a id='toolbar-links' class='black-text header-links' href="/accessories">Accessories</a></li>
+            <li><a id='toolbar-links' class='black-text header-links' href="/apparel">Apparel</a></li>
+            <li><a id='toolbar-links' class='black-text header-links' href="/art&culture">Art/Culture</a></li>
+            <li><a id='toolbar-links' class='black-text header-links' href="/essentials">Essentials</a></li>
+            <li><a id='toolbar-links' class='black-text header-links' href="/gadgets">Gadgets</a></li>
+            <li><a id='toolbar-links' class='black-text header-links' href="/tech">Tech</a></li>
+          </ul>
       </div>
     </nav>
   </div>
-  <div class="navbar-fixed hide-on-small-only">
+  <!-- <div class="navbar-fixed hide-on-small-only">
     <nav class='grey lighten-2 center-align' id='toolbar'>
       <div class="nav-wrapper">
         <div id="toolbar-link-list">
@@ -55,4 +65,4 @@
         </div>
       </div>
     </nav>
-  </div>
+  </div> -->

@@ -64,11 +64,16 @@
  }
 
  #logo {
-   font: 400 40px/1.5 'Pacifico', Helvetica, sans-serif;
+   font-family: "Gotham Narrow SSm A", , "Gotham Narrow SSm B";
+   font-style: normal;
+   font-weight: 400;
    color: black;
-   text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
  }
 
+ #cat-nav li a {
+  font-family: 'Raleway', sans-serif;
+ }
+  
  #product-title {
    font-family: arial;
    font-weight: 900;
@@ -150,6 +155,7 @@
 
  #footer-icons {
    margin-right: 15px;
+   color: black;
  }
 
  #footer-links {
