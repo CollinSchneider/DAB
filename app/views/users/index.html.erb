@@ -107,7 +107,7 @@ $(document).ready(function(){
                   <button class='landing-button'>Login</<button>
               </div>
             </form>
-            <a href="/password_resets/new">
+            <a href="#" onclick="$('.login').css('display', 'none');$('.password').css('display', 'block');">
               <p class='landing-login'>Forgot Password?</p>
             </a>
             <a href="#" onclick="$('.login').css('display', 'none');$('.index').css('display', 'block');">
@@ -117,32 +117,31 @@ $(document).ready(function(){
         </div>
         <!-- End Login -->
 
-        <!-- Login -->
-        <div class="login">
+        <!-- Forgot Password -->
+        <div class="password">
           <div class="row">
-            <form action='/login' method="POST">
+            <p class='landing-sub'>Please enter your email below. If you have an account with us, instructions will be sent to your mailbox.</p>
+            <!-- <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+              <%= f.email_field :email %>
+              <%= f.submit "Send Password Reset Email" %>
+            <% end %>
+            <%= flash[:info] %>
+            <%= flash[:danger] %> -->
+            <form action='/create' method="PUT">
               <div class="input-field col s12">
                 <input name='email' id="email" type="email" class="validate">
                 <label for="email">Email</label>
               </div>
-              <div class="input-field col s12">
-                <input name='password' id="password" type="password" class="validate">
-                <label for="password">Password</label>
-                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-              </div>
               <div class='input-field col s12'>
-                  <button class='landing-button'>Login</<button>
+                <button class='landing-button'>Submit</<button>
               </div>
             </form>
-            <a href="/password_resets/new">
-              <p class='landing-login'>Forgot Password?</p>
-            </a>
-            <a href="#" onclick="$('.login').css('display', 'none');$('.index').css('display', 'block');">
-              <p class='landing-login'>Not a member?</p>
+            <a href="#" onclick="$('.password').css('display', 'none');$('.login').css('display', 'block');">
+              <p class='landing-login'>back</p>
             </a>
           </div>
         </div>
-        <!-- End Login -->
+        <!-- End Forgot Password -->
 
       </div>
     </div>

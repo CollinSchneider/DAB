@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col l6 s12">
         <%= display_meta_tags separator: "&mdash;".html_safe %>
-        <%= image_tag @product.image.url(:large), :id => "main-image", :class => "responsive-img", :style => 'height:450px;width:600px' %>
+        <%= image_tag @product.image.url(:large), :id => "main-image", :class => "responsive-img" %>
         <ul id='product-images-list'>
           <% if @product.image_two.exists? %>
             <li><%= image_tag @product.image_two.url(:medium), :class => "show-pic responsive-img", :style => "width:145px" %></li>

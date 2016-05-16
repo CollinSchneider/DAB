@@ -11,6 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7161914/6083752/css/fonts.css" />
 
   <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
@@ -19,7 +21,7 @@
 </head>
 
 
-<body class='grey lighten-5'>
+<body class='white'>
     <!-- Compiled and minified Jquery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
    <!-- Compiled and minified JavaScript -->
@@ -31,12 +33,15 @@
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       $('select').material_select();
+      var logo_width = $('#logo').width();
+      $('#cat-nav').css("padding-left",logo_width+10)
 
         $('#sign-up-tag').click(function(){
           console.log('signup');
           $('#signup-content').toggle();
           $('#login-content').toggle();
         })
+        
 
         function toggleSignUp(){
           $('.ToggleOff').removeClass('ToggleOff')
