@@ -41,7 +41,9 @@
               <h5>Month Orders</h5>
             </div>
             <div style='max-height:300px'>
-              <%= area_chart @month_orders_data.group_by_day(:created_at, format: "%B %d, %Y").count %>
+              <% total_orders = Order.all.group_by_day(:created_at, format: '%B %d, %Y', range: 30.days.ago..Time.now).count %>
+              <%= area_chart total_orders, min: 0, max: total_orders.max[1] + 10 %>
+              <!-- <#%= area_chart @month_orders_data.group_by_day(:created_at, format: "%B %d, %Y").count %> -->
               <canvas id="myChart"></canvas>
             </div>
           </div>
@@ -52,6 +54,7 @@
               <h5>Month Sales</h5>
             </div>
             <div style='max-height:300px'>
+              <%= area_chart @month_sales.group_by_day(@month_sales.each{|key, value|}).count %>
               <canvas id="myChart"></canvas>
             </div>
           </div>
