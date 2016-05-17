@@ -78,7 +78,6 @@ class AdminsController < ApplicationController
       else
         @month_sales[date] = order_item.product_item.product.price.to_i * order_item.quantity
       end
-      binding.pry
       # @month_sales += order_item.product_item.product.price.to_i * order_item.quantity
     end
 
