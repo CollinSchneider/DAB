@@ -5,6 +5,7 @@ class AdminsController < ApplicationController
 
     @total_impressions = Impression.where('action_name = ?', 'index')
     @total_unique_views = Impression.select(:ip_address).uniq
+    @month_unique_views = @total_unique_views.where('created_at >= ?', Time.now - 30.days)
     @weeks_unique_views = @total_unique_views.where('created_at >= ?', past_7_days)
     @total_show_impressions = Impression.where('action_name = ?', 'show')
     @weeks_impressions = Impression.where('action_name = ? AND created_at >= ?', 'index', past_7_days)
