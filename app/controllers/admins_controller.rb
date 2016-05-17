@@ -13,6 +13,7 @@ class AdminsController < ApplicationController
     @top_selling_products = Product.order(total_orders: :desc).limit(4)
     @weeks_orders = Order.where('created_at >= ?', past_7_days).count
     @month_views = Impression.where('action_name = ? And created_at >= ?', 'index', Time.now - 30.days)
+    @month_users = User.where('created_at >= ?', Time.now - 30.days)
 
     total_orders = OrderItem.all
     @total_orders = 0
@@ -66,12 +67,19 @@ class AdminsController < ApplicationController
     # Calculate Month Orders
     @month_orders = Order.where('created_at >= ?', Time.now - 30.days).count
     @month_orders_data = Order.where('created_at >= ?', Time.now - 30.days)
-
     # Calulate Month Sales
-    @month_sales = 0;
+    @month_sales = {};
     month_orders = OrderItem.where('extract(month from created_at) = ?', Date.today.month)
     month_orders.each do |order_item|
-      @month_sales += order_item.product_item.product.price.to_i * order_item.quantity
+      string_time = order_item.created_at.to_s.split(' ')[0]
+      date = Time.new(string_time).strftime('%B %d, %Y')
+      if @month_sales[date] != nil
+        @month_sales[date] += order_item.product_item.product.price.to_i * order_item.quantity
+      else
+        @month_sales[date] = order_item.product_item.product.price.to_i * order_item.quantity
+      end
+      binding.pry
+      # @month_sales += order_item.product_item.product.price.to_i * order_item.quantity
     end
 
     # if params[:search]

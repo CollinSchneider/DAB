@@ -72,8 +72,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create( email: params[:email], password: params[:password], name: params[:name], status: 2 )
-    binding.pry
+    user = User.create( email: params[:email], password: params[:password], name: params[:name], status: 0 )
     if user.save
       if user.status === 0
         binding.pry
