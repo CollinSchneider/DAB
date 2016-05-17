@@ -32,7 +32,7 @@
           <div class="col l3 m6 s12 center">
             <div class="metric-box">
             <div class="metric-heading">
-              <p><i id='fa-metric' class="fa fa-globe" aria-hidden="true"></i>Total <strong>Hits</strong><p>
+              <p><i id='fa-metric' class="fa fa-globe" aria-hidden="true"></i>Total Unique <strong>Hits</strong><p>
             </div>
             <div class="metric-body">
               <h4><%= @total_unique_views.count %></h4>
@@ -45,7 +45,7 @@
               <p><i id='fa-metric' class="fa fa-users" aria-hidden="true"></i>Total <strong>Users</strong><p>
             </div>
             <div class="metric-body">
-              <h4><%= @total_unique_views.count %></h4>
+              <h4><%= @users.count %></h4>
             </div>
           </div>
           </div>
@@ -71,10 +71,11 @@
           <div class="col l6 m12 s12 center">
             <div class="metric-box">
               <div class="metric-heading">
-                <h5>Monthly Page Views</h5>
+                <h5>Monthly Unique Page Views</h5>
               </div>
               <div style='max-height:300px'>
-                <%= area_chart @month_views.group_by_day(:created_at, format: "%B %d, %Y").count %>
+                <% unique_views = @month_unique_views.group_by_day(:created_at, format: "%B %d, %Y").count %>
+                <%= area_chart unique_views, min: 0, max: unique_views.max[1] + 10  %>
                 <canvas id="myChart"></canvas>
               </div>
             </div>
