@@ -54,7 +54,7 @@
               <h5>Month Sales</h5>
             </div>
             <div style='max-height:300px'>
-              <%= area_chart @month_sales.group_by_day(@month_sales.each{|key, value|}).count %>
+              <%= area_chart @month_sales.group_by_day(@month_sales.each{|key, value|} key, range: 30.days.ago..Time.now).count %>
               <canvas id="myChart"></canvas>
             </div>
           </div>
