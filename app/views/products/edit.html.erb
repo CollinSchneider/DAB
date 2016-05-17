@@ -43,7 +43,7 @@
     <div class="row">
       <%= form_for @product do |f| %>
       <div class="col l6 s12">
-        <%= image_tag @product.image.url(:large), :id => "main-image", :class => "responsive-img", :style => 'height:448px;width:597px' %>
+        <%= image_tag @product.image.url(:large), :id => "main-image", :class => "responsive-img"%>
         <ul id='product-images-list'>
           <% if @product.image_two.exists? %>
             <li><%= image_tag @product.image_two.url(:medium), :class => "show-pic responsive-img", :style => "width:150px" %></li>

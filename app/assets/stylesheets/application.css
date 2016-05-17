@@ -64,13 +64,16 @@
  }
 
  #logo {
-   font-style: normal;
-   font-weight: 400;
-   color: black;
+  font-family: "Gotham Narrow SSm A", "Gotham Narrow SSm B";
+  font-style: normal;
+  font-weight: 300;
+  color: black;
  }
 
  #cat-nav li a {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Gotham Narrow SSm A", "Gotham Narrow SSm B";
+  font-style: normal;
+  font-weight: 300;
  }
   
  #product-title {
@@ -243,11 +246,6 @@
 
  #info-header-containter {
    height: 75px;
- }
-
- .header-links {
-  font-family: 'Montserrat';
-  font-size: 14px;
  }
 
  #info-header {
