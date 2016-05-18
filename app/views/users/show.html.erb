@@ -1,3 +1,8 @@
+<%= render partial: 'nav' %>
+
+		<main>
+			<div class="container" id='main-container'>
+
 <%= link_to "Home", admins_path %>
 
 <h3> <%= @user.name || @user.email %> </h3>
@@ -11,3 +16,7 @@
   <%= render partial: 'affiliates_show' %>
 
 <% end %>
+			</div>
+		</main>
+	</body>
+</html>
