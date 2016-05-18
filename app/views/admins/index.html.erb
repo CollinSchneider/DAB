@@ -77,7 +77,6 @@
               </div>
               <div style='max-height:300px'>
                 <% unique_views = @month_unique_views.group_by_day(:created_at, format: "%B %d, %Y").count %>
-                <%= unique_views %>
                 <%= area_chart unique_views, min: 0, max: unique_views.max[1] + 10  %>
                 <canvas id="myChart"></canvas>
               </div>
