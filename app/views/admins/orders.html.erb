@@ -28,7 +28,7 @@
               <p><i id='fa-metric' class="fa fa-trophy" aria-hidden="true"></i>Total Month Sales</strong><p>
             </div>
             <div class="metric-body">
-              <h4>$<%= @month_sales %></h4>
+              <h4>$<%= @total_month_sales %></h4>
             </div>
           </div>
         </div>
@@ -43,7 +43,6 @@
             <div style='max-height:300px'>
               <% total_orders = Order.all.group_by_day(:created_at, format: '%B %d, %Y', range: 30.days.ago..Time.now).count %>
               <%= area_chart total_orders, min: 0, max: total_orders.max[1] + 10 %>
-              <!-- <#%= area_chart @month_orders_data.group_by_day(:created_at, format: "%B %d, %Y").count %> -->
               <canvas id="myChart"></canvas>
             </div>
           </div>
@@ -54,11 +53,7 @@
               <h5>Month Sales</h5>
             </div>
             <div style='max-height:300px'>
-<!-- <<<<<<< HEAD
-              <%= area_chart @month_sales.group_by_day(@month_sales.each{|key, value|} key, range: 30.days.ago..Time.now).count %>
-=======
-              <%= area_chart @month_sales.group_by_day(@month_sales.each{|key, value|}).count %>
->>>>>>> 897d1c54d700fba1cccf9955dfb1a27e7a0ddfae -->
+              <%= area_chart @month_sales %>
               <canvas id="myChart"></canvas>
             </div>
           </div>

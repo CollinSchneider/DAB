@@ -53,38 +53,40 @@ class AdminsController < ApplicationController
       end
     end
 
-  @users = User.all
-  respond_to do |format|
-    format.html
-    format.csv do
-      headers['Content-Disposition'] = "attachment; filename=\"user-list\""
-      headers['Content-Type'] ||= 'text/csv'
+    @users = User.all
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"user-list\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
     end
-  end
   end
 
   def orders
-    # Calculate Month Orders
+
     @month_orders = Order.where('created_at >= ?', Time.now - 30.days).count
     @month_orders_data = Order.where('created_at >= ?', Time.now - 30.days)
-    # Calulate Month Sales
-    @month_sales = {};
-    month_orders = OrderItem.where('extract(month from created_at) = ?', Date.today.month)
+
+    @month_sales = {}
+    @total_month_sales = 0
+    thirty_days = (30.days.ago.to_date .. Time.now.to_date).to_a
+    thirty_days.each do |date|
+      @month_sales[date.strftime('%B %d, %Y')] = 0
+    end
+    month_orders = OrderItem.where('created_at >= ?', Time.now - 30.days)
     month_orders.each do |order_item|
+      @total_month_sales += order_item.product_item.product.price.to_i * order_item.quantity
       string_time = order_item.created_at.to_s.split(' ')[0]
-      date = Time.new(string_time).strftime('%B %d, %Y')
+      date = string_time.to_datetime.strftime('%B %d, %Y')
+      date.to_date
       if @month_sales[date] != nil
-        @month_sales[date] += order_item.product_item.product.price.to_i * order_item.quantity
+        @month_sales[date] += (order_item.product_item.product.price.to_i * order_item.quantity)
       else
         @month_sales[date] = order_item.product_item.product.price.to_i * order_item.quantity
       end
-      # @month_sales += order_item.product_item.product.price.to_i * order_item.quantity
+
     end
-
-    # if params[:search]
-    #   @order_search = Order.where('id = ?', "#{params[:search]}").paginate(:page => params[:page], :per_page => 5)
-    # end
-
   end
 
   def affiliates
