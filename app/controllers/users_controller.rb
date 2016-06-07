@@ -75,11 +75,8 @@ class UsersController < ApplicationController
     user = User.create( email: params[:email], password: params[:password], name: params[:name], status: 0 )
     if user.save
       if user.status === 0
-        binding.pry
         session[:user_id] = user.id
-        binding.pry
         UserMailer.user_welcome_email(user).deliver
-        binding.pry
         redirect_to root_path
       elsif user.status === 1
         flash[:success] = "New Affiliate Created!"

@@ -177,7 +177,10 @@ $('.show-pic').click(function(){
   var thisImage = $(this);
   var mainImage = $('#main-image');
   var mainImageSrc = mainImage.attr('src');
-  mainImage.attr('src', thisImage[0].currentSrc);
+  imageArray = thisImage[0].currentSrc.split('/')
+  largeImage = imageArray[9] = 'large'
+  largeImage = imageArray.join('/');
+  mainImage.attr('src', largeImage);
   thisImage.attr('src', mainImageSrc);
 })
 

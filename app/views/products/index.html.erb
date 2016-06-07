@@ -44,7 +44,7 @@
   	    <%= render :partial => 'product'%>
   	  </div>
 
-  	  <p class="pagination hidden" style="margin-left:47%">
+  	  <p class="pagination" style="margin-left:47%">
   	    <%= link_to_next_page(@products, '', :remote => true) %>
   	  </p>
       </div>
@@ -55,7 +55,6 @@
 <%= render partial: 'partials/footer' %>
 
 <script>
-
 var active = false
 
 function scroller(){
@@ -64,7 +63,7 @@ function scroller(){
     if($(window).scrollTop()>$(document).height()-$(window).height()-50){
       if(!active && url){
         active = true;
-        $('.pagination > a').text('Retrieving products...')
+        $('.pagination > a').append($('<img src="/loading_wheel.gif" id="loading-wheel" />'))
         $.getScript(url).then(function(){
           active = false;
         })
